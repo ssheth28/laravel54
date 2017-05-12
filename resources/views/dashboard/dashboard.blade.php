@@ -2955,7 +2955,7 @@
                         <a href="" class="collapse" data-original-title="" title=""> </a>
                     </div>
                     <div class="actions">
-                        <a class="btn btn-icon-only btn-default" href="#">
+                        <!-- <a class="btn btn-icon-only btn-default" href="#">
                             <i class="fa fa-search"></i>
                         </a>
                         <a class="btn btn-icon-only btn-default" href="#">
@@ -2963,7 +2963,7 @@
                         </a>
                         <a class="btn btn-icon-only btn-default" href="#">
                             <i class="icon-trash"></i>
-                        </a>
+                        </a> -->
                         <a class="btn btn-icon-only btn-default fullscreen" href="#" data-original-title="" title=""> </a>
                     </div>
                     <!-- <div class="actions">

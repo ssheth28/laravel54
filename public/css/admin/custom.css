@@ -21,6 +21,9 @@ table thead .sorting_asc {
 label.error {
     color: red;
 }
+.width-auto {
+    width: auto !important;
+}
 .border-btn {
     border: 1px solid #38648B;
 }
@@ -36,7 +39,7 @@ label.error {
 }
 .mt-element-list .list-todo .list-count.green-haze,
 .mt-element-list .list-todo.mt-list-head.green-haze {
-    background-color: #17C4BB;
+    background-color: #4276a4;
 }
 
 .add_modul.mt-element-list .list-todo.mt-list-container {

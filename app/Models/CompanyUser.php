@@ -21,6 +21,6 @@ class CompanyUser extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'company_id','is_invitation_accepted',
+        'user_id', 'company_id','settings',
     ];
 }

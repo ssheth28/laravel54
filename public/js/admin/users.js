@@ -42,7 +42,7 @@ var User = function() {
                 email: {
                     required: true,
                     remote: {
-                        url: "/" + window.locale + "/admin/checkCompanyUser",
+                        url: "/admin/checkCompanyUser",
                         type: "post",
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                         data: {
@@ -248,8 +248,8 @@ $(document).ready(function() {
                 userCount: 0,
                 sortKey: '',
                 sortOrder: 1,
-                sortby: 'users.id',
-                sorttype: 'desc',
+                sortby: '',
+                sorttype: '',
                 searchdata: '',
                 footercontent: ''
             },
@@ -281,10 +281,11 @@ $(document).ready(function() {
                     }
                 },
                 searchUserData: function() {
-                    var name = $("#user_name").val();
-                    var email = $("#user_email").val();
+                    var name = $("#name").val();
+                    var email = $("#email").val();
+                    var not_accepted_invitation = $("#not_accepted_invitation").is(":checked") ? "1" : "0";
                     var created_at = $("#created_at").val();
-                    var searchdata = "&name="+ name + "&email=" + email + "&created_at=" + created_at;
+                    var searchdata = "&name="+ name + "&email=" + email + "&not_accepted_invitation=" + not_accepted_invitation;
                     if($('#user_pagination').data("twbs-pagination")){
                         $('#user_pagination').twbsPagination('destroy');
                     }

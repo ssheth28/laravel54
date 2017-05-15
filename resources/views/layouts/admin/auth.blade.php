@@ -59,7 +59,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="full-login-screen row">
                             <div class="col-md-6 leftbar-login">
                                 <div class="login-logo">
-                                    <img class="login-logo" src="{{ asset('img/logo_white.png') }}" />
+                                    <img class="login-logo" src="{{ asset('img/logo.png') }}" />
                                 </div>
                                 <div class="login-description">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod

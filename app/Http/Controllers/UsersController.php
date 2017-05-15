@@ -47,7 +47,7 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
+    {      
         return view('users.index');
     }
 
@@ -110,7 +110,11 @@ class UsersController extends Controller
         $request = $this->request->all();
         $companyId = Landlord::getTenants()['company']->id;
 
-        $users = DB::table('users')->join('company_user', 'company_user.user_id', 'users.id')->join('people', 'users.person_id', 'people.id')->where('company_user.company_id', $companyId)->select('*', DB::raw('DATE_FORMAT(users.created_at, "%d-%m-%Y %H:%i:%s") as "created_datetime"'), DB::raw('users.id as user_id'));
+        $users = DB::table('users')
+                    ->join('company_user', 'company_user.user_id', 'users.id')
+                    ->join('people', 'users.person_id', 'people.id')
+                    ->where('company_user.company_id', $companyId)
+                    ->select('*', DB::raw('DATE_FORMAT(users.created_at, "%d-%m-%Y %H:%i:%s") as "created_datetime"'), DB::raw('users.id as user_id'));
 
         $sortby = 'users.id';
         $sorttype = 'desc';
@@ -119,15 +123,25 @@ class UsersController extends Controller
             $sorttype = $request['sorttype'];
         }
 
-        $users->orderBy($sortby, $sorttype);
-
         // $users->where('users.deleted_at', '=', null);
         if (isset($request['name']) && trim($request['name']) !== '') {
-            $users->where('users.name', 'like', '%'.$request['name'].'%');
+            $users->where('people.first_name', 'like', '%'.$request['name'].'%');
         }
 
         if (isset($request['email']) && trim($request['email']) !== '') {
             $users->where('users.email', 'like', '%'.$request['email'].'%');
+        }
+
+        if (isset($request['not_accepted_invitation']) && trim($request['not_accepted_invitation']) == '1') {
+            if (!isset($request['sortby'])) {
+                $users->orderBy('company_user.settings->is_invitation_accepted', 'asc');
+            }
+        } else {
+            $users->where('company_user.settings->is_invitation_accepted', '=', 1);
+        }
+
+        if ( isset($request['not_accepted_invitation']) && (trim($request['not_accepted_invitation']) == '0' || (isset($request['sortby']) && trim($request['not_accepted_invitation']) == '1')) ) {
+            $users->orderBy($sortby, $sorttype);
         }
 
         $usersList = [];
@@ -234,7 +248,7 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($company, $userId)
-    {
+    {        
         $user = User::find($userId);
         $companyId = Landlord::getTenants()['company']->id;
         $roles = Role::where('name', 'LIKE', $companyId.'%')->pluck('display_name', 'name');
@@ -317,5 +331,27 @@ class UsersController extends Controller
                 return $this->response()->array(['error' => 'not found'])->statusCode(404);
             }
         }
+    }
+
+    public function resendInvitation($company, $userId)
+    {
+        $user = User::find($userId);        
+        $companyId = Landlord::getTenants()['company']->id;
+
+        $existedUserInvite = UserInvite::where('invited_user_id' ,$userId)
+                                        ->where('company_id', $companyId)
+                                        ->delete();
+        $userInvite = new UserInvite();
+        $userInvite->user_id = Auth::user()->id;
+        $userInvite->company_id = $companyId;
+        $userInvite->invited_user_id = $userId;
+        $userInvite->accept_token = md5(uniqid(mt_rand(), true));
+        $userInvite->save();
+
+        dispatch(new SendInvitationMail($userInvite, $user));
+
+        flash()->success(config('config-variables.flash_messages.invitationSent'));
+
+        return redirect()->route('users.index', ['domain' => app('request')->route()->parameter('company')]);
     }
 }

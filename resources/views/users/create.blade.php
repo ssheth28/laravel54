@@ -66,6 +66,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-row col-md-6 clearfix demo" style="display: none;">
+                                        <p>test</p>
+                                    </div>
                                 </div>
                             </div>
                             <div class="tab-pane js-tab-pane" id="profile_setup">

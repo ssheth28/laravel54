@@ -79,7 +79,7 @@ class Controller extends BaseController
                     'locale' => LaravelLocalization::getCurrentLocale(),
                 ]);
 
-                $companies = Auth::user()->companies()->where('is_invitation_accepted', 1)->get();
+                $companies = Auth::user()->companies()->where('settings->is_invitation_accepted', 1)->get();
                 View::share('companies', $companies);
             }
             return $next($request);

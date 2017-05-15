@@ -52,7 +52,7 @@ class UsersController extends Controller
     }
 
     public function validateEmail(Request $request)
-    {        
+    {
         $email = $request->email;
         if ($email !== null && !empty($email)) {
             $userQuery = User::where('email', $email);
@@ -82,6 +82,26 @@ class UsersController extends Controller
                 return 'false';
             }
         }       
+        return 'true';
+    }
+
+    public function checkCompanyUser(Request $request)
+    {
+        $email = $request->email;
+        $companyId = Landlord::getTenants()['company']->id;
+        if ($email !== null && !empty($email)) {
+            $userQuery = User::where('email', $email);
+            if ($request->id) {
+                $userQuery->where('id', '!=', $request->id);
+            }
+            $user = $userQuery->first();
+            if($user) {
+                $companyUser = CompanyUser::where('user_id', $user->id)->where('company_id', $companyId)->first();
+                if ($companyUser) {
+                    return 'false';
+                }
+            }
+        }
         return 'true';
     }
 
@@ -187,9 +207,7 @@ class UsersController extends Controller
         $companyUser = new CompanyUser();
         $companyUser->company_id = $companyId;
         $companyUser->user_id = $userId;
-        if(!$checkUserExists) {
-            $companyUser->is_invitation_accepted = 1;
-        }
+        $companyUser->settings = json_encode(['is_invitation_accepted' => $checkUserExists ? 0 : 1]);
         $companyUser->save();
 
         flash()->success(config('config-variables.flash_messages.dataSaved'));
@@ -292,7 +310,7 @@ class UsersController extends Controller
                 $companyUser = DB::table('company_user')
                                     ->where('user_id', $userInvites->invited_user_id)
                                     ->where('company_id', $userInvites->company_id)
-                                    ->update(['is_invitation_accepted' => 1]);
+                                    ->update(['settings->is_invitation_accepted' => 1]);
 
                 return view('users.accpet_invitation');                
             } else {

@@ -14,6 +14,9 @@ var User = function() {
             messages: {
                 username: {
                     remote: 'Username already exists.'
+                },
+                email: {
+                    remote: 'Email already exists.'
                 }
             },
             rules: {
@@ -38,6 +41,16 @@ var User = function() {
                 },
                 email: {
                     required: true,
+                    remote: {
+                        url: "/" + window.locale + "/admin/checkCompanyUser",
+                        type: "post",
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                        data: {
+                            id: function() {
+                                return $('input[name="user_id"]').val();
+                            }
+                        }
+                    }
                 },
                 'roles[]': {
                     required: true

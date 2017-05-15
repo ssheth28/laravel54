@@ -69,6 +69,7 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
                 Route::post('/getUserData', 'UsersController@getUserData');
                 Route::post('/validateEmail', 'UsersController@validateEmail');
                 Route::post('/validateUsername', 'UsersController@validateUsername');
+                Route::post('/checkCompanyUser', 'UsersController@checkCompanyUser');
 
                 Route::resource('modules', 'ModulesController');
                 Route::post('/getModuleData', 'ModulesController@getModuleData');

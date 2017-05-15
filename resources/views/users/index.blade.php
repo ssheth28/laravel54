@@ -7,7 +7,7 @@
                 <div class="portlet box white">
                     <div class="portlet-title">
                         <div class="caption">
-                            Search
+                            <span class="caption-subject bold uppercase font-dark">Search</span>
                         </div>
                         <div class="tools">
                             <a href="javascript:;" class="expand" data-original-title="" title=""> </a>
@@ -18,18 +18,22 @@
                         <div class="form-horizontal" id="frmSearchData">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="col-md-3 col-sm-12 control-label">Name</label>
-                                        <div class="col-md-9">
-                                            <input type="text" class="form-control" placeholder="User Name" id="user_name">
+                                    <div class="form-row clearfix">
+                                        <div class="form-col-1">
+                                            <label class="label">Name </label>
+                                        </div>
+                                        <div class="p-r-5 input-wrapper right">
+                                            <input type="text" name="name" class="form-control" placeholder="User Name" id="name">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label class="col-md-3 col-sm-12 control-label">Email</label>
-                                        <div class="col-md-9">
-                                            <input type="text" class="form-control" placeholder="Email" id="user_email">
+                                    <div class="form-row clearfix">
+                                        <div class="form-col-1">
+                                            <label class="label">Email </label>
+                                        </div>
+                                        <div class="p-r-5 input-wrapper right">
+                                            <input type="text" name="email" class="form-control" placeholder="Email" id="email">
                                         </div>
                                     </div>
                                 </div>
@@ -37,8 +41,8 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="pull-right">
-                                        <button type="button" class="btn green" @click="searchUserData()">Search</button>
-                                        <button type="button" class="btn btn-default" @click="clearForm('frmSearchData')">Clear</button>
+                                        <button type="button" class="btn uie-btn uie-btn-primary" @click="searchUserData()">Search</button>
+                                        <button type="button" class="uie-btn uie-secondary-btn" @click="clearForm('frmSearchData')">Clear</button>
                                     </div>
                                 </div>
                             </div>
@@ -51,12 +55,18 @@
                     @include('flash::message')
                     <div class="portlet-title">
                         <div class="caption col-md-8">
-                            <i class="icon-share font-dark hide"></i>
-                            <span class="caption-subject font-dark bold uppercase">User List</span>
+                            <i class="fa fa-table"></i>
+                            <span class="caption-subject font-dark bold uppercase">User List</span> &nbsp;&nbsp;
+                            <span style="display:inline-block;">
+                                <label class="mt-checkbox"> Show User With Pending Invitation
+                                    <input type="checkbox" value="1" name="not_accepted_invitation" id="not_accepted_invitation" @click="searchUserData()" />
+                                    <span></span>
+                                </label>
+                            </span>
                         </div>
                         <div class="col-md-4">
                             <div class="btn-group pull-right">
-                                <a class="btn sbold green" href="{{ route('users.create', ['domain' => app('request')->route()->parameter('company')]) }}"> Add New
+                                <a class="btn sbold border-btn" href="{{ route('users.create', ['domain' => app('request')->route()->parameter('company')]) }}"> Add New
                                     <i class="fa fa-plus"></i>
                                 </a>
                             </div>
@@ -69,22 +79,27 @@
                                     <tr>
                                         <th data-field="people.first_name" @click="sortBy('people.first_name')" :class="[sortKey != 'people.first_name' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">First name</th>
                                         <th data-field="people.last_name" @click="sortBy('people.last_name')" :class="[sortKey != 'people.last_name' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Last name</th>
-                                        <th data-field="email" @click="sortBy('email')" :class="[sortKey != 'email' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Email</th> 
+                                        <th data-field="email" @click="sortBy('email')" :class="[sortKey != 'email' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Email</th>
+                                        <th>Invitation Status</th>
                                         <th data-field="created_datetime" @click="sortBy('created_datetime')" :class="[sortKey != 'created_datetime' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Created at</th>     
                                         <th class="text-center">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="" v-for="user in userData">  
+                                    <tr class="" v-for="user in userData">                                    
                                         <td>@{{ user.first_name }}</td>
                                         <td>@{{ user.last_name }}</td>
                                         <td>@{{ user.email }}</td>
+                                        <td>@{{ user.settings.is_invitation_accepted == 1 ? 'Accepted' : 'Pending'}}</td>
                                         <td>@{{ user.created_datetime }}</td>
-                                        <td class="text-center">
-                                            <a href="{{url('admin/users')}}/@{{user.user_id}}/edit" class="btn btn-icon-only green">
+                                        <td class="text-center table_icon">                                        
+                                            <a href="{{ url('admin/resendInvitation') }}/@{{user.user_id}}" class="btn btn-icon-only" v-if="user.settings.is_invitation_accepted == 0">
+                                                <i class="fa fa-share-square-o"></i>
+                                            </a>
+                                            <a href="{{ url('admin/users') }}/@{{user.user_id}}/edit" class="btn btn-icon-only">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a href="#" data-confirm-msg="Are you sure you would like to delete this tag record?" data-delete-url="{{ url('admin/users') }}/@{{ user.user_id }}"  class="btn btn-icon-only red js-delete-button" data-toggle="modal" data-target="#delete_modal"><i class="fa fa-trash"></i></a>
+                                            <a href="#" data-confirm-msg="Are you sure you would like to delete this tag record?" data-delete-url="{{ url('admin/users') }}/@{{ user.user_id }}"  class="btn btn-icon-only js-delete-button" data-toggle="modal" data-target="#delete_modal"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>

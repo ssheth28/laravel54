@@ -20,49 +20,25 @@
         </div> -->
         <!-- BEGIN PAGE TOP -->
         <div class="page-top">
-            <div class="top-menu pull-left user-setting">
+            <div class="top-menu pull-left user-setting">            
                 <div class="dropdown company-list">
                     <a id="dLabel" role="button" data-toggle="dropdown" class="btn" data-target="#" href="javascript:;">
                         <img alt="" class="img-circle" src="../../img/admin/avatar1.jpg">
-                        <span class="username username-hide-on-mobile"> ViitorCloud Tech. PVT LTD.</span>
+                        <span class="username username-hide-on-mobile"> {{ $currentCompany->name }}</span>
                         <span class="role">Manager</span>
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-                        <li class="dropdown-submenu">
-                            <a tabindex="-1" href="javascript:;">Aecor Digital</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="javascript:;">QA</a></li>
-                                <li><a href="javascript:;">Developer</a></li>
-                                <li><a href="javascript:;">Manager</a></li>
-                                <li><a href="#">Designer</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a tabindex="-1" href="javascript:;">ViitorCloud Tech. PVT LTD.</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="javascript:;">Manager</a></li>
-                                <li><a href="javascript:;">Developer</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a tabindex="-1" href="javascript:;">White Magic</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="javascript:;">QA</a></li>
-                                <li><a href="javascript:;">Developer</a></li>
-                                <li><a href="javascript:;">Manager</a></li>
-                                <li><a href="javascript:;">Designer</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a tabindex="-1" href="#">Norlinx</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="javascript:;">QA</a></li>
-                                <li><a href="javascript:;">Developer</a></li>
-                                <li><a href="javascript:;">Manager</a></li>
-                                <li><a href="javascript:;">Designer</a></li>
-                            </ul>
-                        </li>
+                        @foreach($companies as $company)
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1" href="{{ route('admin.home', ['domain' => $company->slug]) }}">{{ $company->name}}</a>
+                                <ul class="dropdown-menu">
+                                    @foreach($currentCompanyRoles as $role)
+                                        <li><a href="{{ route('admin.home', ['domain' => $company->slug, 'role' => $role->id]) }}">{{ $role->display_name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @endforeach                       
                     </ul>
                 </div>
             </div>
@@ -73,17 +49,7 @@
                     </a>
                 </div>
             </div> 
-            <div class="top-menu pull-left lang-box">
-                <div class="lang-box-inner">
-                    <select>
-                        <option>Eng1</option>
-                        <option>Eng2</option>
-                        <option>Eng3</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="pull-left lang-box lang-translation">
+            <div class="top-menu pull-left lang-box lang-translation">
                 <div class="lang-box-inner">
                     <ul style="list-style-type: none;">
                         <li class="dropdown">
@@ -103,9 +69,8 @@
                     </ul>
                 </div>
             </div>
-    
-            <div class="top-menu pull-left">
-                <p>{{ __('Selected language is') }} {{ LaravelLocalization::getCurrentLocaleNative() }} </p>
+            <div class="top-menu pull-left lang-text">
+                <p>{{ __('selected-language') }} {{ LaravelLocalization::getCurrentLocaleNative() }} </p>
                 {{-- <p>{{ {{ __("Company Name") }} }}</p> --}}
             </div>
             

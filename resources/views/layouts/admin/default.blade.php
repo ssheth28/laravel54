@@ -52,6 +52,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
         <link href="{{ asset('css/admin/custom.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/admin/form.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/admin/profile.css') }}" rel="stylesheet" type="text/css" />
         <!-- END THEME LAYOUT STYLES -->
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -122,6 +123,19 @@ License: You must have a valid license purchased only from themeforest(the above
 
                     <div class="page-content-body">
                         @include('elements.admin.delete_modal')
+                        <div class="page-bar">
+                            <ul class="page-breadcrumb">
+                                <li>
+                                    <span>Profile</span>
+                                </li>
+                            </ul>
+                            <div class="page-toolbar">
+                                <div class="date-time clearfix">
+                                    <div id="myTime" class="show-date"></div>
+                                    <div id="myTimeData" class="show-time"></div>
+                                </div>
+                            </div>
+                        </div>
                         @yield('page-content')
                     </div>
                 </div>

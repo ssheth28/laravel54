@@ -54,12 +54,18 @@
                     <ul style="list-style-type: none;">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <span class="flag">
+                                    <img src="/img/admin/flag.png" width="20">
+                                </span>
                                 {{ LaravelLocalization::getCurrentLocaleNative() }} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                     <li>
                                         <a rel="alternate" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode, $url = null, $attributes = [], $forceDefaultLocation = true) }}">
+                                            <span class="flag">
+                                                <img src="/img/admin/flag.png" width="20">
+                                            </span>
                                             {{ $properties['native'] }}
                                         </a>
                                     </li>
@@ -377,7 +383,7 @@
                                 </label>
                             </li>
                             <li>
-                                <a href="profile.php">
+                                <a href="{{ route('users.profile', ['domain' => $company->slug]) }}">
                                     <i class="icon-user"></i> My Account </a>
                             </li>
                             <li>

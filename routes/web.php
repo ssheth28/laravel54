@@ -20,6 +20,7 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
             */
             Auth::routes();
             Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
+            Route::get('/acceptinvitation/{token}', 'UsersController@acceptInvitation');
 
             Route::get('/home', 'HomeController@index');
 
@@ -67,6 +68,10 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
                 Route::resource('users', 'UsersController');
                 Route::post('/getUserData', 'UsersController@getUserData');
                 Route::post('/validateEmail', 'UsersController@validateEmail');
+                Route::post('/validateUsername', 'UsersController@validateUsername');
+
+                Route::post('/checkCompanyUser', 'UsersController@checkCompanyUser');
+                Route::get('/resendInvitation/{id}', 'UsersController@resendInvitation');
 
                 Route::resource('modules', 'ModulesController');
                 Route::post('/getModuleData', 'ModulesController@getModuleData');
@@ -85,5 +90,5 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
 
 // Local dev specific routes
 if (App::environment('local')) {
-    Route::get('decompose', '\Lubusin\Decomposer\Controllers\DecomposerController@index');
+    // Route::get('decompose', '\Lubusin\Decomposer\Controllers\DecomposerController@index');
 }

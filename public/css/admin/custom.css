@@ -609,7 +609,7 @@ table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
 	height: 50px;
 }
 .page-header.navbar .page-logo .logo-default {
-    margin: 20px 0 0;
+    margin: 5px 0 0;
 }
 .page-header.navbar .menu-toggler.sidebar-toggler {
     float: right;

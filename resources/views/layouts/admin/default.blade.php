@@ -53,7 +53,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <link href="{{ asset('css/admin/custom.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/admin/form.css') }}" rel="stylesheet" type="text/css" />
         <!-- END THEME LAYOUT STYLES -->
-        <link rel="shortcut icon" href="favicon.ico" />
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <!-- END HEAD -->
 
@@ -153,6 +153,8 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('plugins/bootstrap-datetimepicker/js/moment-with-locales.js') }}"></script>
         <script src="{{ asset('plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js') }}"></script>
+        <script src="{{ asset('plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js') }}"></script>
+
         <!-- END CORE PLUGINS -->
         <!-- BEGIN THEME GLOBAL SCRIPTS -->
         <script src="{{ asset('js/admin/app.min.js') }}" type="text/javascript"></script>
@@ -164,6 +166,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="{{ asset('js/admin/demo.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/admin/quick-sidebar.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/admin/quick-nav.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/admin/form-wizard.min.js') }}" type="text/javascript"></script>
         <!-- END THEME LAYOUT SCRIPTS -->
         <script src="{{ asset('js/admin/common.js') }}" type="text/javascript"></script>
 

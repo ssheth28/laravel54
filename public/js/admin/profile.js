@@ -78,8 +78,7 @@ var User = function() {
             errorPlacement: function (error, element) { // render error placement for each input type
                 element.parent().append(error);
             },
-            submitHandler: function (form) {
-                alert('hi');
+            submitHandler: function (form) {                
                 form.submit();
             }
         });

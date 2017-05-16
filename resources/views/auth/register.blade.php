@@ -1,8 +1,8 @@
 @extends('layouts.admin.auth')
 
 @section('auth-content')
-    <div class="login-content">
-        <h1>Registration</h1>
+    <div class="login-content text-center">
+        <h3 class="text-white">Registration</h3>
         <form class="login-form" role="form" method="POST" action="{{ route('register', ['domain' => app('request')->route()->parameter('company')]) }}">
             {{ csrf_field() }}
 
@@ -65,8 +65,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-6">
-                    <button class="btn green" type="submit">{{ __("Register") }}</button>
+                <div class="col-xs-12">
+                    <button class="btn login-btn" type="submit">{{ __("Register") }}</button>
                 </div>
             </div>
         </form>

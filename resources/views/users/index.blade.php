@@ -93,7 +93,7 @@
                                         <td>@{{ user.settings.is_invitation_accepted == 1 ? 'Accepted' : 'Pending'}}</td>
                                         <td>@{{ user.created_datetime }}</td>
                                         <td class="text-center table_icon">                                        
-                                            <a href="{{ url('admin/resendInvitation') }}/@{{user.user_id}}" class="btn btn-icon-only" v-if="user.settings.is_invitation_accepted == 0">
+                                            <a href="javascript: void(0)" @click="resendInvitation(user.user_id)" class="btn btn-icon-only" v-if="user.settings.is_invitation_accepted == 0">
                                                 <i class="fa fa-share-square-o"></i>
                                             </a>
                                             <a href="{{ url('admin/users') }}/@{{user.user_id}}/edit" class="btn btn-icon-only">

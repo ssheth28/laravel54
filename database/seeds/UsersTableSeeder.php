@@ -49,7 +49,9 @@ class UsersTableSeeder extends Seeder
         [
             'company_id' => 2,
             'user_id'    => 1,
-            'is_invitation_accepted' => 1
+            'settings' => json_encode([
+                'is_invitation_accepted' => 1
+            ])
         ], ]);
 
         event(new CompanyRegistered($company, $user, 'admin'));

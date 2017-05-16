@@ -47,13 +47,12 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
-        $pendingInvitations = Auth::user()->companies()->where('is_invitation_accepted', 1);        
-        return view('users.index', compact('pendingInvitations'));
+    {      
+        return view('users.index');
     }
 
     public function validateEmail(Request $request)
-    {        
+    {
         $email = $request->email;
         if ($email !== null && !empty($email)) {
             $userQuery = User::where('email', $email);
@@ -86,6 +85,26 @@ class UsersController extends Controller
         return 'true';
     }
 
+    public function checkCompanyUser(Request $request)
+    {
+        $email = $request->email;
+        $companyId = Landlord::getTenants()['company']->id;
+        if ($email !== null && !empty($email)) {
+            $userQuery = User::where('email', $email);
+            if ($request->id) {
+                $userQuery->where('id', '!=', $request->id);
+            }
+            $user = $userQuery->first();
+            if($user) {
+                $companyUser = CompanyUser::where('user_id', $user->id)->where('company_id', $companyId)->first();
+                if ($companyUser) {
+                    return 'false';
+                }
+            }
+        }
+        return 'true';
+    }
+
     public function getUserData()
     {
         $request = $this->request->all();
@@ -95,8 +114,7 @@ class UsersController extends Controller
                     ->join('company_user', 'company_user.user_id', 'users.id')
                     ->join('people', 'users.person_id', 'people.id')
                     ->where('company_user.company_id', $companyId)
-                    // ->where('company_user.is_invitation_accepted', 1)
-                    ->select('*', DB::raw('DATE_FORMAT(users.created_at, "%d-%m-%Y %H:%i:%s") as "created_datetime"'), DB::raw('users.id as user_id'));
+                    ->select('*', DB::raw('DATE_FORMAT(users.created_at, "%d-%m-%Y %H:%i:%s") as "created_datetime"'), DB::raw('users.id as user_id'), DB::raw('company_user.settings as settings'));
 
         $sortby = 'users.id';
         $sorttype = 'desc';
@@ -116,10 +134,10 @@ class UsersController extends Controller
 
         if (isset($request['not_accepted_invitation']) && trim($request['not_accepted_invitation']) == '1') {
             if (!isset($request['sortby'])) {
-                $users->orderBy('company_user.is_invitation_accepted', 'asc');
+                $users->orderBy('company_user.settings->is_invitation_accepted', 'asc');
             }
         } else {
-            $users->where('company_user.is_invitation_accepted', '=', 1);
+            $users->where('company_user.settings->is_invitation_accepted', '=', 1);
         }
 
         if ( isset($request['not_accepted_invitation']) && (trim($request['not_accepted_invitation']) == '0' || (isset($request['sortby']) && trim($request['not_accepted_invitation']) == '1')) ) {
@@ -203,9 +221,7 @@ class UsersController extends Controller
         $companyUser = new CompanyUser();
         $companyUser->company_id = $companyId;
         $companyUser->user_id = $userId;
-        if(!$checkUserExists) {
-            $companyUser->is_invitation_accepted = 1;
-        }
+        $companyUser->settings = ['is_invitation_accepted' => ($checkUserExists ? 0 : 1)];
         $companyUser->save();
 
         flash()->success(config('config-variables.flash_messages.dataSaved'));
@@ -308,7 +324,7 @@ class UsersController extends Controller
                 $companyUser = DB::table('company_user')
                                     ->where('user_id', $userInvites->invited_user_id)
                                     ->where('company_id', $userInvites->company_id)
-                                    ->update(['is_invitation_accepted' => 1]);
+                                    ->update(['settings->is_invitation_accepted' => 1]);
 
                 return view('users.accpet_invitation');                
             } else {
@@ -317,9 +333,9 @@ class UsersController extends Controller
         }
     }
 
-    public function resendInvitation($company, $userId)
+    public function resendInvitation(Request $request, $company, $userId)
     {
-        $user = User::find($userId);        
+        $user = User::find($userId);
         $companyId = Landlord::getTenants()['company']->id;
 
         $existedUserInvite = UserInvite::where('invited_user_id' ,$userId)
@@ -336,6 +352,11 @@ class UsersController extends Controller
 
         flash()->success(config('config-variables.flash_messages.invitationSent'));
 
-        return redirect()->route('users.index', ['domain' => app('request')->route()->parameter('company')]);
+        $parameters = ['domain' => app('request')->route()->parameter('company')];
+        if(isset($request->show_pending)) {
+            $parameters['show_pending'] = 1;
+        }
+
+        return redirect()->route('users.index', $parameters);
     }
 }

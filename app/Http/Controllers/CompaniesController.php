@@ -106,7 +106,7 @@ class CompaniesController extends Controller
     public function selectCompany(Request $request)
     {
         $companySlug = app('request')->route()->parameter('company');
-        $companies = Auth::user()->companies()->where('is_invitation_accepted', 1);
+        $companies = Auth::user()->companies()->where('settings->is_invitation_accepted', 1);
 
         if ($companySlug != 'www') {
             return redirect()->route('admin.home', ['domain' => $companySlug]);

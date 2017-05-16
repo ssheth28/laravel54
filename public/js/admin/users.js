@@ -14,6 +14,9 @@ var User = function() {
             messages: {
                 username: {
                     remote: 'Username already exists.'
+                },
+                email: {
+                    remote: 'Email already exists.'
                 }
             },
             rules: {
@@ -38,6 +41,16 @@ var User = function() {
                 },
                 email: {
                     required: true,
+                    remote: {
+                        url: "/admin/checkCompanyUser",
+                        type: "post",
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                        data: {
+                            id: function() {
+                                return $('input[name="user_id"]').val();
+                            }
+                        }
+                    }
                 },
                 'roles[]': {
                     required: true
@@ -63,56 +76,6 @@ var User = function() {
             }
         });
     };
-
-    // var handleValidationEditPage = function() {
-    //     editForm.validate({
-    //         doNotHideMessage: true, //this option enables to show the error/success messages on tab switch.
-    //         errorElement: 'span', //default input error message container
-    //         errorClass: 'help-block help-block-error', // default input error message class
-    //         focusInvalid: false, // do not focus the last invalid input
-    //         messages: {
-    //             username: {
-    //                 remote: 'Username already exists.'
-    //             }
-    //         },
-    //         rules: {
-    //             first_name: {
-    //                 required: true
-    //             },
-    //             last_name: {
-    //                 required: true
-    //             },
-    //             username: {
-    //                 required: true,
-    //                  remote: {
-    //                     url: "/admin/validateUsername",
-    //                     type: "post",
-    //                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-    //                     data: {   
-    //                           id: function() {
-    //                             return $('input[name="user_id"]').val();
-    //                           }
-    //                     }
-    //                 }
-    //             },
-    //             email: {
-    //                 required: true,
-    //             },
-    //             'roles[]': {
-    //                 required: true
-    //             },
-    //             created_at :{
-    //                 required: true
-    //             },
-    //         },
-    //         errorPlacement: function (error, element) { // render error placement for each input type
-    //             element.parent().append(error);
-    //         },            
-    //         submitHandler: function (form) {
-    //             editForm.submit();
-    //         }
-    //     });
-    // };
 
     var handleTitle = function(tab, navigation, index) {
         var total = navigation.find('li').length;
@@ -295,6 +258,13 @@ $(document).ready(function() {
                 },
                 clearForm: function(formid) {
                     this.reloadData();
+                },
+                resendInvitation: function(userId) {
+                    var url = "/admin/resendInvitation/" + userId;
+                    if($("#not_accepted_invitation").is(":checked")) {
+                        url += "?show_pending=" + 1;
+                    }
+                    window.location.href = url;
                 }
             }
         });
@@ -312,6 +282,11 @@ function userDataSuccess(userData, status, xhr){
 
     setTimeout(function(){
         if(userData['data'].length>0 && Cookies.get('pagination_length') > 0) {
+            $.map( userData['data'], function( data ) {
+                data.settings = JSON.parse(data.settings);
+                return data;
+            });
+
             vueUser.$set('currPage', userData.current_page);
             current_page = userData.current_page;
 

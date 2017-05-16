@@ -10,7 +10,7 @@ return [
         'dataNotSaved'   => 'Data could not be saved at this moment. Please try later.',
         'dataDeleted'    => 'Data have been deleted successfully.',
         'dataNotDeleted' => 'Data could not be deleted at this moment. Please try later.',
-        'invitationSent' => 'invitation has been sent.',
+        'invitationSent' => 'Invitation has been sent.',
     ],
     'module_types' => [
         'Page'   => 'Page',

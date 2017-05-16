@@ -354,4 +354,34 @@ class UsersController extends Controller
 
         return redirect()->route('users.index', ['domain' => app('request')->route()->parameter('company')]);
     }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        View::share('user', $user);
+        return view('users.profile');
+    }
+
+    public function saveGeneralInfo(Request $request)
+    {
+        $user = User::with('person')->where('id', Auth::user()->id)->first();
+        $user->person->first_name = $request->general_first_name;
+        $user->person->last_name = $request->general_last_name;
+        $address = array();
+        $address['address1'] = $request->general_address1;
+        $address['city'] = $request->general_city;
+        $address['state'] = $request->general_state;
+        $address['pin'] = $request->general_pin;
+        $user->person->address = $address;
+        $user->person->mobile_number = $request->general_mobile_number;
+        $user->person->home_phone = $request->general_home_phone;
+        $user->person->work_phone = $request->general_work_phone;
+        $user->person->dob = Carbon::parse($request->dob)->format('Y-m-d H:i:s');
+        $user->person->gender = $request->general_gender;
+        $user->person->save();
+
+        flash()->success(config('config-variables.flash_messages.dataSaved'));
+
+        return redirect()->route('users.profile', ['domain' => app('request')->route()->parameter('company')]);
+    }
 }

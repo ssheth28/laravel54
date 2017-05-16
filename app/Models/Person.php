@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Basemodel as Model;
 use Illuminate\Notifications\Notifiable;
+use App\Traits\MySQLJSONColumnManager;
 
 class Person extends Model
 {
@@ -14,7 +15,7 @@ class Person extends Model
      */
     protected $table = 'people';
 
-    use Notifiable;
+    use Notifiable, MySQLJSONColumnManager;
 
     /**
      * The attributes that are mass assignable.

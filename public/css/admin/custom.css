@@ -28,6 +28,58 @@ label.error {
     border: 1px solid #38648B;
 }
 
+.page-bar {
+    border-bottom: 1px solid #e7ecf1;
+    margin: -8px 0 20px;
+    background-color: #fff;
+    position: relative;
+    padding: 0 20px;
+}
+.page-bar .page-breadcrumb {
+    padding: 11px 0;
+    display: inline-block;
+    float: left;
+    margin: 0;
+    list-style: none;
+}
+.page-bar .page-breadcrumb>li {
+    display: inline-block;
+}
+.page-bar .page-breadcrumb>li>span {
+    color: #888;
+    font-size: 14px;
+    text-shadow: none;
+}
+.page-bar .page-toolbar {
+    padding: 6px 0;
+    display: inline-block;
+    float: right;
+}
+.page-toolbar .date-time {
+    padding: 5px 0;
+}
+.page-toolbar .date-time > div {
+    display: inline-block;
+    color: #184DA0;
+    font-size: 14px;
+    font-weight: 300;
+    margin: 0 0 0 10px;
+    padding-left: 20px;
+    position: relative;
+    vertical-align: top;
+}
+.page-toolbar .date-time .show-date::after {
+    content: "\f073";
+}
+.page-toolbar .date-time > div::after {
+    font-family: 'FontAwesome';
+    left: 3px;
+    position: absolute;
+}
+.page-toolbar .date-time .show-time::after {
+    content: "\f017";
+}
+
 .mt-element-list .list-todo.mt-list-container ul {
     z-index: 1;
 }
@@ -708,6 +760,7 @@ table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
     margin: 16px 0 16px 10px;
     color: #3979B2;
 }
+
 .btn-group.dashboard-btn-group a{
     width: 34px;
     height: 34px;
@@ -981,4 +1034,145 @@ table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
 }*/
 .form .form-actions, .portlet-form .form-actions{
     border-top: 0;
+}
+
+.panel-grid-main .form-row .input-wrapper .text-box {
+    border-radius: 0;
+    box-shadow: none;
+}
+.datepicker-row .text-box:not([disabled="disabled"]) {
+    background-image: url(../../img/admin/date.svg);
+    background-position: 98% center;
+    background-repeat: no-repeat;
+    padding-right: 35px;
+}
+.fileinput-exists .fileinput-new, .fileinput-new .fileinput-exists {
+    display: none;
+}
+.portlet.light>.portlet-title>.nav-tabs>li>a {
+    padding: 12px 12px 13px;
+}
+
+.cus-form-wizard .nav.nav-pills {
+    padding: 0;
+    /*width: 55%;*/
+}
+.form-wizard .progress {
+    /*width: 55%;*/
+}
+.cus-form-wizard .progress-bar-success {
+    background-color: #7AC044;
+    background-image: linear-gradient(45deg, rgb(207,237,187) 25%, transparent 25%, transparent 50%, rgb(207,237,187) 50%, rgb(207,237,187) 75%, transparent 75%, transparent);
+}
+
+.form-wizard.cus-form-wizard .steps > li > a.step {
+    padding: 15px 15px 20px;
+    color: #898989;
+    position: relative;
+}
+.form-wizard.cus-form-wizard .steps > li.active > a.step .number {
+    border-color: #175588;
+    color: #236194;
+}
+.form-wizard.cus-form-wizard .steps > li > a.step .number {
+    background-color: #ffffff;
+    font-size: 24px;
+    border: 2px solid #bdbdbd;
+    float: left;
+    height: 50px;
+    line-height: 44px;
+    margin: 0;
+    padding: 0;
+    width: 50px;
+}
+.cus-form-wizard .nav.nav-pills li a .desc {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+    padding: 0 0 0 60px;
+    text-align: left;
+}
+.cus-form-wizard .nav.nav-pills li a .desc .name {
+    display: block;
+    line-height: 15px;
+    margin: 0 0 3px;
+    text-transform: uppercase;
+}
+.cus-form-wizard .nav.nav-pills li a .desc .short-des {
+    display: block;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 15px;
+}
+.form-wizard.cus-form-wizard .steps > li > a.step .count-step {
+    bottom: 23px;
+    font-size: 58px;
+    font-weight: bold;
+    line-height: 0;
+    position: absolute;
+    right: 10px;
+}
+.form-wizard.cus-form-wizard .steps > li > a.step.step2 .count-step {
+    bottom: 24px;
+    color: #dfddde;
+}
+.form-wizard.cus-form-wizard .steps > li > a.step.step2 {
+    background: #EBEBEB;
+}
+.form-wizard.cus-form-wizard .steps > li.active > a.step {
+    background: #236194;
+}
+.form-wizard.cus-form-wizard .steps > li.active > a.step .count-step {
+    color: #1d537f;
+}
+.form-wizard.cus-form-wizard .steps > li.done > a.step {
+    background: #7ac043 none repeat scroll 0 0;
+    border-right: 1px solid #669f38;
+}
+.form-wizard.cus-form-wizard .steps > li.done > a.step .desc {
+    color: #ffffff;
+}
+.form-wizard.cus-form-wizard .steps > li.done > a.step .count-step {
+    color: #69A436;
+}
+.form-wizard.cus-form-wizard .steps > li.active > a.step::after {
+    border-bottom: 10px solid #ffffff;
+    border-left: 10px solid rgba(0, 0, 0, 0);
+    border-right: 10px solid rgba(0, 0, 0, 0);
+    bottom: 0;
+    content: "";
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    width: 15px;
+}
+.cus-form-wizard .number-lbl {
+    background: #4276a4 none repeat scroll 0 0;
+    /* border-radius: 30px !important; */
+    color: #ffffff;
+    display: inline-block;
+    font-weight: 600;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 5px 0 0;
+    width: 30px;
+    text-align: center;
+}
+.scroll-wrapper {
+    overflow: hidden;
+}
+.help-block-error {
+    color: #e73d4a;
+}
+.form .cus-form-wizard .form-actions{
+    border-top: 1px solid #e7ecf1;
+}
+.form-wizard.cus-form-wizard .steps > li.done > a.step .number {
+    border-color: #669F38;
+    color: #7AC044;
+}
+.note.note-info {
+    border-color: #236194;
 }

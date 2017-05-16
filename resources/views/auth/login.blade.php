@@ -67,13 +67,15 @@
         <form class="forget-form login-form" role="form" method="POST" action="{{ route('password.email', ['domain' => app('request')->route()->parameter('company')]) }}">
             {{ csrf_field() }}
             <h3 class="text-white">{{ __("Forgot Password?") }}</h3>
-            <p> {{ __("Enter your e-mail address below to reset your password.") }} </p>
+            <p class="text-white"> {{ __("Enter your e-mail address below to reset your password.") }} </p>
             <div class="form-group">
                 <input class="form-control placeholder-no-fix form-group" type="email" autocomplete="off" placeholder="{{ __("Email") }}" name="email" value="{{ old('email') }}" required/>
             </div>
-            <div class="form-actions">
-                <button type="button" id="back-btn" class="btn green btn-outline">{{ __("Back") }}</button>
-                <button type="submit" class="btn btn-success uppercase pull-right">{{ __("Submit") }}</button>
+            <div class="form-actions row">
+                <div class="col-md-12">
+                    <button type="button" id="back-btn" class="btn login-btn btn-outline pull-left width-auto">{{ __("Back") }}</button>
+                    <button type="submit" class="btn login-btn uppercase pull-right width-auto">{{ __("Submit") }}</button>
+                </div>
             </div>
         </form>
         <!-- END FORGOT PASSWORD FORM -->

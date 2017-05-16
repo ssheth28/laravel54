@@ -12,7 +12,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="btn-group pull-right">
-                            <a class="btn sbold green" href="{{ route('teams.index', ['domain' => app('request')->route()->parameter('company')]) }}"> Back
+                            <a class="btn sbold uie-btn uie-btn-primary" href="{{ route('teams.index', ['domain' => app('request')->route()->parameter('company')]) }}"> Back
                                 <i class="fa fa-arrow-left"></i>
                             </a>
                         </div>
@@ -63,7 +63,7 @@
                             <tr>
                                 <td>{{$invite->email}}</td>
                                 <td>
-                                    <a href="{{ route('teams.members.resend_invite', ['domain' => app('request')->route()->parameter('company'), 'invite_id' => $invite]) }}" class="btn btn-sm green">
+                                    <a href="{{ route('teams.members.resend_invite', ['domain' => app('request')->route()->parameter('company'), 'invite_id' => $invite]) }}" class="btn btn-sm uie-btn uie-btn-primary width-auto">
                                         <i class="fa fa-envelope-o"></i> Resend invite
                                     </a>
                                 </td>
@@ -84,7 +84,7 @@
                     <form class="form-horizontal js-frm-invite-member" method="post" action="{{route('teams.members.invite', ['domain' => app('request')->route()->parameter('company'), 'id' => $team])}}">
                         {!! csrf_field() !!}
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">E-Mail Address</label>
+                            <label class="col-md-4 control-label label">E-Mail Address</label>
 
                             <div class="col-md-6">
                                 <input type="email" class="form-control" name="email" value="{{ old('email') }}">
@@ -100,7 +100,7 @@
 
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary green">
+                                <button type="submit" class="btn uie-btn uie-btn-primary">
                                     <i class="fa fa-btn fa-envelope-o"></i> Invite to Team
                                 </button>
                             </div>

@@ -2,7 +2,7 @@
 
 Route::group(
     [
-        'prefix' => LaravelLocalization::setLocale(),
+        'prefix'     => LaravelLocalization::setLocale(),
         'middleware' => ['localize', 'localeSessionRedirect', 'localizationRedirect'],
     ],
     function () {

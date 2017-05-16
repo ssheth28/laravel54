@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendVerificationEmail;
 use App\Models\Person;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Jobs\SendVerificationEmail;
-use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -104,10 +104,10 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'first_name' => 'max:255',
-            'last_name' => 'max:255',
-            'username' => 'required|max:60|unique:users',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'last_name'  => 'max:255',
+            'username'   => 'required|max:60|unique:users',
+            'email'      => 'required|email|max:255|unique:users',
+            'password'   => 'required|min:6|confirmed',
         ]);
     }
 
@@ -121,17 +121,17 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $person = Person::create([
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'display_name' => $data['username'],
+            'first_name'    => $data['first_name'],
+            'last_name'     => $data['last_name'],
+            'display_name'  => $data['username'],
             'primary_email' => $data['email'],
         ]);
 
         $user = User::create([
-            'person_id' => $person->id,
-            'username' => $data['username'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'person_id'          => $person->id,
+            'username'           => $data['username'],
+            'email'              => $data['email'],
+            'password'           => bcrypt($data['password']),
             'verification_token' => md5(uniqid(mt_rand(), true)),
         ]);
 

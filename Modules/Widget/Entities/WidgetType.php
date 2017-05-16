@@ -3,6 +3,7 @@
 namespace Modules\Widget\Entities;
 
 use App\Models\Basemodel as Model;
+
 // use Illuminate\Database\Eloquent\Model;
 
 class WidgetType extends Model

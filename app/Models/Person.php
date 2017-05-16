@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Models\Basemodel as Model;
-use Illuminate\Notifications\Notifiable;
 use App\Traits\MySQLJSONColumnManager;
+use Illuminate\Notifications\Notifiable;
 
 class Person extends Model
 {

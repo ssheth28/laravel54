@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use DB;
-use View;
-use Landlord;
 use App\Models\Menu;
 use App\Models\MenuItem;
 use App\Models\Widget;
 use App\Models\WidgetType;
+use DB;
 use Illuminate\Http\Request;
+use Landlord;
 use Spatie\Permission\Models\Permission;
+use View;
 
 class WidgetsController extends Controller
 {
@@ -114,6 +114,7 @@ class WidgetsController extends Controller
         $WidgetTree = Widget::generate();
         $menuItems = MenuItem::where('menu_id', $this->menuId)->get()->toArray();
         $allWidgetControllers = Menu::buildMenuTree($menuItems);
+
         return view('widgets.create', compact('WidgetTypes', 'WidgetTree', 'allWidgetControllers'));
     }
 
@@ -127,7 +128,7 @@ class WidgetsController extends Controller
     public function store(Request $request)
     {
         $this->init();
-        
+
         $request = $this->request;
         $widget = new Widget();
         $widget->icon = $request->widget_icon;
@@ -144,7 +145,7 @@ class WidgetsController extends Controller
 
         $companyId = Landlord::getTenants()['company']->id;
         $permission = new Permission();
-        $permission->name = $companyId.'.'.(config('config-variables.widget_permission_identifier')). '.' .$widget->id;
+        $permission->name = $companyId.'.'.(config('config-variables.widget_permission_identifier')).'.'.$widget->id;
         $permission->save();
 
         flash()->success(config('config-variables.flash_messages.dataSaved'));

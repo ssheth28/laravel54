@@ -4,11 +4,11 @@ namespace App\Listeners;
 
 use App\Events\CompanyRegistered;
 use App\Models\Menu;
-use App\Models\Widget;
 use App\Models\MenuItem;
+use App\Models\Widget;
+use DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-use DB;
 
 class CreateDefaultMenuItems
 {
@@ -23,7 +23,7 @@ class CreateDefaultMenuItems
     {
         $company = $event->company;
         $user = $event->user;
-        $defaultMenuItems = config('defaultmenuitems.' . $event->userType);
+        $defaultMenuItems = config('defaultmenuitems.'.$event->userType);
 
         $role = new Role();
         $role->name = $company->id.'.Admin';
@@ -44,14 +44,14 @@ class CreateDefaultMenuItems
             $menuItem->save();
 
             $permission = new Permission();
-            $permission->name = $menu->company_id. '.' . config('config-variables.menu_item_permission_identifier') . '.' .$menuItem->id;
+            $permission->name = $menu->company_id.'.'.config('config-variables.menu_item_permission_identifier').'.'.$menuItem->id;
             $permission->save();
 
             DB::table('role_has_permissions')->insert([
             [
                 'permission_id' => $permission->id,
-                'role_id' => $role->id
-            ]
+                'role_id'       => $role->id,
+            ],
             ]);
 
             if (isset($mainMenuItem['children']) && count($mainMenuItem['children']) > 0) {
@@ -67,13 +67,13 @@ class CreateDefaultMenuItems
                     $widget->save();
 
                     $permission = new Permission();
-                    $permission->name = $company->id. '.' . config('config-variables.widget_permission_identifier') . '.' .$widget->id;
+                    $permission->name = $company->id.'.'.config('config-variables.widget_permission_identifier').'.'.$widget->id;
                     $permission->save();
                     DB::table('role_has_permissions')->insert([
             [
                 'permission_id' => $permission->id,
-                'role_id' => $role->id
-            ]
+                'role_id'       => $role->id,
+            ],
             ]);
 
                     if (isset($widgetItem['children']) && count($widgetItem['children']) > 0) {
@@ -102,13 +102,13 @@ class CreateDefaultMenuItems
             $menuItem->save();
 
             $permission = new Permission();
-            $permission->name = $menu->company_id. '.' . config('config-variables.menu_item_permission_identifier') . '.' .$menuItem->id;
+            $permission->name = $menu->company_id.'.'.config('config-variables.menu_item_permission_identifier').'.'.$menuItem->id;
             $permission->save();
             DB::table('role_has_permissions')->insert([
             [
                 'permission_id' => $permission->id,
-                'role_id' => $role->id
-            ]
+                'role_id'       => $role->id,
+            ],
             ]);
 
             if (isset($item['children']) && count($item['children']) > 0) {
@@ -124,13 +124,13 @@ class CreateDefaultMenuItems
                     $widget->save();
 
                     $permission = new Permission();
-                    $permission->name = $menu->company_id. '.' . config('config-variables.widget_permission_identifier') . '.' .$widget->id;
+                    $permission->name = $menu->company_id.'.'.config('config-variables.widget_permission_identifier').'.'.$widget->id;
                     $permission->save();
                     DB::table('role_has_permissions')->insert([
             [
                 'permission_id' => $permission->id,
-                'role_id' => $role->id
-            ]
+                'role_id'       => $role->id,
+            ],
             ]);
 
                     if (isset($widgetItem['children']) && count($widgetItem['children']) > 0) {
@@ -145,8 +145,8 @@ class CreateDefaultMenuItems
      * [generateChildrenWidgets description].
      *
      * @param array  $childrenWidgets [description]
-     * @param object $parent        [description]
-     * @param object $role          [description]
+     * @param object $parent          [description]
+     * @param object $role            [description]
      *
      * @return [type] [description]
      */
@@ -160,13 +160,13 @@ class CreateDefaultMenuItems
             $widget->save();
 
             $permission = new Permission();
-            $permission->name = $parent->company_id. '.' . config('config-variables.widget_permission_identifier') . '.' .$widget->id;
+            $permission->name = $parent->company_id.'.'.config('config-variables.widget_permission_identifier').'.'.$widget->id;
             $permission->save();
             DB::table('role_has_permissions')->insert([
             [
                 'permission_id' => $permission->id,
-                'role_id' => $role->id
-            ]
+                'role_id'       => $role->id,
+            ],
             ]);
 
             if (isset($item['children']) && count($item['children']) > 0) {

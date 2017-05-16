@@ -2,20 +2,18 @@
 
 namespace Modules\Module\Http\Controllers;
 
-
+use App\Http\Controllers\Controller;
 use DB;
-use View;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Landlord;
 use Modules\Module\Entities\Menu;
 use Modules\Module\Entities\MenuItem;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
+use View;
 
 class ModuleController extends Controller
 {
-
     public $title;
     public $uniqueUrl;
     public $menuId;
@@ -59,10 +57,11 @@ class ModuleController extends Controller
 
     /**
      * Display a listing of the resource.
+     *
      * @return Response
      */
     public function index()
-    {        
+    {
         return view('module::index');
     }
 
@@ -110,20 +109,23 @@ class ModuleController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
      * @return Response
      */
     public function create()
     {
         $this->init();
         $menuItems = MenuItem::where('menu_id', $this->menuId)->where('type', 'Module')->get()->toArray();
-        $allModules = Menu::buildMenuTree($menuItems);        
+        $allModules = Menu::buildMenuTree($menuItems);
 
         return view('module::create', compact('allModules'));
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param  Request $request
+     *
+     * @param Request $request
+     *
      * @return Response
      */
     public function store(Request $request)
@@ -135,7 +137,7 @@ class ModuleController extends Controller
 
         $companyId = Landlord::getTenants()['company']->id;
         $permission = new Permission();
-        $permission->name = $companyId.'.'.(config('config-variables.menu_item_permission_identifier')). '.' .$module->id;
+        $permission->name = $companyId.'.'.(config('config-variables.menu_item_permission_identifier')).'.'.$module->id;
         $permission->save();
 
         flash()->success(config('config-variables.flash_messages.dataSaved'));
@@ -145,6 +147,7 @@ class ModuleController extends Controller
 
     /**
      * Show the specified resource.
+     *
      * @return Response
      */
     public function show()
@@ -154,6 +157,7 @@ class ModuleController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     *
      * @return Response
      */
     public function edit($company, $moduleId)
@@ -162,13 +166,15 @@ class ModuleController extends Controller
         $module = MenuItem::find($moduleId);
         $menuItems = MenuItem::where('menu_id', $this->menuId)->where('type', 'Module')->get()->toArray();
         $allModules = Menu::buildMenuTree($menuItems);
-        
+
         return view('module::edit', compact('module', 'allModules'));
     }
 
     /**
      * Update the specified resource in storage.
-     * @param  Request $request
+     *
+     * @param Request $request
+     *
      * @return Response
      */
     public function update(Request $request, $company, $moduleId)
@@ -184,6 +190,7 @@ class ModuleController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
      * @return Response
      */
     public function destroy()

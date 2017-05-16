@@ -112,10 +112,12 @@ class CompaniesController extends Controller
             return redirect()->route('admin.home', ['domain' => $companySlug]);
         }
 
-        if(count($companies->get()) == 1) {
+        if (count($companies->get()) == 1) {
             $singleCompanySlug = $companies->first();
+
             return redirect()->route('admin.home', ['domain' => $singleCompanySlug->slug]);
         }
+
         return view('auth.selectcompany');
     }
 }

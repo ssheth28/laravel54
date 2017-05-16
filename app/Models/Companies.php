@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Basemodel as Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 

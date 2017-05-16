@@ -62,11 +62,11 @@ class WidgetServiceProvider extends ServiceProvider
         $sourcePath = __DIR__.'/../Resources/views';
 
         $this->publishes([
-            $sourcePath => $viewPath
+            $sourcePath => $viewPath,
         ]);
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
-            return $path . '/modules/widget';
+            return $path.'/modules/widget';
         }, \Config::get('view.paths')), [$sourcePath]), 'widget');
     }
 
@@ -82,7 +82,7 @@ class WidgetServiceProvider extends ServiceProvider
         if (is_dir($langPath)) {
             $this->loadTranslationsFrom($langPath, 'widget');
         } else {
-            $this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'widget');
+            $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'widget');
         }
     }
 

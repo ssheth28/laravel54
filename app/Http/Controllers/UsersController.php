@@ -114,7 +114,7 @@ class UsersController extends Controller
                     ->join('company_user', 'company_user.user_id', 'users.id')
                     ->join('people', 'users.person_id', 'people.id')
                     ->where('company_user.company_id', $companyId)
-                    ->select('*', DB::raw('DATE_FORMAT(users.created_at, "%d-%m-%Y %H:%i:%s") as "created_datetime"'), DB::raw('users.id as user_id'));
+                    ->select('*', DB::raw('DATE_FORMAT(users.created_at, "%d-%m-%Y %H:%i:%s") as "created_datetime"'), DB::raw('users.id as user_id'), DB::raw('company_user.settings as settings'));
 
         $sortby = 'users.id';
         $sorttype = 'desc';
@@ -221,7 +221,7 @@ class UsersController extends Controller
         $companyUser = new CompanyUser();
         $companyUser->company_id = $companyId;
         $companyUser->user_id = $userId;
-        $companyUser->settings = json_encode(['is_invitation_accepted' => $checkUserExists ? 0 : 1]);
+        $companyUser->settings = ['is_invitation_accepted' => ($checkUserExists ? 0 : 1)];
         $companyUser->save();
 
         flash()->success(config('config-variables.flash_messages.dataSaved'));
@@ -333,9 +333,9 @@ class UsersController extends Controller
         }
     }
 
-    public function resendInvitation($company, $userId)
+    public function resendInvitation(Request $request, $company, $userId)
     {
-        $user = User::find($userId);        
+        $user = User::find($userId);
         $companyId = Landlord::getTenants()['company']->id;
 
         $existedUserInvite = UserInvite::where('invited_user_id' ,$userId)
@@ -352,6 +352,11 @@ class UsersController extends Controller
 
         flash()->success(config('config-variables.flash_messages.invitationSent'));
 
-        return redirect()->route('users.index', ['domain' => app('request')->route()->parameter('company')]);
+        $parameters = ['domain' => app('request')->route()->parameter('company')];
+        if(isset($request->show_pending)) {
+            $parameters['show_pending'] = 1;
+        }
+
+        return redirect()->route('users.index', $parameters);
     }
 }

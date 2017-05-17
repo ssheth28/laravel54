@@ -88,8 +88,8 @@ class Handler extends ExceptionHandler
 
         return new \Illuminate\Http\Response(
             $whoops->handleException($exception),
-            $e->getStatusCode(),
-            $e->getHeaders()
+            $exception->getStatusCode(),
+            $exception->getHeaders()
         );
     }
 }

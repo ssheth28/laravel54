@@ -82,6 +82,25 @@ var User = function() {
                 form.submit();
             }
         });
+
+        $('.js-frm-save-user-avatar').validate({
+            messages: {
+                user_avatar: {
+                    required: "Please upload an image"                    
+                }
+            },
+            rules: {
+                user_avatar: {
+                    required: true
+                }
+            },            
+            errorPlacement: function (error, element) { // render error placement for each input type
+                element.parent().append(error);
+            },
+            submitHandler: function (form) {                
+                form.submit();
+            }
+        });
     };
 
     return {

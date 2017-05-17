@@ -11,7 +11,7 @@
                 <div class="portlet light profile-sidebar-portlet ">
                     <!-- SIDEBAR USERPIC -->
                     <div class="profile-userpic">
-                        <img src="/img/admin/profile_user.jpg" class="img-responsive" alt=""> </div>
+                        <img src="{{ $avatar }} " class="img-responsive" alt=""> </div>
                     <!-- END SIDEBAR USERPIC -->
                     <!-- SIDEBAR USER TITLE -->
                     <div class="profile-usertitle">
@@ -869,18 +869,21 @@
                                     <!-- CHANGE AVATAR TAB -->
                                     <div class="tab-pane" id="tab_1_5">
                                         <p> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                            eiusmod. </p>
-                                        <form action="#" role="form">
+                                            eiusmod. </p>                                        
+                                        {!! Form::open(['route' => ['users.update.avatar', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-save-user-avatar form-horizontal', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
+
                                             <div class="form-group">
                                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                                     <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                                                        <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt=""> </div>
-                                                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                                                        <img src="{{ $avatar }}" alt="">
+                                                    </div>
+                                                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> 
+                                                    </div>
                                                     <div>
                                                         <span class="btn default btn-file">
                                                             <span class="fileinput-new"> Select image </span>
                                                             <span class="fileinput-exists"> Change </span>
-                                                            <input type="file" name="..."> </span>
+                                                            <input type="file" name="user_avatar" id="user_avatar"> </span>
                                                         <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"> Remove </a>
                                                     </div>
                                                 </div>
@@ -890,10 +893,11 @@
                                                 </div>
                                             </div>
                                             <div class="margin-top-10">
-                                                <a href="javascript:;" class="btn btn-primary"> Submit </a>
+                                                {{-- <a href="javascript:;" class="btn btn-primary"> Submit </a> --}}
+                                                <button class="uie-btn uie-btn-primary save-btn" type="submit" name="btnSave" data-type="submit" tabindex="11">Submit</button>
                                                 <a href="javascript:;" class="btn default"> Cancel </a>
                                             </div>
-                                        </form>
+                                        {!! Form::close() !!}
                                     </div>
                                     <!-- END CHANGE AVATAR TAB -->
                                     <!-- CHANGE PASSWORD TAB -->

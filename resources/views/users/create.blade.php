@@ -12,6 +12,21 @@
                     <span class="step-title"></span>
                 </span>                
             </div>
+            <div class="tools">
+                &nbsp;<a href="" class="collapse" data-original-title="" title=""> </a>
+            </div>
+            <div class="actions">
+                <a class="btn btn-icon-only btn-default" href="#">
+                    <i class="fa fa-info"></i>
+                </a>
+                <a class="btn btn-icon-only btn-default" href="#">
+                    <i class="icon-wrench"></i>
+                </a>
+                <a class="btn btn-icon-only btn-default" href="#">
+                    <i class="icon-trash"></i>
+                </a>
+                <a class="btn btn-icon-only btn-default fullscreen" href="#" data-original-title="" title=""> </a>
+            </div>
         </div>
         <div class="portlet-body form" id="user_form_wizard">
        		{!! Form::open(['route' => ['users.store', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-create-user form-horizontal', 'role' => 'form', 'id' => 'submit_user_form']) !!}
@@ -69,7 +84,7 @@
                                                         <label class="label">Email </label>
                                                     </div>
                                                     <div class="col-md-7 col-lg-7 col-sm-7">
-                                                        {!! Form::email('email', null,['class' => 'form-control', 'id' => 'email']) !!}
+                                                        {!! Form::email('email', app('request')->get('email'), ['class' => 'form-control', 'id' => 'email']) !!}
                                                     </div>
                                                 </div>
                                             </div>

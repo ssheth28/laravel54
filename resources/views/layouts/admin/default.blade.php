@@ -126,9 +126,16 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="page-bar">
                             <ul class="page-breadcrumb">
                                 <li>
-                                    <span>Profile</span>
+                                    <span>{{ $title }}</span>
                                 </li>
                             </ul>
+                            <div class="trial-reminder">
+                                <a href="#">Go Pro</a>
+                                <div class="pro-bar">
+                                    <div class="bar"></div>
+                                    <span><b>15</b> days left</span>
+                                </div>
+                            </div>
                             <div class="page-toolbar">
                                 <div class="date-time clearfix">
                                     <div id="myTime" class="show-date"></div>

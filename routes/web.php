@@ -30,61 +30,66 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
 
             Route::post('company/generateSlug', 'CompaniesController@generateSlug')->name('generate.company.slug');
 
-            Route::group(['middleware' => ['auth', 'verifycompany'], 'prefix' => 'admin'], function () {
-                Route::get('companyselect', 'CompaniesController@selectCompany')->name('company.select');
+            Route::get('admin/companyselect', 'CompaniesController@selectCompany')->name('company.select')->middleware('auth', 'verifycompany');
 
-                Route::get('/home', 'HomeController@index')->name('admin.home');
-                Route::get('/dashboard', 'DashboardController@index')->name('admin.dashboard');
+            /*Route::group(
+            [
+                'prefix'     => request()->segment(2),
+                'middleware' => ['roleSessionRedirect'],
+            ],
+            function () {*/
+                Route::group(['middleware' => ['auth', 'verifycompany'], 'prefix' => 'admin'], function () {
+                    Route::get('/home', 'HomeController@index')->name('admin.home');
+                    Route::get('/dashboard', 'DashboardController@index')->name('admin.dashboard');
 
-                /*
-                 * Teamwork routes
-                 */
-                Route::group(['prefix' => 'teams', 'namespace' => 'Teamwork'], function () {
-                    Route::get('/', 'TeamController@index')->name('teams.index');
-                    Route::get('create', 'TeamController@create')->name('teams.create');
-                    Route::post('teams', 'TeamController@store')->name('teams.store');
-                    Route::get('edit/{id}', 'TeamController@edit')->name('teams.edit');
-                    Route::put('edit/{id}', 'TeamController@update')->name('teams.update');
-                    Route::delete('destroy/{id}', 'TeamController@destroy')->name('teams.destroy');
-                    Route::get('switch/{id}', 'TeamController@switchTeam')->name('teams.switch');
+                    /*
+                     * Teamwork routes
+                     */
+                    Route::group(['prefix' => 'teams', 'namespace' => 'Teamwork'], function () {
+                        Route::get('/', 'TeamController@index')->name('teams.index');
+                        Route::get('create', 'TeamController@create')->name('teams.create');
+                        Route::post('teams', 'TeamController@store')->name('teams.store');
+                        Route::get('edit/{id}', 'TeamController@edit')->name('teams.edit');
+                        Route::put('edit/{id}', 'TeamController@update')->name('teams.update');
+                        Route::delete('destroy/{id}', 'TeamController@destroy')->name('teams.destroy');
+                        Route::get('switch/{id}', 'TeamController@switchTeam')->name('teams.switch');
 
-                    Route::get('members/{id}', 'TeamMemberController@show')->name('teams.members.show');
-                    Route::get('members/resend/{invite_id}', 'TeamMemberController@resendInvite')->name('teams.members.resend_invite');
-                    Route::post('members/{id}', 'TeamMemberController@invite')->name('teams.members.invite');
-                    Route::delete('members/{id}/{user_id}', 'TeamMemberController@destroy')->name('teams.members.destroy');
+                        Route::get('members/{id}', 'TeamMemberController@show')->name('teams.members.show');
+                        Route::get('members/resend/{invite_id}', 'TeamMemberController@resendInvite')->name('teams.members.resend_invite');
+                        Route::post('members/{id}', 'TeamMemberController@invite')->name('teams.members.invite');
+                        Route::delete('members/{id}/{user_id}', 'TeamMemberController@destroy')->name('teams.members.destroy');
 
-                    Route::post('/getTeamData', 'TeamController@getTeamData');
+                        Route::post('/getTeamData', 'TeamController@getTeamData');
 
-                    Route::get('accept/{token}', 'AuthController@acceptInvite')->name('teams.accept_invite');
+                        Route::get('accept/{token}', 'AuthController@acceptInvite')->name('teams.accept_invite');
+                    });
+
+                    Route::resource('roles', 'RolesController');
+                    Route::post('/getRoleData', 'RolesController@getRoleData');
+
+                    Route::resource('permissions', 'PermissionController');
+                    Route::post('/getPermissionData', 'PermissionController@getPermissionData');
+
+                    //Users Section
+                    Route::resource('users', 'UsersController');
+                    Route::post('/getUserData', 'UsersController@getUserData');
+                    Route::post('/validateEmail', 'UsersController@validateEmail');
+                    Route::post('/validateUsername', 'UsersController@validateUsername');
+                    Route::get('/profile', 'UsersController@profile')->name('users.profile');
+                    Route::post('/saveGeneralInfo', 'UsersController@saveGeneralInfo')->name('users.save.general.info');
+                    Route::post('/checkPassword', 'UsersController@checkPassword')->name('users.check.password');
+                    Route::post('/changePassword', 'UsersController@changePassword')->name('users.change.password');
+                    Route::post('/updateAvatar', 'UsersController@updateAvatar')->name('users.update.avatar');
+
+                    Route::post('/checkCompanyUser', 'UsersController@checkCompanyUser');
+                    Route::get('/resendInvitation/{id}', 'UsersController@resendInvitation');
+
+                    Route::resource('groups', 'GroupController');
+                    Route::post('/getGroupData', 'GroupController@getGroupData');
+
+                    Route::post('/inviteTeamMate', 'UsersController@inviteTeamMate')->name('users.invite.teammate');
                 });
-
-                Route::resource('roles', 'RolesController');
-                Route::post('/getRoleData', 'RolesController@getRoleData');
-
-                Route::resource('permissions', 'PermissionController');
-                Route::post('/getPermissionData', 'PermissionController@getPermissionData');
-
-                //Users Section
-                Route::resource('users', 'UsersController');
-                Route::post('/getUserData', 'UsersController@getUserData');
-                Route::post('/validateEmail', 'UsersController@validateEmail');
-                Route::post('/validateUsername', 'UsersController@validateUsername');
-                Route::get('/profile', 'UsersController@profile')->name('users.profile');
-                Route::post('/saveGeneralInfo', 'UsersController@saveGeneralInfo')->name('users.save.general.info');
-
-                Route::post('/checkCompanyUser', 'UsersController@checkCompanyUser');
-                Route::get('/resendInvitation/{id}', 'UsersController@resendInvitation');
-
-                // Route::resource('modules', 'ModulesController');
-                // Route::post('/getModuleData', 'ModulesController@getModuleData');
-                // Route::post('generateModuleUrl', 'ModulesController@generateModuleUrl');
-
-                // Route::resource('widgets', 'WidgetsController');
-                // Route::post('/getWidgetData', 'WidgetsController@getWidgetData');
-
-                Route::resource('groups', 'GroupController');
-                Route::post('/getGroupData', 'GroupController@getGroupData');
-            });
+            /*});*/
         }
     );
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');

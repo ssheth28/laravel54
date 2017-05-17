@@ -11,11 +11,11 @@
                 <div class="portlet light profile-sidebar-portlet ">
                     <!-- SIDEBAR USERPIC -->
                     <div class="profile-userpic">
-                        <img src="/img/admin/profile_user.jpg" class="img-responsive" alt=""> </div>
+                        <img src="{{ $avatar }} " class="img-responsive" alt=""> </div>
                     <!-- END SIDEBAR USERPIC -->
                     <!-- SIDEBAR USER TITLE -->
                     <div class="profile-usertitle">
-                        <div class="profile-usertitle-name"> Marcus Doe </div>
+                        <div class="profile-usertitle-name"> {{ Auth::user()->person->first_name . ' ' . Auth::user()->person->last_name }} </div>
                         <div class="profile-usertitle-job"> Developer </div>
                     </div>
                     <!-- END SIDEBAR USER TITLE -->
@@ -91,12 +91,15 @@
                                 <div class="caption caption-md">
                                     <i class="icon-globe theme-font hide"></i>
                                     <span class="caption-subject font-blue-madison bold uppercase">Profile Account</span>
+                                    @include('flash::message')
                                 </div>
                                 <ul class="nav nav-tabs">
+                                    @if($user->hasRole(Landlord::getTenants()['company']->id . '.Admin'))
                                     <li class="active">
                                         <a href="#tab_1_1" data-toggle="tab">Company Profile</a>
                                     </li>
-                                    <li>
+                                    @endif
+                                    <li @if(!$user->hasRole(Landlord::getTenants()['company']->id . '.Admin')) class="active" @endif>
                                         <a href="#tab_1_2" data-toggle="tab">General</a>
                                     </li>
                                     <li>
@@ -118,6 +121,7 @@
                             </div>
                             <div class="portlet-body forms-grid">
                                 <div class="tab-content">
+                                    @if($user->hasRole(Landlord::getTenants()['company']->id . '.Admin'))
                                     <!-- COMPANY INFO TAB -->
                                     <div class="tab-pane active" id="tab_1_1">
                                         <div class="panel-grid-main element-sec clearfix" id="appendForm" novalidate="novalidate">
@@ -538,9 +542,10 @@
 											<div class="clearfix"></div>
 										</div>
                                     </div>
+                                    @endif
                                     <!-- END COMPANY INFO TAB -->
                                     <!-- GENERAL INFO TAB -->
-                                    <div class="tab-pane" id="tab_1_2">
+                                    <div class="tab-pane @if(!$user->hasRole(Landlord::getTenants()['company']->id . '.Admin')) active @endif" id="tab_1_2">
 									    <div class="panel-grid-main element-sec clearfix" id="appendForm1" novalidate="novalidate">
                                             {!! Form::open(['route' => ['users.save.general.info', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-save-general-info form-horizontal', 'role' => 'form']) !!}
 									            <div class="scroll-wrapper" data-class="">
@@ -869,18 +874,21 @@
                                     <!-- CHANGE AVATAR TAB -->
                                     <div class="tab-pane" id="tab_1_5">
                                         <p> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum
-                                            eiusmod. </p>
-                                        <form action="#" role="form">
+                                            eiusmod. </p>                                        
+                                        {!! Form::open(['route' => ['users.update.avatar', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-save-user-avatar form-horizontal', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
+
                                             <div class="form-group">
                                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                                     <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                                                        <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt=""> </div>
-                                                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                                                        <img src="{{ $avatar }}" alt="">
+                                                    </div>
+                                                    <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> 
+                                                    </div>
                                                     <div>
                                                         <span class="btn default btn-file">
                                                             <span class="fileinput-new"> Select image </span>
                                                             <span class="fileinput-exists"> Change </span>
-                                                            <input type="file" name="..."> </span>
+                                                            <input type="file" name="user_avatar" id="user_avatar"> </span>
                                                         <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput"> Remove </a>
                                                     </div>
                                                 </div>
@@ -890,29 +898,41 @@
                                                 </div>
                                             </div>
                                             <div class="margin-top-10">
-                                                <a href="javascript:;" class="btn btn-primary"> Submit </a>
+                                                {{-- <a href="javascript:;" class="btn btn-primary"> Submit </a> --}}
+                                                <button class="uie-btn uie-btn-primary save-btn" type="submit" name="btnSave" data-type="submit" tabindex="11">Submit</button>
                                                 <a href="javascript:;" class="btn default"> Cancel </a>
                                             </div>
-                                        </form>
+                                        {!! Form::close() !!}
                                     </div>
                                     <!-- END CHANGE AVATAR TAB -->
                                     <!-- CHANGE PASSWORD TAB -->
                                     <div class="tab-pane" id="tab_1_6">
-                                        <form action="#">
+                                        {{-- <form action="#"> --}}
+                                        {!! Form::open(['route' => ['users.change.password', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-save-change-password', 'id' => 'js-frm-save-change-password', 'role' => 'form']) !!}
+                                            <input type="hidden" name="change_password_user_id" value="{{ $user->id }}">
                                             <div class="form-group">
                                                 <label class="control-label">Current Password</label>
-                                                <input type="password" class="form-control"> </div>
+                                                {{-- <input type="password" class="form-control"> --}}
+                                                {!! Form::password('change_password_current_password', ['class' => 'form-control', 'id' => 'change_password_current_password']) !!}
+                                                <p id="current_password_error_msg" style="color: red; display: none;"></p>
+                                            </div>
                                             <div class="form-group">
                                                 <label class="control-label">New Password</label>
-                                                <input type="password" class="form-control"> </div>
+                                                {{-- <input type="password" class="form-control"> </div> --}}
+                                                {!! Form::password('change_password_new_password', ['class' => 'form-control', 'id' => 'change_password_new_password']) !!}
+                                            </div>
                                             <div class="form-group">
                                                 <label class="control-label">Re-type New Password</label>
-                                                <input type="password" class="form-control"> </div>
+                                                {{-- <input type="password" class="form-control"> </div> --}}
+                                                {!! Form::password('change_password_retype_new_password',['class' => 'form-control', 'id' => 'change_password_retype_new_password']) !!}
+                                            </div>
                                             <div class="margin-top-10">
-                                                <a href="javascript:;" class="btn btn-primary"> Change Password </a>
+                                                {{-- <a href="javascript:;" class="btn btn-primary"> Change Password </a> --}}
+                                                <button class="btn btn-primary" type="submit" name="btnSavePassword" data-type="submit" tabindex="11">Change Password</button>
                                                 <a href="javascript:;" class="btn default"> Cancel </a>
                                             </div>
-                                        </form>
+                                        {!! Form::close() !!}
+                                        {{-- </form> --}}
                                     </div>
                                     <!-- END CHANGE PASSWORD TAB -->
                                     <!-- PRIVACY SETTINGS TAB -->
@@ -999,5 +1019,8 @@
 @endsection
 
 @section('page-script')
+    <script>
+        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+    </script>
 	<script src="{{ asset('js/admin/profile.js') }}" type="text/javascript"></script>
 @endsection

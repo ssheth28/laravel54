@@ -79,6 +79,7 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
                     Route::post('/saveGeneralInfo', 'UsersController@saveGeneralInfo')->name('users.save.general.info');
                     Route::post('/checkPassword', 'UsersController@checkPassword')->name('users.check.password');
                     Route::post('/changePassword', 'UsersController@changePassword')->name('users.change.password');
+                    Route::post('/updateAvatar', 'UsersController@updateAvatar')->name('users.update.avatar');
 
                     Route::post('/checkCompanyUser', 'UsersController@checkCompanyUser');
                     Route::get('/resendInvitation/{id}', 'UsersController@resendInvitation');
@@ -87,9 +88,8 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
                     Route::post('/getGroupData', 'GroupController@getGroupData');
 
                     Route::post('/inviteTeamMate', 'UsersController@inviteTeamMate')->name('users.invite.teammate');
-                /*});*/
-
-            });
+                });
+            /*});*/
         }
     );
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');

@@ -180,7 +180,7 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {        
         $this->init();
         $checkUserExists = User::where('email', $request->email)->first();        
         $companyId = Landlord::getTenants()['company']->id;
@@ -363,8 +363,28 @@ class UsersController extends Controller
     public function profile()
     {
         $user = Auth::user();
+        $userMedia = $user->getMedia('User');
+
+        if(count($userMedia) > 0) {
+            $avatar = $user->getMedia('User')[0]->getUrl();
+        } else {
+            $avatar = "http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image";
+        }
+
         View::share('user', $user);
-        return view('users.profile');
+        return view('users.profile', compact('avatar'));
+    }
+
+    public function updateAvatar(Request $request)
+    {   
+        $user = Auth::user();
+        $userAvatar = $request->file('user_avatar');
+        $user->clearMediaCollection('User');
+        $media = $user->addMedia($userAvatar)
+                        ->preservingOriginal()
+                        ->toMediaLibrary('User');
+        
+        return redirect()->route('users.profile', ['domain' => app('request')->route()->parameter('company')]);
     }
 
     public function saveGeneralInfo(Request $request)
@@ -374,7 +394,6 @@ class UsersController extends Controller
         $user->person->last_name = $request->general_last_name;
         $address = array();
         $address['address1'] = $request->general_address1;
-        $address['city'] = $request->general_city;
         $address['state'] = $request->general_state;
         $address['pin'] = $request->general_pin;
         $user->person->address = $address;

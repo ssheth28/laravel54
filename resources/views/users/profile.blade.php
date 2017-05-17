@@ -94,10 +94,12 @@
                                     @include('flash::message')
                                 </div>
                                 <ul class="nav nav-tabs">
+                                    @if($user->hasRole(Landlord::getTenants()['company']->id . '.Admin'))
                                     <li class="active">
                                         <a href="#tab_1_1" data-toggle="tab">Company Profile</a>
                                     </li>
-                                    <li>
+                                    @endif
+                                    <li @if(!$user->hasRole(Landlord::getTenants()['company']->id . '.Admin')) class="active" @endif>
                                         <a href="#tab_1_2" data-toggle="tab">General</a>
                                     </li>
                                     <li>
@@ -119,6 +121,7 @@
                             </div>
                             <div class="portlet-body forms-grid">
                                 <div class="tab-content">
+                                    @if($user->hasRole(Landlord::getTenants()['company']->id . '.Admin'))
                                     <!-- COMPANY INFO TAB -->
                                     <div class="tab-pane active" id="tab_1_1">
                                         <div class="panel-grid-main element-sec clearfix" id="appendForm" novalidate="novalidate">
@@ -539,9 +542,10 @@
 											<div class="clearfix"></div>
 										</div>
                                     </div>
+                                    @endif
                                     <!-- END COMPANY INFO TAB -->
                                     <!-- GENERAL INFO TAB -->
-                                    <div class="tab-pane" id="tab_1_2">
+                                    <div class="tab-pane @if(!$user->hasRole(Landlord::getTenants()['company']->id . '.Admin')) active @endif" id="tab_1_2">
 									    <div class="panel-grid-main element-sec clearfix" id="appendForm1" novalidate="novalidate">
                                             {!! Form::open(['route' => ['users.save.general.info', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-save-general-info form-horizontal', 'role' => 'form']) !!}
 									            <div class="scroll-wrapper" data-class="">

@@ -75,12 +75,12 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
                 Route::post('/checkCompanyUser', 'UsersController@checkCompanyUser');
                 Route::get('/resendInvitation/{id}', 'UsersController@resendInvitation');
 
-                Route::resource('modules', 'ModulesController');
-                Route::post('/getModuleData', 'ModulesController@getModuleData');
-                Route::post('generateModuleUrl', 'ModulesController@generateModuleUrl');
+                // Route::resource('modules', 'ModulesController');
+                // Route::post('/getModuleData', 'ModulesController@getModuleData');
+                // Route::post('generateModuleUrl', 'ModulesController@generateModuleUrl');
 
-                Route::resource('widgets', 'WidgetsController');
-                Route::post('/getWidgetData', 'WidgetsController@getWidgetData');
+                // Route::resource('widgets', 'WidgetsController');
+                // Route::post('/getWidgetData', 'WidgetsController@getWidgetData');
 
                 Route::resource('groups', 'GroupController');
                 Route::post('/getGroupData', 'GroupController@getGroupData');

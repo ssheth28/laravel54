@@ -2,8 +2,8 @@
 
 namespace App\Listeners;
 
-use Illuminate\Auth\Events\Authenticated;
 use App\Exceptions\UserNotVerifiedException;
+use Illuminate\Auth\Events\Authenticated;
 
 class LogAuthenticated
 {
@@ -25,7 +25,7 @@ class LogAuthenticated
      */
     public function handle(Authenticated $event)
     {
-        if (! $event->user->is_verified) {
+        if (!$event->user->is_verified) {
             throw new UserNotVerifiedException('User Not verified');
         }
     }

@@ -71,6 +71,7 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
                 Route::post('/validateUsername', 'UsersController@validateUsername');
                 Route::get('/profile', 'UsersController@profile')->name('users.profile');
                 Route::post('/saveGeneralInfo', 'UsersController@saveGeneralInfo')->name('users.save.general.info');
+                Route::post('/updateAvatar', 'UsersController@updateAvatar')->name('users.update.avatar');
 
                 Route::post('/checkCompanyUser', 'UsersController@checkCompanyUser');
                 Route::get('/resendInvitation/{id}', 'UsersController@resendInvitation');

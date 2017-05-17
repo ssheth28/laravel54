@@ -126,7 +126,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <div class="page-bar">
                             <ul class="page-breadcrumb">
                                 <li>
-                                    <span>Profile</span>
+                                    <span>{{ $title }}</span>
                                 </li>
                             </ul>
                             <div class="page-toolbar">

@@ -19,6 +19,8 @@ use View;
 
 class UsersController extends Controller
 {
+    public $title;
+    
     /**
      * Create a new controller instance.
      *
@@ -382,11 +384,14 @@ class UsersController extends Controller
     {   
         $user = Auth::user();
         $userAvatar = $request->file('user_avatar');
-        $user->clearMediaCollection('User');
-        $media = $user->addMedia($userAvatar)
+
+        if($userAvatar) {
+            $user->clearMediaCollection('User');
+            $media = $user->addMedia($userAvatar)
                         ->preservingOriginal()
                         ->toMediaLibrary('User');
-        
+        }
+
         return redirect()->route('users.profile', ['domain' => app('request')->route()->parameter('company')]);
     }
 

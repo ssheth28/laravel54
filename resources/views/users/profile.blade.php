@@ -15,7 +15,7 @@
                     <!-- END SIDEBAR USERPIC -->
                     <!-- SIDEBAR USER TITLE -->
                     <div class="profile-usertitle">
-                        <div class="profile-usertitle-name"> Marcus Doe </div>
+                        <div class="profile-usertitle-name"> {{ Auth::user()->person->first_name . ' ' . Auth::user()->person->last_name }} </div>
                         <div class="profile-usertitle-job"> Developer </div>
                     </div>
                     <!-- END SIDEBAR USER TITLE -->

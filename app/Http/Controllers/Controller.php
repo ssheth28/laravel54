@@ -76,6 +76,7 @@ class Controller extends BaseController
                 }
                 JavaScript::put([
                     'locale' => LaravelLocalization::getCurrentLocale(),
+                    'urlInitial' => LaravelLocalization::getCurrentLocale() != "en" ? "/" . LaravelLocalization::getCurrentLocale() : ""
                 ]);
 
                 $companies = Auth::user()->companies()->where('settings->is_invitation_accepted', 1)->get();

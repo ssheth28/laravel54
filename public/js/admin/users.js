@@ -28,8 +28,8 @@ var User = function() {
                 },
                 username: {
                     required: true,
-                     remote: {
-                        url: "/admin/validateUsername",
+                    remote: {
+                        url: window.urlInitial + "/admin/validateUsername",
                         type: "post",
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                         data: {   
@@ -42,7 +42,7 @@ var User = function() {
                 email: {
                     required: true,
                     remote: {
-                        url: "/admin/checkCompanyUser",
+                        url: window.urlInitial + "/admin/checkCompanyUser",
                         type: "post",
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                         data: {
@@ -164,7 +164,7 @@ $(document).ready(function() {
 
     $(document).on('click', '.js-continue', function(){
         $.ajax({
-            url: "/admin/validateEmail",
+            url: window.urlInitial + "/admin/validateEmail",
             type: "POST",
             data: {email: $("#email").val()},
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },

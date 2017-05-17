@@ -69,7 +69,7 @@
                                                         <label class="label">Email </label>
                                                     </div>
                                                     <div class="col-md-7 col-lg-7 col-sm-7">
-                                                        {!! Form::email('email', null,['class' => 'form-control', 'id' => 'email']) !!}
+                                                        {!! Form::email('email', app('request')->get('email'), ['class' => 'form-control', 'id' => 'email']) !!}
                                                     </div>
                                                 </div>
                                             </div>

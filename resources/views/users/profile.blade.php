@@ -91,6 +91,7 @@
                                 <div class="caption caption-md">
                                     <i class="icon-globe theme-font hide"></i>
                                     <span class="caption-subject font-blue-madison bold uppercase">Profile Account</span>
+                                    @include('flash::message')
                                 </div>
                                 <ul class="nav nav-tabs">
                                     <li class="active">
@@ -898,21 +899,32 @@
                                     <!-- END CHANGE AVATAR TAB -->
                                     <!-- CHANGE PASSWORD TAB -->
                                     <div class="tab-pane" id="tab_1_6">
-                                        <form action="#">
+                                        {{-- <form action="#"> --}}
+                                        {!! Form::open(['route' => ['users.change.password', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-save-change-password', 'id' => 'js-frm-save-change-password', 'role' => 'form']) !!}
+                                            <input type="hidden" name="change_password_user_id" value="{{ $user->id }}">
                                             <div class="form-group">
                                                 <label class="control-label">Current Password</label>
-                                                <input type="password" class="form-control"> </div>
+                                                {{-- <input type="password" class="form-control"> --}}
+                                                {!! Form::password('change_password_current_password', ['class' => 'form-control', 'id' => 'change_password_current_password']) !!}
+                                                <p id="current_password_error_msg" style="color: red; display: none;"></p>
+                                            </div>
                                             <div class="form-group">
                                                 <label class="control-label">New Password</label>
-                                                <input type="password" class="form-control"> </div>
+                                                {{-- <input type="password" class="form-control"> </div> --}}
+                                                {!! Form::password('change_password_new_password', ['class' => 'form-control', 'id' => 'change_password_new_password']) !!}
+                                            </div>
                                             <div class="form-group">
                                                 <label class="control-label">Re-type New Password</label>
-                                                <input type="password" class="form-control"> </div>
+                                                {{-- <input type="password" class="form-control"> </div> --}}
+                                                {!! Form::password('change_password_retype_new_password',['class' => 'form-control', 'id' => 'change_password_retype_new_password']) !!}
+                                            </div>
                                             <div class="margin-top-10">
-                                                <a href="javascript:;" class="btn btn-primary"> Change Password </a>
+                                                {{-- <a href="javascript:;" class="btn btn-primary"> Change Password </a> --}}
+                                                <button class="btn btn-primary" type="submit" name="btnSavePassword" data-type="submit" tabindex="11">Change Password</button>
                                                 <a href="javascript:;" class="btn default"> Cancel </a>
                                             </div>
-                                        </form>
+                                        {!! Form::close() !!}
+                                        {{-- </form> --}}
                                     </div>
                                     <!-- END CHANGE PASSWORD TAB -->
                                     <!-- PRIVACY SETTINGS TAB -->
@@ -999,5 +1011,8 @@
 @endsection
 
 @section('page-script')
+    <script>
+        $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+    </script>
 	<script src="{{ asset('js/admin/profile.js') }}" type="text/javascript"></script>
 @endsection

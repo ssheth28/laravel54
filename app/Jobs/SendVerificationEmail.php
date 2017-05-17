@@ -2,13 +2,13 @@
 
 namespace App\Jobs;
 
+use App\Mail\EmailVerification;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Mail;
-use App\Mail\EmailVerification;
 
 class SendVerificationEmail implements ShouldQueue
 {
@@ -19,9 +19,10 @@ class SendVerificationEmail implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @return void
      *
      * @param mixed $user
+     *
+     * @return void
      */
     public function __construct($user)
     {

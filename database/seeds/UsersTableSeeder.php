@@ -1,11 +1,11 @@
 <?php
 
-use App\Models\User;
+use App\Events\CompanyRegistered;
 use App\Models\Companies;
+use App\Models\User;
+use Carbon\Carbon as Carbon;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
-use App\Events\CompanyRegistered;
-use Carbon\Carbon as Carbon;
 
 class UsersTableSeeder extends Seeder
 {
@@ -49,9 +49,9 @@ class UsersTableSeeder extends Seeder
         [
             'company_id' => 2,
             'user_id'    => 1,
-            'settings' => json_encode([
-                'is_invitation_accepted' => 1
-            ])
+            'settings'   => json_encode([
+                'is_invitation_accepted' => 1,
+            ]),
         ], ]);
 
         event(new CompanyRegistered($company, $user, 'admin'));

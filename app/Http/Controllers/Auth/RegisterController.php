@@ -4,16 +4,16 @@ namespace App\Http\Controllers\Auth;
 
 use App\Events\CompanyRegistered;
 use App\Http\Controllers\Controller;
+use App\Jobs\SendVerificationEmail;
 use App\Models\Companies;
 use App\Models\CompanyUser;
 use App\Models\Person;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use App\Jobs\SendVerificationEmail;
-use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -130,19 +130,17 @@ class RegisterController extends Controller
         ]);
 
         $user = User::create([
-            'person_id' => $person->id,
-            'username' => $data['username'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
+            'person_id'          => $person->id,
+            'username'           => $data['username'],
+            'email'              => $data['email'],
+            'password'           => bcrypt($data['password']),
             'verification_token' => md5(uniqid(mt_rand(), true)),
         ]);
 
         $companyUser = CompanyUser::create([
             'user_id'       => $user->id,
             'company_id'    => $company->id,
-            'settings' => json_encode([
-                'is_invitation_accepted' => 1
-            ]),
+            'settings'      => ['is_invitation_accepted' => 1],
         ]);
 
         event(new CompanyRegistered($company, $user, 'front'));

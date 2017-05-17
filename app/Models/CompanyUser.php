@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use App\Models\Basemodel as Model;
+use App\Traits\MySQLJSONColumnManager;
 
 class CompanyUser extends Model
 {
+    use MySQLJSONColumnManager;
+
     /**
      * The table associated with the model.
      *
@@ -21,6 +24,15 @@ class CompanyUser extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'company_id','settings',
+        'user_id', 'company_id', 'settings',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'settings' => 'array',
     ];
 }

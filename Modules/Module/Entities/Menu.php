@@ -3,6 +3,7 @@
 namespace Modules\Module\Entities;
 
 use App\Models\Basemodel as Model;
+
 // use Illuminate\Database\Eloquent\Model;
 
 class Menu extends Model

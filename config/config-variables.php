@@ -25,5 +25,5 @@ return [
         '100%' => '100%',
     ],
     'menu_item_permission_identifier' => 'm',
-    'widget_permission_identifier' => 'w',
+    'widget_permission_identifier'    => 'w',
 ];

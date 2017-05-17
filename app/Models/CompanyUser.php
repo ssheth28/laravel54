@@ -8,7 +8,7 @@ use App\Traits\MySQLJSONColumnManager;
 class CompanyUser extends Model
 {
     use MySQLJSONColumnManager;
-    
+
     /**
      * The table associated with the model.
      *
@@ -24,7 +24,7 @@ class CompanyUser extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'company_id','settings',
+        'user_id', 'company_id', 'settings',
     ];
 
     /**

@@ -2,17 +2,17 @@
 
 namespace Modules\Widget\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use DB;
-use View;
-use Landlord;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Landlord;
 use Modules\Module\Entities\Menu;
 use Modules\Module\Entities\MenuItem;
 use Modules\Widget\Entities\Widget;
 use Modules\Widget\Entities\WidgetType;
-use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
+use View;
 
 class WidgetController extends Controller
 {
@@ -57,10 +57,11 @@ class WidgetController extends Controller
 
     /**
      * Display a listing of the resource.
+     *
      * @return Response
      */
     public function index()
-    {        
+    {
         return view('widget::index');
     }
 
@@ -105,28 +106,31 @@ class WidgetController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     *
      * @return Response
      */
     public function create()
     {
         $this->init();
-        $WidgetTypes = WidgetType::generate();        
+        $WidgetTypes = WidgetType::generate();
         $WidgetTree = Widget::generate();
-        $menuItems = MenuItem::where('menu_id', $this->menuId)->get()->toArray();        
-        $allWidgetControllers = Menu::buildMenuTree($menuItems);        
+        $menuItems = MenuItem::where('menu_id', $this->menuId)->get()->toArray();
+        $allWidgetControllers = Menu::buildMenuTree($menuItems);
 
         return view('widget::create', compact('WidgetTypes', 'WidgetTree', 'allWidgetControllers'));
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param  Request $request
+     *
+     * @param Request $request
+     *
      * @return Response
      */
     public function store(Request $request)
     {
         $this->init();
-        
+
         $request = $this->request;
         $widget = new Widget();
         $widget->icon = $request->widget_icon;
@@ -143,7 +147,7 @@ class WidgetController extends Controller
 
         $companyId = Landlord::getTenants()['company']->id;
         $permission = new Permission();
-        $permission->name = $companyId.'.'.(config('config-variables.widget_permission_identifier')). '.' .$widget->id;
+        $permission->name = $companyId.'.'.(config('config-variables.widget_permission_identifier')).'.'.$widget->id;
         $permission->save();
 
         flash()->success(config('config-variables.flash_messages.dataSaved'));
@@ -153,15 +157,17 @@ class WidgetController extends Controller
 
     /**
      * Show the specified resource.
+     *
      * @return Response
      */
     public function show()
     {
-    return view('widget::show');
+        return view('widget::show');
     }
 
     /**
      * Show the form for editing the specified resource.
+     *
      * @return Response
      */
     public function edit($company, $id)
@@ -178,7 +184,9 @@ class WidgetController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param  Request $request
+     *
+     * @param Request $request
+     *
      * @return Response
      */
     public function update(Request $request, $company, $id)
@@ -203,6 +211,7 @@ class WidgetController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
      * @return Response
      */
     public function destroy($company, $id)

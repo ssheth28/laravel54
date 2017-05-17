@@ -62,11 +62,11 @@ class ModuleServiceProvider extends ServiceProvider
         $sourcePath = __DIR__.'/../Resources/views';
 
         $this->publishes([
-            $sourcePath => $viewPath
+            $sourcePath => $viewPath,
         ]);
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
-            return $path . '/modules/module';
+            return $path.'/modules/module';
         }, \Config::get('view.paths')), [$sourcePath]), 'module');
     }
 
@@ -82,7 +82,7 @@ class ModuleServiceProvider extends ServiceProvider
         if (is_dir($langPath)) {
             $this->loadTranslationsFrom($langPath, 'module');
         } else {
-            $this->loadTranslationsFrom(__DIR__ .'/../Resources/lang', 'module');
+            $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'module');
         }
     }
 

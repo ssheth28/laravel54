@@ -21,7 +21,7 @@ class CompanyRegistered
      *
      * @return void
      */
-    public function __construct(Companies $company, User $user, string $userType = "")
+    public function __construct(Companies $company, User $user, string $userType = '')
     {
         $this->company = $company;
         $this->user = $user;

@@ -2,12 +2,12 @@
 
 namespace Modules\Widget\Entities;
 
+use App\Models\Basemodel as Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
-use App\Models\Basemodel as Model;
 
 class Widget extends Model
-{    
+{
     use HasSlug;
 
     /**
@@ -61,7 +61,6 @@ class Widget extends Model
 
         return $items;
     }
-
 
     /**
      * Relationship: menuitems.

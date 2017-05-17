@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendInvitationMail;
+use App\Jobs\SendVerificationEmail;
 use App\Models\CompanyUser;
 use App\Models\Person;
 use App\Models\User;
+use App\Models\UserInvite;
+use Auth;
 use Carbon\Carbon as Carbon;
 use DB;
 use Illuminate\Http\Request;
@@ -12,10 +16,6 @@ use Illuminate\Support\Facades\Hash;
 use Landlord;
 use Spatie\Permission\Models\Role;
 use View;
-use App\Jobs\SendVerificationEmail;
-use App\Jobs\SendInvitationMail;
-use App\Models\UserInvite;
-use Auth;
 
 class UsersController extends Controller
 {
@@ -47,7 +47,7 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {      
+    {
         return view('users.index');
     }
 
@@ -63,8 +63,9 @@ class UsersController extends Controller
 
             if ($user) {
                 return 'false';
-            }            
-        }       
+            }
+        }
+
         return 'true';
     }
 
@@ -81,7 +82,8 @@ class UsersController extends Controller
             if ($user) {
                 return 'false';
             }
-        }       
+        }
+
         return 'true';
     }
 
@@ -95,13 +97,14 @@ class UsersController extends Controller
                 $userQuery->where('id', '!=', $request->id);
             }
             $user = $userQuery->first();
-            if($user) {
+            if ($user) {
                 $companyUser = CompanyUser::where('user_id', $user->id)->where('company_id', $companyId)->first();
                 if ($companyUser) {
                     return 'false';
                 }
             }
         }
+
         return 'true';
     }
 
@@ -140,7 +143,7 @@ class UsersController extends Controller
             $users->where('company_user.settings->is_invitation_accepted', '=', 1);
         }
 
-        if ( isset($request['not_accepted_invitation']) && (trim($request['not_accepted_invitation']) == '0' || (isset($request['sortby']) && trim($request['not_accepted_invitation']) == '1')) ) {
+        if (isset($request['not_accepted_invitation']) && (trim($request['not_accepted_invitation']) == '0' || (isset($request['sortby']) && trim($request['not_accepted_invitation']) == '1'))) {
             $users->orderBy($sortby, $sorttype);
         }
 
@@ -182,11 +185,11 @@ class UsersController extends Controller
     public function store(Request $request)
     {        
         $this->init();
-        $checkUserExists = User::where('email', $request->email)->first();        
+        $checkUserExists = User::where('email', $request->email)->first();
         $companyId = Landlord::getTenants()['company']->id;
         $userId = 0;
 
-        if(!$checkUserExists) {
+        if (!$checkUserExists) {
             $person = new Person();
             $person->first_name = $request->first_name;
             $person->last_name = $request->last_name;
@@ -248,7 +251,7 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($company, $userId)
-    {        
+    {
         $user = User::find($userId);
         $companyId = Landlord::getTenants()['company']->id;
         $roles = Role::where('name', 'LIKE', $companyId.'%')->pluck('display_name', 'name');
@@ -257,7 +260,7 @@ class UsersController extends Controller
 
         $companyWiseRoles = $userRoles->filter(function ($value, $key) {
             $companyId = Landlord::getTenants()['company']->id;
-            if(explode(".", $value->name)[0] == $companyId) {
+            if (explode('.', $value->name)[0] == $companyId) {
                 return $value;
             }
         })->values()->pluck('name')->toArray();
@@ -320,13 +323,13 @@ class UsersController extends Controller
     {
         if (isset($token)) {
             $userInvites = UserInvite::where('accept_token', $token)->first();
-            if ($userInvites) {               
+            if ($userInvites) {
                 $companyUser = DB::table('company_user')
                                     ->where('user_id', $userInvites->invited_user_id)
                                     ->where('company_id', $userInvites->company_id)
                                     ->update(['settings->is_invitation_accepted' => 1]);
 
-                return view('users.accpet_invitation');                
+                return view('users.accpet_invitation');
             } else {
                 return $this->response()->array(['error' => 'not found'])->statusCode(404);
             }
@@ -338,7 +341,7 @@ class UsersController extends Controller
         $user = User::find($userId);
         $companyId = Landlord::getTenants()['company']->id;
 
-        $existedUserInvite = UserInvite::where('invited_user_id' ,$userId)
+        $existedUserInvite = UserInvite::where('invited_user_id', $userId)
                                         ->where('company_id', $companyId)
                                         ->delete();
         $userInvite = new UserInvite();
@@ -353,7 +356,7 @@ class UsersController extends Controller
         flash()->success(config('config-variables.flash_messages.invitationSent'));
 
         $parameters = ['domain' => app('request')->route()->parameter('company')];
-        if(isset($request->show_pending)) {
+        if (isset($request->show_pending)) {
             $parameters['show_pending'] = 1;
         }
 
@@ -392,7 +395,7 @@ class UsersController extends Controller
         $user = User::with('person')->where('id', Auth::user()->id)->first();
         $user->person->first_name = $request->general_first_name;
         $user->person->last_name = $request->general_last_name;
-        $address = array();
+        $address = [];
         $address['address1'] = $request->general_address1;
         $address['state'] = $request->general_state;
         $address['pin'] = $request->general_pin;

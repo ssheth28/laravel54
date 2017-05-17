@@ -9,12 +9,11 @@ use Illuminate\Notifications\Notifiable;
 use Lab404\Impersonate\Models\Impersonate;
 use Mpociot\Teamwork\Traits\UserHasTeams;
 use Skybluesofa\Followers\Traits\Followable;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use Spatie\Permission\Traits\HasRoles;
 use Ufutx\LaravelComment\CanComment;
 use Ufutx\LaravelFavorite\Traits\Favoriteability;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
-use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 
 /**
  * App\Models\User.

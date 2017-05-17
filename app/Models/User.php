@@ -12,6 +12,9 @@ use Skybluesofa\Followers\Traits\Followable;
 use Spatie\Permission\Traits\HasRoles;
 use Ufutx\LaravelComment\CanComment;
 use Ufutx\LaravelFavorite\Traits\Favoriteability;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
+use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 
 /**
  * App\Models\User.
@@ -37,9 +40,9 @@ use Ufutx\LaravelFavorite\Traits\Favoriteability;
  * @method static \Illuminate\Database\Query\Builder|\App\Models\User whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class User extends Authenticatable implements HasBansContract
+class User extends Authenticatable implements HasBansContract, HasMedia
 {
-    use Notifiable, HasRoles, Impersonate, CanComment, Favoriteability, Followable, HasBans, UserHasTeams;
+    use Notifiable, HasRoles, Impersonate, CanComment, Favoriteability, Followable, HasBans, UserHasTeams, HasMediaTrait;
 
     /**
      * The attributes that are mass assignable.

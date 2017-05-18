@@ -7,7 +7,6 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
             'middleware' => ['localize', 'localeSessionRedirect', 'localizationRedirect'],
         ],
         function () {
-
             /*
             |--------------------------------------------------------------------------
             | Web Routes
@@ -32,12 +31,12 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
 
             Route::get('admin/companyselect', 'CompaniesController@selectCompany')->name('company.select')->middleware('auth', 'verifycompany');
 
-            /*Route::group(
+            Route::group(
             [
-                'prefix'     => request()->segment(2),
+                'prefix'     => UserRole::setUserRole(),
                 'middleware' => ['roleSessionRedirect'],
             ],
-            function () {*/
+            function () {
                 Route::group(['middleware' => ['auth', 'verifycompany'], 'prefix' => 'admin'], function () {
                     Route::get('/home', 'HomeController@index')->name('admin.home');
                     Route::get('/dashboard', 'DashboardController@index')->name('admin.dashboard');
@@ -89,7 +88,7 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
 
                     Route::post('/inviteTeamMate', 'UsersController@inviteTeamMate')->name('users.invite.teammate');
                 });
-            /*});*/
+            });
         }
     );
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');

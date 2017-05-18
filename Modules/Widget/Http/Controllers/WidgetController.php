@@ -2,17 +2,19 @@
 
 namespace Modules\Widget\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use DB;
+use View;
+use Auth;
+use Landlord;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Landlord;
 use Modules\Module\Entities\Menu;
-use Modules\Module\Entities\MenuItem;
 use Modules\Widget\Entities\Widget;
+use App\Http\Controllers\Controller;
+use Modules\Module\Entities\MenuItem;
 use Modules\Widget\Entities\WidgetType;
 use Spatie\Permission\Models\Permission;
-use View;
+
 
 class WidgetController extends Controller
 {
@@ -149,6 +151,9 @@ class WidgetController extends Controller
         $permission = new Permission();
         $permission->name = $companyId.'.'.(config('config-variables.widget_permission_identifier')).'.'.$widget->id;
         $permission->save();
+
+        $user = Auth::user();
+        $user->givePermissionTo($permission->name);
 
         flash()->success(config('config-variables.flash_messages.dataSaved'));
 

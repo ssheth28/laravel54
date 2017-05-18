@@ -14,8 +14,8 @@ class WidgetDatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
-
+        $this->call(WidgetTypeTableSeeder::class);
+        // Model::unguard();
         // $this->call("OthersTableSeeder");
     }
 }

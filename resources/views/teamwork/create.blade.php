@@ -10,7 +10,7 @@
         </div>
         <div class="portlet-body form">
             {!! Form::open(['route' => ['teams.store', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-create-team form-horizontal', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
-                @include('partial.admin.teams.form', ['from'=>'add'])
+                @include('partials.admin.teams.form', ['from'=>'add'])
             {{ Form::close() }}
         </div>
     </div>

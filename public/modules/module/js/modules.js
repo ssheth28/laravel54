@@ -189,7 +189,7 @@ function moduleDataSuccess(moduleData, status, xhr){
 function generateModuleUrl() {
     var data = "parent_id=" + $('#parent_id').val() + "&module_name=" + $('#module_name').val() + "&module_type=" + $('#module_type').val();
     data += $('#is_publicly_visible').bootstrapSwitch('state') ? "&is_publicly_visible=1" : "&is_publicly_visible=0";
-    ajaxCall("/admin/generateModuleUrl", data, 'POST', 'json', generateModuleUrlResponse);
+    ajaxCall(window.urlInitial + "/admin/generateModuleUrl", data, 'POST', 'json', generateModuleUrlResponse);
 }
 
 function generateModuleUrlResponse(response, status, xhr) {

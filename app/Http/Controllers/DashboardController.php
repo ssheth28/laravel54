@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Widget;
 use View;
+use Modules\Widget\Entities\Widget;
 
 class DashboardController extends Controller
 {

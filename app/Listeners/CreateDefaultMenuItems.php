@@ -2,11 +2,11 @@
 
 namespace App\Listeners;
 
-use App\Events\CompanyRegistered;
-use App\Models\Menu;
-use App\Models\MenuItem;
-use App\Models\Widget;
 use DB;
+use App\Events\CompanyRegistered;
+use Modules\Module\Entities\Menu;
+use Modules\Module\Entities\MenuItem;
+use Modules\Widget\Entities\Widget;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 

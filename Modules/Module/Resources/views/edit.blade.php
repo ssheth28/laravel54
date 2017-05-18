@@ -14,12 +14,12 @@
         </div>
         <div class="portlet-body form">
        		{!! Form::open(['route' => ['modules.update', 'domain' => app('request')->route()->parameter('company'), 'moduleId' => $module->id], 'method' => 'PUT', 'class' => 'js-frm-edit-module form-horizontal', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
-		    	@include('partial.admin.modules.form', ['from'=>'edit'])
+		    	@include('modules.module.form', ['from'=>'edit'])
 			{{ Form::close() }}
         </div>
     </div>
 @endsection
 
 @section('page-script')
-    <script src="{{ asset('js/admin/modules.js') }}" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ Module::asset('module:js/modules.js') }}"></script>
 @endsection

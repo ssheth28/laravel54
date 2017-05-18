@@ -197,7 +197,7 @@ class ModuleController extends Controller
      *
      * @return Response
      */
-    public function destroy()
+    public function destroy($company, $moduleId)
     {
         $this->init();
         $message = config('config-variables.flash_messages.dataDeleted');

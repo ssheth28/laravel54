@@ -12,14 +12,4 @@ class Group extends Model
      * @var string
      */
     protected $table = 'groups';
-
-    /**
-     * Relationship: menuitems.
-     *
-     * @return
-     */
-    public function menuItems()
-    {
-        return $this->hasMany('App\Models\MenuItemGroup', 'group_id');
-    }
 }

@@ -11,6 +11,7 @@ use Modules\Module\Entities\Menu;
 use Modules\Module\Entities\MenuItem;
 use Spatie\Permission\Models\Permission;
 use View;
+use Auth;
 
 class ModuleController extends Controller
 {
@@ -139,6 +140,9 @@ class ModuleController extends Controller
         $permission = new Permission();
         $permission->name = $companyId.'.'.(config('config-variables.menu_item_permission_identifier')).'.'.$module->id;
         $permission->save();
+        
+        $user = Auth::user();
+        $user->givePermissionTo($permission->name);
 
         flash()->success(config('config-variables.flash_messages.dataSaved'));
 

@@ -7,7 +7,7 @@
 
 {!! Form::open(['route' => ['groups.update', 'domain' => app('request')->route()->parameter('company'), 'id' => $role->id], 'class' => 'js-frm-edit-group form-inline row module-edit','method' => 'PUT', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
 
-    @include('partial.admin.groups.form',['from'=>'edit'])
+    @include('partials.admin.groups.form',['from'=>'edit'])
     
 {{ Form::close() }}
 @endsection

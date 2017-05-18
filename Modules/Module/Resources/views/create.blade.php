@@ -10,12 +10,12 @@
         </div>
         <div class="portlet-body form">
        		{!! Form::open(['route' => ['modules.store', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-create-module form-horizontal', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
-		    	@include('partial.admin.modules.form',['from'=>'add'])
+		    	@include('modules.module.form', ['from'=>'add'])
 			{{ Form::close() }}
         </div>
     </div>
 @endsection
 
 @section('page-script')
-    <script src="{{ asset('js/admin/modules.js') }}" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ Module::asset('module:js/modules.js') }}"></script>
 @endsection

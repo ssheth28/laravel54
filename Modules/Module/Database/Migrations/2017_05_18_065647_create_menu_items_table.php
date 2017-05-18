@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateMenuItemsTable extends Migration
 {
@@ -40,6 +40,6 @@ class CreateMenuItemsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('menu_items');
+        Schema::dropIfExists('menu_items');
     }
 }

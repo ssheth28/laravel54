@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
-use App\Models\Menu;
-use App\Models\MenuItem;
-use App\Models\Widget;
+use Modules\Module\Entities\Menu;
+use Modules\Module\Entities\MenuItem;
+use Modules\Widget\Entities\Widget;
 use DB;
 use Illuminate\Http\Request;
 use Landlord;

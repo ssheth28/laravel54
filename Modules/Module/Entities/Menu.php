@@ -20,7 +20,7 @@ class Menu extends Model
      */
     public function items()
     {
-        return $this->hasMany('App\Models\MenuItem');
+        return $this->hasMany('Modules\Module\Entities\MenuItem');
     }
 
     public function generate()

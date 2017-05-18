@@ -48,14 +48,18 @@ class Controller extends BaseController
                     })->values();
 
                     $permissions = $role->permissions;
-                    $menuItemIds = $permissions->map(function ($item, $key) {
+
+                    $userPermissions = Auth::user()->permissions;
+                    $allPermissions = $userPermissions->merge($permissions);
+
+                    $menuItemIds = $allPermissions->map(function ($item, $key) {
                         if (strpos($item->name, '.'.config('config-variables.menu_item_permission_identifier').'.') !== false) {
                             return explode('.', $item->name)[2];
                         }
                     })->unique()->toArray();
                     $menuItemIdArray = array_merge($menuItemIdArray, $menuItemIds);
 
-                    $widgetsAccess = $permissions->map(function ($item, $key) {
+                    $widgetsAccess = $allPermissions->map(function ($item, $key) {
                         if (strpos($item->name, '.'.config('config-variables.widget_permission_identifier').'.') !== false) {
                             return explode('.', $item->name)[2];
                         }

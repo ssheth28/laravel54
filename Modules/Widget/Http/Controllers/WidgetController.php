@@ -13,6 +13,7 @@ use Modules\Widget\Entities\Widget;
 use Modules\Widget\Entities\WidgetType;
 use Spatie\Permission\Models\Permission;
 use View;
+use Auth;
 
 class WidgetController extends Controller
 {
@@ -149,6 +150,9 @@ class WidgetController extends Controller
         $permission = new Permission();
         $permission->name = $companyId.'.'.(config('config-variables.widget_permission_identifier')).'.'.$widget->id;
         $permission->save();
+
+        $user = Auth::user();
+        $user->givePermissionTo($permission->name);
 
         flash()->success(config('config-variables.flash_messages.dataSaved'));
 

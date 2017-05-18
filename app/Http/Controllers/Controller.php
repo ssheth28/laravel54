@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Companies;
-use App\Models\Menu;
-use App\Models\MenuItem;
-use App\Models\Widget;
 use Auth;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
-use JavaScript;
-use Landlord;
-use LaravelLocalization;
 use View;
+use Landlord;
+use JavaScript;
+use LaravelLocalization;
+use App\Models\Companies;
+use Modules\Module\Entities\Menu;
+use Modules\Widget\Entities\Widget;
+use Modules\Module\Entities\MenuItem;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+
 
 class Controller extends BaseController
 {

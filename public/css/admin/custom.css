@@ -1111,6 +1111,9 @@ table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
     padding: 0 0 0 60px;
     text-align: left;
 }
+.form-wizard .steps>li.active>a.step .desc {
+    color: #fff;
+}
 .cus-form-wizard .nav.nav-pills li a .desc .name {
     display: block;
     line-height: 15px;

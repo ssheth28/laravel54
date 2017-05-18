@@ -9,23 +9,18 @@ var User = function() {
         $('.js-frm-save-general-info').validate({
             messages: {
                 general_primary_email: {
-                    required: "Enter your primary email",
                     email: "Please enter valid email"
                 },
                 general_secondary_email: {
-                    required: "Enter your primary email",
                     email: "Please enter valid email"
                 },
-                general_mobile_no: {
-                    required: "This field is required",
+                general_mobile_number: {
                     number: "Please enter valid number"
                 },
                 general_home_phone: {
-                    required: "This field is required",
                     number: "Please enter valid number"
                 },
                 general_work_phone: {
-                    required: "This field is required",
                     number: "Please enter valid number"
                 }
             },
@@ -44,7 +39,7 @@ var User = function() {
                     required: true,
                     email: true
                 },
-                general_address: {
+                general_address1: {
                     required: true
                 },
                 general_city: {
@@ -56,7 +51,7 @@ var User = function() {
                 general_pin: {
                     required: true  
                 },
-                general_mobile_no: {
+                general_mobile_number: {
                     required: true,
                     number: true
                 },
@@ -83,22 +78,42 @@ var User = function() {
             }
         });
 
-        $('.js-frm-save-user-avatar').validate({
+        $('.js-frm-save-change-password').validate({
             messages: {
-                user_avatar: {
-                    required: "Please upload an image"                    
+                change_password_retype_new_password: {
+                    equalTo: "Please enter the same password as above"
                 }
             },
             rules: {
-                user_avatar: {
+                change_password_current_password: {
                     required: true
+                },
+                change_password_new_password: {
+                    required: true
+                },
+                change_password_retype_new_password: {
+                    required: true,
+                    equalTo: "#change_password_new_password"
                 }
-            },            
+            },
             errorPlacement: function (error, element) { // render error placement for each input type
                 element.parent().append(error);
             },
-            submitHandler: function (form) {                
-                form.submit();
+            submitHandler: function (form) {
+                $.ajax({
+                    type: "POST",
+                    url: "checkPassword", 
+                    data: $('#js-frm-save-change-password').serialize(),
+                    success: function(result){
+                        console.log(result);
+                        if (result === 'false') {
+                            $('#current_password_error_msg').show();
+                            $("#current_password_error_msg").html("Entered password does not matched");
+                            return;
+                        }
+                        form.submit();
+                    }
+                });
             }
         });
     };

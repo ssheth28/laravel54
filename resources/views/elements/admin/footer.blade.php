@@ -54,19 +54,19 @@
 
         <!-- Modal content-->
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"></button>
-                <h4 class="modal-title">Invite your team mates!</h4>
-            </div>
-            <div class="modal-body">
-                <form role="form">
-                    <input class="form-control" placeholder="xyz@gmail.com" type="text">
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn blue">Submit</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+            {!! Form::open(['route' => ['users.invite.teammate', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-invite-team-mate form-horizontal', 'role' => 'form', 'id' => 'user_invite_teammate']) !!}
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                    <h4 class="modal-title">Invite your team mates!</h4>
+                </div>
+                <div class="modal-body">
+                    {!! Form::email('invite_team_mate_email', null, ['class' => 'form-control', 'id' => 'invite_team_mate_email', 'placeholder' => 'xyz@gmail.com']) !!}                
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn blue">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            {!! Form::close() !!}
         </div>
 
     </div>

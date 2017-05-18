@@ -1,5 +1,51 @@
 var PageLimit = 10;
+var InviteTeamMate = function() {
+    var form = $('#user_invite_teammate');
+    var error = $('.alert-danger', form);
+    var success = $('.alert-success', form);
+
+    var handleValidationInviteTeamMate = function() {
+        $('.js-frm-invite-team-mate').validate({
+            messages: {
+                invite_team_mate_email: {
+                    remote: 'Email already exists.'
+                }
+            },
+            rules: {
+                invite_team_mate_email: {
+                    required: true,
+                    remote: {
+                        url: window.urlInitial + "/admin/checkCompanyUser",
+                        type: "post",
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                        data: {
+                            id: function() {
+                                return $('input[name="user_id"]').val();
+                            }
+                        }
+                    }
+                },
+            },
+            errorPlacement: function (error, element) { // render error placement for each input type
+                element.parent().append(error);
+            },
+            submitHandler: function (form) {
+                error.hide();
+                form.submit();
+            }
+        });
+    };
+
+    return {
+        init: function() {
+            handleValidationInviteTeamMate();
+        }
+    }
+}();
+
 $(document).ready(function() {
+    InviteTeamMate.init();
+
     $(".select2-hide-search-box").select2({
         minimumResultsForSearch: Infinity
     });

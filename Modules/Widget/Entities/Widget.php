@@ -69,6 +69,6 @@ class Widget extends Model
      */
     public function menuItems()
     {
-        return $this->belongsTo('App\Models\MenuItem');
+        return $this->belongsTo('Modules\Module\Entities\MenuItem');
     }
 }

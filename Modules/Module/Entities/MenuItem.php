@@ -22,6 +22,6 @@ class MenuItem extends Model
      */
     public function widgets()
     {
-        return $this->hasMany('App\Models\Widget', 'menu_item_id');
+        return $this->hasMany('Modules\Widget\Entities\Widget', 'menu_item_id');
     }
 }

@@ -14,12 +14,12 @@
         </div>
         <div class="portlet-body form">
        		{!! Form::open(['route' => ['widgets.store', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-create-widget form-horizontal', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
-		    	@include('partial.admin.widgets.form',['from'=>'add'])
+		    	@include('modules.widget.form',['from'=>'add'])
 			{{ Form::close() }}
         </div>
     </div>
 @endsection
 
 @section('page-script')
-    <script src="{{ asset('js/admin/widgets.js') }}" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ Module::asset('widget:js/widgets.js') }}"></script> 
 @endsection

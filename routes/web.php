@@ -63,12 +63,6 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
                         Route::get('accept/{token}', 'AuthController@acceptInvite')->name('teams.accept_invite');
                     });
 
-                    Route::resource('roles', 'RolesController');
-                    Route::post('/getRoleData', 'RolesController@getRoleData');
-
-                    Route::resource('permissions', 'PermissionController');
-                    Route::post('/getPermissionData', 'PermissionController@getPermissionData');
-
                     //Users Section
                     Route::resource('users', 'UsersController');
                     Route::post('/getUserData', 'UsersController@getUserData');

@@ -200,7 +200,7 @@ class ModuleController extends Controller
         $type = 'success';
         $companyId = Landlord::getTenants()['company']->id;
 
-        Permission::where('name', $companyId.'.'.$moduleId)->delete();
+        Permission::where('name', $companyId.'.'.(config('config-variables.menu_item_permission_identifier')).'.'.$moduleId)->delete();
 
         if (!MenuItem::where('id', $moduleId)->delete()) {
             $message = config('config-variables.flash_messages.dataNotDeleted');

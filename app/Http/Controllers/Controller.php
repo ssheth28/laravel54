@@ -75,7 +75,8 @@ class Controller extends BaseController
                     View::share('currentCompanyRoles', $currentCompanyRoles);
                 }
                 JavaScript::put([
-                    'locale' => LaravelLocalization::getCurrentLocale(),
+                    'locale'     => LaravelLocalization::getCurrentLocale(),
+                    'urlInitial' => LaravelLocalization::getCurrentLocale() != 'en' ? '/'.LaravelLocalization::getCurrentLocale() : '',
                 ]);
 
                 $companies = Auth::user()->companies()->where('settings->is_invitation_accepted', 1)->get();

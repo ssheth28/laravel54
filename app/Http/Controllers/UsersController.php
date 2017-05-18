@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ChangePassword;
 use App\Jobs\SendInvitationMail;
+use App\Jobs\SendPasswordChangedNotificationEmail;
 use App\Jobs\SendVerificationEmail;
 use App\Models\CompanyUser;
 use App\Models\Person;
@@ -20,7 +22,7 @@ use View;
 class UsersController extends Controller
 {
     public $title;
-    
+
     /**
      * Create a new controller instance.
      *
@@ -185,7 +187,7 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
+    {
         $this->init();
         $checkUserExists = User::where('email', $request->email)->first();
         $companyId = Landlord::getTenants()['company']->id;
@@ -370,22 +372,23 @@ class UsersController extends Controller
         $user = Auth::user();
         $userMedia = $user->getMedia('User');
 
-        if(count($userMedia) > 0) {
+        if (count($userMedia) > 0) {
             $avatar = $user->getMedia('User')[0]->getUrl();
         } else {
-            $avatar = "http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image";
+            $avatar = 'http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image';
         }
 
         View::share('user', $user);
+
         return view('users.profile', compact('avatar'));
     }
 
     public function updateAvatar(Request $request)
-    {   
+    {
         $user = Auth::user();
         $userAvatar = $request->file('user_avatar');
 
-        if($userAvatar) {
+        if ($userAvatar) {
             $user->clearMediaCollection('User');
             $media = $user->addMedia($userAvatar)
                         ->preservingOriginal()
@@ -405,6 +408,8 @@ class UsersController extends Controller
         $address['state'] = $request->general_state;
         $address['pin'] = $request->general_pin;
         $user->person->address = $address;
+        $user->person->primary_email = $request->general_primary_email;
+        $user->person->secondary_email = $request->general_secondary_email;
         $user->person->mobile_number = $request->general_mobile_number;
         $user->person->home_phone = $request->general_home_phone;
         $user->person->work_phone = $request->general_work_phone;
@@ -415,5 +420,62 @@ class UsersController extends Controller
         flash()->success(config('config-variables.flash_messages.dataSaved'));
 
         return redirect()->route('users.profile', ['domain' => app('request')->route()->parameter('company')]);
+    }
+
+    /**
+     * Check whether requested password of user get match or not.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return string
+     */
+    public function checkPassword(Request $request)
+    {
+        $password = $request->change_password_current_password;
+        $userId = $request->change_password_user_id;
+
+        if (!empty($password) && !empty($userId)) {
+            $user = User::where('id', $userId)->first();
+            if ($user && Hash::check($password, $user->password)) {
+                return 'true';
+            }
+        }
+
+        return 'false';
+    }
+
+    /**
+     * Change password of logged in user.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return string
+     */
+    public function changePassword(Request $request)
+    {
+        $user_data = $request->all();
+        $userId = $user_data['change_password_user_id'];
+        $user = User::where('id', $userId)->first();
+        if ($user_data['change_password_new_password'] && $user_data['change_password_retype_new_password']) {
+            $user->password = Hash::make($user_data['change_password_new_password']);
+            $user->save();
+        }
+        dispatch(new SendPasswordChangedNotificationEmail($user));
+
+        flash()->success(config('config-variables.flash_messages.dataSaved'));
+
+        return redirect()->route('users.profile', ['domain' => app('request')->route()->parameter('company')]);
+    }
+
+    /**
+     * Invite team mate.
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return string
+     */
+    public function inviteTeamMate(Request $request)
+    {
+        return redirect()->route('users.create', ['domain' => app('request')->route()->parameter('company'), 'email' => $request->invite_team_mate_email]);
     }
 }

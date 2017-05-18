@@ -125,7 +125,7 @@
         "phpmd/phpmd": "^2.6",
         "phpro/grumphp": "dev-master",
         "phpspec/phpspec": "dev-master",
-        "phpunit/phpunit": "~6.0",
+        "phpunit/phpunit": "~5.7",
         "roave/security-advisories": "dev-master",
         "sebastian/phpcpd": "^3.0",
         "sensiolabs/security-checker": "^4.0",

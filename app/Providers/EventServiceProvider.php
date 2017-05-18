@@ -35,6 +35,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\CompanyRegistered' => [
             'App\Listeners\CreateDefaultMenuItems',
         ],
+        'App\Events\ChangePassword' => [
+            'App\Listeners\SendPasswordChangedNotification',
+        ],
     ];
 
     /**

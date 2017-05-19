@@ -10,6 +10,7 @@ use Landlord;
 use Modules\Module\Entities\Menu;
 use Modules\Module\Entities\MenuItem;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use View;
 use Auth;
 
@@ -140,9 +141,9 @@ class ModuleController extends Controller
         $permission = new Permission();
         $permission->name = $companyId.'.'.(config('config-variables.menu_item_permission_identifier')).'.'.$module->id;
         $permission->save();
-        
-        $user = Auth::user();
-        $user->givePermissionTo($permission->name);
+
+        $role = Role::find(1);
+        $role->givePermissionTo($permission);
 
         flash()->success(config('config-variables.flash_messages.dataSaved'));
 

@@ -142,7 +142,7 @@ class ModuleController extends Controller
         $permission->name = $companyId.'.'.(config('config-variables.menu_item_permission_identifier')).'.'.$module->id;
         $permission->save();
 
-        $role = Role::find(1);
+        $role = Role::find(session('currentrole'));
         $role->givePermissionTo($permission);
 
         flash()->success(config('config-variables.flash_messages.dataSaved'));

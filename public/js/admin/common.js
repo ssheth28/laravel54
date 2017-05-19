@@ -52,6 +52,8 @@ $(document).ready(function() {
     
     $(".js-select2-multiselect").select2();
 
+    $(".js-select2-roles").select2();
+
     $('#temp .dropdown-menu').on({
         "click":function(e){
           e.stopPropagation();

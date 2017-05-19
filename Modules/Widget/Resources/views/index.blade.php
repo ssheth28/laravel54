@@ -102,5 +102,5 @@
     </div>
 @endsection
 @section('page-script')
-    <script type="text/javascript" src="{{ asset('js/admin/widgets.js') }}"></script>
+    <script type="text/javascript" src="{{ Module::asset('widget:js/widgets.js') }}"></script>
 @endsection

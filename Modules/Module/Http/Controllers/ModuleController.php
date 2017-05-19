@@ -10,7 +10,9 @@ use Landlord;
 use Modules\Module\Entities\Menu;
 use Modules\Module\Entities\MenuItem;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use View;
+use Auth;
 
 class ModuleController extends Controller
 {
@@ -140,6 +142,9 @@ class ModuleController extends Controller
         $permission->name = $companyId.'.'.(config('config-variables.menu_item_permission_identifier')).'.'.$module->id;
         $permission->save();
 
+        $role = Role::find(session('currentrole'));
+        $role->givePermissionTo($permission);
+
         flash()->success(config('config-variables.flash_messages.dataSaved'));
 
         return redirect()->route('modules.index', ['domain' => app('request')->route()->parameter('company')]);
@@ -193,14 +198,14 @@ class ModuleController extends Controller
      *
      * @return Response
      */
-    public function destroy()
+    public function destroy($company, $moduleId)
     {
         $this->init();
         $message = config('config-variables.flash_messages.dataDeleted');
         $type = 'success';
         $companyId = Landlord::getTenants()['company']->id;
 
-        Permission::where('name', $companyId.'.'.$moduleId)->delete();
+        Permission::where('name', $companyId.'.'.(config('config-variables.menu_item_permission_identifier')).'.'.$moduleId)->delete();
 
         if (!MenuItem::where('id', $moduleId)->delete()) {
             $message = config('config-variables.flash_messages.dataNotDeleted');

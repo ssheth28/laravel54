@@ -1,7 +1,10 @@
 <?php
 
+namespace Modules\Module\Database\Seeders;
+
 use Carbon\Carbon as Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
 
 class MenuItemsTableSeeder extends Seeder
 {
@@ -338,6 +341,8 @@ class MenuItemsTableSeeder extends Seeder
             'is_shown_on_menu' => 1,
             'created_at'       => Carbon::now()->format('Y-m-d H:i:s'),
         ],
-        ]);
+        ]);            
+        // Model::unguard();
+        // $this->call("OthersTableSeeder");
     }
 }

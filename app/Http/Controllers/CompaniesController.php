@@ -117,7 +117,15 @@ class CompaniesController extends Controller
 
             return redirect()->route('admin.home', ['domain' => $singleCompanySlug->slug]);
         }
-
         return view('auth.selectcompany');
+    }
+
+    public function redirectUserCompanyRole(Request $request)
+    {
+        $companySlug = $request->companyslug;
+        $roleId = $request->roleid;
+        $request->session()->put('currentrole', $roleId);
+        return response()
+            ->json(['redirecturl' => route('admin.home', ['domain' => $companySlug])]);
     }
 }

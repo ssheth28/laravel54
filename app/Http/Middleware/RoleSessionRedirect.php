@@ -18,6 +18,7 @@ class RoleSessionRedirect
      */
     public function handle($request, Closure $next)
     {
+        //return $next($request);
         $params = explode('/', $request->path());
         $currentrole = session('currentrole', false);
         $userRoles = Auth::user()->roles->pluck('id')->toArray();
@@ -28,9 +29,15 @@ class RoleSessionRedirect
             return $next($request);
         }
 
-        if ($currentrole && in_array($userRoles, $currentrole)) {
+        if ($currentrole && in_array($currentrole, $userRoles)) {
             app('session')->reflash();
-            $redirection = app('laravellocalization')->getLocalizedURL($locale);
+            $allSegments = $request->segments();
+
+            $updatedSegments = array_merge(array_slice($allSegments, 0, 1),
+                array(1 => $currentrole), 
+                array_slice($allSegments, 1, count($allSegments) - 1)) ;
+
+            $redirection = $request->root() . "/" . implode('/', $updatedSegments);
 
             return new RedirectResponse($redirection, 302, []);
         }

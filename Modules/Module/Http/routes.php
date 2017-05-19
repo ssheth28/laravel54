@@ -4,13 +4,20 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
     Route::group(
         [
             'prefix'     => LaravelLocalization::setLocale(),
-            'middleware' => ['localize', 'localeSessionRedirect', 'localizationRedirect'],
+            'middleware' => ['web', 'localeSessionRedirect', 'localizationRedirect'],
         ],
         function () {
-            Route::group(['middleware' => ['web', 'verifycompany'], 'prefix' => 'admin', 'namespace' => 'Modules\Module\Http\Controllers'], function () {
-                Route::resource('modules', 'ModuleController');
-                Route::post('/getModuleData', 'ModuleController@getModuleData');
-                Route::post('generateModuleUrl', 'ModuleController@generateModuleUrl');
+            Route::group(
+            [
+                'prefix'     => UserRole::setUserRole(),
+                'middleware' => ['roleSessionRedirect'],
+            ],
+            function () {
+                Route::group(['middleware' => ['verifycompany'], 'prefix' => 'admin', 'namespace' => 'Modules\Module\Http\Controllers'], function () {
+                    Route::resource('modules', 'ModuleController');
+                    Route::post('/getModuleData', 'ModuleController@getModuleData');
+                    Route::post('generateModuleUrl', 'ModuleController@generateModuleUrl');
+                });
             });
         });
 });

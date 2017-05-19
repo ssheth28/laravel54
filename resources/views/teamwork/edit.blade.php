@@ -15,7 +15,7 @@
         </div>
         <div class="portlet-body form">
             {!! Form::open(['route' => ['teams.update', 'domain' => app('request')->route()->parameter('company'), 'id' => $team], 'method' => 'PUT', 'class' => 'js-frm-edit-team form-horizontal', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
-                @include('partial.admin.teams.form',['from'=>'edit'])
+                @include('partials.admin.teams.form',['from'=>'edit'])
             {{ Form::close() }}
         </div>
     </div>

@@ -1,7 +1,11 @@
 <?php
 
+namespace Modules\Widget\Database\Seeders;
+
+use DB;
 use Carbon\Carbon as Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
 
 class WidgetTypeTableSeeder extends Seeder
 {
@@ -60,5 +64,8 @@ class WidgetTypeTableSeeder extends Seeder
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
         ]);
+
+        // Model::unguard();
+        // $this->call("OthersTableSeeder");
     }
 }

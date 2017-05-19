@@ -196,9 +196,9 @@ $(document).ready(function() {
                     data += setPaginationAmount();
 
                     if(typeof(page) == "undefined"){
-                        ajaxCall("teams/getTeamData", data, 'POST', 'json', teamDataSuccess);
+                        ajaxCall(window.urlInitial + "/teams/getTeamData", data, 'POST', 'json', teamDataSuccess);
                     } else {
-                        ajaxCall("teams/getTeamData?page="+page, data, 'POST', 'json', teamDataSuccess);
+                        ajaxCall(window.urlInitial + "/teams/getTeamData?page="+page, data, 'POST', 'json', teamDataSuccess);
                     }
                 },
                 searchTeamData: function() {

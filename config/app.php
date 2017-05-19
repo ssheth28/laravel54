@@ -245,6 +245,11 @@ return [
         App\Providers\OptimusServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * Custom Application Service Providers...
+         */
+        App\Providers\UserRoleServiceProvider::class
+
     ],
 
     'localProviders' => [
@@ -346,7 +351,7 @@ return [
         'SnappyImage'         => Barryvdh\Snappy\Facades\SnappyImage::class,
         'Swap'                => Swap\Laravel\Facades\Swap::class,
         'UrlSigner'           => Spatie\UrlSigner\Laravel\UrlSignerFacade::class,
-        //'Widget' => Arrilot\Widgets\Facade::class,
+        'UserRole'            => App\Facades\UserRole::class,
     ],
 
     'localAliases' => [

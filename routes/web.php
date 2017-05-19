@@ -31,6 +31,8 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
 
             Route::get('admin/companyselect', 'CompaniesController@selectCompany')->name('company.select')->middleware('auth', 'verifycompany');
 
+            Route::post('admin/companyselect', 'CompaniesController@redirectUserCompanyRole')->middleware('auth', 'verifycompany')->name('redirect.user.company.role');
+
             Route::group(
             [
                 'prefix'     => UserRole::setUserRole(),

@@ -23,7 +23,7 @@
             <div class="top-menu pull-left user-setting">            
                 <div class="dropdown company-list">
                     <a id="dLabel" role="button" data-toggle="dropdown" class="btn" data-target="#" href="javascript:;">
-                        <img alt="" class="img-circle" src="../../img/admin/avatar1.jpg">
+                        <img alt="" class="img-circle" src="{{ asset('img/admin/avatar1.jpg') }}">
                         <span class="username username-hide-on-mobile"> {{ $currentCompany->name }}</span>
                         <span class="role">Manager</span>
                         <i class="fa fa-angle-down"></i>
@@ -199,7 +199,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="photo">
-                                                <img src="../img/admin/avatar1.jpg" class="img-circle" alt=""> </span>
+                                                <img src="{{ asset('img/admin/avatar1.jpg') }}" class="img-circle" alt=""> </span>
                                             <span class="subject">
                                                 <span class="from"> Lisa Wong </span>
                                                 <span class="time">Just Now </span>
@@ -210,7 +210,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="photo">
-                                                <img src="../img/admin/avatar1.jpg" class="img-circle" alt=""> </span>
+                                                <img src="{{ asset('img/admin/avatar1.jpg') }}" class="img-circle" alt=""> </span>
                                             <span class="subject">
                                                 <span class="from"> Richard Doe </span>
                                                 <span class="time">16 mins </span>
@@ -221,7 +221,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="photo">
-                                                <img src="../img/admin/avatar1.jpg" class="img-circle" alt=""> </span>
+                                                <img src="{{ asset('img/admin/avatar1.jpg') }}" class="img-circle" alt=""> </span>
                                             <span class="subject">
                                                 <span class="from"> Bob Nilson </span>
                                                 <span class="time">2 hrs </span>
@@ -232,7 +232,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="photo">
-                                                <img src="../img/admin/avatar1.jpg" class="img-circle" alt=""> </span>
+                                                <img src="{{ asset('img/admin/avatar1.jpg') }}" class="img-circle" alt=""> </span>
                                             <span class="subject">
                                                 <span class="from"> Lisa Wong </span>
                                                 <span class="time">40 mins </span>
@@ -243,7 +243,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="photo">
-                                                <img src="../img/admin/avatar1.jpg" class="img-circle" alt=""> </span>
+                                                <img src="{{ asset('img/admin/avatar1.jpg') }}" class="img-circle" alt=""> </span>
                                             <span class="subject">
                                                 <span class="from"> Richard Doe </span>
                                                 <span class="time">46 mins </span>

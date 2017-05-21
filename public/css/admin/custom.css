@@ -5,17 +5,17 @@ body, h1, h2, h3, h4, h5, h6 {
 }
 table thead .sorting {
     cursor: pointer;
-    background: rgba(0, 0, 0, 0) url(../../img/admin/sort_both.png) no-repeat scroll right center;
+    background: rgba(0, 0, 0, 0) url(/img/admin/sort_both.png) no-repeat scroll right center;
 }
 
 table thead .sorting_desc {
     cursor: pointer;
-    background: rgba(0, 0, 0, 0) url(../../img/admin/sort_desc.png) no-repeat scroll right center;
+    background: rgba(0, 0, 0, 0) url(/img/admin/sort_desc.png) no-repeat scroll right center;
 }
 
 table thead .sorting_asc {
     cursor: pointer;
-    background: rgba(0, 0, 0, 0) url(../../img/admin/sort_asc.png) no-repeat scroll right center;
+    background: rgba(0, 0, 0, 0) url(/img/admin/sort_asc.png) no-repeat scroll right center;
 }
 
 label.error {
@@ -176,13 +176,13 @@ label.error {
     line-height: 31px;
 }
 .portlet.box>.portlet-title>.tools>a.expand {
-    background-image: url(../../img/admin/portlet-collapse-icon.png);
+    background-image: url(/img/admin/portlet-collapse-icon.png);
 }
 .portlet.box>.portlet-title>.tools>a.collapse {
-    background-image: url(../../img/admin/portlet-expand-icon.png);
+    background-image: url(/img/admin/portlet-expand-icon.png);
 }
 .portlet.box>.portlet-title>.tools>a.reload {
-    background-image: url(../../img/admin/portlet-reload-icon.png);
+    background-image: url(/img/admin/portlet-reload-icon.png);
 }
 .portlet.light>.portlet-title>.tools {
     margin-top: -4px;
@@ -315,7 +315,7 @@ table .btn {
 	background-color: #fff;
 }
 .page-header.navbar .menu-toggler {
-	background-image: url(../../img/admin/sidebar-toggler-inverse.png);;
+	background-image: url(/img/admin/sidebar-toggler-inverse.png);;
 }
 .portlet>.portlet-title>.caption {
 	font-size: 14px;
@@ -516,13 +516,13 @@ table.table tr th {
     background: #3979B2;
 }
 table.table tr th.sorting {
-    background: #3979B2 url(../../img/admin/sort_both.png) center right no-repeat !important;
+    background: #3979B2 url(/img/admin/sort_both.png) center right no-repeat !important;
 }
 table.table tr th.sorting_asc {
-    background: #3979B2 url(../../img/admin/sort_asc.png) center right no-repeat;
+    background: #3979B2 url(/img/admin/sort_asc.png) center right no-repeat;
 }
 table.table tr th.sorting_desc {
-    background: #3979B2 url(../../img/admin/sort_desc.png) center right no-repeat;
+    background: #3979B2 url(/img/admin/sort_desc.png) center right no-repeat;
 }
 .page-sidebar-closed .page-sidebar .page-sidebar-menu.page-sidebar-menu-closed>li>a {
 	min-height: 39px;
@@ -1041,7 +1041,7 @@ table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
     box-shadow: none;
 }
 .datepicker-row .text-box:not([disabled="disabled"]) {
-    background-image: url(../../img/admin/date.svg);
+    background-image: url(/img/admin/date.svg);
     background-position: 98% center;
     background-repeat: no-repeat;
     padding-right: 35px;

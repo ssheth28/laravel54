@@ -115,7 +115,18 @@ class CompaniesController extends Controller
         if (count($companies->get()) == 1) {
             $singleCompanySlug = $companies->first();
 
-            return redirect()->route('admin.home', ['domain' => $singleCompanySlug->slug]);
+            $roles = Auth::user()->roles->filter(function ($value, $key) use($singleCompanySlug) {
+                    if (explode('.', $value->name)[0] == $singleCompanySlug->id) {
+                        return $value;
+                    }
+                })->values();
+
+            if(count($roles) == 1) {
+                $request->session()->put('currentrole', $roles->first()->id);
+                return redirect()->route('admin.home', ['domain' => $singleCompanySlug->slug]);
+            } else {
+                return view('auth.selectcompany');
+            }
         }
         return view('auth.selectcompany');
     }

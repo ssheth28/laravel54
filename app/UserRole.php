@@ -8,10 +8,13 @@ class UserRole
 {
     public function setUserRole($role = null)
     {
+        // need to work on this class
+         
+        
     	// dd(Auth::user());
     	// $userRoles = Auth::user()->roles->pluck('id')->toArray();
 
-        $allRoles = Role::all()->pluck('id')->toArray();
+        // $allRoles = Role::all()->pluck('id')->toArray();
 
     	//to check
         if (empty($role) || !is_string($role)) {
@@ -20,7 +23,9 @@ class UserRole
             $role = app()->request->segment(2);
         }
 
-        if(in_array($role, $allRoles)) {
+        $role = intval($role);
+
+        if($role!=0 && is_int($role)) {
 
         } else {
         	$role = null;

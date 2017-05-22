@@ -25,27 +25,25 @@ class Controller extends BaseController
     {
         $this->middleware(function ($request, $next) {
             if (Auth::check() && count(Landlord::getTenants()) > 0) {
+                $userCompanyRoles = [];
+                $companies = Auth::user()->companies()->where('settings->is_invitation_accepted', 1)->get();
+                foreach($companies as $company) {
+                    $userCompanyRoles[$company->id] = Auth::user()->roles->filter(function ($value, $key) use($company) {
+                        if (explode('.', $value->name)[0] == $company->id) {
+                            return $value;
+                        }
+                    })->values();
+                }
                 if (Landlord::getTenants()['company']->slug != 'www') {
                     $widgetsAccessArray = [];
                     $menuItemIdArray = [];
                     $role = null;
 
-                    if (isset($request->role)) {
-                        $role = Auth::user()->roles()->where('id', $request->role)->first();
-                    } else {
-                        $role = Auth::user()->roles()->first();
-                    }
+                    $role = Auth::user()->roles()->where('id', session('currentrole'))->first();
 
                     if (!$role) {
                         return response()->json(['error' => 'not found'], 404);
                     }
-
-                    $currentCompanyRoles = Auth::user()->roles->filter(function ($value, $key) {
-                        $companyId = Landlord::getTenants()['company']->id;
-                        if (explode('.', $value->name)[0] == $companyId) {
-                            return $value;
-                        }
-                    })->values();
 
                     $permissions = $role->permissions;
 
@@ -77,14 +75,12 @@ class Controller extends BaseController
 
                     View::share('menu_items', $menuItemArray);
                     View::share('currentCompany', $currentCompany);
-                    View::share('currentCompanyRoles', $currentCompanyRoles);
                 }
                 JavaScript::put([
                     'locale'     => LaravelLocalization::getCurrentLocale(),
-                    'urlInitial' => LaravelLocalization::getCurrentLocale() != 'en' ? '/'.LaravelLocalization::getCurrentLocale() : '',
+                    'urlInitial' => '/' . LaravelLocalization::getCurrentLocale() . '/' . session('currentrole'),
                 ]);
-
-                $companies = Auth::user()->companies()->where('settings->is_invitation_accepted', 1)->get();
+                View::share('userCompanyRoles', $userCompanyRoles);
                 View::share('companies', $companies);
             }
 

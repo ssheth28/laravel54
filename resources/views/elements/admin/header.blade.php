@@ -23,18 +23,18 @@
             <div class="top-menu pull-left user-setting">            
                 <div class="dropdown company-list">
                     <a id="dLabel" role="button" data-toggle="dropdown" class="btn" data-target="#" href="javascript:;">
-                        <img alt="" class="img-circle" src="../../img/admin/avatar1.jpg">
+                        <img alt="" class="img-circle" src="{{ asset('img/admin/avatar1.jpg') }}">
                         <span class="username username-hide-on-mobile"> {{ $currentCompany->name }}</span>
                         <span class="role">Manager</span>
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-                        @foreach($companies as $company)
-                            <li class="dropdown-submenu">
+                        @foreach($companies as $company)                        
+                            <li class="dropdown-submenu {{ $currentCompany->id == $company->id ? 'active' : null }} ">
                                 <a tabindex="-1" href="{{ route('admin.home', ['domain' => $company->slug]) }}">{{ $company->name}}</a>
                                 <ul class="dropdown-menu">
-                                    @foreach($currentCompanyRoles as $role)
-                                        <li><a href="{{ route('admin.home', ['domain' => $company->slug, 'role' => $role->id]) }}">{{ $role->display_name }}</a></li>
+                                    @foreach($userCompanyRoles[$company->id] as $role)
+                                        <li class="{{ session('currentrole') == $role->id ? 'active' : null }} "><a href="{{ UserRole::getRoleURL($company->slug, $role->id) }}">{{ $role->display_name }}</a></li>
                                     @endforeach
                                 </ul>
                             </li>
@@ -62,7 +62,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                     <li>
-                                        <a rel="alternate" hreflang="{{$localeCode}}" href="{{LaravelLocalization::getLocalizedURL($localeCode, $url = null, $attributes = [], $forceDefaultLocation = true) }}">
+                                        <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, $url = null, $attributes = [], $forceDefaultLocation = true) }}">
                                             <span class="flag">
                                                 <img src="/img/admin/flag.png" width="20">
                                             </span>
@@ -199,7 +199,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="photo">
-                                                <img src="../img/admin/avatar1.jpg" class="img-circle" alt=""> </span>
+                                                <img src="{{ asset('img/admin/avatar1.jpg') }}" class="img-circle" alt=""> </span>
                                             <span class="subject">
                                                 <span class="from"> Lisa Wong </span>
                                                 <span class="time">Just Now </span>
@@ -210,7 +210,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="photo">
-                                                <img src="../img/admin/avatar1.jpg" class="img-circle" alt=""> </span>
+                                                <img src="{{ asset('img/admin/avatar1.jpg') }}" class="img-circle" alt=""> </span>
                                             <span class="subject">
                                                 <span class="from"> Richard Doe </span>
                                                 <span class="time">16 mins </span>
@@ -221,7 +221,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="photo">
-                                                <img src="../img/admin/avatar1.jpg" class="img-circle" alt=""> </span>
+                                                <img src="{{ asset('img/admin/avatar1.jpg') }}" class="img-circle" alt=""> </span>
                                             <span class="subject">
                                                 <span class="from"> Bob Nilson </span>
                                                 <span class="time">2 hrs </span>
@@ -232,7 +232,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="photo">
-                                                <img src="../img/admin/avatar1.jpg" class="img-circle" alt=""> </span>
+                                                <img src="{{ asset('img/admin/avatar1.jpg') }}" class="img-circle" alt=""> </span>
                                             <span class="subject">
                                                 <span class="from"> Lisa Wong </span>
                                                 <span class="time">40 mins </span>
@@ -243,7 +243,7 @@
                                     <li>
                                         <a href="#">
                                             <span class="photo">
-                                                <img src="../img/admin/avatar1.jpg" class="img-circle" alt=""> </span>
+                                                <img src="{{ asset('img/admin/avatar1.jpg') }}" class="img-circle" alt=""> </span>
                                             <span class="subject">
                                                 <span class="from"> Richard Doe </span>
                                                 <span class="time">46 mins </span>

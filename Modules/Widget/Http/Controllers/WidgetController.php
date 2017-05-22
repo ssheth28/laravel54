@@ -153,7 +153,7 @@ class WidgetController extends Controller
         $permission->name = $companyId.'.'.(config('config-variables.widget_permission_identifier')).'.'.$widget->id;
         $permission->save();
 
-        $role = Role::find(1);
+        $role = Role::find(session('currentrole'));
         $role->givePermissionTo($permission);
 
         flash()->success(config('config-variables.flash_messages.dataSaved'));

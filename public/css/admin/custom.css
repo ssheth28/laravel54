@@ -665,7 +665,7 @@ table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
 }
 .page-header.navbar .menu-toggler.sidebar-toggler {
     float: right;
-    margin: 15px 0 0;
+    margin: 15px 13px 0;
 }
 .page-header.navbar .page-top,
 .page-header.navbar {
@@ -1198,59 +1198,57 @@ table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
     border-color: #236194;
 }
 .trial-reminder {
-    background: #cccccc none repeat scroll 0 0;
     border-radius: 20px !important;
-    float: right;
-    margin: 7px 0 0 15px;
-    padding: 6px 9px 6px 75px;
-    position: relative;
-    width: 240px;
+    bottom: 6px;
+    left: 43px;
+    padding: 9px 9px 9px 75px;
+    position: fixed;
+    width: 176px;
 }
 .trial-reminder > a {
-    background: #4276a4 none repeat scroll 0 0;
-    border-radius: 40px !important;
-    box-shadow: 0 0 7px -3px #000000 inset;
+    background: #7ac043 none repeat scroll 0 0;
+    border-radius: 3px !important;
+    box-shadow: 0 0 5px -3px #000000 inset;
     color: #ffffff;
     font-size: 13px;
     font-weight: 600;
     height: 100%;
     left: 0;
-    line-height: 26px;
+    line-height: 24px;
     padding: 0 12px;
     position: absolute;
     text-decoration: none;
     top: 0;
 }
 .trial-reminder .pro-bar {
-    border: 1px solid #236194;
+    border: 1px solid #ffffff;
     border-radius: 15px !important;
-    height: 15px;
+    height: 8px;
     position: relative;
+    top: 7px;
 }
 .trial-reminder .pro-bar .bar {
-    background: #236194 none repeat scroll 0 0;
+    background: #e07160 none repeat scroll 0 0;
     border-radius: 15px !important;
-    bottom: 2px;
-    box-shadow: 0 0 7px -2px #000000 inset;
-    left: 2px;
+    bottom: 1px;
+    left: 1px;
     position: absolute;
-    top: 2px;
-    width: 50%;
+    top: 1px;
 }
 .trial-reminder .pro-bar span {
-    background: #3c6c95 none repeat scroll 0 0;
     border-radius: 7px 7px 0 0 !important;
     color: #ffffff;
     display: block;
     font-size: 12px;
     left: 0;
+    line-height: 12px;
     margin: auto;
-    padding: 1px 5px;
     position: absolute;
     right: 0;
     text-align: center;
-    top: -28px;
+    top: -17px;
     width: 80px;
+
 }
 .table-icons {
     margin-bottom: 10px;
@@ -1273,4 +1271,24 @@ table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
 .table-icons .btn-default.btn:hover {
     background-color: #3979b2;
     color: #fff;
+}
+.modal .action-title {
+    color: #120e5b;
+    font-size: 12px;
+    margin: 0;
+    overflow: hidden;
+    padding: 5px 0 15px;
+    text-overflow: ellipsis;
+}
+.close{
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    opacity: .4;
+}
+.close:focus, .close:hover {
+    opacity: 1;
+}
+.thumbnail a>img, .thumbnail>img {
+    max-height: 140px;
 }

@@ -1274,3 +1274,7 @@ table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
     background-color: #3979b2;
     color: #fff;
 }
+
+[v-cloak] {
+    display: none;
+}

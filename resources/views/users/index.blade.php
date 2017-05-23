@@ -2,7 +2,7 @@
 @section('page-content')
 <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="row">
-        <div class="col-md-12" id="userlist">
+        <div class="col-md-12" id="userlist" v-cloak>
             @if( in_array('filter', app('session')->get('widgetAccess')) )
                 <div class="portlet box white">
                     <div class="portlet-title">

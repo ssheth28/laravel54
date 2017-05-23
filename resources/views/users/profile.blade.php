@@ -877,7 +877,7 @@
                                             eiusmod. </p>                                        
                                         {!! Form::open(['route' => ['users.update.avatar', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-save-user-avatar form-horizontal', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
 
-                                            <div class="form-group">
+                                            <div class="">
                                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                                     <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
                                                         <img src="{{ $avatar }}" alt="">
@@ -893,8 +893,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="clearfix margin-top-10">
-                                                    <span class="label label-danger">NOTE! </span>
-                                                    <span>Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only </span>
+                                                    <span class="label label-danger">NOTE! </span> &nbsp;
+                                                    <span> Attached image thumbnail is supported in Latest Firefox, Chrome, Opera, Safari and Internet Explorer 10 only </span>
                                                 </div>
                                             </div>
                                             <div class="margin-top-10">

@@ -1,5 +1,12 @@
 <!-- BEGIN FOOTER -->
 <div class="page-footer">
+    <div class="trial-reminder">
+        <a href="#">Go Pro</a>
+        <div class="pro-bar">
+            <div style="width: 50%;" class="bar"></div>
+            <span><b>15</b> days left</span>
+        </div>
+    </div>
     <div class="page-footer-inner"> 2017 &copy; Company Theme By
         <a target="_blank" href="#">Company</a>
         <div class="scroll-to-top">

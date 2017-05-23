@@ -222,6 +222,8 @@ class UsersController extends Controller
             $userInvite->accept_token = md5(uniqid(mt_rand(), true));
             $userInvite->save();
 
+            $checkUserExists->assignRole($request->get('roles'));
+
             dispatch(new SendInvitationMail($userInvite, $checkUserExists));
         }
 
@@ -282,8 +284,17 @@ class UsersController extends Controller
      */
     public function update(Request $request, $company, $userId)
     {
-        $this->init();
+        $this->init();        
         $user = User::findOrFail($userId);
+        $userRoles = $user->roles;
+
+        $companyWiseRoles = $userRoles->filter(function ($value, $key) {
+            $companyId = Landlord::getTenants()['company']->id;
+            if (explode('.', $value->name)[0] == $companyId) {
+                return $value;
+            }
+        })->values()->pluck('id')->toArray();
+
         $person = Person::findOrFail($user->person_id);
 
         $person->first_name = $request->first_name;
@@ -294,7 +305,7 @@ class UsersController extends Controller
         $user->username = $request->username;
         $user->banned_at = Carbon::parse($request->banned_at)->format('Y-m-d H:i:s');
         $user->save();
-        $user->syncRoles();
+        $user->roles()->detach($companyWiseRoles);
         $user->assignRole($request->get('roles'));
         flash()->success(config('config-variables.flash_messages.dataSaved'));
 

@@ -70,7 +70,7 @@
                     {!! Form::email('invite_team_mate_email', null, ['class' => 'form-control', 'id' => 'invite_team_mate_email', 'placeholder' => 'xyz@gmail.com']) !!}                
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn blue">Submit</button>
+                    <button type="submit" class="uie-btn uie-btn-primary">Submit</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             {!! Form::close() !!}

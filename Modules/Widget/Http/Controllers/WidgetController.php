@@ -9,6 +9,7 @@ use Landlord;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Module\Entities\Menu;
+use Spatie\Permission\Models\Role;
 use Modules\Widget\Entities\Widget;
 use App\Http\Controllers\Controller;
 use Modules\Module\Entities\MenuItem;
@@ -152,8 +153,8 @@ class WidgetController extends Controller
         $permission->name = $companyId.'.'.(config('config-variables.widget_permission_identifier')).'.'.$widget->id;
         $permission->save();
 
-        $user = Auth::user();
-        $user->givePermissionTo($permission->name);
+        $role = Role::find(session('currentrole'));
+        $role->givePermissionTo($permission);
 
         flash()->success(config('config-variables.flash_messages.dataSaved'));
 

@@ -56,6 +56,29 @@
                <div class="portlet-body">
                     <div>
                         <table class="table table-striped table-bordered table-hover order-column" v-cloak>
+                            <div class="actions pull-right table-icons">
+                                <a class="btn btn-icon-only btn-default" href="#">
+                                    <i class="fa fa-refresh"></i>
+                                </a>
+                                <a class="btn btn-icon-only btn-default" href="#">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a class="btn btn-icon-only btn-default" href="#">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                                <a class="btn btn-icon-only btn-default" href="#">
+                                    <i class="fa fa-sliders"></i>
+                                </a>
+                                <a class="btn btn-icon-only btn-default" href="#">
+                                    <i class="fa fa-sort-amount-asc"></i>
+                                </a>
+                                <a class="btn btn-icon-only btn-default" href="#">
+                                    <i class="fa fa-table"></i>
+                                </a>
+                                <a class="btn btn-icon-only btn-default" href="#">
+                                    <i class="fa fa-caret-down"></i>
+                                </a>
+                            </div>
                             <thead>
                                 <tr>
                                     <th data-field="name" @click="sortBy('name')" :class="[sortKey != 'name' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Name</th>

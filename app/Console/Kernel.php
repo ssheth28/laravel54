@@ -14,6 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \Spatie\LinkChecker\CheckLinksCommand::class,
+        Commands\InstallApp::class,
+        // \Modules\Module\Console\PublishModule::class,
     ];
 
     /**

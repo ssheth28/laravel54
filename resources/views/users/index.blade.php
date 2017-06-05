@@ -2,7 +2,7 @@
 @section('page-content')
 <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="row">
-        <div class="col-md-12" id="userlist">
+        <div class="col-md-12" id="userlist" v-cloak>
             @if( in_array('filter', app('session')->get('widgetAccess')) )
                 <div class="portlet box white">
                     <div class="portlet-title">
@@ -94,7 +94,7 @@
                                     <a class="btn btn-icon-only btn-default" href="#">
                                         <i class="fa fa-table"></i>
                                     </a>
-                                    <a class="btn btn-icon-only btn-default" href="#">
+                                    <a class="btn btn-icon-only btn-default" href="#" data-toggle="modal" data-target="#caret-down-popup">
                                         <i class="fa fa-caret-down"></i>
                                     </a>
                                 </div>
@@ -147,6 +147,80 @@
                 </div>
             @endif
         </div>
+    </div>
+
+    <div class="modal fade" id="caret-down-popup" role="dialog">
+       <div class="modal-dialog">
+          <div class="modal-content popup-action">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">Actions</h4>
+             </div>
+             <div class="modal-body">
+                 <div class="action-box element-sec clearfix">
+                    <div class="select-record-status hide">
+                        <p></p>
+                        <div class="radio-btn">
+                            <input type="radio" id="radio" name="selectRecordAction" value="1">
+                            <label for="radio" class="redio-btn-string"><span><span></span></span>All Records matched the filter Criteria</label>
+                            <div class="searched-criteria-text-popup searched-criteria-text-show"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="radio-btn">
+                            <input type="radio" id="radio1" name="selectRecordAction" value="2" disabled="disabled">
+                            <label for="radio1"><span><span></span></span> Selected Records on the Page </label>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div>
+                        <h3 class="action-title">action.command.label</h3>
+                        <div class="clearfix"></div>
+                        <div class="owl-carousel owl-theme owl-responsive-1000 owl-loaded">
+                            <div class="owl-stage-outer">
+                                <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: 0s; width: 1008px;">
+                                    <div class="owl-item active" style="width: 116px; margin-right: 10px;">
+                                        <div class="item"><a href="javascript:void(0);" class="assignrole-action action-popup-close"><span class="action-image"></span><span class="action-title">assign.role.link.label</span></a></div>
+                                    </div>
+                                    <div class="owl-item active" style="width: 116px; margin-right: 10px;">
+                                        <div class="item"><a href="javascript:void(0);" class="assignorganization-action action-popup-close"><span class="action-image"></span><span class="action-title">assign.organization.link.label</span></a></div>
+                                    </div>
+                                    <div class="owl-item active" style="width: 116px; margin-right: 10px;">
+                                        <div class="item"><a href="javascript:void(0);" class="assignusergroup-action action-popup-close"><span class="action-image"></span><span class="action-title">assign.usergroup.link.label</span></a></div>
+                                    </div>
+                                    <div class="owl-item active" style="width: 116px; margin-right: 10px;">
+                                        <div class="item"><a href="javascript:void(0);" class="suspenduser-action action-popup-close"><span class="action-image"></span><span class="action-title">suspend.user.link.label</span></a></div>
+                                    </div>
+                                    <div class="owl-item active" style="width: 116px; margin-right: 10px;">
+                                        <div class="item"><a href="javascript:void(0);" class="unsuspenduser-action action-popup-close"><span class="action-image"></span><span class="action-title">active.user.link.label</span></a></div>
+                                    </div>
+                                    <div class="owl-item" style="width: 116px; margin-right: 10px;">
+                                        <div class="item"><a href="javascript:void(0);" class="forcelogout-action action-popup-close"><span class="action-image"></span><span class="action-title">forcelogout.link.label</span></a></div>
+                                    </div>
+                                    <div class="owl-item" style="width: 116px; margin-right: 10px;">
+                                        <div class="item"><a href="javascript:void(0);" class="regpswd-action action-popup-close"><span class="action-image"></span><span class="action-title">regenrate.pswrd.link.label</span></a></div>
+                                    </div>
+                                    <div class="owl-item" style="width: 116px; margin-right: 10px;">
+                                        <div class="item"><a href="javascript:void(0);" class="forcechangepswd-action action-popup-close"><span class="action-image"></span><span class="action-title">force.change.pswrd.link.label</span></a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="owl-controls">
+                                <div class="owl-nav">
+                                    <div class="owl-prev" style="">prev</div>
+                                    <div class="owl-next" style="">next</div>
+                                </div>
+                                <div class="owl-dots" style="">
+                                    <div class="owl-dot active"><span></span></div>
+                                    <div class="owl-dot"><span></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+             </div>
+          </div>
+       </div>
     </div>
 @endsection
 @section('page-script')

@@ -53,6 +53,8 @@ License: You must have a valid license purchased only from themeforest(the above
         <link href="{{ asset('css/admin/custom.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/admin/form.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/admin/profile.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/admin/owl.carousel.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/admin/grid.css') }}" rel="stylesheet" type="text/css" />
         <!-- END THEME LAYOUT STYLES -->
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -129,13 +131,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <span>{{ $title }}</span>
                                 </li>
                             </ul>
-                            <div class="trial-reminder">
+                            <!-- <div class="trial-reminder">
                                 <a href="#">Go Pro</a>
                                 <div class="pro-bar">
                                     <div class="bar"></div>
                                     <span><b>15</b> days left</span>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="page-toolbar">
                                 <div class="date-time clearfix">
                                     <div id="myTime" class="show-date"></div>
@@ -190,6 +192,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="{{ asset('js/admin/form-wizard.min.js') }}" type="text/javascript"></script>
         <!-- END THEME LAYOUT SCRIPTS -->
         <script src="{{ asset('js/admin/common.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/admin/owl.carousel.js') }}" type="text/javascript"></script>
 
         <!-- <script src="http://htmlwazir.peppyemails.com/js/function.js" type="text/javascript"></script>
         <script src="http://htmlwazir.peppyemails.com/js/init.js" type="text/javascript"></script> -->

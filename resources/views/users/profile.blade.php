@@ -124,9 +124,9 @@
                                     @if($user->hasRole(Landlord::getTenants()['company']->id . '.Admin'))
                                     <!-- COMPANY INFO TAB -->
                                     <div class="tab-pane active" id="tab_1_1">
-                                        <div class="panel-grid-main element-sec clearfix" id="appendForm" novalidate="novalidate">
+                                        <div class="panel-grid-main clearfix" id="appendForm" novalidate="novalidate">
                                         	{{--<form name="addUser-87" id="addUser-87" method="POST" action="#" class="normal-form">
-                                        		<div class="scroll-wrapper" data-class="">
+                                        		<div class="scroll-wrapper row" data-class="">
                                         			<div class="form-row col-md-6 clearfix" data-element="company-name">
                                         				<div class="form-col-1">
                                         					<label class="label label-bold">Company Name </label>
@@ -546,149 +546,163 @@
                                     <!-- END COMPANY INFO TAB -->
                                     <!-- GENERAL INFO TAB -->
                                     <div class="tab-pane @if(!$user->hasRole(Landlord::getTenants()['company']->id . '.Admin')) active @endif" id="tab_1_2">
-									    <div class="panel-grid-main element-sec clearfix" id="appendForm1" novalidate="novalidate">
+									    <div class="panel-grid-main clearfix" id="appendForm1" novalidate="novalidate">
                                             {!! Form::open(['route' => ['users.save.general.info', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-save-general-info form-horizontal', 'role' => 'form']) !!}
 									            <div class="scroll-wrapper" data-class="">
-									                <div class="form-row col-md-6 clearfix" data-element="code">
-									                    <div class="form-col-1">
-									                        <label class="label label-bold">First Name </label>
-									                    </div>
-									                    <div class="form-col-2">
-									                        <div class="p-r-5 input-wrapper right">
-									                            {!! Form::text('general_first_name',$user->person->first_name,['class' => 'form-control', 'id' => 'general_first_name']) !!}
-									                        </div>
-									                    </div>
-									                </div>
-									                <div class="form-row col-md-6 clearfix" data-element="Employee-name">
-									                    <div class="form-col-1">
-									                        <label class="label label-bold">Last Name </label>
-									                    </div>
-									                    <div class="form-col-2">
-									                        <div class="p-r-5 input-wrapper right">
-									                            {!! Form::text('general_last_name', $user->person->last_name,['class' => 'form-control', 'id' => 'general_last_name']) !!}
-									                        </div>
-									                    </div>
-									                </div>
-									                <div class="form-row col-md-6 clearfix" data-element="Email">
-									                    <div class="form-col-1">
-									                        <label class="label">Primary Email </label>
-									                    </div>
-									                    <div class="form-col-2">
-									                        <div class="p-r-5 input-wrapper right">
-									                            {!! Form::email('general_primary_email', $user->person->primary_email, ['class' => 'form-control', 'id' => 'primary_email']) !!}
-									                        </div>
-									                    </div>
-									                </div>
-                                                    <div class="form-row col-md-6 clearfix" data-element="Email">
-                                                        <div class="form-col-1">
-                                                            <label class="label">Secondary Email </label>
+                                                    <div class="row">
+                                                        <div class="form-row col-md-6 clearfix" data-element="code">
+                                                            <div class="form-col-1">
+                                                                <label class="label label-bold">First Name </label>
+                                                            </div>
+                                                            <div class="form-col-2">
+                                                                <div class="p-r-5 input-wrapper right">
+                                                                    {!! Form::text('general_first_name',$user->person->first_name,['class' => 'form-control', 'id' => 'general_first_name']) !!}
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="form-col-2">
-                                                            <div class="p-r-5 input-wrapper right">
-                                                                {!! Form::email('general_secondary_email', $user->person->secondary_email, ['class' => 'form-control', 'id' => 'secondary_email']) !!}
+                                                        <div class="form-row col-md-6 clearfix" data-element="Employee-name">
+                                                            <div class="form-col-1">
+                                                                <label class="label label-bold">Last Name </label>
+                                                            </div>
+                                                            <div class="form-col-2">
+                                                                <div class="p-r-5 input-wrapper right">
+                                                                    {!! Form::text('general_last_name', $user->person->last_name,['class' => 'form-control', 'id' => 'general_last_name']) !!}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-row col-md-6 clearfix" data-element="Address">
-                                                        <div class="form-col-1">
-                                                            <label class="label label-bold">Address </label>
+									                <div class="row">
+                                                        <div class="form-row col-md-6 clearfix" data-element="Email">
+                                                            <div class="form-col-1">
+                                                                <label class="label">Primary Email </label>
+                                                            </div>
+                                                            <div class="form-col-2">
+                                                                <div class="p-r-5 input-wrapper right">
+                                                                    {!! Form::email('general_primary_email', $user->person->primary_email, ['class' => 'form-control', 'id' => 'primary_email']) !!}
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="form-col-2">
-                                                            <div class="p-r-5 input-wrapper right">
-                                                                {!! Form::textarea('general_address1', $user->person->address()->address1, ['class' => 'form-control', 'rows' => '15', 'class' => 'textarea-box']) !!}
+                                                        <div class="form-row col-md-6 clearfix" data-element="Email">
+                                                            <div class="form-col-1">
+                                                                <label class="label">Secondary Email </label>
+                                                            </div>
+                                                            <div class="form-col-2">
+                                                                <div class="p-r-5 input-wrapper right">
+                                                                    {!! Form::email('general_secondary_email', $user->person->secondary_email, ['class' => 'form-control', 'id' => 'secondary_email']) !!}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-									                <div class="form-row col-md-6 clearfix" data-element="City">
-									                    <div class="form-col-1">
-									                        <label class="label label-bold">City </label>
-									                    </div>
-									                    <div class="form-col-2">
-									                        <div class="p-r-5 input-wrapper right">
-									                            {!! Form::text('general_city', $user->person->address()->city, ['class' => 'form-control']) !!}
-									                        </div>
-									                    </div>
-									                </div>
-									                <div class="form-row col-md-6 clearfix" data-element="State">
-									                    <div class="form-col-1">
-									                        <label class="label label-bold">State </label>
-									                    </div>
-									                    <div class="form-col-2">
-									                        <div class="p-r-5 input-wrapper right">
-									                            {!! Form::text('general_state', $user->person->address()->state, ['class' => 'form-control']) !!}
-									                        </div>
-									                    </div>
-									                </div>
-									                <div class="form-row col-md-6 clearfix" data-element="Pin">
-									                    <div class="form-col-1">
-									                        <label class="label label-bold">Pin </label>
-									                    </div>
-									                    <div class="form-col-2">
-									                        <div class="p-r-5 input-wrapper right">
-									                            {!! Form::text('general_pin', $user->person->address()->pin, ['class' => 'form-control']) !!}
-									                        </div>
-									                    </div>
-									                </div>
-									                <div class="form-row col-md-6 clearfix" data-element="Mobile-No">
-									                    <div class="form-col-1">
-									                        <label class="label label-bold">Mobile No </label>
-									                    </div>
-									                    <div class="form-col-2">
-									                        <div class="p-r-5 input-wrapper right">
-									                            {!! Form::text('general_mobile_number', $user->person->mobile_number, ['class' => 'form-control']) !!}
-									                        </div>
-									                    </div>
-									                </div>
-                                                    <div class="form-row col-md-6 clearfix" data-element="Home-Phone">
-                                                        <div class="form-col-1">
-                                                            <label class="label label-bold">Home Phone </label>
+                                                    <div class="row">
+                                                        <div class="form-row col-md-6 clearfix" data-element="Address">
+                                                            <div class="form-col-1">
+                                                                <label class="label label-bold">Address </label>
+                                                            </div>
+                                                            <div class="form-col-2">
+                                                                <div class="p-r-5 input-wrapper right">
+                                                                    {!! Form::textarea('general_address1', $user->person->address()->address1, ['class' => 'form-control', 'rows' => '15', 'class' => 'textarea-box']) !!}
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="form-col-2">
-                                                            <div class="p-r-5 input-wrapper right">
-                                                                {!! Form::text('general_home_phone', $user->person->home_phone, ['class' => 'form-control']) !!}
+    									                <div class="form-row col-md-6 clearfix" data-element="City">
+    									                    <div class="form-col-1">
+    									                        <label class="label label-bold">City </label>
+    									                    </div>
+    									                    <div class="form-col-2">
+    									                        <div class="p-r-5 input-wrapper right">
+    									                            {!! Form::text('general_city', $user->person->address()->city, ['class' => 'form-control']) !!}
+    									                        </div>
+    									                    </div>
+    									                </div>
+                                                    </div>
+                                                    <div class="row">
+    									                <div class="form-row col-md-6 clearfix" data-element="State">
+    									                    <div class="form-col-1">
+    									                        <label class="label label-bold">State </label>
+    									                    </div>
+    									                    <div class="form-col-2">
+    									                        <div class="p-r-5 input-wrapper right">
+    									                            {!! Form::text('general_state', $user->person->address()->state, ['class' => 'form-control']) !!}
+    									                        </div>
+    									                    </div>
+    									                </div>
+    									                <div class="form-row col-md-6 clearfix" data-element="Pin">
+    									                    <div class="form-col-1">
+    									                        <label class="label label-bold">Pin </label>
+    									                    </div>
+    									                    <div class="form-col-2">
+    									                        <div class="p-r-5 input-wrapper right">
+    									                            {!! Form::text('general_pin', $user->person->address()->pin, ['class' => 'form-control']) !!}
+    									                        </div>
+    									                    </div>
+    									                </div>
+                                                    </div>
+                                                    <div class="row">
+    									                <div class="form-row col-md-6 clearfix" data-element="Mobile-No">
+    									                    <div class="form-col-1">
+    									                        <label class="label label-bold">Mobile No </label>
+    									                    </div>
+    									                    <div class="form-col-2">
+    									                        <div class="p-r-5 input-wrapper right">
+    									                            {!! Form::text('general_mobile_number', $user->person->mobile_number, ['class' => 'form-control']) !!}
+    									                        </div>
+    									                    </div>
+    									                </div>
+                                                        <div class="form-row col-md-6 clearfix" data-element="Home-Phone">
+                                                            <div class="form-col-1">
+                                                                <label class="label label-bold">Home Phone </label>
+                                                            </div>
+                                                            <div class="form-col-2">
+                                                                <div class="p-r-5 input-wrapper right">
+                                                                    {!! Form::text('general_home_phone', $user->person->home_phone, ['class' => 'form-control']) !!}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-row col-md-6 clearfix" data-element="Work-Phone">
-                                                        <div class="form-col-1">
-                                                            <label class="label label-bold">Work Phone </label>
-                                                        </div>
-                                                        <div class="form-col-2">
-                                                            <div class="p-r-5 input-wrapper right">
-                                                                {!! Form::text('general_work_phone', $user->person->work_phone, ['class' => 'form-control']) !!}
+                                                    <div class="row">
+                                                        <div class="form-row col-md-6 clearfix" data-element="Work-Phone">
+                                                            <div class="form-col-1">
+                                                                <label class="label label-bold">Work Phone </label>
+                                                            </div>
+                                                            <div class="form-col-2">
+                                                                <div class="p-r-5 input-wrapper right">
+                                                                    {!! Form::text('general_work_phone', $user->person->work_phone, ['class' => 'form-control']) !!}
+                                                                </div>
                                                             </div>
                                                         </div>
+    									                <div class="form-row col-md-6 clearfix" data-element="Dateofbirth">
+    									                    <div class="form-col-1">
+    									                        <label class="label label-bold">Date Of Birth </label>
+    									                    </div>
+    									                    <div class="form-col-2">
+    									                        <div class="p-r-5 input-wrapper right">
+    									                            <div class="datepicker-row">
+    									                                {!! Form::text('general_date_of_birth', Carbon\Carbon::parse($user->person->dob)->format('d/m/Y h:i A'),
+                                                                        ['class' => 'form-control', 'id' => 'general_date_of_birth', 'readonly' => 'readonly']) !!}
+    									                            </div>
+    									                        </div>
+    									                    </div>
+    									                </div>
                                                     </div>
-									                <div class="form-row col-md-6 clearfix" data-element="Dateofbirth">
-									                    <div class="form-col-1">
-									                        <label class="label label-bold">Date Of Birth </label>
-									                    </div>
-									                    <div class="form-col-2">
-									                        <div class="p-r-5 input-wrapper right">
-									                            <div class="datepicker-row">
-									                                {!! Form::text('general_date_of_birth', Carbon\Carbon::parse($user->person->dob)->format('d/m/Y h:i A'),
-                                                                    ['class' => 'form-control', 'id' => 'general_date_of_birth', 'readonly' => 'readonly']) !!}
-									                            </div>
-									                        </div>
-									                    </div>
-									                </div>
-									                <div class="form-row col-md-6 clearfix" data-element="Membership">
-									                    <div class="form-col-1">
-									                        <label class="label label-bold">Gender </label>
-									                    </div>
-									                    <div class="form-col-2">
-									                        <div class="p-r-5 input-wrapper right">
-									                            <div class="radio-btn" data-validate="required" data-type="radio" data-name="Membership" tabindex="10">
-									                                <input name="general_gender" type="radio" data-type="radio" value="m" id="Membership-0-1" data-init-value="1" {{ $user->person->gender == "m" ? 'checked="checked"' : '' }}>
-									                                <label for="Membership-0-1">Male<span><span></span></span>
-									                                </label>
-									                                <input name="general_gender" type="radio" data-type="radio" value="f" id="Membership-1-2" {{ $user->person->gender == "f" ? 'checked="checked"' : ''}}>
-									                                <label for="Membership-1-2">Female<span><span></span></span>
-									                                </label>
-									                            </div>
-									                        </div>
-									                    </div>
-									                </div>
+                                                    <div class="row">
+    									                <div class="form-row col-md-6 clearfix" data-element="Membership">
+    									                    <div class="form-col-1">
+    									                        <label class="label label-bold">Gender </label>
+    									                    </div>
+    									                    <div class="form-col-2">
+    									                        <div class="p-r-5 input-wrapper right">
+    									                            <div class="radio-btn" data-validate="required" data-type="radio" data-name="Membership" tabindex="10">
+    									                                <input name="general_gender" type="radio" data-type="radio" value="m" id="Membership-0-1" data-init-value="1" {{ $user->person->gender == "m" ? 'checked="checked"' : '' }}>
+    									                                <label for="Membership-0-1">Male<span><span></span></span>
+    									                                </label>
+    									                                <input name="general_gender" type="radio" data-type="radio" value="f" id="Membership-1-2" {{ $user->person->gender == "f" ? 'checked="checked"' : ''}}>
+    									                                <label for="Membership-1-2">Female<span><span></span></span>
+    									                                </label>
+    									                            </div>
+    									                        </div>
+    									                    </div>
+    									                </div>
+                                                    </div>
 									            </div>
 									            <div class="center-btn col-md-12 clearfix">
 									                <button class="uie-btn uie-btn-primary save-btn" type="submit" name="btnSave" data-type="submit" tabindex="11">Submit</button>
@@ -701,9 +715,9 @@
                                     <!-- END GENERAL INFO TAB -->
                                     <!-- PERSONAL INFO TAB -->
                                     <div class="tab-pane" id="tab_1_3">
-									    <div class="panel-grid-main element-sec clearfix" id="appendForm2" novalidate="novalidate">
+									    <div class="panel-grid-main clearfix" id="appendForm2" novalidate="novalidate">
 									        <form name="addUser-2" id="addUser-2" method="POST" action="#" class="normal-form">
-									            <div class="scroll-wrapper" data-class="">
+									            <div class="scroll-wrapper row" data-class="">
 									                <div class="form-row col-md-6 clearfix" data-element="DOJ">
 									                    <div class="form-col-1">
 									                        <label class="label label-bold">DOJ </label>

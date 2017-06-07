@@ -976,5 +976,5 @@ th .checkbox input.css-checkbox[type="checkbox"]:checked+label.css-label {
     position: relative;
 }
 .action-box .owl-carousel.owl-theme {
-    width: 680px;
+    width: auto;
 }

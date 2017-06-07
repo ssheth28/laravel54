@@ -5,7 +5,7 @@
 @endsection
 @section('page-content')
 	<div class="portlet light">
-        <div class="portlet-title">
+        <div class="portlet-title min-height">
             <div class="caption">
                 <i class="fa fa-newspaper-o"></i>
                 <span class="caption-subject bold uppercase font-dark">Add Users

@@ -122,7 +122,7 @@
                                             <a href="{{ url('admin/users') }}/@{{user.user_id}}/edit" class="btn btn-icon-only">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a href="#" data-confirm-msg="Are you sure you would like to delete this tag record?" data-delete-url="{{ url('admin/users') }}/@{{ user.user_id }}"  class="btn btn-icon-only js-delete-button" data-toggle="modal" data-target="#delete_modal"><i class="fa fa-trash"></i></a>
+                                            <a href="#" data-confirm-msg="Are you sure you would like to delete this user record?" data-delete-url="{{ url('admin/users') }}/@{{ user.user_id }}"  class="btn btn-icon-only js-delete-button" data-toggle="modal" data-target="#delete_modal"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>

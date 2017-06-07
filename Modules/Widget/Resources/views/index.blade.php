@@ -3,10 +3,10 @@
 @section('page-content')
     <div class="row">
         <div class="col-md-12" id="widgetlist">
-            <div class="portlet box white">
+            <div class="portlet light box white">
                 <div class="portlet-title">
                     <div class="caption">
-                        <span class="caption-subject bold uppercase font-dark">Search</span>
+                        <span class="caption-subject bold uppercase font-dark"><i class="fa fa-filter" aria-hidden="true"></i> Search</span>
                     </div>
                     <div class="tools">
                         <a href="javascript:;" class="expand" data-original-title="" title=""> </a>
@@ -16,22 +16,23 @@
                 <div class="portlet-body flip-scroll" style="display: none">
                     <div class="form-horizontal" id="frmSearchData">
                         <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-row clearfix">
-                                    <div class="form-col-1">
-                                        <label class="label">Name </label>
-                                    </div>
+                            <div class="form-row col-lg-6 clearfix">
+                                <div class="form-col-1">
+                                    <label class="label">Name </label>
+                                </div>
+                                <div class="form-col-2">
                                     <div class="p-r-5 input-wrapper right">
                                         <input type="text" class="form-control" placeholder="Name" id="widget_name">
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="pull-right">
-                                    <button type="button" class="btn uie-btn uie-btn-primary" @click="searchWidgetData()">Search</button>
-                                    <button type="button" class="uie-btn uie-secondary-btn" @click="clearForm('frmSearchData')">Clear</button>
+                            <div class="form-row col-lg-2 clearfix">
+                                <div class="form-col-1">
+                                    <label class="label"> </label>
+                                </div>
+                                <div class="form-col-2">
+                                    <button type="button" class="btn blue custom-filter-submit" @click="searchWidgetData()">Search</button>
+                                    <button type="button" class="btn red custom-filter-cancel" @click="clearForm('frmSearchData')">Clear</button>
                                 </div>
                             </div>
                         </div>
@@ -95,10 +96,10 @@
                                     <td>@{{ widget.status==1 ? 'Activated' : 'Inactive' }}</td>
                                     <td>@{{ widget.created_datetime }}</td>
                                     <td class="text-center table_icon">
-                                        <a href="{{ url('admin/widgets') }}/@{{ widget.id }}/edit" class="btn btn-icon-only">
+                                        <a href="{{ url('admin/widgets') }}/@{{ widget.id }}/edit" class="btn btn-icon-only outline-green">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <a href="#" data-confirm-msg="Are you sure you would like to delete this widget record?" data-delete-url="{{ url('admin/widgets') }}/@{{ widget.id }}" class="btn btn-icon-only js-delete-button" data-toggle="modal" data-target="#delete_modal"><i class="fa fa-trash"></i></a>
+                                        <a href="#" data-confirm-msg="Are you sure you would like to delete this widget record?" data-delete-url="{{ url('admin/widgets') }}/@{{ widget.id }}" class="btn btn-icon-only js-delete-button outline-red" data-toggle="modal" data-target="#delete_modal"><i class="fa fa-trash-o"></i></a>
                                     </td>
                                 </tr>
                             </tbody>

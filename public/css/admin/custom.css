@@ -173,7 +173,8 @@ label.error {
     border: 1px solid #d9d9d9;
 }
 .portlet.box.white>.portlet-title>.caption {
-    line-height: 31px;
+    line-height: 18px;
+    padding: 1px 0;
 }
 .portlet.box>.portlet-title>.tools>a.expand {
     background-image: url(/img/admin/portlet-collapse-icon.png);
@@ -184,8 +185,23 @@ label.error {
 .portlet.box>.portlet-title>.tools>a.reload {
     background-image: url(/img/admin/portlet-reload-icon.png);
 }
+.portlet.light>.portlet-title>.actions {
+    margin-top: -4px;
+    padding: 0;
+}
+.dashboard .portlet.light {
+    padding-bottom: 20px !important;
+}
 .portlet.light>.portlet-title>.tools {
     margin-top: -4px;
+}
+.portlet.box>.portlet-title {
+    /*padding: 0 20px;*/
+    min-height: 30px;
+    border-bottom: 1px solid #eee;
+}
+.portlet.light>.portlet-title>.tools {
+    padding: 0;
 }
 .portlet>.portlet-title>.tools>a{
     background-position: center center;
@@ -258,11 +274,11 @@ label.error {
     border-style: solid;
     border-width: 1px;
     /*box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.03);*/
-    /*padding: 0 20px;*/
+    padding: 12px 20px !important;
 }
 
 .portlet.light .portlet-body {
-    padding: 15px 0;
+    padding: 8px 0 0 0;
 }
 
 .module_btn {
@@ -317,8 +333,21 @@ table .btn {
 .page-header.navbar .menu-toggler {
 	background-image: url(/img/admin/sidebar-toggler-inverse.png);;
 }
+.portlet.light.portlet-fit>.portlet-title {
+    padding: 0;
+    min-height: 35px;
+}
+.dashboard .portlet.light>.portlet-title {
+    min-height: 35px;
+}
+.portlet.light>.portlet-title.min-height {
+    min-height: 35px;
+}
 .portlet>.portlet-title>.caption {
-	font-size: 14px;
+	font-size: 16px;
+}
+.portlet.light>.portlet-title>.caption {
+    padding: 1px 0;
 }
 .portlet.light>.portlet-title>.caption>.caption-subject {
 	font-size: 16px;
@@ -490,8 +519,8 @@ body {
 
 .select2-container--bootstrap .select2-selection--single {
     padding: 6px 20px 6px 4px;
-    font-size: 12px;
-    line-height: 1.7;
+    font-size: 14px;
+    line-height: 1.4;
 }
 .select2-container--bootstrap.select2-container--focus .select2-selection, .select2-container--bootstrap.select2-container--open .select2-selection {
     border-color: #38648B !important;
@@ -513,16 +542,16 @@ table.table tr th {
     font-size: 13px;
     color: #fff;
     padding: 10px;
-    background: #3979B2;
+    background: #74B4ED;
 }
 table.table tr th.sorting {
-    background: #3979B2 url(/img/admin/sort_both.png) center right no-repeat !important;
+    background: #74B4ED url(/img/admin/sort_both.png) center right no-repeat !important;
 }
 table.table tr th.sorting_asc {
-    background: #3979B2 url(/img/admin/sort_asc.png) center right no-repeat;
+    background: #74B4ED url(/img/admin/sort_asc.png) center right no-repeat;
 }
 table.table tr th.sorting_desc {
-    background: #3979B2 url(/img/admin/sort_desc.png) center right no-repeat;
+    background: #74B4ED url(/img/admin/sort_desc.png) center right no-repeat;
 }
 .page-sidebar-closed .page-sidebar .page-sidebar-menu.page-sidebar-menu-closed>li>a {
 	min-height: 39px;
@@ -531,10 +560,28 @@ table.table tr th.sorting_desc {
 	margin-left: -2px; 
 }
 table .table_icon .btn{
-    width: 25px;
+    width: 20px;
     margin-right: 0;
-    padding: 0;
-    height: auto;
+    padding: 1px;
+    height: 20px;
+}
+table .table_icon .btn.outline-blue {
+    border: 1px solid #337ab7;
+}
+table .table_icon .btn.outline-green{
+    border: 1px solid #32c5d2;
+}
+table .table_icon .btn.outline-red {
+    border: 1px solid #e7505a;
+}
+table .table_icon .btn i {
+    font-size: 12px;
+}
+table .table_icon .btn i.fa-edit{
+    color: #74B4ED;
+}
+table .table_icon .btn i.fa-trash-o {
+    color: #e7505a;
 }
 table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
     line-height: 0.5
@@ -1022,7 +1069,7 @@ table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
     max-width: 100%;
     width: 980px;
 }
-.portlet.light > .portlet-title > .caption > .caption-subject i {
+.portlet>.portlet-title>.caption i {
     color: #4276A4;
     border-right: 1px solid;
     margin: 0 4px 0 0;
@@ -1252,25 +1299,29 @@ table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
 }
 .table-icons {
     margin-bottom: 10px;
-    border: 1px solid #3979b2;
+    border: 1px solid #ccc;
 }
 .table-icons .btn-default.btn {
-    border-color: #3979b2;
-    color: #3979b2;
+    border-color: #ccc;
+    color: #b5b6b7;
     height: 28px;
     line-height: 28px;
     width: 28px;
     padding: 0;
     border: none;
-    border-right: 1px solid;
+    border-right: 1px solid #ccc;
     display: table-cell;
 }
 .table-icons .btn-default.btn:last-child {
     border-right: 0;
 }
 .table-icons .btn-default.btn:hover {
-    background-color: #3979b2;
-    color: #fff;
+    background-color: #e6e6e6;
+    color: #b5b6b7;
+    border-color: #adadad;
+}
+.portlet.light>.portlet-title>.caption>.caption-subject {
+    font-size: 16px;
 }
 [v-cloak] {
     display: none;
@@ -1294,4 +1345,12 @@ table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
 }
 .thumbnail a>img, .thumbnail>img {
     max-height: 140px;
+}
+
+.dashboard-modal .portlet.light {
+    border-color: #fff;
+}
+#select-company-modal .modal-dialog {
+    max-width: 96%;
+    width: 800px;
 }

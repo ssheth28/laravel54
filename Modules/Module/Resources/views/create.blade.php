@@ -2,10 +2,16 @@
 
 @section('page-content')
 	<div class="portlet light">
-        <div class="portlet-title">
+        <div class="portlet-title min-height">
             <div class="caption">
                 <i class="fa fa-newspaper-o" aria-hidden="true"></i>
                 <span class="caption-subject bold uppercase font-dark">Add Module</span>
+            </div>
+            <div class="tools">
+                <a href="" class="collapse" data-original-title="" title=""> </a>
+            </div>
+            <div class="actions">
+                <a class="btn btn-icon-only btn-default fullscreen" href="#" data-original-title="" title=""> </a>
             </div>
         </div>
         <div class="portlet-body form">

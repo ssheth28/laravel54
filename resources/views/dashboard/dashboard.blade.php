@@ -1,4 +1,4 @@
-@extends('layouts.admin.default')
+\@extends('layouts.admin.default')
 
 @section('page-core-style')
 	<link href="{{ asset('plugins/morris/morris.css') }}" rel="stylesheet" type="text/css" />
@@ -6,6 +6,7 @@
 @endsection
 
 @section('page-content')
+<div class="dashboard">
 	<!-- BEGIN DASHBOARD STATS 1-->
     @if(isset($widgets["tile-count-widget"]) && $widgets["tile-count-widget"] == 1)
     <div class="row">
@@ -3532,6 +3533,7 @@
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @section('page-core-scripts')
@@ -3548,4 +3550,5 @@
 	<script src="{{ asset('plugins/jquery-easypiechart/jquery.easypiechart.min.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('plugins/jquery.sparkline.min.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('js/admin/dashboard.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/admin/common.js') }}" type="text/javascript"></script>
 @endsection

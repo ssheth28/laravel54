@@ -45,8 +45,6 @@ var InviteTeamMate = function() {
 
 $(document).ready(function() {
 
-    $('#select-company-modal').modal('show');
-
     InviteTeamMate.init();
 
     $(".select2-hide-search-box").select2({

@@ -44,6 +44,7 @@ var InviteTeamMate = function() {
 }();
 
 $(document).ready(function() {
+
     InviteTeamMate.init();
 
     $(".select2-hide-search-box").select2({
@@ -227,8 +228,8 @@ var wazirFunction = {
             var d = new Date();
 
             var options = {hour12: false};
-            // document.getElementById('myTime').innerHTML = date.toDateString();
-            // document.getElementById('myTimeData').innerHTML = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+            document.getElementById('myTime').innerHTML = date.toDateString();
+            document.getElementById('myTimeData').innerHTML = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
         }, 1000);
     },
     widgetSetting: function () {

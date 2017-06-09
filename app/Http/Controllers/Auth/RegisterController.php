@@ -14,6 +14,8 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use JavaScript;
+use LaravelLocalization;
 
 class RegisterController extends Controller
 {
@@ -44,6 +46,10 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
+        JavaScript::put([
+            'locale'     => '/' . LaravelLocalization::getCurrentLocale(),
+        ]);
+
         $this->middleware('guest')->except('verify');
     }
 
@@ -125,6 +131,7 @@ class RegisterController extends Controller
                 'display_name'  => $data['username'],
                 'primary_email' => $data['email'],
         ]);
+        
         $company = Companies::create([
                 'name'  => $data['company_name'],
         ]);

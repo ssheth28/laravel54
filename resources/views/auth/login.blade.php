@@ -4,7 +4,7 @@
     <div class="login-content text-center">
         <h3 class="text-white">Login to your account</h3>
         
-        <form class="login-form" role="form" method="POST" action="{{ route('login', ['domain' => app('request')->route()->parameter('company')]) }}">
+        <form class="login-form js-login-frm" role="form" method="POST" action="{{ route('login', ['domain' => app('request')->route()->parameter('company')]) }}">
             {{ csrf_field() }}
 
             <div class="alert alert-danger display-hide">
@@ -15,7 +15,7 @@
                 <div class="col-xs-12">
                     <div class="input-icon">
                         <i class="fa fa-envelope-o"></i>
-                        <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" id="login" autocomplete="off" size="40" placeholder="{{ __("Enter Email Address") }}" name="login" value="{{ old('login') }}" required/>
+                        <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" id="email_address" autocomplete="off" size="40" placeholder="{{ __("Enter Email Address") }}" name="login" value="{{ old('login') }}" required/>
                     </div>
                 </div>
                 <div class="col-xs-12">
@@ -41,7 +41,7 @@
                     <a href="javascript:;" id="forget-password" class="forget-password" href="{{ route('password.request', ['domain' => app('request')->route()->parameter('company')]) }}">Forgot Password?</a>
                 </div>
                 <div class="col-xs-12">
-                    <button class="btn btn-del btn-5 btn-5a fa fa-lock login-btn" type="submit">
+                    <button class="btn btn-del btn-5 btn-5a fa fa-lock login-btn" type="submit" id="login_btn">
                         <span>{{ __("Login") }}</span>
                     </button>
                 </div>
@@ -79,6 +79,18 @@
             </div>
         </form>
         <!-- END FORGOT PASSWORD FORM -->
+        <div class="modal" id="select-company-modal" role="dialog">
+           <div class="modal-dialog">
+              <div class="modal-content popup-action dashboard-modal js-companies-modal-content">
+                    {{-- modal body render from modal/select_company.blade.php --}}
+              </div>
+           </div>
+        </div>
     </div>
 @endsection
+
+@section('page-script')
+    <script src="{{ asset('js/admin/auth.js') }}" type="text/javascript"></script>
+@endsection
+
     

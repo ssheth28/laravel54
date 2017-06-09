@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Models\Companies;
+use Auth;
+use View;
+use JavaScript;
+use LaravelLocalization;
 
 class LoginController extends Controller
 {
@@ -39,6 +44,9 @@ class LoginController extends Controller
     {
         $this->request = $request;
         $this->middleware('guest', ['except' => 'logout']);
+        JavaScript::put([
+            'locale'     => LaravelLocalization::getCurrentLocale(),
+        ]);
     }
 
     public function logout(Request $request)
@@ -74,7 +82,21 @@ class LoginController extends Controller
 
         $this->clearLoginAttempts($request);
 
-        return $this->authenticated($request, $this->guard()->user())
-                ?: redirect($this->redirectPath());
+        $userCompanyRoles = [];
+        $companies = Auth::user()->companies()->where('settings->is_invitation_accepted', 1)->get();
+        foreach($companies as $company) {
+            $userCompanyRoles[$company->id] = Auth::user()->roles->filter(function ($value, $key) use($company) {
+                if (explode('.', $value->name)[0] == $company->id) {
+                    return $value;
+                }
+            })->values();
+        }
+
+        $view = View::make('modals.select_company', ['companies' => $companies, 'userCompanyRoles' => $userCompanyRoles]);
+        $contents = $view->render();
+
+        // return $this->authenticated($request, $this->guard()->user())
+        //         ?: redirect($this->redirectPath());
+        return $contents;
     }
 }

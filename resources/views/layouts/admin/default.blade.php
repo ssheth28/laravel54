@@ -1,24 +1,10 @@
 <!DOCTYPE html>
-<!-- 
-Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.7
-Version: 4.7.1
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
-Renew Support: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
--->
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
 <!--[if !IE]><!-->
 <html lang="en">
     <!--<![endif]-->
     <!-- BEGIN HEAD -->
-
     <head>
         <meta charset="utf-8" />
         <title>Company</title>
@@ -76,53 +62,6 @@ License: You must have a valid license purchased only from themeforest(the above
             <div class="page-content-wrapper">
                 <!-- BEGIN CONTENT BODY -->
                 <div class="page-content">
-<!--                     <h1 class="page-title"> Title
-                        <small>Title</small>
-                    </h1>
-                    <div class="page-bar">
-                        <ul class="page-breadcrumb">
-                            <li>
-                                <i class="icon-home"></i>
-                                <a href="index.html">Home</a>
-                                <i class="fa fa-angle-right"></i>
-                            </li>
-                            <li>
-                                <a href="#">Breadcrumb</a>
-                                <i class="fa fa-angle-right"></i>
-                            </li>
-                            <li>
-                                <span>Breadcrumb</span>
-                            </li>
-                        </ul>
-                        <div class="page-toolbar">
-                            <div class="btn-group pull-right">
-                                <button type="button" class="btn btn-fit-height grey-salt dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"> Actions
-                                    <i class="fa fa-angle-down"></i>
-                                </button>
-                                <ul class="dropdown-menu pull-right" role="menu">
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-bell"></i> Action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-shield"></i> Another action</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-user"></i> Something else here</a>
-                                    </li>
-                                    <li class="divider"> </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="icon-bag"></i> Separated link</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!-- END PAGE HEADER-->
-
                     <div class="page-content-body">
                         @include('elements.admin.delete_modal')
                         <div class="page-bar">
@@ -131,13 +70,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <span>{{ $title }}</span>
                                 </li>
                             </ul>
-                            <!-- <div class="trial-reminder">
-                                <a href="#">Go Pro</a>
-                                <div class="pro-bar">
-                                    <div class="bar"></div>
-                                    <span><b>15</b> days left</span>
-                                </div>
-                            </div> -->
                             <div class="page-toolbar">
                                 <div class="date-time clearfix">
                                     <div id="myTime" class="show-date"></div>
@@ -155,12 +87,12 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- END CONTAINER -->
         <!-- BEGIN FOOTER -->
         @include('elements.admin.footer')
-            <!-- END QUICK NAV -->
-            <!--[if lt IE 9]>
-<script src="../assets/global/plugins/respond.min.js"></script>
-<script src="../assets/global/plugins/excanvas.min.js"></script> 
-<script src="../assets/global/plugins/ie8.fix.min.js"></script> 
-<![endif]-->
+        <!-- END QUICK NAV -->
+        <!--[if lt IE 9]>
+        <script src="../assets/global/plugins/respond.min.js"></script>
+        <script src="../assets/global/plugins/excanvas.min.js"></script> 
+        <script src="../assets/global/plugins/ie8.fix.min.js"></script> 
+        <![endif]-->
         <!-- BEGIN CORE PLUGINS -->
         <script src="{{ asset('plugins/jquery.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>

@@ -15,21 +15,9 @@
             <div class="tools">
                 &nbsp;<a href="" class="collapse" data-original-title="" title=""> </a>
             </div>
-            <div class="actions">
-                <a class="btn btn-icon-only btn-default" href="#">
-                    <i class="fa fa-info"></i>
-                </a>
-                <a class="btn btn-icon-only btn-default" href="#">
-                    <i class="icon-wrench"></i>
-                </a>
-                <a class="btn btn-icon-only btn-default" href="#">
-                    <i class="icon-trash"></i>
-                </a>
-                <a class="btn btn-icon-only btn-default fullscreen" href="#" data-original-title="" title=""> </a>
-            </div>
         </div>
         <div class="portlet-body form" id="user_form_wizard">
-       		{!! Form::open(['route' => ['users.store', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-create-user form-horizontal', 'role' => 'form', 'id' => 'submit_user_form']) !!}
+       		{!! Form::open(['route' => ['users.store', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-create-user form-horizontal userfrm', 'role' => 'form', 'id' => 'submit_user_form']) !!}
                 <div class="form-wizard forms-grid cus-form-wizard">
     		    	<div class="form-body">
                         <ul class="nav nav-pills nav-justified steps">
@@ -77,37 +65,38 @@
                                 <div class="panel-grid-main">
                                     <div class="form-group">
                                         <div class="scroll-wrapper">
-                                            <div class="form-row col-md-7 col-lg-6 clearfix">
-                                                <div class="row">
-                                                    <div class="col-md-5 col-lg-5 col-sm-5">
-                                                        <span class="number-lbl">1</span>
-                                                        <label class="label">Email </label>
-                                                    </div>
-                                                    <div class="col-md-7 col-lg-7 col-sm-7">
-                                                        {!! Form::email('email', app('request')->get('email'), ['class' => 'form-control', 'id' => 'email']) !!}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="scroll-wrapper">
-                                            <div class="form-row col-md-7 col-lg-6 clearfix">
-                                                <div class="row">
-                                                    <div class="col-md-5 col-lg-5 col-sm-5">
-                                                        <span class="number-lbl">2</span>
-                                                        <label class="label">Roles </label>
-                                                    </div>
-                                                    <div class="col-md-7 col-lg-7 col-sm-7">
-                                                        <div class="row">
-                                                            <div class="col-md-12">                                                    
-                                                                {!! Form::select('roles[]', $roles, null, array('class' =>'js-select2-multiselect form-control', 'multiple' => true)) !!}
-                                                            </div>                                            
+                                            <div class="form-row col-md-12 clearfix">
+                                                <div class="">
+                                                    <div class="col-lg-3 col-md-3">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon no-bg"><i class="fa fa-envelope blue-color"></i></span>
+                                                            {!! Form::email('email', app('request')->get('email'), ['class' => 'form-control', 'placeholder' => 'Email ID', 'id' => 'email']) !!}
                                                         </div>
                                                     </div>
-                                                </div>
+                                                    <div class="col-lg-3 col-md-3">
+                                                        <div class="form-group">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
+                                                                {!! Form::select('roles[]', $roles, null, array('class' =>'form-control select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select User Role --')) !!}
+                                                            </div> 
+                                                        </div>                  
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon no-bg"><i class="fa fa-envelope blue-color"></i></span>
+                                                            {!! Form::text('department', app('request')->get('department'), ['class' => 'form-control', 'placeholder' => 'Department', 'id' => 'department']) !!}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 col-lg-3">
+                                                        <div class="form-group">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon no-bg"><i class="fa fa-calendar blue-color"></i></span>
+                                                                <input class="form-control form-control-inline date-picker datepicker" size="16" type="text" value="" placeholder="Date Of Joining" name="joining_date">
+                                                            </div>
+                                                        </div>
+                                                    </div>                                                    
+                                                </div>                                            
                                             </div>
-                                        </div>
-                                        <div class="form-row col-md-6 clearfix demo" style="display: none;">
-                                            <p>test</p>
                                         </div>
                                     </div>
                                 </div>
@@ -115,65 +104,37 @@
                             <div class="tab-pane js-tab-pane" id="profile_setup">
                                 <div class="js-profile-details">
                                     <div class="note note-info">
-                                        <p style="font-size: 18px;">Provide your account details</p>
+                                        <p style="font-size: 18px;">Basic Information</p>
                                     </div>
                                     <div class="panel-grid-main">
                                         <div class="form-group">
                                             <div class="scroll-wrapper">
-                                                <div class="form-row col-md-7 col-lg-6 clearfix">
-                                                    <div class="row">
-                                                        <div class="col-md-5 col-lg-5 col-sm-5">
-                                                            <span class="number-lbl">1</span>
-                                                            <label class="label">Name </label>
+                                                <div class="form-row col-md-12 clearfix">
+                                                    <div class="">
+                                                        <div class="col-lg-3 col-md-3">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon no-bg"><i class="fa fa-user blue-color"></i></span>
+                                                                {!! Form::text('first_name', null,['class' => 'form-control', 'placeholder' => 'First Name', 'id' => 'name']) !!}
+                                                            </div> 
                                                         </div>
-                                                        <div class="col-md-7 col-lg-7 col-sm-7">
-                                                            {!! Form::text('first_name', null,['class' => 'form-control']) !!}
+                                                        <div class="col-lg-3 col-md-3">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon no-bg"><i class="fa fa-user blue-color"></i></span>
+                                                                {!! Form::text('last_name', null,['class' => 'form-control', 'placeholder' => 'Last Name']) !!}
+                                                            </div> 
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="scroll-wrapper">
-                                                <div class="form-row col-md-7 col-lg-6 clearfix">
-                                                    <div class="row">
-                                                        <div class="col-md-5 col-lg-5 col-sm-5">
-                                                            <span class="number-lbl">2</span>
-                                                            <label class="label">Last Name </label>
+                                                       <div class="col-lg-3 col-md-3">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon no-bg"><i class="fa fa-user blue-color"></i></span>
+                                                                {!! Form::text('username', null,['class' => 'form-control', 'placeholder' => 'Username']) !!}
+                                                            </div> 
                                                         </div>
-                                                        <div class="col-md-7 col-lg-7 col-sm-7">
-                                                            {!! Form::text('last_name', null,['class' => 'form-control']) !!}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="scroll-wrapper">
-                                                <div class="form-row col-md-7 col-lg-6 clearfix">
-                                                    <div class="row">
-                                                        <div class="col-md-5 col-lg-5 col-sm-5">
-                                                            <span class="number-lbl">3</span>
-                                                            <label class="label">Username </label>
-                                                        </div>
-                                                        <div class="col-md-7 col-lg-7 col-sm-7">
-                                                            {!! Form::text('username', null,['class' => 'form-control']) !!}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="scroll-wrapper">
-                                                <div class="form-row col-md-7 col-lg-6 clearfix">
-                                                    <div class="row">
-                                                        <div class="col-md-5 col-lg-5 col-sm-5">
-                                                            <span class="number-lbl">4</span>
-                                                            <label class="label">Created at </label>
-                                                        </div>
-                                                        <div class="col-md-7 col-lg-7 col-sm-7">
-                                                            <div class='input-group date js-form-datetimepicker'>
-                                                                {!! Form::text('banned_at', null,
-                                                                ['class' => 'form-control', 'id' => 'banned_at', 'readonly' => 'readonly']) !!}
-                                                                <span class="input-group-addon">
-                                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                                </span>
-                                                            </div>
-                                                        </div>
+                                                        <div class="col-md-3 col-lg-3">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon no-bg"><i class="fa fa-user blue-color"></i></span>
+                                                                {!! Form::text('middle_name', null,['class' => 'form-control', 'placeholder' => 'Middle Name']) !!}
+                                                            </div>                                                         
+                                                        </div>                                                          
                                                     </div>
                                                 </div>
                                             </div>
@@ -183,6 +144,105 @@
                                 <div class="js-send-invitation">
                                     <h3>Send invitation to join</h3> 
                                     <p>User already exist. Do you want to send invitation?</p>                                   
+                                </div>
+                                <div class="js-profile-details">
+                                    <div class="note note-info">
+                                        <p style="font-size: 18px;">Personal Information</p>
+                                    </div>
+                                    <div class="panel-grid-main">
+                                        <div class="form-group">
+                                            <div class="scroll-wrapper">
+                                                <div class="form-row col-md-12 clearfix">
+                                                    <div class="">
+                                                        <div class="col-lg-3 col-md-3">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon no-bg"><i class="fa fa-user blue-color"></i></span>
+                                                                {!! Form::text('contact_no', null,['class' => 'form-control', 'placeholder' => 'Contact No']) !!}
+                                                            </div> 
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-3">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon no-bg"><i class="fa fa-user blue-color"></i></span>
+                                                                {!! Form::text('landline_no', null,['class' => 'form-control', 'placeholder' => 'Landline Number']) !!}
+                                                            </div> 
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-3">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon no-bg"><i class="fa fa-user blue-color"></i></span>
+                                                                {!! Form::text('parent_contact_no', null,['class' => 'form-control', 'placeholder' => 'Parents Contact Number' ]) !!}
+                                                            </div> 
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-3">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon no-bg"><i class="fa fa-user blue-color"></i></span>
+                                                                {!! Form::text('driving_licence_no', null,['class' => 'form-control', 'placeholder' => 'Driving Licence Number' ]) !!}
+                                                            </div> 
+                                                        </div>                            
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="scroll-wrapper">
+                                                <div class="form-row col-md-12 clearfix">
+                                                    <div class="">
+                                                        <div class="col-lg-3 col-md-3">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon no-bg"><i class="fa fa-user blue-color"></i></span>
+                                                                {!! Form::text('aadhar_card_no', null,['class' => 'form-control', 'placeholder' => 'Aadhar Card Number']) !!}
+                                                            </div> 
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-3">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon no-bg"><i class="fa fa-user blue-color"></i></span>
+                                                                {!! Form::text('voter_id_no', null,['class' => 'form-control', 'placeholder' => 'Voter ID No']) !!}
+                                                            </div> 
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-3">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon no-bg"><i class="fa fa-user blue-color"></i></span>
+                                                                {!! Form::text('blood_group', null,['class' => 'form-control', 'placeholder' => 'Blood Group']) !!}
+                                                            </div> 
+                                                        </div>
+                                                        <div class="col-md-3 col-lg-3">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon no-bg"><i class="fa fa-calendar blue-color"></i></span>
+                                                                <input class="form-control form-control-inline date-picker datepicker" size="16" type="text" value="" placeholder="Date Of Birth" name="birth_date">
+                                                            </div>
+                                                        </div>               
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="scroll-wrapper">
+                                                <div class="form-row col-md-12 clearfix">
+                                                    <div class="">
+                                                        <div class="col-md-3 col-lg-3">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon no-bg"><i class="fa fa-map-marker blue-color"></i></span>
+                                                                {!! Form::textarea('current_address', null,['class' => 'form-control', 'placeholder' => 'Current Address', 'rows' => '3' ]) !!}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 col-lg-3">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon no-bg"><i class="fa fa-map-marker blue-color"></i></span>
+                                                                {!! Form::textarea('permanent_address', null,['class' => 'form-control', 'placeholder' => 'Permanent Address', 'rows' => '3' ]) !!}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-3">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
+                                                                {!! Form::select('gender', config('config-variables.gender'), null, array('class' =>'form-control select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select Gender --')) !!}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3 col-md-3">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
+                                                                {!! Form::select('status', config('config-variables.user_status'), null, array('class' =>'form-control select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select Status --')) !!}
+                                                            </div>
+                                                        </div>                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -24,6 +24,7 @@
         <link href="{{ asset('plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css') }}">
         <link href="{{ asset('plugins/fontawesome-iconpicker/fontawesome-iconpicker.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css" />
         @yield('page-core-style')
         <!-- END GLOBAL MANDATORY STYLES -->
         <!-- BEGIN THEME GLOBAL STYLES -->
@@ -41,6 +42,7 @@
         <link href="{{ asset('css/admin/profile.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/admin/owl.carousel.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/admin/grid.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/admin/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
         <!-- END THEME LAYOUT STYLES -->
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -109,6 +111,7 @@
         <script src="{{ asset('plugins/bootstrap-datetimepicker/js/moment-with-locales.js') }}"></script>
         <script src="{{ asset('plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js') }}"></script>
         <script src="{{ asset('plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 
         <!-- END CORE PLUGINS -->
         <!-- BEGIN THEME GLOBAL SCRIPTS -->
@@ -125,6 +128,7 @@
         <!-- END THEME LAYOUT SCRIPTS -->
         <script src="{{ asset('js/admin/common.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/admin/owl.carousel.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/admin/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
 
         <!-- <script src="http://htmlwazir.peppyemails.com/js/function.js" type="text/javascript"></script>
         <script src="http://htmlwazir.peppyemails.com/js/init.js" type="text/javascript"></script> -->

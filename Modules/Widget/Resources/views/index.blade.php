@@ -6,7 +6,7 @@
             <div class="portlet light box white">
                 <div class="portlet-title">
                     <div class="caption">
-                        <span class="caption-subject bold uppercase font-dark"><i class="fa fa-filter" aria-hidden="true"></i> Search</span>
+                        <span class="caption-subject bold uppercase font-dark"><i class="fa fa-filter" aria-hidden="true"></i> Search Widget</span>
                     </div>
                     <div class="tools">
                         <a href="javascript:;" class="expand" data-original-title="" title=""> </a>
@@ -14,27 +14,37 @@
                     </div>
                 </div>
                 <div class="portlet-body flip-scroll" style="display: none">
-                    <div class="form-horizontal" id="frmSearchData">
+                    <div class="" id="frmSearchData">
                         <div class="row">
-                            <div class="form-row col-lg-6 clearfix">
-                                <div class="form-col-1">
-                                    <label class="label">Name </label>
-                                </div>
-                                <div class="form-col-2">
-                                    <div class="p-r-5 input-wrapper right">
-                                        <input type="text" class="form-control" placeholder="Name" id="widget_name">
+                            <div class="col-md-3 col-lg-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon no-bg"><i class="fa fa-file-code-o blue-color"></i></span>
+                                        <input type="text" class="form-control" placeholder="By Widget Name" id="widget_name">
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-row col-lg-2 clearfix">
-                                <div class="form-col-1">
-                                    <label class="label"> </label>
-                                </div>
+
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
+                                        <select class="form-control selectpicker" id="widget_status">
+                                        <option value="">By Status</option>
+                                        @foreach( config('config-variables.search_section.status') as $key=>$status)
+                                            <option value="{{ $key }}">{{ $status }}</option>
+                                        @endforeach
+                                    </select>
+                                    </div> 
+                                </div>                  
+                            </div>
+
+                            <div class="col-md-3 col-lg-3">
                                 <div class="form-col-2">
                                     <button type="button" class="btn blue custom-filter-submit" @click="searchWidgetData()">Search</button>
                                     <button type="button" class="btn red custom-filter-cancel" @click="clearForm('frmSearchData')">Clear</button>
                                 </div>
-                            </div>
+                            </div>                      
                         </div>
                     </div>
                 </div>
@@ -44,7 +54,7 @@
                 <div class="portlet-title">
                     <div class="caption col-md-9">
                         <i class="fa fa-table"></i>
-                        <span class="caption-subject bold uppercase font-dark">Widget List</span>
+                        <span class="caption-subject bold uppercase font-dark">Mangage Widget</span>
                     </div>
                     <div class="col-md-3">
                         <div class="btn-group pull-right">
@@ -56,50 +66,49 @@
                 </div>
                 <div class="portlet-body">
                     <div>
-                        <table class="table table-striped table-bordered table-hover order-column" v-cloak>
+                        <table class="table table-striped table-bordered table-hover order-column" v-cloak id="widgetTbl">
                             <div class="actions pull-right table-icons">
-                                <a class="btn btn-icon-only btn-default" href="#">
-                                    <i class="fa fa-refresh"></i>
+                                <a class="btn btn-icon-only btn-default" href="{{ route('widgets.create', ['domain' => app('request')->route()->parameter('company')]) }}">
+                                    <i class="fa fa-plus"></i>
                                 </a>
                                 <a class="btn btn-icon-only btn-default" href="#">
-                                    <i class="fa fa-edit"></i>
+                                    <i class="fa fa-gear"></i>
                                 </a>
-                                <a class="btn btn-icon-only btn-default" href="#">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                                <a class="btn btn-icon-only btn-default" href="#">
-                                    <i class="fa fa-sliders"></i>
-                                </a>
-                                <a class="btn btn-icon-only btn-default" href="#">
-                                    <i class="fa fa-sort-amount-asc"></i>
-                                </a>
-                                <a class="btn btn-icon-only btn-default" href="#">
-                                    <i class="fa fa-table"></i>
-                                </a>
-                                <a class="btn btn-icon-only btn-default" href="#">
-                                    <i class="fa fa-caret-down"></i>
-                                </a>
+                                <a class="btn btn-icon-only btn-default fullscreen" href="#" data-original-title="" title="">
+                                    <i class= "fa fa-expand"></i>
+                                </a> 
                             </div>
                             <thead>
                                 <tr>
-                                    <th data-field="name" @click="sortBy('name')" :class="[sortKey != 'name' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Name</th>
-                                    <th data-field="description" @click="sortBy('description')" :class="[sortKey != 'description' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Description</th>
-                                    <th data-field="status" @click="sortBy('status')" :class="[sortKey != 'status' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Status</th>
-                                    <th data-field="created_datetime" @click="sortBy('created_datetime')" :class="[sortKey != 'created_datetime' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Created at</th>
                                     <th class="text-center">Actions</th>
+                                    <th data-field="name" @click="sortBy('name')" :class="[sortKey != 'name' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Widget Name</th>
+                                    <th data-field="description" @click="sortBy('description')" :class="[sortKey != 'description' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Description</th>
+                                    <th data-field="widget_type_id" @click="sortBy('widget_type_id')" :class="[sortKey != 'widget_type_id' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Type</th>                                    
+                                    <th data-field="is_publicly_visible" @click="sortBy('is_publicly_visible')" :class="[sortKey != 'is_publicly_visible' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Visible</th>
+                                    <th data-field="status" @click="sortBy('status')" :class="[sortKey != 'status' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Status</th>                  
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="" v-for="widget in widgetData"> 
-                                    <td>@{{ widget.name }}</td>
-                                    <td>@{{ widget.description }}</td>
-                                    <td>@{{ widget.status==1 ? 'Activated' : 'Inactive' }}</td>
-                                    <td>@{{ widget.created_datetime }}</td>
+                                <tr class="" v-for="widget in widgetData">
                                     <td class="text-center table_icon">
+                                        <a href="#" class="btn btn-icon-only outline-green js-widget-detail" data-toggle="modal" data-target=".widget-detail-show" data-url="{{ url('admin/widgets') }}/@{{ widget.id }}">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
                                         <a href="{{ url('admin/widgets') }}/@{{ widget.id }}/edit" class="btn btn-icon-only outline-green">
                                             <i class="fa fa-edit"></i>
                                         </a>
-                                        <a href="#" data-confirm-msg="Are you sure you would like to delete this widget record?" data-delete-url="{{ url('admin/widgets') }}/@{{ widget.id }}" class="btn btn-icon-only js-delete-button outline-red" data-toggle="modal" data-target="#delete_modal"><i class="fa fa-trash-o"></i></a>
+                                        <a href="#" data-confirm-msg="Are you sure you would like to delete this widget record?" 
+                                        data-delete-url="{{ '/' . LaravelLocalization::getCurrentLocale() . '/' . session('currentrole') . '/admin/widgets/' }}@{{ widget.id }}" 
+                                        class="btn btn-icon-only js-delete-button outline-red" 
+                                        data-toggle="modal" data-target="#delete_modal"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                    <td>@{{ widget.name }}</td>
+                                    <td>@{{ widget.description }}</td>
+                                    <td>@{{ widget.widgetName }}</td>
+                                    <td>@{{ widget.is_publicly_visible == 1 ? 'Yes' : 'No' }}</td>
+                                    <td>
+                                        <span class="wz-status active tooltips" data-container="body" data-placement="top"  v-if="widget.status == 1"></span>
+                                        <span class="wz-status inactive tooltips" data-container="body" data-placement="top"  v-if="widget.status == 0"></span>
                                     </td>
                                 </tr>
                             </tbody>
@@ -123,6 +132,17 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade in widget-detail-show" id="view_widget_details" role="dialog" style="display: none; padding-left: 17px;">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-body js-widget-detail-content">
+                        {{-- body will be render from module_detail_show.blade.php --}}
+                    </div>
+                </div>
+
+            </div>
+        </div>        
     </div>
 @endsection
 @section('page-script')

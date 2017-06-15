@@ -46,6 +46,8 @@ var InviteTeamMate = function() {
 $(document).ready(function() {
 
     InviteTeamMate.init();
+    
+    $(".datepicker").datepicker();
 
     $(".select2-hide-search-box").select2({
         minimumResultsForSearch: Infinity

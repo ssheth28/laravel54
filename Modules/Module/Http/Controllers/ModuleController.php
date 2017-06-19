@@ -77,8 +77,10 @@ class ModuleController extends Controller
         $this->init();
         $request = $this->request->all();
         $modules = DB::table('menu_items')
-                ->where('menu_id', $this->menuId)
-                ->select('*', DB::raw('DATE_FORMAT(created_at, "%d-%m-%Y %H:%i:%s") as "created_datetime"'));
+                ->join('menu_items as parent', 'menu_items.parent_id', 'parent.id')
+                ->where('menu_items.menu_id', $this->menuId)
+                ->select('menu_items.*', DB::raw('DATE_FORMAT(menu_items.created_at, "%d-%m-%Y %H:%i:%s") as "created_datetime"'),
+                    DB::raw('parent.name as parentMenuName'));
 
         $sortby = 'menu_items.id';
         $sorttype = 'desc';
@@ -93,6 +95,10 @@ class ModuleController extends Controller
         if (isset($request['name']) && trim($request['name']) !== '') {
             $modules->where('menu_items.name', 'like', '%'.$request['name'].'%');
         }
+
+        if (isset($request['status']) && trim($request['status']) !== '') {
+            $modules->where('menu_items.is_active', '=', $request['status']);
+        }        
 
         $modulesList = [];
 
@@ -155,9 +161,13 @@ class ModuleController extends Controller
      *
      * @return Response
      */
-    public function show()
+    public function show($company, $moduleId)
     {
-        return view('module::show');
+        $this->init();
+        $module = MenuItem::find($moduleId);
+        $moduleDetailHtml = view('modules.module.module_detail_show', ['module' => $module])->render();
+
+        return array('moduleDetailHtml' => $moduleDetailHtml);        
     }
 
     /**

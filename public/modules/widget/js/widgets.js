@@ -7,12 +7,6 @@ var Widget = function() {
             messages: {                
             },
             rules: {
-                widget_type: {
-                    required: true
-                },
-                widget_icon: {
-                    required: true
-                },
                 widget_name: {
                     required: true
                 },
@@ -27,7 +21,7 @@ var Widget = function() {
                 },
             },
             errorPlacement: function (error, element) { // render error placement for each input type
-                element.parent().append(error);
+                element.parent().parent().append(error);
             },
             submitHandler: function (form) {
                 form.submit();
@@ -55,6 +49,11 @@ $(document).ready(function() {
         vueWidget.widgetListData(1, vueWidget.sortby, vueWidget.sorttype, vueWidget.searchdata);
     });
 
+    $(document).on('click', '.js-widget-detail', function(){
+        var data={};
+        ajaxCall($(this).data("url"), data, 'GET', 'json', widgetDetailSuccess);
+    });
+
     function getWidgetData() {
         vueWidget = new Vue({
             el: "#widgetlist",
@@ -63,7 +62,7 @@ $(document).ready(function() {
                 widgetCount: 0,
                 sortKey: '',
                 sortOrder: 1,
-                sortby: 'id',
+                sortby: 'widgets.id',
                 sorttype: 'desc',
                 searchdata: '',
                 footercontent: ''
@@ -97,7 +96,8 @@ $(document).ready(function() {
                 },
                 searchWidgetData: function() {
                     var name = $("#widget_name").val();
-                    var searchdata = "&name="+ name;
+                    var status = $('#widget_status').val();
+                    var searchdata = "&name="+ name + "&status="+ status;
                     if($('#widget_pagination').data("twbs-pagination")){
                         $('#widget_pagination').twbsPagination('destroy');
                     }
@@ -176,4 +176,8 @@ function widgetDataSuccess(widgetData, status, xhr){
 
         $('#pagination_length').val(Cookies.get('pagination_length'));
     });
+}
+
+function widgetDetailSuccess(response, status, xhr) {
+    $(".js-widget-detail-content").html(response.widgetDetailHtml);
 }

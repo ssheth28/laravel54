@@ -33,7 +33,7 @@ class UsersController extends Controller
         $this->title = 'User';
         $this->request = $request;
         View::share('title', $this->title);
-        parent::__construct();
+        parent::__construct();        
     }
 
     public function __destruct()
@@ -43,6 +43,7 @@ class UsersController extends Controller
 
     public function init()
     {
+
     }
 
     /**
@@ -121,7 +122,10 @@ class UsersController extends Controller
                     ->join('company_user', 'company_user.user_id', 'users.id')
                     ->join('people', 'users.person_id', 'people.id')
                     ->where('company_user.company_id', $companyId)
-                    ->select('*', DB::raw('DATE_FORMAT(users.created_at, "%d-%m-%Y %H:%i:%s") as "created_datetime"'), DB::raw('users.id as user_id'), DB::raw('company_user.settings as settings'));
+                    ->select('*', DB::raw('DATE_FORMAT(users.created_at, "%d-%m-%Y %H:%i:%s") as "created_datetime"'),
+                                  DB::raw('DATE_FORMAT(people.date_of_joining, "%d-%m-%Y") as "joined_date"'),
+                                  DB::raw('users.id as user_id'),
+                                  DB::raw('company_user.settings as settings'));
 
         $sortby = 'users.id';
         $sorttype = 'desc';
@@ -197,6 +201,23 @@ class UsersController extends Controller
             $person = new Person();
             $person->first_name = $request->first_name;
             $person->last_name = $request->last_name;
+            $person->department = $request->department;
+            $person->middle_name = $request->middle_name;
+            $person->mobile_number = $request->contact_no;
+            $person->home_phone = $request->landline_no;
+            $person->parent_contact_number = $request->parent_contact_no;
+            $person->driving_licence_number = $request->driving_licence_no;
+            $person->aadhar_card_number = $request->aadhar_card_no;
+            $person->voter_id_number = $request->voter_id_no;
+            $person->blood_group = $request->blood_group;
+            $person->dob = Carbon::parse($request->birth_date)->format('Y-m-d H:i:s');
+            $person->date_of_joining = Carbon::parse($request->joining_date)->format('Y-m-d H:i:s');
+            $address = [];
+            $address['current_address'] = $request->current_address;
+            $person->address = $address;
+            $person->permanent_address = $request->permanent_address;
+            $person->gender = $request->gender;
+            $person->status = $request->status;
             $person->save();
 
             $user = new User();
@@ -210,6 +231,7 @@ class UsersController extends Controller
             $user->assignRole($request->get('roles'));
 
             $userId = $user->id;
+            // dd($userId);
 
             dispatch(new SendVerificationEmail($user));
         } else {
@@ -245,8 +267,13 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($userId)
+    public function show($company, $userId)
     {
+        $this->init();
+        $user = User::find($userId);
+        $userDetailHtml = view('users.user_detail_show', ['user' => $user])->render();
+
+        return array('userDetailHtml' => $userDetailHtml);
     }
 
     /**
@@ -299,6 +326,21 @@ class UsersController extends Controller
 
         $person->first_name = $request->first_name;
         $person->last_name = $request->last_name;
+        $person->department = $request->department;
+        $person->middle_name = $request->middle_name;
+        $person->mobile_number = $request->contact_no;
+        $person->home_phone = $request->landline_no;
+        $person->parent_contact_number = $request->parent_contact_no;
+        $person->driving_licence_number = $request->driving_licence_no;
+        $person->aadhar_card_number = $request->aadhar_card_no;
+        $person->voter_id_number = $request->voter_id_no;
+        $person->blood_group = $request->blood_group;
+        $person->dob = Carbon::parse($request->birth_date)->format('Y-m-d H:i:s');
+        $person->date_of_joining = Carbon::parse($request->joining_date)->format('Y-m-d H:i:s');
+        $address = [];
+        $address['current_address'] = $request->current_address;
+        $person->address = $address;
+        $person->permanent_address = $request->permanent_address;
         $person->save();
 
         $user->email = $request->email;
@@ -319,7 +361,7 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($company, $userId)
+    public function destroy(Request $request, $company, $userId)
     {
         $message = config('config-variables.flash_messages.dataDeleted');
         $type = 'success';

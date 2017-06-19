@@ -6,8 +6,9 @@
             @if( in_array('filter', app('session')->get('widgetAccess')) )
                 <div class="portlet light box white">
                     <div class="portlet-title">
-                        <div class="caption">
-                            <span class="caption-subject bold uppercase font-dark">Search</span>
+                        <div class="caption">                            
+                            <span class="caption-subject font-dark bold uppercase"><i class="fa fa-filter"></i>
+                            SEARCH USER</span>
                         </div>
                         <div class="tools">
                             <a href="javascript:;" class="expand" data-original-title="" title=""> </a>
@@ -15,34 +16,27 @@
                         </div>
                     </div>
                     <div class="portlet-body flip-scroll" style="display: none">
-                        <div class="form-horizontal" id="frmSearchData">
+                        <div class="" id="frmSearchData">
                             <div class="row">
-                                <div class="form-row col-lg-2 col-md-3 clearfix">
-                                    <div class="form-col-1">
-                                        <label class="label">Name </label>
-                                    </div>
-                                    <div class="form-col-2">
-                                        <div class="p-r-5 input-wrapper right">
-                                            <input type="text" name="name" class="form-control" placeholder="User Name" id="name">
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon no-bg"><i class="fa fa-envelope blue-color"></i></span>
+                                            <input type="text" name="name" class="form-control" placeholder="By User Name" id="name">
                                         </div>
                                     </div>
-                                </div>
+                                </div> 
 
-                                <div class="form-row col-lg-2 col-md-3 clearfix">
-                                    <div class="form-col-1">
-                                        <label class="label">Email </label>
-                                    </div>
-                                    <div class="form-col-2">
-                                        <div class="p-r-5 input-wrapper right">
-                                            <input type="text" name="email" class="form-control" placeholder="Email" id="email">
+                                <div class="col-md-3 col-lg-3">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon no-bg"><i class="fa fa-envelope blue-color"></i></span>
+                                            <input type="text" name="email" class="form-control" placeholder="By User Email" id="email">
                                         </div>
-                                    </div>
+                                    </div>        
                                 </div>
 
-                                <div class="form-row col-lg-2 clearfix">
-                                    <div class="form-col-1">
-                                        <label class="label"> </label>
-                                    </div>
+                                <div class="col-md-3 col-lg-3">
                                     <div class="form-col-2">
                                         <button type="button" class="btn blue custom-filter-submit" @click="searchUserData()">Search</button>
                                         <button type="button" class="btn red custom-filter-cancel" @click="clearForm('frmSearchData')">Clear</button>
@@ -58,8 +52,8 @@
                     @include('flash::message')
                     <div class="portlet-title">
                         <div class="caption col-md-8">
-                            <i class="fa fa-table"></i>
-                            <span class="caption-subject font-dark bold uppercase">User List</span> &nbsp;&nbsp;
+                            <i class="fa fa-user"></i>
+                            <span class="caption-subject font-dark bold uppercase">MANAGE USER</span> &nbsp;&nbsp;
                             <span style="display:inline-block;">
                                 <label class="mt-checkbox"> Show User With Pending Invitation
                                     <input type="checkbox" value="1" name="not_accepted_invitation" id="not_accepted_invitation" @click="searchUserData()" />
@@ -77,55 +71,53 @@
                     </div>
                     <div class="portlet-body">
                         <div>
-                            <table class="table table-striped table-bordered table-hover order-column" v-cloak>
+                            <table class="table table-striped table-bordered table-hover order-column" v-cloak id="userTbl">
                                 <div class="actions pull-right table-icons">
-                                    <a class="btn btn-icon-only btn-default" href="#">
-                                        <i class="fa fa-refresh"></i>
+                                    <a class="btn btn-icon-only btn-default" href="{{ route('users.create', ['domain' => app('request')->route()->parameter('company')]) }}">
+                                        <i class="fa fa-plus"></i>
                                     </a>
                                     <a class="btn btn-icon-only btn-default" href="#">
-                                        <i class="fa fa-edit"></i>
+                                        <i class="fa fa-gear"></i>
                                     </a>
-                                    <a class="btn btn-icon-only btn-default" href="#">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                    <a class="btn btn-icon-only btn-default" href="#">
-                                        <i class="fa fa-sliders"></i>
-                                    </a>
-                                    <a class="btn btn-icon-only btn-default" href="#">
-                                        <i class="fa fa-sort-amount-asc"></i>
-                                    </a>
-                                    <a class="btn btn-icon-only btn-default" href="#">
-                                        <i class="fa fa-table"></i>
-                                    </a>
-                                    <a class="btn btn-icon-only btn-default" href="#" data-toggle="modal" data-target="#caret-down-popup">
-                                        <i class="fa fa-caret-down"></i>
-                                    </a>
+                                    <a class="btn btn-icon-only btn-default fullscreen" href="#" data-original-title="" title="">
+                                        <i class= "fa fa-expand"></i>
+                                    </a> 
                                 </div>
                                 <thead>
                                     <tr>
-                                        <th data-field="people.first_name" @click="sortBy('people.first_name')" :class="[sortKey != 'people.first_name' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">First name</th>
-                                        <th data-field="people.last_name" @click="sortBy('people.last_name')" :class="[sortKey != 'people.last_name' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Last name</th>
-                                        <th data-field="email" @click="sortBy('email')" :class="[sortKey != 'email' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Email</th>
-                                        <th>Invitation Status</th>
-                                        <th data-field="created_datetime" @click="sortBy('created_datetime')" :class="[sortKey != 'created_datetime' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Created at</th>     
                                         <th class="text-center">Actions</th>
+                                        <th data-field="username" @click="sortBy('username')" :class="[sortKey != 'username' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Username</th>
+                                        <th data-field="email" @click="sortBy('email')" :class="[sortKey != 'email' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Email Id</th>
+                                        <th data-field="person.department" @click="sortBy('person.department')" :class="[sortKey != 'person.department' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Department</th>
+                                        <th data-field="person.mobile_number" @click="sortBy('person.mobile_number')" :class="[sortKey != 'person.mobile_number' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Contact</th>
+                                        <th data-field="person.date_of_joining" @click="sortBy('person.date_of_joining')" :class="[sortKey != 'person.date_of_joining' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">DOJ</th>
+                                        <th data-field="person.gender" @click="sortBy('person.gender')" :class="[sortKey != 'person.gender' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Gender</th>
+                                        <th data-field="person.status" @click="sortBy('person.status')" :class="[sortKey != 'person.status' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="" v-for="user in userData">                                    
-                                        <td>@{{ user.first_name }}</td>
-                                        <td>@{{ user.last_name }}</td>
-                                        <td>@{{ user.email }}</td>
-                                        <td>@{{ user.settings.is_invitation_accepted == 1 ? 'Accepted' : 'Pending'}}</td>
-                                        <td>@{{ user.created_datetime }}</td>
-                                        <td class="text-center table_icon">                                        
+                                    <tr class="" v-for="user in userData"> 
+                                        <td class="text-center table_icon">
+                                            <a href="#" class="btn btn-icon-only outline-green js-user-detail" data-toggle="modal" data-target=".user-detail-show" data-url="{{ url('admin/users') }}/@{{ user.id }}">
+                                            <i class="fa fa-eye"></i>
+                                            </a>
                                             <a href="javascript: void(0)" @click="resendInvitation(user.user_id)" class="btn btn-icon-only outline-blue" v-if="user.settings.is_invitation_accepted == 0">
                                                 <i class="fa fa-share-square-o"></i>
                                             </a>
-                                            <a href="{{ url('admin/users') }}/@{{user.user_id}}/edit" class="btn btn-icon-only outline-green">
+                                            <a href="{{ url('admin/users') }}/@{{user.user_id}}/edit" class="btn green btn-outline btn-xs tooltips">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a href="#" data-confirm-msg="Are you sure you would like to delete this tag record?" data-delete-url="{{ url('admin/users') }}/@{{ user.user_id }}"  class="btn btn-icon-only js-delete-button outline-red" data-toggle="modal" data-target="#delete_modal"><i class="fa fa-trash-o"></i></a>
+                                            <a href="#" data-confirm-msg="Are you sure you would like to delete this user record?" data-delete-url="{{ '/' . LaravelLocalization::getCurrentLocale() . '/' . session('currentrole') . '/admin/users/'}}@{{ user.user_id }}"  class="btn red btn-outline btn-xs js-delete-button" data-toggle="modal" data-target="#delete_modal"><i class="fa fa-trash"></i></a>
+                                        </td>
+                                        <td>@{{ user.username }}</td>
+                                        <td>@{{ user.email }}</td>
+                                        <td>@{{ user.department }}</td>
+                                        <td>@{{ user.mobile_number }}</td>
+                                        <td>@{{ user.joined_date }}</td>
+                                        <td>@{{ user.gender == 0 ? 'Male' : 'Female' }}</td>
+                                        <td>
+                                            <span class="wz-status active tooltips" data-container="body" data-placement="top"  v-if="user.status == 1"></span>
+                                            <span class="wz-status inactive tooltips" data-container="body" data-placement="top"  v-if="user.status == 0"></span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -223,8 +215,19 @@
                 </div>
              </div>
           </div>
-       </div>
+       </div>      
     </div>
+
+    <div class="modal fade in user-detail-show" id="view_user_details" role="dialog" style="display: none; padding-left: 17px;">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body js-user-detail-content">
+                    {{-- body will be render from user_detail_show.blade.php --}}
+                </div>
+            </div>
+        </div>
+    </div>     
 @endsection
 @section('page-script')
     <script type="text/javascript" src="{{ asset('js/admin/users.js') }}"></script>

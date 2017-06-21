@@ -52,4 +52,8 @@ return [
     ],
     'menu_item_permission_identifier' => 'm',
     'widget_permission_identifier'    => 'w',
+    'job_type' => [
+        '1' => 'Yes',
+        '0' => 'No'
+    ]
 ];

@@ -76,7 +76,9 @@ class WidgetController extends Controller
     public function getWidgetData()
     {
         $request = $this->request->all();
-        $widgets = DB::table('widgets')->select('*', DB::raw('DATE_FORMAT(created_at, "%d-%m-%Y %H:%i:%s") as "created_datetime"'));
+        $widgets = DB::table('widgets')
+                    ->leftjoin('widget_type', 'widget_type.id', 'widgets.id')
+                    ->select('widgets.*', DB::raw('DATE_FORMAT(widgets.created_at, "%d-%m-%Y %H:%i:%s") as "created_datetime"'), DB::raw('widget_type.name as widgetName'));
 
         $sortby = 'widgets.created_datetime';
         $sorttype = 'desc';
@@ -90,6 +92,10 @@ class WidgetController extends Controller
 
         if (isset($request['name']) && trim($request['name']) !== '') {
             $widgets->where('widgets.name', 'like', '%'.$request['name'].'%');
+        }
+
+        if (isset($request['status']) && trim($request['status']) !== '') {
+            $widgets->where('widgets.status', '=', $request['status']);
         }
 
         $widgetsList = [];
@@ -138,13 +144,14 @@ class WidgetController extends Controller
         $widget = new Widget();
         $widget->icon = $request->widget_icon;
         $widget->name = $request->widget_name;
-        $widget->slug = $request->widget_slug;
+        // $widget->slug = $request->widget_slug;
         $widget->description = $request->description;
         $widget->width = $request->widget_width;
         $widget->status = $request->status ? 1 : 0;
         $widget->widget_type_id = $request->widget_type;
         $widget->parent_id = $request->widget_parent;
         $widget->menu_item_id = $request->widget_controller;
+        $widget->is_publicly_visible = $request->is_publicly_visible;
         $widget->company_id = 1;
         $widget->save();
 
@@ -161,14 +168,18 @@ class WidgetController extends Controller
         return redirect()->route('widgets.index', ['domain' => app('request')->route()->parameter('company')]);
     }
 
-    /**
-     * Show the specified resource.
-     *
-     * @return Response
-     */
-    public function show()
+    // /**
+    //  * Show the specified resource.
+    //  *
+    //  * @return Response
+    //  */
+    public function show($company, $widgetId)
     {
-        return view('widget::show');
+        $this->init();
+        $widget = Widget::find($widgetId);
+        $widgetDetailHtml = view('modules.widget.widget_detail_show', ['widget' => $widget])->render();
+
+        return array('widgetDetailHtml' => $widgetDetailHtml);
     }
 
     /**
@@ -200,13 +211,14 @@ class WidgetController extends Controller
         $widget = Widget::findOrFail($id);
         $widget->icon = $request->widget_icon;
         $widget->name = $request->widget_name;
-        $widget->slug = $request->widget_slug;
+        // $widget->slug = $request->widget_slug;
         $widget->description = $request->description;
         $widget->width = $request->widget_width;
         $widget->status = $request->status ? 1 : 0;
         $widget->widget_type_id = $request->widget_type;
         $widget->parent_id = $request->widget_parent;
         $widget->menu_item_id = $request->widget_controller;
+        $widget->is_publicly_visible = $request->is_publicly_visible;
         $widget->company_id = 1;
         $widget->save();
 
@@ -231,5 +243,9 @@ class WidgetController extends Controller
         flash()->message($message, $type);
 
         return redirect()->route('widgets.index', ['domain' => app('request')->route()->parameter('company')]);
+    }
+
+    public function delete($company,$id) {
+        echo '123';exit;
     }
 }

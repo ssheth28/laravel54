@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="portlet-body form">
-       		{!! Form::open(['route' => ['widgets.store', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-create-widget form-horizontal', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
+       		{!! Form::open(['route' => ['widgets.store', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-create-widget', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
 		    	@include('modules.widget.form',['from'=>'add'])
 			{{ Form::close() }}
         </div>

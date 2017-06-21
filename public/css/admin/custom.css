@@ -1358,7 +1358,6 @@ table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
 #select-company-modal .mt-element-overlay .mt-overlay-1{
     height: auto;
 }
-
 .add-group-form.manage-widget {
     position: relative;
 }
@@ -1572,3 +1571,156 @@ table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
     width: 1px;
 }
 
+=======
+.input-group-btn:last-child>.btn, 
+.input-group-btn:last-child>.btn-group {
+    width: 100%;
+}
+#widgetTbl tbody > tr > td > span.wz-status.active {
+    background: #32c5d2 none repeat scroll 0 0;
+    border-radius: 15px !important;
+    display: block;
+    height: 12px;
+    line-height: 0;
+    cursor: pointer;
+    width: 12px;
+    margin: auto;
+}
+#widgetTbl tbody > tr > td > span.wz-status.inactive {
+    background: #D64635 none repeat scroll 0 0;
+    border-radius: 15px !important;
+    display: block;
+    height: 12px;
+    line-height: 0;
+    cursor: pointer;
+    width: 12px;
+    margin: auto;
+}
+#moduleTbl tbody > tr > td > span.wz-status.active {
+    background: #32c5d2 none repeat scroll 0 0;
+    border-radius: 15px !important;
+    display: block;
+    height: 12px;
+    line-height: 0;
+    cursor: pointer;
+    width: 12px;
+    margin: auto;
+}
+#moduleTbl tbody > tr > td > span.wz-status.inactive {
+    background: #D64635 none repeat scroll 0 0;
+    border-radius: 15px !important;
+    display: block;
+    height: 12px;
+    line-height: 0;
+    cursor: pointer;
+    width: 12px;
+    margin: auto;
+}
+
+#userTbl tbody > tr > td > span.wz-status.active {
+    background: #32c5d2 none repeat scroll 0 0;
+    border-radius: 15px !important;
+    display: block;
+    height: 12px;
+    line-height: 0;
+    cursor: pointer;
+    width: 12px;
+    margin: auto;
+}
+#userTbl tbody > tr > td > span.wz-status.inactive {
+    background: #D64635 none repeat scroll 0 0;
+    border-radius: 15px !important;
+    display: block;
+    height: 12px;
+    line-height: 0;
+    cursor: pointer;
+    width: 12px;
+    margin: auto;
+}
+
+#view_module_details .modal-dialog {
+    max-width: 96%;    
+    width: 800px;
+}
+#view_module_details .modal-body {
+    position: relative;
+    padding: 0;
+}
+
+#view_widget_details .modal-dialog {
+    max-width: 96%;    
+    width: 800px;
+}
+#view_widget_details .modal-body {
+    position: relative;
+    padding: 0;
+}
+.portlet.light > .portlet-title > .tools a {
+    background-position: center center;
+    background-repeat: no-repeat;
+    border: 1px solid #cccccc;
+    font-size: 22px;
+    color: #cccccc;
+    height: 27px;
+    line-height: 25px;
+    margin: 0;
+    text-align: center;
+    vertical-align: top;
+    width: 27px;
+}
+.userfrm .help-block {
+    margin-top: 0;
+}
+
+/*for show user detail*/
+#view_user_details .modal-dialog {
+  max-width: 96%;
+  width: 800px;
+}
+#view_user_details .form-group {
+  margin-bottom: 3px;
+}
+#view_user_details fieldset{
+    padding: 15px;
+}
+#view_user_details fieldset legend{
+    font-size: 16px;
+    font-weight: 600;
+}
+#view_user_details fieldset label{
+    font-size: 13px;
+}
+#view_user_details .modal-dialog .form-horizontal .col-md-12:last-child fieldset {
+  margin-bottom: 0;
+}
+fieldset {
+    border: 1px solid #e7ecf1;
+    margin: 0 0 25px;
+}
+#view_user_details fieldset legend {
+    font-size: 16px;
+    font-weight: 600;
+}
+.blue-color {
+    color: #4276a4 !important;
+}
+legend {
+    border: medium none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0;
+    padding: 0 5px;
+    width: auto;
+}
+#view_user_details .portlet.light > .portlet-title {
+    min-height: 35px;
+}
+
+#view_user_details .portlet.light>.portlet-title>.caption {
+    padding: 1px 0;
+}
+
+#view_user_details .modal-body {
+    position: relative;
+    padding: 0;
+}

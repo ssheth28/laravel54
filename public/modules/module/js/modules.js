@@ -23,12 +23,9 @@ var Module = function() {
                 icon: {
                     required: true
                 },
-                type: {
-                    required: true
-                }
             },
             errorPlacement: function (error, element) { // render error placement for each input type
-                element.parent().append(error);
+                element.parent().parent().append(error);
             },
             submitHandler: function (form) {
                 form.submit();
@@ -43,7 +40,7 @@ var Module = function() {
             $(document).on('change', '#parent_id, #module_name, #module_type', function(event) {
                 generateModuleUrl();
             });
-            $(document).on('switchChange.bootstrapSwitch', '#is_publicly_visible, #module_type', function(event){
+            $(document).on('change', '#is_publicly_visible, #module_type', function(event){
                 generateModuleUrl();
             });
         }
@@ -63,6 +60,11 @@ $(document).ready(function() {
         vueModule.moduleListData(1, vueModule.sortby, vueModule.sorttype, vueModule.searchdata);
     });
 
+    $(document).on('click', '.js-module-detail', function(){
+        var data={};
+        ajaxCall($(this).data("url"), data, 'GET', 'json', moduleDetailSuccess);
+    });
+
     function getModuleData() {
         vueModule = new Vue({
             el: "#modulelist",
@@ -71,7 +73,7 @@ $(document).ready(function() {
                 moduleCount: 0,
                 sortKey: '',
                 sortOrder: 1,
-                sortby: 'id',
+                sortby: 'menu_items.id',
                 sorttype: 'desc',
                 searchdata: '',
                 footercontent: ''
@@ -105,7 +107,8 @@ $(document).ready(function() {
                 },
                 searchModuleData: function() {
                     var name = $("#module_name").val();
-                    var searchdata = "&name="+ name;
+                    var status = $('#module_status').val();
+                    var searchdata = "&name="+ name + "&status="+ status;
                     if($('#module_pagination').data("twbs-pagination")){
                         $('#module_pagination').twbsPagination('destroy');
                     }
@@ -188,10 +191,14 @@ function moduleDataSuccess(moduleData, status, xhr){
 
 function generateModuleUrl() {
     var data = "parent_id=" + $('#parent_id').val() + "&module_name=" + $('#module_name').val() + "&module_type=" + $('#module_type').val();
-    data += $('#is_publicly_visible').bootstrapSwitch('state') ? "&is_publicly_visible=1" : "&is_publicly_visible=0";
+    data += $('#is_publicly_visible').val();
     ajaxCall(window.urlInitial + "/admin/generateModuleUrl", data, 'POST', 'json', generateModuleUrlResponse);
 }
 
 function generateModuleUrlResponse(response, status, xhr) {
     $("#module_url").val(response.moduleUrl);
+}
+
+function moduleDetailSuccess(response, status, xhr) {
+    $(".js-module-detail-content").html(response.moduleDetailHtml);
 }

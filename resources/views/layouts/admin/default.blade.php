@@ -42,6 +42,7 @@
         <link href="{{ asset('css/admin/profile.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/admin/owl.carousel.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/admin/grid.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/admin/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
         <!-- END THEME LAYOUT STYLES -->
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -127,6 +128,7 @@
         <!-- END THEME LAYOUT SCRIPTS -->
         <script src="{{ asset('js/admin/common.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/admin/owl.carousel.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/admin/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
 
         <!-- <script src="http://htmlwazir.peppyemails.com/js/function.js" type="text/javascript"></script>
         <script src="http://htmlwazir.peppyemails.com/js/init.js" type="text/javascript"></script> -->

@@ -26,6 +26,9 @@ var User = function() {
                 last_name: {
                     required: true
                 },
+                department: {
+                    required: true
+                },
                 username: {
                     required: true,
                     remote: {
@@ -58,16 +61,19 @@ var User = function() {
                 created_at :{
                     required: true
                 },
+                status: {
+                    required: true
+                },
             },
             errorPlacement: function (error, element) { // render error placement for each input type
-                element.parent().append(error);
+                element.parent().parent().append(error);
             },
 
             invalidHandler: function (event, validator) { //display error alert on form submit   
                 if($('.js-frm-create-user').length > 0) {
                     success.hide();
                     error.show();
-                    App.scrollTo(error, -200);    
+                    App.scrollTo(error, -200);
                 }  
             },
             submitHandler: function (form) {
@@ -160,6 +166,11 @@ $(document).ready(function() {
     $(document).on('change', '#pagination_length', function(){
         Cookies.set('pagination_length', $(this).val());
         vueUser.userListData(1, vueUser.sortby, vueUser.sorttype, vueUser.searchdata);
+    });
+
+    $(document).on('click', '.js-user-detail', function(){
+        var data={};
+        ajaxCall($(this).data("url"), data, 'GET', 'json', userDetailSuccess);
     });
 
     $(document).on('click', '.js-continue', function(){
@@ -325,4 +336,8 @@ function userDataSuccess(userData, status, xhr){
 
         $('#pagination_length').val(Cookies.get('pagination_length'));
     });
+}
+
+function userDetailSuccess(response, status, xhr) {
+    $(".js-user-detail-content").html(response.userDetailHtml);
 }

@@ -83,7 +83,6 @@ class Controller extends BaseController
                 View::share('userCompanyRoles', $userCompanyRoles);
                 View::share('companies', $companies);
             }
-
             return $next($request);
         });
     }

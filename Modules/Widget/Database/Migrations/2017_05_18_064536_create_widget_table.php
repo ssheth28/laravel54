@@ -31,6 +31,7 @@ class CreateWidgetTable extends Migration
             $table->foreign('menu_item_id')
                 ->references('id')->on('menu_items')
                 ->onDelete('cascade');
+            $table->boolean('is_publicly_visible')->default(false);
             $table->integer('widget_type_id')->unsigned();
             $table->foreign('widget_type_id')
                 ->references('id')->on('widget_type')

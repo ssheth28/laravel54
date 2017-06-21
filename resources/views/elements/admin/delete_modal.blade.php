@@ -13,7 +13,7 @@
           <button type="submit" class="uie-btn uie-btn-primary ">Yes</button>
           <button type="button" class="uie-btn uie-secondary-btn" data-dismiss="modal">Cancel</button>
         </div>
-        <input name="_method" value="DELETE" type="hidden" />
+        <input name="_method" type="hidden" value="DELETE">
       {!! Form::close() !!}
     </div>
   </div>

@@ -124,6 +124,7 @@ return [
                                     'status'         => 1,
                                     'settings'       => null,
                                     'widget_type_id' => 1,
+                                    'is_publicly_visible' => 0,
                                 ],
                                 [
                                     'icon'           => 'fa fa-gear fa-lg',
@@ -134,6 +135,7 @@ return [
                                     'status'         => 1,
                                     'settings'       => null,
                                     'widget_type_id' => 1,
+                                    'is_publicly_visible' => 0,                                    
                                 ],
                             ],
                         ],
@@ -157,6 +159,7 @@ return [
                                     'status'         => 1,
                                     'settings'       => null,
                                     'widget_type_id' => 1,
+                                    'is_publicly_visible' => 0,
                                 ],
                             ],
                         ],

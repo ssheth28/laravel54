@@ -71,4 +71,9 @@ class Widget extends Model
     {
         return $this->belongsTo('Modules\Module\Entities\MenuItem');
     }
+
+    public function widgetType()
+    {
+        return $this->belongsTo('Modules\Widget\Entities\WidgetType');
+    }
 }

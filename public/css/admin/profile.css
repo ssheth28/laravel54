@@ -1,7 +1,7 @@
 .profile-sidebar {
-    float: left;
+   /* float: left;
     width: 300px;
-    margin-right: 20px;
+    margin-right: 20px;*/
 }
 .profile-sidebar-portlet {
     padding: 30px 0 0!important;
@@ -10,7 +10,7 @@
     margin-top: 0;
     margin-bottom: 25px;
 }
-.profile-userpic img {
+/*.profile-userpic img {
     float: none;
     margin: 0 auto;
     width: 50%;
@@ -18,7 +18,7 @@
     -webkit-border-radius: 50%!important;
     -moz-border-radius: 50%!important;
     border-radius: 50%!important;
-}
+}*/
 .img-responsive {
     display: block;
 }

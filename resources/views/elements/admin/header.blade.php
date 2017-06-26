@@ -21,7 +21,7 @@
         <!-- BEGIN PAGE TOP -->
         <div class="page-top">
             <div class="top-menu pull-left user-setting">            
-                <div class="dropdown company-list">
+                <div class="dropdown company-list" id="company_list">
                     <a id="dLabel" role="button" data-toggle="dropdown" class="btn" data-target="#" href="javascript:;">
                         <img alt="" class="img-circle" src="{{ asset('img/admin/avatar1.jpg') }}">
                         <span class="username username-hide-on-mobile"> {{ $currentCompany->name }}</span>
@@ -42,7 +42,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="top-menu pull-left add-user">
+            <div class="top-menu pull-left add-user" id="invite_team_members">
                 <div class="dropdown add-company">
                     <a data-container="body" data-toggle="modal" data-target="#invite-popup" data-trigger="hover" data-placement="bottom" data-content="Click (+) icon to invite by email" data-original-title="Invite your team mates!" class="btn popovers" href="#">
                         <i class="fa fa-plus-circle"></i>
@@ -367,7 +367,7 @@
                     </li>
                     <!-- END TODO DROPDOWN -->
                     <!-- BEGIN USER LOGIN DROPDOWN -->
-                    <li class="dropdown dropdown-user">
+                    <li class="dropdown dropdown-user" id="tour_user">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                             <span class="name"> {{ Auth::user()->person->first_name[0]. Auth::user()->person->last_name[0] }} </span>
                             <i class="fa fa-angle-down"></i>
@@ -383,9 +383,15 @@
                                 </label>
                             </li>
                             <li>
-                                <a href="{{ route('users.profile', ['domain' => $company->slug]) }}">
+                                <a href="{{ route('user.profile', ['domain' => $company->slug]) }}">
                                     <i class="icon-user"></i> My Account </a>
                             </li>
+                            <li>
+                                <a href="{{ route('company.profile', ['domain' => $company->slug]) }}">
+                                    <i class="icon-user"></i> Company Profile </a>
+                                </a>
+                            </li>
+                            
                             <li>
                                 <a href="app_calendar.html">
                                     <i class="fa fa-cog"></i> Setting </a>

@@ -12,7 +12,7 @@ var Group = function() {
                 },
             },
             errorPlacement: function (error, element) { // render error placement for each input type
-                element.parent().append(error);
+                element.parent().parent().append(error);
             },
             submitHandler: function (form) {
                 form.submit();
@@ -39,6 +39,16 @@ $(document).ready(function() {
         Cookies.set('pagination_length', $(this).val());
         vueGroup.groupListData(1, vueGroup.sortby, vueGroup.sorttype, vueGroup.searchdata);
     });
+
+    // $('.selectall').trigger('change');
+    
+    $('.selectall').change(function() {
+        if ($(this).prop('checked')) {
+            $('input').prop('checked', true);
+        } else {
+            $('input').prop('checked', false);
+        }
+    });  
 
     function getGroupData() {
         vueGroup = new Vue({

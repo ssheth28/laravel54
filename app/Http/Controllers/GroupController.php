@@ -131,9 +131,12 @@ class GroupController extends Controller
         $requestWidgets = $request->widgets;
 
         // fetch all the relevant permission ids based on the menu items
-        $menuItems = $request->menuItems;
-        $menuItems = MenuItem::whereIn('id', $request->menuItems)->get();
+        $menuItems = array();
+        foreach($requestWidgets as $menuItemId=>$widget) {
+            $menuItems[] = $menuItemId;
+        }
 
+        $menuItems = MenuItem::whereIn('id', $menuItems)->get();
         foreach ($menuItems as $item) {
             $allModules = [];
             $allWidgets = [];
@@ -248,8 +251,12 @@ class GroupController extends Controller
         $role->save();
 
         // fetch all the relevant permission ids based on the menu items
-        $menuItems = $request->menuItems;
-        $menuItems = MenuItem::whereIn('id', $request->menuItems)->get();
+        $menuItems = array();
+        foreach($requestWidgets as $menuItemId=>$widget) {
+            $menuItems[] = $menuItemId;
+        }
+        // $menuItems = $request->menuItems;
+        $menuItems = MenuItem::whereIn('id', $menuItems)->get();
 
         foreach ($menuItems as $item) {
             $allModules = [];

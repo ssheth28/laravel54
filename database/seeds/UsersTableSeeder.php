@@ -25,7 +25,6 @@ class UsersTableSeeder extends Seeder
                             'last_name'         => 'Shah',
                             'display_name'      => 'Hardik Shah',
                             'primary_email'     => 'hshah@aecordigital.com',
-                            'address'           => 'Test',
                             'dob'               => Carbon::now()->format('Y-m-d H:i:s'),
                             'gender'            => 0,
                             'mobile_number'     => '012345678',

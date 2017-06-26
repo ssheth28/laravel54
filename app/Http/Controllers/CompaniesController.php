@@ -19,7 +19,6 @@ class CompaniesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
         $this->title = 'Company Profile';
         View::share('title', $this->title);
         parent::__construct();
@@ -174,9 +173,9 @@ class CompaniesController extends Controller
                         ->join('people', 'users.person_id', 'people.id')
                         ->where('company_user.company_id', $companyId)
                         ->select('*', DB::raw('DATE_FORMAT(users.created_at, "%d-%m-%Y %H:%i:%s") as "created_datetime"'),
-                                      DB::raw('DATE_FORMAT(people.date_of_joining, "%d-%m-%Y") as "joined_date"'),
                                       DB::raw('users.id as user_id'),
-                                      DB::raw('company_user.settings as settings'))->get();        
+                                      DB::raw('company_user.settings as settings'))->get();    
+                                      // dd($users);    
         
         return view('companies.view_members', compact('users', 'companyData'));
     }

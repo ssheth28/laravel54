@@ -63,7 +63,7 @@
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-addon no-bg"><i class="fa fa-sort-numeric-asc blue-color"></i></span>
-                                                        {!! Form::text('department',$companyUser->settings['department'],['class' => 'form-control', 'id' => 'general_first_name', 'placeholder' => 'Department']) !!}
+                                                        {!! Form::text('department',$companyUser->settings['department'], ['class' => 'form-control', 'id' => 'general_first_name', 'placeholder' => 'Department']) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -71,7 +71,7 @@
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-addon no-bg"><i class="fa fa-sort-numeric-asc blue-color"></i></span>
-                                                        {!! Form::text('designation',$companyUser->settings['designation'],['class' => 'form-control', 'id' => 'general_first_name', 'placeholder' => 'Designation']) !!}
+                                                        {!! Form::text('designation',isset($companyUser->settings['designation']) ? $companyUser->settings['designation'] : null,['class' => 'form-control', 'id' => 'general_first_name', 'placeholder' => 'Designation']) !!}
                                                     </div>
                                                 </div>
                                             </div>                                           
@@ -79,7 +79,7 @@
                                                 <div class="form-group">
 					                                <div class="input-group">
 					                                    <span class="input-group-addon no-bg"><i class="fa fa-calendar blue-color"></i></span>
-					                                    {!! Form::text('joining_date', $companyUser->settings['doj'], ['class' => 'form-control form-control-inline date-picker datepicker', 'size' => '16', 'placeholder' => 'DOJ']) !!}
+					                                    {!! Form::text('joining_date', isset($companyUser->settings['doj']) ? $companyUser->settings['doj'] : null , ['class' => 'form-control form-control-inline date-picker datepicker', 'size' => '16', 'placeholder' => 'DOJ']) !!}
 					                                </div>
                                                 </div>
                                             </div>
@@ -100,7 +100,7 @@
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-addon no-bg"><i class="fa fa-sort-numeric-asc blue-color"></i></span>
-                                                        {!! Form::text('bank_account_no',$companyUser->settings['bank_account_no'],['class' => 'form-control', 'id' => 'general_first_name', 'placeholder' => 'Bank Acc. No']) !!}
+                                                        {!! Form::text('bank_account_no',isset($companyUser->settings['bank_account_no']) ? $companyUser->settings['bank_account_no'] : null,['class' => 'form-control', 'id' => 'general_first_name', 'placeholder' => 'Bank Acc. No']) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -108,7 +108,7 @@
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-addon no-bg"><i class="fa fa-sort-numeric-asc blue-color"></i></span>
-                                                        {!! Form::text('branch',$companyUser->settings['branch'],['class' => 'form-control', 'id' => 'general_first_name', 'placeholder' => 'Branch']) !!}
+                                                        {!! Form::text('branch',isset($companyUser->settings['branch']) ? $companyUser->settings['branch'] : null,['class' => 'form-control', 'id' => 'general_first_name', 'placeholder' => 'Branch']) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -116,7 +116,7 @@
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-addon no-bg"><i class="fa fa-sort-numeric-asc blue-color"></i></span>
-                                                        {!! Form::text('ifsc_code',$companyUser->settings['ifsc'],['class' => 'form-control', 'id' => 'general_first_name', 'placeholder' => 'IFSC Code']) !!}
+                                                        {!! Form::text('ifsc_code',isset($companyUser->settings['ifsc']) ? $companyUser->settings['ifsc'] : null,['class' => 'form-control', 'id' => 'general_first_name', 'placeholder' => 'IFSC Code']) !!}
                                                     </div>
                                                 </div>
                                             </div>                                            
@@ -124,7 +124,7 @@
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-addon no-bg"><i class="fa fa-sort-numeric-asc blue-color"></i></span>
-                                                        {!! Form::text('pf_no',$companyUser->settings['pf_no'],['class' => 'form-control', 'id' => 'general_first_name', 'placeholder' => 'PF Number']) !!}
+                                                        {!! Form::text('pf_no',isset($companyUser->settings['pf_no']) ? $companyUser->settings['pf_no'] : null,['class' => 'form-control', 'id' => 'general_first_name', 'placeholder' => 'PF Number']) !!}
                                                     </div>
                                                 </div>
                                             </div>   
@@ -132,7 +132,7 @@
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-addon no-bg"><i class="fa fa-sort-numeric-asc blue-color"></i></span>
-                                                        {!! Form::text('esi_no',$companyUser->settings['esi_no'],['class' => 'form-control', 'id' => 'general_first_name', 'placeholder' => 'ESI No']) !!}
+                                                        {!! Form::text('esi_no',isset($companyUser->settings['esi_no']) ? $companyUser->settings['esi_no'] : null,['class' => 'form-control', 'id' => 'general_first_name', 'placeholder' => 'ESI No']) !!}
                                                     </div>
                                                 </div>
                                             </div>   
@@ -140,7 +140,7 @@
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-addon no-bg"><i class="fa fa-sort-numeric-asc blue-color"></i></span>
-                                                        {!! Form::text('annual_ctc',$companyUser->settings['ctc'],['class' => 'form-control', 'id' => 'general_first_name', 'placeholder' => 'Annual CTC']) !!}
+                                                        {!! Form::text('annual_ctc',isset($companyUser->settings['ctc']) ? $companyUser->settings['ctc'] : null,['class' => 'form-control', 'id' => 'general_first_name', 'placeholder' => 'Annual CTC']) !!}
                                                     </div>
                                                 </div>
                                             </div>

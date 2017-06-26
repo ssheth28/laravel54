@@ -39,15 +39,16 @@
 	                </thead>
 	                <tbody>
 	                	@foreach($users as $user)
+	                	@php($settings=(array)json_decode($user->settings))
 	                    <tr> 
 	                        <td class="text-center table_icon">
 	                            <a href="#" data-confirm-msg="Are you sure you would like to delete this user record?" data-delete-url="{{ '/' . LaravelLocalization::getCurrentLocale() . '/' . session('currentrole') . '/admin/users/'}}{{ $user->user_id }}"  class="btn red btn-outline btn-xs js-delete-button" data-toggle="modal" data-target="#delete_modal"><i class="fa fa-trash"></i></a>
-	                        </td>
+	                        </td>	                    
 	                        <td>{{ $user->first_name }} {{ $user->last_name }}</td>
 	                        <td>{{ $user->email }}</td>
-	                        <td>{{ $user->department }}</td>	             
+	                        <td>{{ $settings['department'] }}</td>
 	                        <td>{{ $user->mobile_number }}</td>
-	                        <td>{{ $user->joined_date}}</td>
+	                        <td>{{ $settings['doj'] }}</td>
 	                        <td>{{ $user->gender == 0 ? 'Male' : 'Female'}}</td>	                        
 	                        <td>
 	                        	@if($user->status == 1)

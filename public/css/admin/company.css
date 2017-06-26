@@ -47,3 +47,10 @@
 .profile ul.profile-nav img.pic-bordered {
     border: 1px solid #e1e7ee;
 }
+
+.profile-usermenu ul li.active a {
+    background-color: #f6f9fb;
+    border-left: 2px solid #4276a4;
+    color: #4276a4;
+    margin-left: -2px;
+}

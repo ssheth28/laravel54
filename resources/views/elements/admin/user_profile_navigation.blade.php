@@ -1,7 +1,11 @@
 <div class="profile-sidebar">
     <div class="portlet light profile-sidebar-portlet">
         <div class="profile-userpic">
-            <img src="{{ $user->getMedia('User')[0]->getUrl() }}" class="img-responsive pic-bordered" alt=""> 
+            @if(count($user->getMedia('User')) > 0)
+                <img src="{{ $user->getMedia('User')[0]->getUrl() }}" class="img-responsive pic-bordered" alt="">
+            @else
+                <img src="http://www.placehold.it/204x204/EFEFEF/AAAAAA&amp;text=noimage" class="img-responsive pic-bordered" alt=""> </div>
+            @endif
         </div>
         <div class="profile-usermenu">
             <ul class="nav">

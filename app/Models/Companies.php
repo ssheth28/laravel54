@@ -17,7 +17,7 @@ class Companies extends Basemodel implements HasMedia
      * @var array
      */
     protected $fillable = [
-        'name', 'slug',
+        'name', 'slug', 'owner_id',
     ];
 
     /**

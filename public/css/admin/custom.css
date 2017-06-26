@@ -1936,7 +1936,3 @@ legend {
     border-right: 1px solid #eef1f5;
 }
 /*tour section end*/
-
-.popover[class*="tour-"] {
-    z-index: 9999;
-}

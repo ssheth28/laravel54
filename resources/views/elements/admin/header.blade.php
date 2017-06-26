@@ -398,7 +398,7 @@
                             </li>
                             <li>
                                 <a href="app_todo.html">
-                                    <i class="icon-rocket"></i> My Tasks
+                                    <i class="fa fa-rocket"></i> My Tasks
                                     <span class="badge badge-success"> 7 </span>
                                 </a>
                             </li>
@@ -406,7 +406,7 @@
                             <li>
                                 <a href="javascript: void(0)"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    <i class="icon-key"></i> Log Out
+                                    <i class="fa fa-key"></i> Log Out
                                 </a>
                                 <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                     {{ csrf_field() }}

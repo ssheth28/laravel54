@@ -13,7 +13,7 @@
                 <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
                 <form class="sidebar-search" action="" method="POST">
                     <a href="javascript:;" class="remove">
-                        <i class="icon-close"></i>
+                        <i class="fa fa-times-circle"></i>
                     </a>
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search...">
@@ -25,6 +25,13 @@
                     </div>
                 </form>
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
+            </li>
+            <li class="nav-item start active ms-hover">
+                <a href="/home.php" class="nav-link nav-toggle">
+                    <i class="fa fa-dashboard"></i>
+                    <span class="title">Home</span>
+                    <span class="selected"></span>
+                </a>
             </li>
             @if (count($menu_items) > 0)                
                 @foreach ($menu_items as $menu_item)
@@ -135,6 +142,17 @@
             </li> --}}
         </ul>
         <!-- END SIDEBAR MENU -->
+    </div>
+
+    <div class="queck-links">
+        <a href="#">
+            <i class="fa fa-file-text-o"></i>
+            <span class="title">New Report</span>
+        </a>
+        <a href="#">
+            <i class="fa fa-tasks"></i>
+            <span class="title">My Task</span>
+        </a>
     </div>
     <!-- END SIDEBAR -->
 </div>

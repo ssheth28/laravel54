@@ -52,4 +52,23 @@ return [
     ],
     'menu_item_permission_identifier' => 'm',
     'widget_permission_identifier'    => 'w',
+    'job_type' => [
+        '1' => 'Yes',
+        '0' => 'No'
+    ],
+    'user_job_types' => [
+        'Probation' => 'Probation',
+        'Contract' => 'Contract',
+        'Consultant' => 'Consultant',
+        'Permanent' => 'Permanent'
+    ],
+    'incremental_durations' => [
+        'Annually' => 'Annually',
+        'Half yearly' => 'Half yearly'
+    ],
+    'salary_modes' => [
+        'Cash' => 'Cash',
+        'Cheque' => 'Cheque',
+        'Online' => 'Online'
+    ]
 ];

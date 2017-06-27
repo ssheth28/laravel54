@@ -19,6 +19,7 @@
         <link href="{{ asset('plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('plugins/simple-line-icons/simple-line-icons.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/admin/bootstrap-tour.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('plugins/bootstrap-switch/css/bootstrap-switch.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -33,7 +34,7 @@
         <!-- END THEME GLOBAL STYLES -->
         <!-- BEGIN THEME LAYOUT STYLES -->
         <link href="{{ asset('css/admin/layout.min.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('css/admin/themes/blue.min.css') }}" rel="stylesheet" type="text/css" id="style_color" />
+        <link href="{{ asset('css/admin/themes/blue.min.css') }}" rel="stylesheet" type="text/css" id="style_color" />        
 
         @yield('page-style')
 
@@ -42,7 +43,7 @@
         <link href="{{ asset('css/admin/profile.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/admin/owl.carousel.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/admin/grid.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('css/admin/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/admin/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />        
         <!-- END THEME LAYOUT STYLES -->
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -129,6 +130,7 @@
         <script src="{{ asset('js/admin/common.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/admin/owl.carousel.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/admin/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/admin/bootstrap-tour.min.js') }}" type="text/javascript"></script>
 
         <!-- <script src="http://htmlwazir.peppyemails.com/js/function.js" type="text/javascript"></script>
         <script src="http://htmlwazir.peppyemails.com/js/init.js" type="text/javascript"></script> -->

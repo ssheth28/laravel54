@@ -2,12 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Companies;
 use Auth;
+use View;
+use DB;
+use Landlord;
+use App\Models\Companies;
 use Illuminate\Http\Request;
 
 class CompaniesController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->title = 'Company Profile';
+        View::share('title', $this->title);
+        parent::__construct();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -138,5 +154,67 @@ class CompaniesController extends Controller
         $request->session()->put('currentrole', $roleId);
         return response()
             ->json(['redirecturl' => route('admin.home', ['domain' => $companySlug])]);
+    }
+
+    public function companyProfile()
+    {
+        $companyId = Landlord::getTenants()['company']->id;
+        $companyData = Companies::with('user')->find($companyId);
+        return view('companies.overview', compact('companyData'));
+    }
+
+    public function viewMembers()
+    {
+        $companyId = Landlord::getTenants()['company']->id;
+        $companyData = Companies::with('user')->find($companyId);
+
+        $users = DB::table('users')
+                        ->join('company_user', 'company_user.user_id', 'users.id')
+                        ->join('people', 'users.person_id', 'people.id')
+                        ->where('company_user.company_id', $companyId)
+                        ->select('*', DB::raw('DATE_FORMAT(users.created_at, "%d-%m-%Y %H:%i:%s") as "created_datetime"'),
+                                      DB::raw('users.id as user_id'),
+                                      DB::raw('company_user.settings as settings'))->get();    
+                                      // dd($users);    
+        
+        return view('companies.view_members', compact('users', 'companyData'));
+    }
+
+    public function editCompanyProfile()
+    {
+        $companyId = Landlord::getTenants()['company']->id;
+        $companyData = Companies::with('user')->find($companyId);
+        return view('companies.edit_company_profile', compact('companyData'));
+    }
+
+    public function updateCompanyProfile(Request $request, $company)
+    {
+        $companyId = Landlord::getTenants()['company']->id;
+        $company = Companies::findOrFail($companyId);
+        $companyLogo = $request->file('company_logo');
+
+        $company->name = $request->name;
+        $company->company_domain_url = $request->company_domain_url;
+        $company->contact_no = $request->contact_no;
+        $company->email = $request->company_email;
+        $company->country = $request->country;
+        $company->state = $request->state;
+        $company->city = $request->city;
+        $company->pincode = $request->pincode;
+        $company->address = $request->address;
+
+        $company->save();
+        
+        // store company logo
+        if($companyLogo) {
+            $company->clearMediaCollection('Company_logo');
+            $media = $company->addMedia($companyLogo)
+                            ->preservingOriginal()
+                            ->toMediaLibrary('Company_logo');
+        }
+
+        flash()->success(config('config-variables.flash_messages.dataSaved'));
+
+        return redirect()->route('company.edit.profile', ['domain' => app('request')->route()->parameter('company')]);
     }
 }

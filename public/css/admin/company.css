@@ -1,0 +1,56 @@
+#company_profile .profile-usermenu ul li a {
+	font-size: 14px;
+}
+
+.profile-info h1 {
+    font-size: 24px;
+    margin: 0 0 10px;
+}
+
+.sale-summary ul {
+    margin-top: -10px;
+}
+
+.sale-summary li .sale-info {
+    margin-top: 4px;
+    float: left;
+    color: #646464;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.sale-summary li:first-child {
+    border-top: none;
+}
+.sale-summary li {
+    padding: 10px 0;
+    overflow: hidden;
+    border-top: solid 1px #eee;
+}
+.sale-summary li .sale-num {
+    float: right;
+    color: #169ef4;
+    font-size: 20px;
+    font-weight: 300;
+}
+.profile ul.profile-nav {
+    margin-bottom: 30px;
+}
+.no-margin-bottom {
+    margin-bottom: 0 !important;
+}
+.profile ul.profile-nav li {
+    position: relative;
+}
+.profile.cus-pro ul.profile-nav img.pic-bordered {
+    width: 100%;
+}
+.profile ul.profile-nav img.pic-bordered {
+    border: 1px solid #e1e7ee;
+}
+
+.profile-usermenu ul li.active a {
+    background-color: #f6f9fb;
+    border-left: 2px solid #4276a4;
+    color: #4276a4;
+    margin-left: -2px;
+}

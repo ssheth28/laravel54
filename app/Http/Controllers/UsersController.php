@@ -123,7 +123,7 @@ class UsersController extends Controller
                     ->join('people', 'users.person_id', 'people.id')
                     ->where('company_user.company_id', $companyId)
                     ->select('*', DB::raw('DATE_FORMAT(users.created_at, "%d-%m-%Y %H:%i:%s") as "created_datetime"'),
-                                  DB::raw('DATE_FORMAT(people.date_of_joining, "%d-%m-%Y") as "joined_date"'),
+                                  // DB::raw('DATE_FORMAT(people.date_of_joining, "%d-%m-%Y") as "joined_date"'),
                                   DB::raw('users.id as user_id'),
                                   DB::raw('company_user.settings as settings'));
 
@@ -201,7 +201,7 @@ class UsersController extends Controller
             $person = new Person();
             $person->first_name = $request->first_name;
             $person->last_name = $request->last_name;
-            $person->department = $request->department;
+            // $person->department = $request->department;
             $person->middle_name = $request->middle_name;
             $person->mobile_number = $request->contact_no;
             $person->home_phone = $request->landline_no;
@@ -211,7 +211,7 @@ class UsersController extends Controller
             $person->voter_id_number = $request->voter_id_no;
             $person->blood_group = $request->blood_group;
             $person->dob = Carbon::parse($request->birth_date)->format('Y-m-d H:i:s');
-            $person->date_of_joining = Carbon::parse($request->joining_date)->format('Y-m-d H:i:s');
+            // $person->date_of_joining = Carbon::parse($request->joining_date)->format('Y-m-d H:i:s');
             $address = [];
             $address['current_address'] = $request->current_address;
             $person->address = $address;
@@ -253,6 +253,10 @@ class UsersController extends Controller
         $companyUser->company_id = $companyId;
         $companyUser->user_id = $userId;
         $companyUser->settings = ['is_invitation_accepted' => ($checkUserExists ? 0 : 1)];
+        $settings = [];
+        $settings['department'] = $request->department;
+        $settings['doj'] = Carbon::parse($request->joining_date)->format('Y-m-d H:i:s');
+        $companyUser->settings = $settings;
         $companyUser->save();
 
         flash()->success(config('config-variables.flash_messages.dataSaved'));
@@ -326,7 +330,7 @@ class UsersController extends Controller
 
         $person->first_name = $request->first_name;
         $person->last_name = $request->last_name;
-        $person->department = $request->department;
+        // $person->department = $request->department;
         $person->middle_name = $request->middle_name;
         $person->mobile_number = $request->contact_no;
         $person->home_phone = $request->landline_no;
@@ -336,12 +340,21 @@ class UsersController extends Controller
         $person->voter_id_number = $request->voter_id_no;
         $person->blood_group = $request->blood_group;
         $person->dob = Carbon::parse($request->birth_date)->format('Y-m-d H:i:s');
-        $person->date_of_joining = Carbon::parse($request->joining_date)->format('Y-m-d H:i:s');
+        // $person->date_of_joining = Carbon::parse($request->joining_date)->format('Y-m-d H:i:s');
+        
         $address = [];
         $address['current_address'] = $request->current_address;
-        $person->address = $address;
+        $person->address = $address;        
+        
         $person->permanent_address = $request->permanent_address;
         $person->save();
+
+        $companyUser = CompanyUser::where('user_id', $user->id)->where('company_id', $companyId)->first();
+        $settings = $companyUser->settings;
+        $settings['department'] = $request->department;
+        $settings['doj'] = Carbon::parse($request->joining_date)->format('Y-m-d H:i:s');
+        $companyUser->settings = $settings;
+        $companyUser->save();
 
         $user->email = $request->email;
         $user->username = $request->username;
@@ -436,20 +449,20 @@ class UsersController extends Controller
         return view('users.profile', compact('avatar'));
     }
 
-    public function updateAvatar(Request $request)
-    {
-        $user = Auth::user();
-        $userAvatar = $request->file('user_avatar');
+    // public function updateAvatar(Request $request)
+    // {
+    //     $user = Auth::user();
+    //     $userAvatar = $request->file('user_avatar');
 
-        if ($userAvatar) {
-            $user->clearMediaCollection('User');
-            $media = $user->addMedia($userAvatar)
-                        ->preservingOriginal()
-                        ->toMediaLibrary('User');
-        }
+    //     if ($userAvatar) {
+    //         $user->clearMediaCollection('User');
+    //         $media = $user->addMedia($userAvatar)
+    //                     ->preservingOriginal()
+    //                     ->toMediaLibrary('User');
+    //     }
 
-        return redirect()->route('users.profile', ['domain' => app('request')->route()->parameter('company')]);
-    }
+    //     return redirect()->route('users.profile', ['domain' => app('request')->route()->parameter('company')]);
+    // }
 
     public function saveGeneralInfo(Request $request)
     {
@@ -517,7 +530,7 @@ class UsersController extends Controller
 
         flash()->success(config('config-variables.flash_messages.dataSaved'));
 
-        return redirect()->route('users.profile', ['domain' => app('request')->route()->parameter('company')]);
+        return redirect()->route('user.profile', ['domain' => app('request')->route()->parameter('company')]);
     }
 
     /**
@@ -530,5 +543,91 @@ class UsersController extends Controller
     public function inviteTeamMate(Request $request)
     {
         return redirect()->route('users.create', ['domain' => app('request')->route()->parameter('company'), 'email' => $request->invite_team_mate_email]);
+    }
+
+    public function userProfile()
+    {
+        $user = Auth::user();
+        return view('users.user_overview', compact('user'));
+    }
+
+    public function editUserProfile()
+    {
+        $user = User::with('person')->where('id', Auth::user()->id)->first();
+        $companyId = Landlord::getTenants()['company']->id;
+        $companyUser = CompanyUser::where('user_id', $user->id)->where('company_id', $companyId)->first();
+        return view('users.edit_profile', compact('user', 'companyUser'));
+    }
+
+    public function viewChangePaswordPage()
+    {
+        $user = Auth::user();
+        return view('users.change_password', compact('user'));
+    }
+
+    public function updateUserProfile(Request $request, $company)
+    {
+        $companyId = Landlord::getTenants()['company']->id;
+        $user = User::with('person')->where('id', Auth::user()->id)->first();
+        $user->email = $request->email;
+        $user->save();     
+
+        $person = Person::findOrFail($user->person_id);
+        $person->first_name = $request->name;
+        $person->dob = $request->dob;
+        $person->blood_group = $request->blood_group;
+        $person->secondary_email = $request->personal_email;
+        $person->mobile_number = $request->mobile_no;
+        $person->aadhar_card_number = $request->aadhar_no;
+
+        $extraInfo = [];
+        $extraInfo['emergency_contact_no'] = $request->emergency_contact_no;
+        $extraInfo['pan_no'] = $request->pan_no;
+        $extraInfo['passport_no'] = $request->passport_no;
+        $extraInfo['marital_status'] = $request->marital_status;
+        $extraInfo['spouse_name'] = $request->spouse_name;
+        $person->extra_info = $extraInfo;
+
+        $person->home_phone = $request->phone_no;
+        $person->bio = $request->about_me;
+        $address = [];
+        $address['current_address'] = $request->current_address;
+        $address['country'] = $request->country;
+        $address['state'] = $request->state;
+        $address['city'] = $request->city;
+        $address['pincode'] = $request->pincode;
+        $person->address = $address;
+        $person->permanent_address = $request->permanent_address;
+        $person->save();
+
+        // saving account details and HR details here 
+        $companyUser = CompanyUser::where('user_id', $user->id)->where('company_id', $companyId)->first();
+        $settings = $companyUser->settings;
+        $settings['department'] = $request->department;
+        $settings['designation'] = $request->designation;
+        $settings['doj'] = $request->joining_date;
+        $settings['job_type'] = $request->job_type;
+        $settings['bank_account_no'] = $request->bank_account_no;
+        $settings['branch'] = $request->branch;
+        $settings['ifsc'] = $request->ifsc_code;
+        $settings['pf_no'] = $request->pf_no;
+        $settings['esi_no'] = $request->esi_no;
+        $settings['ctc'] = $request->annual_ctc;
+        $settings['incremental_duration'] = $request->incremental_duration;
+        $settings['salary_mode'] = $request->salary_mode;
+        $companyUser->settings = $settings;
+        $companyUser->save();
+
+        $userAvatar = $request->file('user_avatar');
+
+        if ($userAvatar) {
+            $user->clearMediaCollection('User');
+            $media = $user->addMedia($userAvatar)
+                        ->preservingOriginal()
+                        ->toMediaLibrary('User');
+        }
+
+        flash()->success(config('config-variables.flash_messages.dataSaved'));
+        return redirect()->route('user.edit.profile', ['domain' => app('request')->route()->parameter('company')]);
     }
 }

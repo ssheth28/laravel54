@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
 
-class Companies extends Basemodel
+class Companies extends Basemodel implements HasMedia
 {
-    use HasSlug;
+    use HasSlug, HasMediaTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +17,7 @@ class Companies extends Basemodel
      * @var array
      */
     protected $fillable = [
-        'name', 'slug',
+        'name', 'slug', 'owner_id',
     ];
 
     /**
@@ -51,5 +53,10 @@ class Companies extends Basemodel
     {
         return (bool) static::where('slug', $slug)
             ->first();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'owner_id');
     }
 }

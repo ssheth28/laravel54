@@ -1,0 +1,6 @@
+.input-group-addon.gender-drop {
+    border: medium none;
+    padding: 0;
+    position: relative;
+    z-index: 9;
+}

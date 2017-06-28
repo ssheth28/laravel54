@@ -63,6 +63,52 @@ $(document).ready(function() {
         }
     });
 
+    // tour section begins
+    var tour = new Tour({       
+        steps: [
+          {
+            element: "#company_list",
+            title: "List of companies",
+            content: "Company list.",
+            placement: "bottom"
+          },
+          {
+            element: "#invite_team_members",
+            title: "Invite team members",
+            content: "Invite team members from here.",
+            placement: "bottom"
+          },
+          {
+            element: "#tour_user",
+            title: "Logged in user details",
+            content: "You can see logged in user details.",
+            placement: "left"
+          },
+          {
+            element: "#widget_setting",
+            title: "Widget settings",
+            content: "Widget setting",
+            placement: "left"
+          },
+          {
+            element: "#tour_go_pro",
+            title: "Title of my step",
+            content: "You can see logged in user details.",
+            placement: "top"
+          }
+        ],
+        backdrop: true,
+        storage: false,
+        onEnd: function (tour) {
+            tour.end();
+        }
+    });
+
+    tour.init();
+    tour.start();
+
+    //tour end
+
     // delete functionality
     $(document).on('click', '.js-delete-button', function(e){
         var action = $(this).data('delete-url');

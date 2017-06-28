@@ -1,6 +1,6 @@
 <!-- BEGIN FOOTER -->
 <div class="page-footer">
-    <div class="trial-reminder">
+    <div class="trial-reminder" id="tour_go_pro">
         <a href="#">Go Pro</a>
         <div class="pro-bar">
             <div style="width: 50%;" class="bar"></div>
@@ -52,7 +52,7 @@
         <a href="javascript:;" class="fa fa-tags label-tag icon-hidden" data-toggle="modal" data-target="#change-label-popup"><span>Change Label</span></a>
         <a href="javascript:;" class="fa fa fa-trash-o delete icon-hidden"><span>Delete</span></a>
         <a href="javascript:;" class="fa fa-plus add icon-hidden" data-toggle="modal" data-target="#add-widget-popup"><span>Add</span></a>
-        <a href="javascript:;" class="fa fa-cog setting"><span>Widget<br>setting</span></a>
+        <a href="javascript:;" class="fa fa-cog setting" id="widget_setting"><span>Widget<br>setting</span></a>
     </div>
 </div>
 

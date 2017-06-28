@@ -86,11 +86,20 @@
               </div>
            </div>
         </div>
+        <div class="overlay fade in"></div>
     </div>
 @endsection
 
 @section('page-script')
     <script src="{{ asset('js/admin/auth.js') }}" type="text/javascript"></script>
+
+     <script type="text/javascript">
+
+        $("#login_btn").click(function(){
+            $('.overlay').addClass('modal-backdrop');
+        });
+        
+    </script>
 @endsection
 
     

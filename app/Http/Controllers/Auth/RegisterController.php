@@ -130,11 +130,7 @@ class RegisterController extends Controller
                 'last_name'     => $data['last_name'],
                 'display_name'  => $data['username'],
                 'primary_email' => $data['email'],
-        ]);
-        
-        $company = Companies::create([
-                'name'  => $data['company_name'],
-        ]);
+        ]);        
 
         $user = User::create([
             'person_id'          => $person->id,
@@ -142,6 +138,11 @@ class RegisterController extends Controller
             'email'              => $data['email'],
             'password'           => bcrypt($data['password']),
             'verification_token' => md5(uniqid(mt_rand(), true)),
+        ]);
+
+        $company = Companies::create([
+            'name'  => $data['company_name'],
+            'owner_id' => $user->id,
         ]);
 
         $companyUser = CompanyUser::create([

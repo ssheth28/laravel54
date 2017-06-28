@@ -19,9 +19,9 @@ class CreatePeopleTable extends Migration
             $table->string('last_name', 60)->nullable();
             $table->string('middle_name', 60)->nullable();
             $table->string('display_name', 50)->nullable();
-            $table->string('department', 50)->nullable();
+            // $table->string('department', 50)->nullable();
             $table->jsonb('address')->nullable();
-            $table->timestamp('date_of_joining')->nullable();
+            // $table->timestamp('date_of_joining')->nullable();
             $table->timestamp('dob')->nullable();
             $table->text('bio')->nullable();
             $table->string('avatar')->nullable();

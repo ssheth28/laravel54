@@ -98,6 +98,16 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
                     Route::get('edit_company_profile','CompaniesController@editCompanyProfile')->name('company.edit.profile');
                     Route::post('edit_company_profile','CompaniesController@updateCompanyProfile')->name('company.update.profile');
 
+                    // Clients section
+                    Route::resource('clients', 'ClientsController');
+                    Route::post('/getClientData', 'ClientsController@getClientData');
+
+                    //Assets Section
+                    Route::resource('assets', 'AssetsController');
+                    Route::post('/getAssetData', 'AssetsController@getAssetData');
+
+                    // Recruitments
+                    Route::resource('recruitments', 'RecruitmentsController');
                 });
             });
         }

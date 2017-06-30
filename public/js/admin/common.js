@@ -98,7 +98,7 @@ $(document).ready(function() {
           }
         ],
         backdrop: true,
-        storage: false,
+        storage: window.localeStorage,
         onEnd: function (tour) {
             tour.end();
         }

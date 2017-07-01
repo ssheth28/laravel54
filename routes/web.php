@@ -104,6 +104,17 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
 
                     // project section routes
                     Route::resource('projects', 'ProjectController');
+
+                    // Clients section
+                    Route::resource('clients', 'ClientsController');
+                    Route::post('/getClientData', 'ClientsController@getClientData');
+
+                    //Assets Section
+                    Route::resource('assets', 'AssetsController');
+                    Route::post('/getAssetData', 'AssetsController@getAssetData');
+
+                    // Recruitments
+                    Route::resource('recruitments', 'RecruitmentsController');
                 });
             });
         }

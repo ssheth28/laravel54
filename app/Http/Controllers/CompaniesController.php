@@ -217,4 +217,11 @@ class CompaniesController extends Controller
 
         return redirect()->route('company.edit.profile', ['domain' => app('request')->route()->parameter('company')]);
     }
+
+    public function changePassword()
+    {
+        $companyId = Landlord::getTenants()['company']->id;
+        $companyData = Companies::with('user')->find($companyId);
+        return view('companies.change_password', compact('companyData'));
+    }
 }

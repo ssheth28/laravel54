@@ -358,6 +358,13 @@ table .btn {
 .page-header.navbar .top-menu .navbar-nav>li.dropdown .dropdown-toggle:hover {
 	background-color: #dedede;
 }
+.page-sidebar .page-sidebar-menu .sub-menu li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu li>a {
+    padding: 9px 15px 6px 35px;
+}
+
+.page-sidebar .page-sidebar-menu .sub-menu li>.sub-menu>li>a {
+    padding-left: 56px;
+}
 .page-sidebar, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover {
 	background-color: #4276A4;
 }
@@ -820,14 +827,18 @@ table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
 }
 .page-header.navbar .page-logo {
 	height: 50px;
+    text-align: center;
 }
 .page-header.navbar .page-logo .logo-default {
-    margin: 5px 0 0;
+    margin: 5px 0 0 35px;
 }
 .page-header.navbar .menu-toggler.sidebar-toggler {
     float: right;
-    margin: 15px 13px 0;
-    margin-right: 23px;
+    margin: 17px 13px 0;
+    margin-right: 0px;
+}
+.page-sidebar-closed.page-sidebar-closed-hide-logo .page-header.navbar .menu-toggler.sidebar-toggler {
+    margin-right: 21px;
 }
 .page-header.navbar .page-top,
 .page-header.navbar {
@@ -1912,12 +1923,18 @@ legend {
 .tour-backdrop {
     opacity: 0.3;
 }
+.popover {
+    width: 276px;
+}
 .popover[class*="tour-"] {
     z-index: 9999;
 }
 .popover-content {
     background-color: #4276A4;
     color: #fff;
+}
+.popover-navigation .btn-group .btn {
+    font-size: 12px;
 }
 .top-menu .dropdown.add-company {
     border-right: 1px solid #eef1f5;

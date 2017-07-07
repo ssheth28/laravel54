@@ -93,6 +93,7 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
                     Route::get('/company_members','CompaniesController@viewMembers')->name('company.members');
                     Route::get('edit_company_profile','CompaniesController@editCompanyProfile')->name('company.edit.profile');
                     Route::post('edit_company_profile','CompaniesController@updateCompanyProfile')->name('company.update.profile');
+                    Route::get('/change-password', 'CompaniesController@changePassword')->name('company.change.password');
 
                     // department section routes
                     Route::resource('departments', 'DepartmentController');

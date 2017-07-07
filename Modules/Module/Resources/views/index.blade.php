@@ -14,9 +14,8 @@
                     </div>
                 </div>
                 <div class="portlet-body flip-scroll" style="display: none">
-                    <div class="" id="frmSearchData">
+                    <div id="frmSearchData">
                         <div class="row">
-
                             <div class="col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <div class="input-group">
@@ -46,7 +45,6 @@
                                     <button type="button" class="btn red custom-filter-cancel" @click="clearForm('frmSearchData')">Clear</button>
                                 </div>
                             </div>  
-
                         </div>
                     </div>
                 </div>
@@ -131,7 +129,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="modal fade in module-detail-show" id="view_module_details" role="dialog" style="display: none; padding-left: 17px;">

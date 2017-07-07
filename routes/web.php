@@ -71,33 +71,50 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
                     Route::post('/getUserData', 'UsersController@getUserData');
                     Route::post('/validateEmail', 'UsersController@validateEmail');
                     Route::post('/validateUsername', 'UsersController@validateUsername');
-                    // Route::get('/profile', 'UsersController@profile')->name('users.profile');
                     Route::post('/saveGeneralInfo', 'UsersController@saveGeneralInfo')->name('users.save.general.info');
                     Route::post('/checkPassword', 'UsersController@checkPassword')->name('users.check.password');
                     Route::post('/changePassword', 'UsersController@changePassword')->name('users.change.password');
-                    // Route::post('/updateAvatar', 'UsersController@updateAvatar')->name('users.update.avatar');
+                    Route::post('/inviteTeamMate', 'UsersController@inviteTeamMate')->name('users.invite.teammate');                
+                    Route::post('/checkCompanyUser', 'UsersController@checkCompanyUser');
+                    Route::get('/resendInvitation/{id}', 'UsersController@resendInvitation');            
 
                     // user profile routes
                     Route::get('user_profile','UsersController@userProfile')->name('user.profile');
                     Route::get('edit_user_profile','UsersController@editUserProfile')->name('user.edit.profile');
                     Route::get('change_password', 'UsersController@viewChangePaswordPage')->name('user.password');
                     Route::post('/update_user_profile','UsersController@updateUserProfile')->name('user.update.profile');
-                    
 
-                    Route::post('/checkCompanyUser', 'UsersController@checkCompanyUser');
-                    Route::get('/resendInvitation/{id}', 'UsersController@resendInvitation');
-
+                    // group section routes
                     Route::resource('groups', 'GroupController');
                     Route::post('/getGroupData', 'GroupController@getGroupData');
-
-                    Route::post('/inviteTeamMate', 'UsersController@inviteTeamMate')->name('users.invite.teammate');
-
+                
                     // company profile routes
                     Route::get('company_profile','CompaniesController@companyProfile')->name('company.profile');
                     Route::get('/company_members','CompaniesController@viewMembers')->name('company.members');
                     Route::get('edit_company_profile','CompaniesController@editCompanyProfile')->name('company.edit.profile');
                     Route::post('edit_company_profile','CompaniesController@updateCompanyProfile')->name('company.update.profile');
 
+                    // department section routes
+                    Route::resource('departments', 'DepartmentController');
+                    Route::post('/getDepartmentData', 'DepartmentController@getDepartmentData');
+
+                    //project technologies section routes
+                    Route::resource('technologies', 'TechnologiesController');
+                    Route::post('/getTechnologyData', 'TechnologiesController@getTechnologyData');
+
+                    // project section routes
+                    Route::resource('projects', 'ProjectController');
+
+                    // Clients section
+                    Route::resource('clients', 'ClientsController');
+                    Route::post('/getClientData', 'ClientsController@getClientData');
+
+                    //Assets Section
+                    Route::resource('assets', 'AssetsController');
+                    Route::post('/getAssetData', 'AssetsController@getAssetData');
+
+                    // Recruitments
+                    Route::resource('recruitments', 'RecruitmentsController');
                 });
             });
         }

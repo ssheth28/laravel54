@@ -33,7 +33,8 @@
                                     <label class="label">Roles </label>
                                 </div>
                                 <div class="input-group">
-                                    <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>         {!! Form::select('roles[]', $roles, $companyWiseRoles, array('class' =>'select2-allow-clear select2-hide-search-box form-control')) !!}
+                                    <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>         
+                                    {!! Form::select('roles[]', $roles, $companyWiseRoles, array('class' =>'select2-allow-clear select2-hide-search-box form-control')) !!}
                                 </div> 
                             </div>                  
                         </div>
@@ -45,7 +46,7 @@
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
-                                    {!! Form::text('department', $user->person->department,['class' => 'form-control', 'readonly' => Auth::user()->id != $user->id ? 'readonly' : null]) !!}
+                                    {!! Form::select('department', $departments, $companyUser->settings['department'], array('class' =>'form-control select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select Department --')) !!}
                                 </div> 
                             </div>                  
                         </div>

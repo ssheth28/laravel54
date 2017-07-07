@@ -60,6 +60,18 @@ class AssetsController extends Controller
         }
         $asset->orderBy($sortby, $sorttype);
 
+        if(isset($request['desk_name']) && trim($request['desk_name']) != '')
+            $asset->where('assets.desk_name', 'like', "%" . $request['desk_name'] . "%");
+
+        if(isset($request['ip_address']) && trim($request['ip_address']) != '')
+            $asset->where('assets.ip_address', 'like', "%" . $request['ip_address'] . "%");
+
+        if(isset($request['manufacture_name']) && trim($request['manufacture_name']) != '')
+            $asset->where('assets.manufacture_name', 'like', "%" . $request['manufacture_name'] . "%");
+
+        if(isset($request['asset_price']) && trim($request['asset_price']) != '')
+            $asset->where('assets.asset_price', 'like', "%" . $request['asset_price'] . "%");
+
         $assetsList = [];
 
         if(!array_key_exists('pagination', $request)) {

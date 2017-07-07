@@ -70,5 +70,20 @@ return [
         'Cash' => 'Cash',
         'Cheque' => 'Cheque',
         'Online' => 'Online'
+    ],
+    'project_priorities' => [
+        'High' => 'High',
+        'Medium' => 'Medium',
+        'Low' => 'Low'
+    ],
+    'project_status' => [
+        'New' => 'New',
+        'In progress' => 'In progress',
+        'Completed' => 'Completed',
+        'On Hold' => 'On Hold'
+    ],
+    'project_types' => [
+        'HTML' => 'HTML',
+        'Development' => 'Development'
     ]
 ];

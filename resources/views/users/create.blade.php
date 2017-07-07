@@ -84,7 +84,7 @@
                                                     <div class="col-lg-3 col-md-3">
                                                         <div class="input-group">
                                                             <span class="input-group-addon no-bg"><i class="fa fa-envelope blue-color"></i></span>
-                                                            {!! Form::text('department', app('request')->get('department'), ['class' => 'form-control', 'placeholder' => 'Department', 'id' => 'department']) !!}
+                                                            {!! Form::select('department', $departments,null, array('class' =>'form-control select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select Department --')) !!}
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 col-lg-3">

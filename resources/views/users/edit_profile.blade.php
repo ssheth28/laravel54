@@ -63,7 +63,7 @@
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <span class="input-group-addon no-bg"><i class="fa fa-sort-numeric-asc blue-color"></i></span>
-                                                        {!! Form::text('department',$companyUser->settings['department'], ['class' => 'form-control', 'id' => 'general_first_name', 'placeholder' => 'Department']) !!}
+                                                        {!! Form::select('department', $departments, $companyUser->settings['department'], array('class' =>'form-control select2-allow-clear select2-hide-search-box')) !!}
                                                     </div>
                                                 </div>
                                             </div>

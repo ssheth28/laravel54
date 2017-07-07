@@ -244,8 +244,4 @@ class WidgetController extends Controller
 
         return redirect()->route('widgets.index', ['domain' => app('request')->route()->parameter('company')]);
     }
-
-    public function delete($company,$id) {
-        echo '123';exit;
-    }
 }

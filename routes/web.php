@@ -104,6 +104,7 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
 
                     // project section routes
                     Route::resource('projects', 'ProjectController');
+                    Route::post('/getProjectData', 'ProjectController@getProjectData');
 
                     // Clients section
                     Route::resource('clients', 'ClientsController');

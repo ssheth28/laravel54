@@ -95,7 +95,7 @@
                                 <a href="#">view all</a>
                             </li>
                             <li>
-                                <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 250px;"><ul class="dropdown-menu-list scroller" style="height: 250px; overflow: hidden; width: auto;" data-handle-color="#637283" data-initialized="1">
+                                <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
                                     <li>
                                         <a href="javascript:;">
                                             <span class="time">just now</span>
@@ -177,7 +177,7 @@
                                                 </span> Storage server failed. </span>
                                         </a>
                                     </li>
-                                </ul><div class="slimScrollBar" style="background: rgb(99, 114, 131); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+                                </ul>
                             </li>
                         </ul>
                     </li>
@@ -195,7 +195,7 @@
                                 <a href="app_inbox.html">view all</a>
                             </li>
                             <li>
-                                <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 275px;"><ul class="dropdown-menu-list scroller" style="height: 275px; overflow: hidden; width: auto;" data-handle-color="#637283" data-initialized="1">
+                                <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
                                     <li>
                                         <a href="#">
                                             <span class="photo">
@@ -251,7 +251,7 @@
                                             <span class="message"> Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh auctor nibh... </span>
                                         </a>
                                     </li>
-                                </ul><div class="slimScrollBar" style="background: rgb(99, 114, 131); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+                                </ul>
                             </li>
                         </ul>
                     </li>
@@ -269,7 +269,7 @@
                                 <a href="app_todo.html">view all</a>
                             </li>
                             <li>
-                                <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 275px;"><ul class="dropdown-menu-list scroller" style="height: 275px; overflow: hidden; width: auto;" data-handle-color="#637283" data-initialized="1">
+                                <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
                                     <li>
                                         <a href="javascript:;">
                                             <span class="task">
@@ -361,7 +361,7 @@
                                             </span>
                                         </a>
                                     </li>
-                                </ul><div class="slimScrollBar" style="background: rgb(99, 114, 131); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+                                </ul>
                             </li>
                         </ul>
                     </li>

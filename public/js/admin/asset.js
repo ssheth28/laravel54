@@ -81,6 +81,7 @@ $(document).ready(function() {
                 this.assetListData();
             },
             methods: {
+
             	 assetListData: function(page, sortby, sorttype, searchdata) {
                     if(typeof(sortby) == "undefined"){
                         sortby = this.sortby;
@@ -104,11 +105,11 @@ $(document).ready(function() {
                         ajaxCall("getAssetData?page="+page, data, 'POST', 'json', assetDataSuccess);
                     }
                 },
-                 searchUserData: function() {
-                    var desk_name = $("#asset_desk_name").val();
-                    var ip_address = $("#asset_ip_address").val();
-                    var manufacture_name = $("#asset_manufacture_name").val();
-                    var asset_price = $("#asset_asset_price").val();
+                 searchAssetData: function() {
+                    var desk_name = $("#desk_name").val();
+                    var ip_address = $("#ip_address").val();
+                    var manufacture_name = $("#manufacture_name").val();
+                    var asset_price = $("#asset_price").val();
                     var searchdata = "&desk_name="+ desk_name + "&ip_address=" + ip_address + "&manufacture_name=" + manufacture_name + "&asset_price=" + asset_price;
                     if($('#asset_pagination').data("twbs-pagination")){
                         $('#asset_pagination').twbsPagination('destroy');
@@ -149,7 +150,6 @@ function assetDataSuccess(assetData, status, xhr){
     setTimeout(function(){
         if(assetData['data'].length>0 && Cookies.get('pagination_length') > 0) {
             
-
             vueAsset.$set('currPage', assetData.current_page);
             current_page = assetData.current_page;
 

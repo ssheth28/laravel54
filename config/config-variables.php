@@ -19,15 +19,15 @@ return [
     'is_publicly_visible' => [
         '1' => 'Yes',
         '0' => 'No',
-     ],
-     'select_status' => [
+    ],
+    'select_status' => [
         '1' => 'Yes',
         '0' => 'No',
-     ],
-     'is_shown_on_menu' => [
+    ],
+    'is_shown_on_menu' => [
         '1' => 'Yes',
         '0' => 'No',
-     ],
+    ],
     'widget_widths' => [
         '20%'  => '20%',
         '25%'  => '25%',
@@ -85,5 +85,22 @@ return [
     'project_types' => [
         'HTML' => 'HTML',
         'Development' => 'Development'
+    ],
+    'positions' => [
+        'Wordpress' => 'Wordpress',
+        'Angular JS' => 'Angular JS',
+        'Laravel' => 'Laravel',
+        'Magento' => 'Magento'
+    ],
+    'assigned_to' => [
+        'Vishal Rajpurohit' => 'Vishal Rajpurohit',
+        'Manish Yadav' => 'Manish Yadav',
+        'Mansi bhatt' => 'Mansi bhatt'
+    ],
+    'last_status' => [
+        'Round-1' => 'Round-1',
+        'Round-2' => 'Round-2',
+        'Round-3' => 'Round-3',
+        'Round-4' => 'Round-4'
     ]
 ];

@@ -26,13 +26,13 @@
                 </form>
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
-            <li class="nav-item start active ms-hover">
+            {{-- <li class="nav-item start active ms-hover">
                 <a href="/home.php" class="nav-link nav-toggle">
                     <i class="fa fa-dashboard"></i>
                     <span class="title">Home</span>
                     <span class="selected"></span>
                 </a>
-            </li>
+            </li> --}}
             @if (count($menu_items) > 0)                
                 @foreach ($menu_items as $menu_item)
                     <li class="nav-item start">

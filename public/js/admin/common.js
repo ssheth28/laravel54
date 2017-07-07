@@ -130,13 +130,7 @@ $(document).ready(function() {
         showClose: true,
         ignoreReadonly: true
     });
-
-    /*$('.js-form-datepicker').datepicker({
-        format: 'dd-mm-yyyy',
-        autoclose: true,
-        ignoreReadonly: true
-    });*/
-
+    
     $('.js-form-datepicker-decade').datetimepicker({
         format: 'DD-MM-YYYY',
         showClose: true,

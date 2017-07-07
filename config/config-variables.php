@@ -70,5 +70,22 @@ return [
         'Cash' => 'Cash',
         'Cheque' => 'Cheque',
         'Online' => 'Online'
+    ],
+    'positions' => [
+        'Wordpress' => 'Wordpress',
+        'Angular JS' => 'Angular JS',
+        'Laravel' => 'Laravel',
+        'Magento' => 'Magento'
+    ],
+    'assigned_to' => [
+        'Vishal Rajpurohit' => 'Vishal Rajpurohit',
+        'Manish Yadav' => 'Manish Yadav',
+        'Mansi bhatt' => 'Mansi bhatt'
+    ],
+    'last_status' => [
+        'Round-1' => 'Round-1',
+        'Round-2' => 'Round-2',
+        'Round-3' => 'Round-3',
+        'Round-4' => 'Round-4'
     ]
 ];

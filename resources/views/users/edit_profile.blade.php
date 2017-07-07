@@ -84,10 +84,12 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-lg-4">
-				                                <div class="input-group select2-bootstrap-prepend">
-				                                    <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
-				                                    {!! Form::select('job_type', config('config-variables.user_job_types'), array('class' =>'select2-allow-clear select2-hide-search-box form-control', 'placeholder' => 'Select job type')) !!}
-				                                </div>
+                                                <div class="form-group">
+    				                                <div class="input-group select2-bootstrap-prepend">
+    				                                    <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
+    				                                    {!! Form::select('job_type', config('config-variables.user_job_types'), array('class' =>'select2-allow-clear select2-hide-search-box form-control', 'placeholder' => 'Select job type')) !!}
+    				                                </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </fieldset>
@@ -145,16 +147,20 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-lg-4">
-				                                <div class="input-group select2-bootstrap-prepend">
-				                                    <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
-				                                    {!! Form::select('incremental_duration', config('config-variables.incremental_durations'), array('class' =>'select2-allow-clear select2-hide-search-box form-control', 'placeholder' => 'Select incremental duration')) !!}
-				                                </div>
+                                                <div class="form-group">
+    				                                <div class="input-group select2-bootstrap-prepend">
+    				                                    <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
+    				                                    {!! Form::select('incremental_duration', config('config-variables.incremental_durations'), array('class' =>'select2-allow-clear select2-hide-search-box form-control', 'placeholder' => 'Select incremental duration')) !!}
+    				                                </div>
+                                                </div>
                                             </div>
                                             <div class="col-md-6 col-lg-4">
-				                                <div class="input-group select2-bootstrap-prepend">
-				                                    <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
-				                                    {!! Form::select('salary_mode', config('config-variables.salary_modes'), array('class' =>'select2-allow-clear select2-hide-search-box form-control', 'placeholder' => 'Select salary mode')) !!}
-				                                </div>
+                                                <div class="form-group">
+    				                                <div class="input-group select2-bootstrap-prepend">
+    				                                    <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
+    				                                    {!! Form::select('salary_mode', config('config-variables.salary_modes'), array('class' =>'select2-allow-clear select2-hide-search-box form-control', 'placeholder' => 'Select salary mode')) !!}
+    				                                </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </fieldset>

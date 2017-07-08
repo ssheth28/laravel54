@@ -111,7 +111,6 @@ class ClientsController extends Controller
 
     public function store(Request $request) 
     {
-    	$this->init();
     	$companyId = Landlord::getTenants()['company']->id;
     	$client = new Client();
     	$client->name = $request->client_name;
@@ -146,7 +145,6 @@ class ClientsController extends Controller
      */
     public function show($company, $clientId)
     {
-        $this->init();
         $client = Client::with('country')->find($clientId);
         $clientDetailHtml = view('clients.client_detail_show', ['client' => $client])->render();
 
@@ -171,7 +169,6 @@ class ClientsController extends Controller
 
     public function update(Request $request, $company, $clientId) 
     {
-    	$this->init();
     	$companyId = Landlord::getTenants()['company']->id;
     	$client = Client::findOrFail($clientId);
     	$client->name = $request->client_name;

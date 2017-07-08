@@ -133,4 +133,5 @@ class User extends Authenticatable implements HasBansContract, HasMedia
     {
         return $this->belongsTo('App\Models\Person', 'person_id');
     }
+
 }

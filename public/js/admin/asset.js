@@ -1,13 +1,6 @@
 var Asset =  function(){
    var handleValidationAddPage = function() {
     $('.js-frm-create-asset, .js-frm-edit-asset').validate({
-        doNotHideMessage: true, //this option enables to show the error/success messages on tab switch.
-        errorElement: 'span', //default input error message container
-        errorClass: 'help-block help-block-error', // default input error message class
-        focusInvalid: false, // do not focus the last invalid input
-        messages: {
-            
-        },
         rules: {
             desk_name: {
                 required: true
@@ -59,7 +52,7 @@ var Asset =  function(){
 $(document).ready(function() {
     Asset.init();
 
-        $(document).on('click', '.js-asset-detail', function(){
+    $(document).on('click', '.js-asset-detail', function(){
         var data={};
         ajaxCall($(this).data("url"), data, 'GET', 'json', assetDetailSuccess);
     });

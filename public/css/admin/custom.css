@@ -1953,3 +1953,9 @@ legend {
     border-right: 1px solid #eef1f5;
 }
 /*tour section end*/
+
+#view_project_details .modal-dialog {
+    max-width: 96%;
+    /* width: 950px; */
+    width: 800px;
+}

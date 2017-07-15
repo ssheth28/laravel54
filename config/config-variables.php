@@ -19,15 +19,15 @@ return [
     'is_publicly_visible' => [
         '1' => 'Yes',
         '0' => 'No',
-     ],
-     'select_status' => [
+    ],
+    'select_status' => [
         '1' => 'Yes',
         '0' => 'No',
-     ],
-     'is_shown_on_menu' => [
+    ],
+    'is_shown_on_menu' => [
         '1' => 'Yes',
         '0' => 'No',
-     ],
+    ],
     'widget_widths' => [
         '20%'  => '20%',
         '25%'  => '25%',
@@ -70,6 +70,21 @@ return [
         'Cash' => 'Cash',
         'Cheque' => 'Cheque',
         'Online' => 'Online'
+    ],
+    'project_priorities' => [
+        'High' => 'High',
+        'Medium' => 'Medium',
+        'Low' => 'Low'
+    ],
+    'project_status' => [
+        'New' => 'New',
+        'In progress' => 'In progress',
+        'Completed' => 'Completed',
+        'On Hold' => 'On Hold'
+    ],
+    'project_types' => [
+        'HTML' => 'HTML',
+        'Development' => 'Development'
     ],
     'positions' => [
         'Wordpress' => 'Wordpress',

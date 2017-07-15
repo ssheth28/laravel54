@@ -53,7 +53,7 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon no-bg"><i class="fa fa-external-link blue-color"></i></span>
-                                    {!! Form::text('url', $from=="edit" ? $module->url : null,['class' => 'form-control', 'id' => 'module_url', 'readonly' => 'readonly', 'placeholder' => 'Module URL']) !!}
+                                    {!! Form::text('url', $from=="edit" ? $module->url : null,['class' => 'form-control', 'id' => 'module_url', 'placeholder' => 'Module URL']) !!}
                                 </div>
                             </div>
                         </div>

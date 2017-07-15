@@ -91,9 +91,16 @@
             <div class="col-md-12 col-md-12 col-sm-12">
             	<div class="portlet light">
             		<div class="portlet-title">
-            			<div class="caption">
+            			<div class="caption col-md-8">                            
                             <span class="caption-subject bold uppercase font-dark"><i class="fa fa-user" aria-hidden="true"></i> Manage Assets</span>
                         </div>
+                        <div class="col-md-4">
+                            <div class="btn-group pull-right">
+                                <a class="btn sbold border-btn" href="{{ route('assets.create', ['domain' => app('request')->route()->parameter('company')]) }}"> Add New
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                            </div>
+                        </div>                        
             		</div>
             		<div class="portlet-body">
                         <div>

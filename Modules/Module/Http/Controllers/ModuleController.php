@@ -240,8 +240,11 @@ class ModuleController extends Controller
         if ($parent) {
             $moduleUrl = $parent->url.'/'.$moduleUrl;
         }
-        if ($parent->is_publicly_visible == 1 && $request->is_publicly_visible == 0) {
-            $moduleUrl = '/admin'.$moduleUrl;
+        // if (($parent && $parent->is_publicly_visible == 1) && $request->is_publicly_visible == 0) {
+        //     $moduleUrl = '/admin/'.$moduleUrl;
+        // }
+        if (!$parent) {
+            $moduleUrl = '/admin/'.$moduleUrl;
         }
         $moduleUrl = $this->generateUniqueUrl($moduleUrl, '');
 

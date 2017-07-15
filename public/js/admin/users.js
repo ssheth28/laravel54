@@ -1,7 +1,6 @@
 var vueUser;
 var User = function() {
     var form = $('#submit_user_form');
-    // var editForm = $('#submit_edit_user_form');
     var error = $('.alert-danger', form);
     var success = $('.alert-success', form);
 

@@ -13,6 +13,7 @@
                 <li><a href="{{ route('company.edit.profile', ['domain' => app('request')->route()->parameter('company')]) }}">Edit Company Profile </a></li>
                 <li><a href="{{ route('company.members', ['domain' => app('request')->route()->parameter('company')]) }}">View Members </a></li>
                 @endif
+                <li><a href="{{ route('company.change.password', ['domain' => app('request')->route()->parameter('company')]) }}">Change Password </a></li>
             </ul>
         </div>
     </div>        

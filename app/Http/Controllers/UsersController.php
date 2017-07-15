@@ -9,6 +9,7 @@ use App\Jobs\SendVerificationEmail;
 use App\Models\CompanyUser;
 use App\Models\Person;
 use App\Models\User;
+use App\Models\Department;
 use App\Models\UserInvite;
 use Auth;
 use Carbon\Carbon as Carbon;
@@ -123,7 +124,6 @@ class UsersController extends Controller
                     ->join('people', 'users.person_id', 'people.id')
                     ->where('company_user.company_id', $companyId)
                     ->select('*', DB::raw('DATE_FORMAT(users.created_at, "%d-%m-%Y %H:%i:%s") as "created_datetime"'),
-                                  // DB::raw('DATE_FORMAT(people.date_of_joining, "%d-%m-%Y") as "joined_date"'),
                                   DB::raw('users.id as user_id'),
                                   DB::raw('company_user.settings as settings'));
 
@@ -179,8 +179,9 @@ class UsersController extends Controller
     {
         $companyId = Landlord::getTenants()['company']->id;
         $roles = Role::where('name', 'LIKE', $companyId.'%')->pluck('display_name', 'name');
+        $departments = Department::all()->pluck('name', 'id');
 
-        return view('users.create', compact('roles'));
+        return view('users.create', compact('roles', 'departments'));
     }
 
     /**
@@ -292,6 +293,8 @@ class UsersController extends Controller
         $user = User::find($userId);
         $companyId = Landlord::getTenants()['company']->id;
         $roles = Role::where('name', 'LIKE', $companyId.'%')->pluck('display_name', 'name');
+        $companyUser = CompanyUser::where('user_id', $user->id)->where('company_id', $companyId)->first();
+        $departments = Department::all()->pluck('name', 'id');
 
         $userRoles = $user->roles;
 
@@ -302,7 +305,7 @@ class UsersController extends Controller
             }
         })->values()->pluck('name')->toArray();
 
-        return view('users.edit', compact('user', 'roles', 'companyWiseRoles'));
+        return view('users.edit', compact('user', 'roles', 'companyWiseRoles', 'companyUser', 'departments'));
     }
 
     /**
@@ -318,7 +321,8 @@ class UsersController extends Controller
         $this->init();        
         $user = User::findOrFail($userId);
         $userRoles = $user->roles;
-
+        $companyId = Landlord::getTenants()['company']->id;
+        
         $companyWiseRoles = $userRoles->filter(function ($value, $key) {
             $companyId = Landlord::getTenants()['company']->id;
             if (explode('.', $value->name)[0] == $companyId) {
@@ -556,7 +560,8 @@ class UsersController extends Controller
         $user = User::with('person')->where('id', Auth::user()->id)->first();
         $companyId = Landlord::getTenants()['company']->id;
         $companyUser = CompanyUser::where('user_id', $user->id)->where('company_id', $companyId)->first();
-        return view('users.edit_profile', compact('user', 'companyUser'));
+        $departments = Department::all()->pluck('name', 'id');
+        return view('users.edit_profile', compact('user', 'companyUser', 'departments'));
     }
 
     public function viewChangePaswordPage()

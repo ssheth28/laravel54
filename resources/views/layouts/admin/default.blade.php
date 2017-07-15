@@ -99,7 +99,7 @@
         <!-- BEGIN CORE PLUGINS -->
         <script src="{{ asset('plugins/jquery.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
-        <script src="http://htmlwazir.peppyemails.com/js/bootstrap-fileinput.js" type="text/javascript"></script>
+        <script src="{{ asset('js/admin/bootstrap-fileinput.js') }}" type="text/javascript"></script>
         <script src="{{ asset('plugins/js.cookie.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('plugins/jquery.blockui.min.js') }}" type="text/javascript"></script>
@@ -131,9 +131,6 @@
         <script src="{{ asset('js/admin/owl.carousel.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/admin/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/admin/bootstrap-tour.min.js') }}" type="text/javascript"></script>
-
-        <!-- <script src="http://htmlwazir.peppyemails.com/js/function.js" type="text/javascript"></script>
-        <script src="http://htmlwazir.peppyemails.com/js/init.js" type="text/javascript"></script> -->
         @yield("page-script")
     </body>
 </html>

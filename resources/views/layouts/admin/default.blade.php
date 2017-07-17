@@ -24,6 +24,7 @@
         <link href="{{ asset('plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="{{ asset('plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css') }}">
+        <link href="{{ asset('css/admin/bootstrap-timepicker.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('plugins/fontawesome-iconpicker/fontawesome-iconpicker.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css" />
         @yield('page-core-style')
@@ -111,6 +112,7 @@
         <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('plugins/bootstrap-datetimepicker/js/moment-with-locales.js') }}"></script>
         <script src="{{ asset('plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js') }}"></script>
+        <script src="{{ asset('js/admin/bootstrap-timepicker.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 

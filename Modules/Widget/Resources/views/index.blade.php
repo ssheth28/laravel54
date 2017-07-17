@@ -132,7 +132,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade in widget-detail-show" id="view_widget_details" role="dialog" style="display: none; padding-left: 17px;">
+        <div class="modal fade in widget-detail-show show-modal" id="view_widget_details" role="dialog" style="display: none; padding-left: 17px;">
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">

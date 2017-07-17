@@ -1,5 +1,4 @@
 <?php
-
 Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], function () {
     Route::group(
         [
@@ -117,6 +116,11 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
 
                     // Recruitments
                     Route::resource('recruitments', 'RecruitmentsController');
+                    Route::post('/getRecruitmentData', 'RecruitmentsController@getRecruitmentData');
+
+                    // Vacancy manager routes
+                    Route::resource('vacancies', 'VacanciesController');
+                    Route::post('/getVacanciesData', 'VacanciesController@getVacanciesData');
                 });
             });
         }

@@ -111,7 +111,6 @@ $(document).ready(function() {
                     }
                 },
                 searchProjectData: function() {
-                    console.log('here');
                     var name= $("#name").val();
                     var searchdata = "&name="+ name;
                     if($('#project_pagination').data("twbs-pagination")){

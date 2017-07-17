@@ -21,14 +21,14 @@ class CreateRecruitmentDetailsTable extends Migration
             $table->string('assign_to');
             $table->string('last_status');
             $table->string('area_of_interest');
-            $table->string('how_did_you');
+            $table->string('source_of_info_about_company');
             $table->string('remarks');
             $table->string('contact_no');
             $table->string('current_salary');
             $table->string('expected_salary');
             $table->string('notice_period');
             $table->timestamp('date_of_joining')->nullable();
-            $table->string('preferred_location');
+            $table->string('preferred_location');            
         });
     }
 

@@ -123,7 +123,7 @@
     </div>
 
 
-    <div class="modal fade in project-detail-show" id="view_project_details" role="dialog" style="display: none; padding-left: 17px;">
+    <div class="modal fade in project-detail-show show-modal" id="view_project_details" role="dialog" style="display: none; padding-left: 17px;">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">

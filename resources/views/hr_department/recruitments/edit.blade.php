@@ -9,7 +9,7 @@
     <div class="portlet-title min-height">  
         <div class="caption">
             <i class="fa fa-newspaper-o"></i>
-            <span class="caption-subject bold uppercase font-dark">Edit Projects
+            <span class="caption-subject bold uppercase font-dark">EDIT RECRUITMENT
                 <span class="step-title"></span>
             </span>                
         </div>
@@ -18,9 +18,9 @@
         </div>
     </div>
     <div class="portlet-body form">
-		{!! Form::open(['route' => ['projects.update', 'domain' => app('request')->route()->parameter('company'), 'id' => $project->id], 'class' => 'js-frm-edit-project','method' => 'PUT', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
+		{!! Form::open(['route' => ['recruitments.update', 'domain' => app('request')->route()->parameter('company'), 'id' => $recruitment->id], 'class' => 'js-frm-edit-recruitment','method' => 'PUT', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
 
-    		@include('partials.admin.project.form',['from'=>'edit'])
+    		@include('partials.admin.hr_department.recruit_manager_form',['from'=>'edit'])
     
 		{{ Form::close() }}
     </div>
@@ -28,5 +28,5 @@
 @endsection
 
 @section('page-script')
-	<script type="text/javascript" src="{{ asset('js/admin/project.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/admin/recruitments.js') }}"></script>
 @endsection

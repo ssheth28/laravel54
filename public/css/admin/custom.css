@@ -1918,7 +1918,7 @@ legend {
 .popover[class*="tour-"] {
     z-index: 9999;
 }
-.popover-content {
+.tour-tour .popover-content {
     background-color: #4276A4;
     color: #fff;
 }

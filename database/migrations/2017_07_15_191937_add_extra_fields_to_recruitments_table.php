@@ -14,7 +14,7 @@ class AddExtraFieldsToRecruitmentsTable extends Migration
     public function up()
     {
         Schema::table('recruitment_details', function (Blueprint $table) {
-            $table->timestamp('time_of_interview')->after('date_of_interview');
+            $table->timestamp('time_of_interview')->after('date_of_interview')->nullable();
             $table->timestamps();
         });
     }

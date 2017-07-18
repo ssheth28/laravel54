@@ -105,7 +105,7 @@ $(document).ready(function() {
     });
 
     // Clear session data
-    localStorage.clear();
+    // localStorage.clear();
 
     tour.init();
     tour.start();

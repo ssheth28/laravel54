@@ -1,9 +1,64 @@
 var isSlugNameChanged = false;
+
+var Registration = function() {
+    var handleValidationRegistrationPage = function() {
+        $('.js-register-frm').validate({
+			messages: {
+				password_confirmation: {
+					equalTo: 'Password does not match.'
+				}
+			},
+            rules: {
+            	company_name: {
+            		required: true,
+            	},
+            	company_slug: {
+            		required: true
+            	},
+            	first_name: {
+            		required: true
+            	},
+            	last_name: {
+            		required: true
+            	},
+            	username: {
+            		required: true
+            	},
+            	email: {
+            		required: true,
+            		email: true
+            	},
+				password : {
+					required: true,
+				},
+				password_confirmation: {
+					required: true,
+					equalTo : "#password"
+				},
+            },
+            errorPlacement: function (error, element) { // render error placement for each input type
+                element.parent().append(error);
+            },
+            submitHandler: function (form) {
+            	if (grecaptcha.getResponse()) {
+            		form.submit();
+            	} else {
+            		$('#recaptcha-error').show();
+            	}
+            }
+        });
+    };
+
+    return {
+        init: function() {
+            handleValidationRegistrationPage();
+        }
+    }
+}();
+
 var Login = function() {
 	var handleValidationLoginPage = function() {
 		$('.js-login-frm').validate({
-			messages: {
-			},
 			rules :{
 				login: {
 					required: true,
@@ -11,12 +66,12 @@ var Login = function() {
 				},
 				password : {
 					required: true,
-				}
+				},
 			},
 			errorPlacement: function (error, element) { // render error placement for each input type
                 element.parent().append(error);
             },
-            submitHandler: function (form) {                
+            submitHandler: function (form) {
                 $.ajax({
 			        url: "/en/login",
 			        data: { 'login' : $("#email_address").val(), 'password' : $("#password").val()  },
@@ -40,6 +95,7 @@ var Login = function() {
 $(document).ready(function() {
 	
 	Login.init();
+	Registration.init();
 	
 	$(".forget-form").hide();
 

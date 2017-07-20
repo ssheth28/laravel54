@@ -3,7 +3,7 @@
 @section('auth-content')
     <div class="login-content text-center">
         <h3 class="text-white">Registration</h3>
-        <form class="login-form" role="form" method="POST" action="{{ route('register', ['domain' => app('request')->route()->parameter('company')]) }}">
+        <form class="login-form js-register-frm" role="form" method="POST" action="{{ route('register', ['domain' => app('request')->route()->parameter('company')]) }}">
             {{ csrf_field() }}
 
             <div class="alert alert-danger display-hide">
@@ -64,12 +64,15 @@
                     @endif
                 </div>
             </div>
+            <div class="g-recaptcha" data-sitekey="6Lf13CkUAAAAAB_RAC38RqKQXtFt8eL_vePtHvW3"></div>
+            <p id="recaptcha-error" style="display: none; color: red">Please ensure that you are a human!</p>
+            <br>
             <div class="row">
                 <div class="col-xs-12">
                     <button class="btn login-btn" type="submit">{{ __("Register") }}</button>
                 </div>
             </div>
-        </form>
+        </form>        
     </div>
 @endsection
 

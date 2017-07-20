@@ -37,12 +37,9 @@ var Module = function() {
     };
     var formEvents = function() {
         if($('.js-frm-create-module').length) {
-            $(document).on('change', '#parent_id, #module_name, #module_type', function(event) {
-                generateModuleUrl();
-            });
-            $(document).on('change', '#is_publicly_visible, #module_type', function(event){
-                generateModuleUrl();
-            });
+            // $(document).on('change', '#parent_id, #module_name, #module_type', '#is_publicly_visible', function(event) {
+            //     generateModuleUrl();
+            // });
         }
     };
     return {

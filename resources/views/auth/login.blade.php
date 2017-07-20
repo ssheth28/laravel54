@@ -46,7 +46,7 @@
                     </button>
                 </div>
             </div>
-            <!-- <div class="row">
+            {{-- <div class="row">
                 <div class="col-sm-4">
                     <div class="rem-password">
                         <label class="rememberme mt-checkbox mt-checkbox-outline">
@@ -61,10 +61,10 @@
                     </div>
                     <button class="btn green" type="submit">{{ __("Sign In") }}</button>
                 </div>
-            </div> -->
+            </div> --}}
         </form>
         <!-- BEGIN FORGOT PASSWORD FORM -->
-        <form class="forget-form login-form" role="form" method="POST" action="{{ route('password.email', ['domain' => app('request')->route()->parameter('company')]) }}">
+        <form class="forget-form" role="form" method="POST" action="{{ route('password.email', ['domain' => app('request')->route()->parameter('company')]) }}">
             {{ csrf_field() }}
             <h3 class="text-white">{{ __("Forgot Password?") }}</h3>
             <p class="text-white"> {{ __("Enter your e-mail address below to reset your password.") }} </p>

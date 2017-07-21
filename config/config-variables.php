@@ -87,15 +87,9 @@ return [
         'Development' => 'Development'
     ],
     'positions' => [
-        'Wordpress' => 'Wordpress',
-        'Angular JS' => 'Angular JS',
-        'Laravel' => 'Laravel',
-        'Magento' => 'Magento'
-    ],
-    'assigned_to' => [
-        'Vishal Rajpurohit' => 'Vishal Rajpurohit',
-        'Manish Yadav' => 'Manish Yadav',
-        'Mansi bhatt' => 'Mansi bhatt'
+        'Developer' => 'Developer',
+        'Designer' => 'Designer',
+        'SEO' => 'SEO'
     ],
     'last_status' => [
         'Round-1' => 'Round-1',

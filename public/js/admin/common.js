@@ -104,6 +104,9 @@ $(document).ready(function() {
         }
     });
 
+    // Clear session data
+    // localStorage.clear();
+
     tour.init();
     tour.start();
 
@@ -138,6 +141,8 @@ $(document).ready(function() {
         viewMode: 'years',
         maxDate : 'now'
     });
+
+    $('.timepicker').timepicker();
 
     /*$('input[type="checkbox"].icheck, input[type="radio"].icheck').iCheck({
       checkboxClass: 'icheckbox_minimal-blue',

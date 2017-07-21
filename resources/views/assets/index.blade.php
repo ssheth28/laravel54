@@ -144,9 +144,9 @@
                             </table>
                         </div>
                       	 <div class="row">
-                          <!--   <div v-if="assetCount == 0" class="col-md-12">
+                            <div v-if="assetCount == 0" class="col-md-12">
                                 <h4 class="block text-center">No record found</h4>
-                            </div> -->
+                            </div>
                             <div class="col-md-5 col-sm-12 dataTables_info table-pagination-info">
                                 <pagination_component>
                                 </pagination_component>

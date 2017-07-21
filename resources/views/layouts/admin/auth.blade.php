@@ -34,7 +34,8 @@
         <!-- BEGIN THEME LAYOUT STYLES -->
         <!-- END THEME LAYOUT STYLES -->
         <link href="{{ asset('css/admin/custom.css') }}" rel="stylesheet" type="text/css" />
-        <link rel="shortcut icon" href="favicon.ico" /> 
+        <link rel="shortcut icon" href="favicon.ico" />
+        <script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
     <!-- END HEAD -->
 

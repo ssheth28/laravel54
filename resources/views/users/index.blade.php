@@ -218,7 +218,7 @@
        </div>      
     </div>
 
-    <div class="modal fade in user-detail-show" id="view_user_details" role="dialog" style="display: none; padding-left: 17px;">
+    <div class="modal fade in user-detail-show show-modal" id="view_user_details" role="dialog" style="display: none; padding-left: 17px;">
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">

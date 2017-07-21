@@ -1831,19 +1831,11 @@ table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
     margin: auto;
 }
 
-#view_module_details .modal-dialog {
-    max-width: 96%;    
-    width: 800px;
-}
 #view_module_details .modal-body {
     position: relative;
     padding: 0;
 }
 
-#view_widget_details .modal-dialog {
-    max-width: 96%;    
-    width: 800px;
-}
 #view_widget_details .modal-body {
     position: relative;
     padding: 0;
@@ -1866,10 +1858,7 @@ table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
 }
 
 /*for show user detail*/
-#view_user_details .modal-dialog {
-  max-width: 96%;
-  width: 800px;
-}
+
 #view_user_details .form-group {
   margin-bottom: 3px;
 }
@@ -1929,7 +1918,7 @@ legend {
 .popover[class*="tour-"] {
     z-index: 9999;
 }
-.popover-content {
+.tour-tour .popover-content {
     background-color: #4276A4;
     color: #fff;
 }
@@ -1949,13 +1938,9 @@ legend {
     -webkit-transform-origin: center center;
     -moz-transform-origin: center center;
 }
-.top-menu .dropdown.add-company {
-    border-right: 1px solid #eef1f5;
-}
 /*tour section end*/
 
-#view_project_details .modal-dialog {
+.show-modal .modal-dialog {
     max-width: 96%;
-    /* width: 950px; */
     width: 800px;
 }

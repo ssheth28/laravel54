@@ -39,7 +39,13 @@ class Controller extends BaseController
                     $menuItemIdArray = [];
                     $role = null;
 
-                    $role = Auth::user()->roles()->where('id', session('currentrole'))->first();
+                    if($request->session()->has('currentrole')) {
+                        $role = Auth::user()->roles()->where('id', session('currentrole'))->first();
+                    } else {
+                        $role = Auth::user()->roles()->first();
+                        $request->session()->put('currentrole', $role->id);
+                    }
+                    
 
                     if (!$role) {
                         return response()->json(['error' => 'not found'], 404);

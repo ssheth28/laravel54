@@ -5,19 +5,24 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class NewCompanyRegistered extends Mailable
+class CompanyRegistration extends Mailable
 {
     use Queueable, SerializesModels;
 
+    protected $user;
+
     protected $company;
 
-    protected $user;
+    public $subject = "Wazir - Company Registration";
 
     /**
      * Create a new message instance.
-     company     * @return void
+     *
+     *
+     * @param mixed $user
+     *
+     * @return void
      */
     public function __construct($user, $company)
     {
@@ -32,6 +37,9 @@ class NewCompanyRegistered extends Mailable
      */
     public function build()
     {
-        return $this->view('email.company_registration_email');
+        return $this->view('email.company_registration')->with([
+            'user' => $this->user,
+            'company' => $this->company,
+        ]);
     }
 }

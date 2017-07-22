@@ -12,6 +12,8 @@ class PasswordChangedNotification extends Mailable
 
     protected $user;
 
+    public $subject = "Wazir - Password Updated";
+
     /**
      * Create a new message instance.
      *

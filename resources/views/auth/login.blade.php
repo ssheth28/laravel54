@@ -48,7 +48,7 @@
             <div class="form-actions row">
                 <div class="col-xs-12">
                     <label class="rememberme mt-checkbox mt-checkbox-outline">
-                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}/> {{ __("Remember me") }}
+                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }} id="remember_me"/> {{ __("Remember me") }}
                         <span></span>
                     </label>
                     <a id="forget-password" class="forget-password" href="{{ route('password.request', ['domain' => app('request')->route()->parameter('company')]) }}">Forgot Password?</a>

@@ -150,7 +150,13 @@ class CompaniesController extends Controller
     public function redirectUserCompanyRole(Request $request)
     {
         $companySlug = $request->companyslug;
-        $roleId = $request->roleid;
+        $companyId = $request->companyid;
+        $roles = Auth::user()->roles->filter(function ($value, $key) use($companyId) {
+                if (explode('.', $value->name)[0] == $companyId) {
+                    return $value;
+                }
+            })->values();
+        $roleId = $roles->first()->id;
         $request->session()->put('currentrole', $roleId);
         return response()
             ->json(['redirecturl' => route('admin.home', ['domain' => $companySlug])]);

@@ -12,6 +12,8 @@ class EmailVerification extends Mailable
 
     protected $user;
 
+    public $subject = "Wazir - Email Verification";
+
     /**
      * Create a new message instance.
      *

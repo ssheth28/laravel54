@@ -84,14 +84,16 @@ var Login = function() {
             submitHandler: function (form) {
                 $.ajax({
 			        url: "/en/login",
-			        data: { 'login' : $("#email_address").val(), 'password' : $("#password").val()  },
+			        data: { 'login' : $("#email_address").val(), 'password' : $("#password").val(), 'remember' : $("#remember_me").val()  },
 			        type: 'POST',
 			        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
 			        success: function(response) {
+			        	$('.overlay').addClass('modal-backdrop');
 						$(".js-companies-modal-content").append(response);
 						$("#select-company-modal").show();
 			        },
 			        error: function(data) {
+			        	console.log(data);
 			        	$('.js-login-error-message').append(data.responseJSON.email);
 			        },
 			    })
@@ -194,7 +196,7 @@ $(document).ready(function() {
 	    	type: "POST",
 	    	url: "/" + window.locale + "/admin/companyselect",
 	    	headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-	    	data: {'companyslug': companySlug, 'roleid': $("#user_company_roles_" + companyId).val()},
+	    	data: {'companyslug': companySlug, 'companyid': companyId},
 	    	success: function(result){
 	    		window.location.href = result.redirecturl;
 		    }

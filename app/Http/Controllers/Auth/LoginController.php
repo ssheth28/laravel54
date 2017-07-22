@@ -36,6 +36,22 @@ class LoginController extends Controller
     protected $redirectTo = '/admin/companyselect';
 
     /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm(Request $request)
+    {
+        //Get the company slug
+        $slug = $request->company;
+        if ($slug !== 'www') {
+            return redirect()->route('login', ['domain' => 'www']);
+        }
+
+        return view('auth.login');
+    }
+
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -82,17 +98,9 @@ class LoginController extends Controller
 
         $this->clearLoginAttempts($request);
 
-        $userCompanyRoles = [];
         $companies = Auth::user()->companies()->where('settings->is_invitation_accepted', 1)->get();
-        foreach($companies as $company) {
-            $userCompanyRoles[$company->id] = Auth::user()->roles->filter(function ($value, $key) use($company) {
-                if (explode('.', $value->name)[0] == $company->id) {
-                    return $value;
-                }
-            })->values();
-        }
 
-        $view = View::make('modals.select_company', ['companies' => $companies, 'userCompanyRoles' => $userCompanyRoles]);
+        $view = View::make('modals.select_company', ['companies' => $companies]);
         $contents = $view->render();
 
         // return $this->authenticated($request, $this->guard()->user())

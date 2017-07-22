@@ -12,6 +12,8 @@ class InviteUser extends Mailable
 
     protected $userInvite;
 
+    public $subject = "Wazir - User Invitation";
+
     /**
      * Create a new message instance.
      *

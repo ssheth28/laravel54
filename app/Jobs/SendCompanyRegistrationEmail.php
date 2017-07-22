@@ -2,34 +2,34 @@
 
 namespace App\Jobs;
 
-use Mail;
-use Log;
+use App\Mail\CompanyRegistration;
 use Illuminate\Bus\Queueable;
-use App\Mail\NewCompanyRegistered;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Mail;
 
-class NewCompanyWelcomeEmail implements ShouldQueue
+class SendCompanyRegistrationEmail implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $company;
-
     protected $user;
+
+    protected $company;
 
     /**
      * Create a new job instance.
+     *
+     *
+     * @param mixed $user
      *
      * @return void
      */
     public function __construct($user, $company)
     {
-        $this->$user = $user;
-        $this->$company = $company;
-         Log::info($user);
-        Log::info($company);
+        $this->user = $user;
+        $this->company = $company;
     }
 
     /**
@@ -39,9 +39,7 @@ class NewCompanyWelcomeEmail implements ShouldQueue
      */
     public function handle()
     {
-        Log::info($this->user);
-        Log::info($this->company);
-        $email = new NewCompanyRegistered($this->user, $this->company);
+        $email = new CompanyRegistration($this->user, $this->company);
         Mail::to($this->user->email)->send($email);
     }
 }

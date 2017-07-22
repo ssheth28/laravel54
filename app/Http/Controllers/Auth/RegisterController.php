@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use JavaScript;
 use LaravelLocalization;
-use App\Jobs\NewCompanyWelcomeEmail;
+use App\Jobs\SendCompanyRegistrationEmail;
 
 class RegisterController extends Controller
 {
@@ -73,6 +73,22 @@ class RegisterController extends Controller
     }
 
     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm(Request $request)
+    {
+        //Get the company slug
+        $slug = $request->company;
+        if ($slug !== 'www') {
+            return redirect()->route('register', ['domain' => 'www']);
+        }
+
+        return view('auth.register');
+    }
+
+    /**
      * Handle a registration request for the application.
      *
      * @param \Illuminate\Http\Request $request
@@ -86,8 +102,8 @@ class RegisterController extends Controller
 
         event(new Registered($registrationData['user']));
 
+        dispatch(new SendCompanyRegistrationEmail($registrationData['user'], $registrationData['company']));
         dispatch(new SendVerificationEmail($registrationData['user']));
-        // dispatch(new NewCompanyWelcomeEmail($registrationData['user'], $registrationData['company']));
 
         return view('auth.verification');
     }

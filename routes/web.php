@@ -17,8 +17,8 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
             |
             */
             Auth::routes();
-            Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
-            Route::get('/acceptinvitation/{token}', 'UsersController@acceptInvitation');
+            Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify')->name('verify.email');
+            Route::get('/acceptinvitation/{token}', 'UsersController@acceptInvitation')->name('accept.invitation');
 
             Route::get('/home', 'HomeController@index');
 
@@ -82,6 +82,7 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
                     Route::get('edit_user_profile','UsersController@editUserProfile')->name('user.edit.profile');
                     Route::get('change_password', 'UsersController@viewChangePaswordPage')->name('user.password');
                     Route::post('/update_user_profile','UsersController@updateUserProfile')->name('user.update.profile');
+                    Route::delete('/remove_user/{id}', 'UsersController@removeUserFromCompanyProfile')->name('company.user.delete');
 
                     // group section routes
                     Route::resource('groups', 'GroupController');

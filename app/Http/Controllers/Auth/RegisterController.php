@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use JavaScript;
 use LaravelLocalization;
+use App\Jobs\NewCompanyWelcomeEmail;
 
 class RegisterController extends Controller
 {
@@ -81,12 +82,12 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $this->validator($request->all())->validate();
+        $registrationData = $this->create($request->all());
 
-        event(new Registered($user = $this->create($request->all())));
+        event(new Registered($registrationData['user']));
 
-        // return redirect()->route('company.select', ['domain' => app('request')->route()->parameter('company')]);
-
-        dispatch(new SendVerificationEmail($user));
+        dispatch(new SendVerificationEmail($registrationData['user']));
+        // dispatch(new NewCompanyWelcomeEmail($registrationData['user'], $registrationData['company']));
 
         return view('auth.verification');
     }
@@ -143,6 +144,7 @@ class RegisterController extends Controller
         $company = Companies::create([
             'name'  => $data['company_name'],
             'owner_id' => $user->id,
+            'email' => $data['email'],
         ]);
 
         $companyUser = CompanyUser::create([
@@ -153,6 +155,6 @@ class RegisterController extends Controller
 
         event(new CompanyRegistered($company, $user, 'front'));
 
-        return $user;
+        return array('user' => $user, 'company' => $company);
     }
 }

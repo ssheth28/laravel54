@@ -69,25 +69,37 @@ var Login = function() {
 				},
 			},
 			errorPlacement: function (error, element) { // render error placement for each input type
-                element.parent().append(error);
+                element.parent().parent().append(error);
             },
             submitHandler: function (form) {
                 $.ajax({
 			        url: "/en/login",
 			        data: { 'login' : $("#email_address").val(), 'password' : $("#password").val()  },
 			        type: 'POST',
-			        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
-			    }).done(function(response) {
-					$(".js-companies-modal-content").append(response);
-					$("#select-company-modal").show();
-				});
+			        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+			        success: function(response) {
+						$(".js-companies-modal-content").append(response);
+						$("#select-company-modal").show();
+			        },
+			        error: function(data) {
+			        	$('.js-login-error-message').append(data.responseJSON.email);
+			        },
+			    })
             }
 		});
 	};
 
+    var formEvents = function() {
+    	$("#email_address, #password").on('keyup', function (e) {
+		    if (e.keyCode == 13) {
+		        $('.js-login-frm').validate();
+		    }
+		});
+    };
 	return {
         init: function() {
             handleValidationLoginPage();
+            formEvents();
         }
     }
 }();
@@ -121,19 +133,6 @@ $(document).ready(function() {
 			});
 		}
     },500));
-
-
-  	// $(document).on('click', '#login_btn', function() {
-  	//   	$.ajax({
-	//        url: "/en/login",
-	//        data: { 'login' : $("#email_address").val(), 'password' : $("#password").val()  },
-	//        type: 'POST',
-	//        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
-	//    }).done(function(response) {
-	// 	$(".js-companies-modal-content").append(response);
-	// 	$("#select-company-modal").show();
-	// });
-  	//});
 
 	$(document).on('click', '.btn-select-company', function() {
 		var companyId = $(this).data('company-id');

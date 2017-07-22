@@ -57,7 +57,7 @@
                             <div class="col-md-6 rightbar-login">   
                                 <div class="content-log">
                                     <div class="login-logo logoicon">
-                                        <img src="{{ asset('img/logo_white.png') }}">
+                                        <img src="{{ asset('img/wazir-logo.png') }}">
                                     </div>
                                     @yield('auth-content')
                                 </div>

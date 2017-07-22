@@ -163,7 +163,7 @@ label.error {
 .mt-checkbox.mt-checkbox-outline:hover>input:not([disabled]):checked~span,
 .mt-checkbox.mt-checkbox-outline>input:checked~span {
     border: 1px solid #fff;
-    background: #fff;
+    /*background: #fff;*/
 }
 
 .inner_list .md-checkbox label.mt-checkbox span,
@@ -1528,10 +1528,6 @@ table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
     opacity: .5;
     filter: alpha(opacity=50);
 }
-/*.modal-backdrop.fade {
-    opacity: 0.5;
-    filter: alpha(opacity=0.5);
-}*/
 .modal-backdrop {
     position: fixed;
     bottom: 0;
@@ -1943,4 +1939,25 @@ legend {
 .show-modal .modal-dialog {
     max-width: 96%;
     width: 800px;
+}
+.login-logo img {
+    margin-top: -15px;
+}
+.login-logo.logoicon img {
+    width: 50px;
+}
+.login-content .input-group input {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}
+
+.login-content .input-group .input-group-addon {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: 1px solid #ffffff;
+    border-right: none;
+    min-width: 40px;
+}
+.login-content .input-group .input-group-addon i {
+    color: #fff;
 }

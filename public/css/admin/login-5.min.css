@@ -8,18 +8,11 @@
     background-size: cover;
     min-height: 100vh;
 }
-.full-login-screen {
-    /*display: table;*/
-    /*height: 100vh;*/
-}
 .leftbar-login {
-	/*display: table-cell;*/
-    /*float: none;*/
-    /*vertical-align: middle;*/
     padding-top: 20%; 
 }
 .rightbar-login {
-	padding-top: 15%;
+	padding-top: 8%;
 }
 .login-description {
     border-left: 4px solid #4276a4;

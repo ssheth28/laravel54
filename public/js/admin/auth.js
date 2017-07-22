@@ -4,7 +4,17 @@ var Registration = function() {
     var handleValidationRegistrationPage = function() {
         $('.js-register-frm').validate({
 			messages: {
+				company_name: 'Company name is required.',
+				company_slug: 'Company URL is required.',
+				first_name: 'First name is required.',
+				last_name: 'Last name is required.',
+				username: 'Username is required.',
+				email: {
+					required: 'Email Id is required.'
+				},
+				password: 'Password is required.',
 				password_confirmation: {
+					required: 'Confirmation password is required.',
 					equalTo: 'Password does not match.'
 				}
 			},
@@ -37,7 +47,7 @@ var Registration = function() {
 				},
             },
             errorPlacement: function (error, element) { // render error placement for each input type
-                element.parent().append(error);
+                element.parent().parent().append(error);
             },
             submitHandler: function (form) {
             	if (grecaptcha.getResponse()) {

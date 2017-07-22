@@ -1961,3 +1961,20 @@ legend {
 .login-content .input-group .input-group-addon i {
     color: #fff;
 }
+.company-name {
+    position: absolute;
+    right: 20px;
+    bottom: 5px;
+    font-size: 13px;
+    -webkit-text-fill-color: #8ba6cf;
+}
+.white-placeholder .input-group input::placeholder {
+    color: #fff
+}
+.login-register {
+    font-size: 14px;
+    text-align: center;
+}
+.login-register a {
+    color: #fff;
+}

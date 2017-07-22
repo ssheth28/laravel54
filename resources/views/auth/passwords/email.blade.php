@@ -1,7 +1,7 @@
 @extends('layouts.admin.auth')
 
 @section('auth-content')
-    <div class="login-content login-view-block">
+    <div class="login-content login-view-block white-placeholder">
         <h3 class="text-white text-center">Forgot Password ?</h3>
 
         @if (session('status'))

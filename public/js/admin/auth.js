@@ -92,23 +92,65 @@ var Login = function() {
     }
 }();
 
+var ForgotPassword = function() {
+	var handleValidationForgotPasswordPage = function() {
+		$('.js-forgot-password-frm').validate({
+			rules :{
+				email: {
+					required: true,
+					email: true
+				}
+			},
+			errorPlacement: function (error, element) { // render error placement for each input type
+                element.parent().parent().append(error);
+            },
+            submitHandler: function (form) {
+            	form.submit();
+            }
+		});
+	};
+
+	return {
+        init: function() {
+            handleValidationForgotPasswordPage();
+        }
+    }
+}();
+
+var ResetPassword = function() {
+	var handleValidationResetPasswordPage = function() {
+		$('.js-reset-password-frm').validate({
+			rules :{
+				password: {
+                    required: true
+                },
+                password_confirmation: {
+                    equalTo: "#reset_password"
+                },
+			},
+			errorPlacement: function (error, element) { // render error placement for each input type
+                element.parent().parent().append(error);
+            },
+            submitHandler: function (form) {
+            	form.submit();
+            }
+		});
+	};
+
+	return {
+        init: function() {
+            handleValidationResetPasswordPage();
+        }
+    }
+}();
+
 $(document).ready(function() {
 	
 	Login.init();
 	Registration.init();
+	ForgotPassword.init();
+	ResetPassword.init();
 	
-	$(".forget-form").hide();
-
-	$(document).on('click', "#forget-password", function() {
-		$(".login-form").hide();
-		$(".forget-form").show();
-	});
-
-	$(document).on('click', "#back-btn", function() {
-		$(".login-form").show();
-		$(".forget-form").hide();
-	});
-
 	$(document).on('keyup', '#company_name', debounce(function(){
         if ($(this).val() !== "" && isSlugNameChanged == false) {
 	        $.ajax({

@@ -17,8 +17,8 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
             |
             */
             Auth::routes();
-            Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
-            Route::get('/acceptinvitation/{token}', 'UsersController@acceptInvitation');
+            Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify')->name('verify.email');
+            Route::get('/acceptinvitation/{token}', 'UsersController@acceptInvitation')->name('accept.invitation');
 
             Route::get('/home', 'HomeController@index');
 

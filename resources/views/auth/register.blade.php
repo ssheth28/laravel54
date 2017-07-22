@@ -1,8 +1,8 @@
 @extends('layouts.admin.auth')
 
 @section('auth-content')
-    <div class="login-content text-center">
-        <h3 class="text-white">Registration</h3>
+    <div class="login-content white-placeholder">
+        <h3 class="text-white text-center">Registration</h3>
         <form class="login-form js-register-frm" role="form" method="POST" action="{{ route('register', ['domain' => app('request')->route()->parameter('company')]) }}">
             {{ csrf_field() }}
 
@@ -11,67 +11,90 @@
                 <span>{{ __("Please fill up required fields.") }}</span>
             </div>
             <div class="row">
-                <div class="col-xs-6">
-                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" id="company_name" autocomplete="off" placeholder="{{ __("Company Name") }}" name="company_name" value="{{ old('company_name') }}" required/>
-                </div>
-                <div class="col-xs-6">
-                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" id="company_slug" autocomplete="off" placeholder="{{ __("Company Slug") }}" name="company_slug" value="{{ old('company_slug') }}"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" id="first_name" autocomplete="off" placeholder="{{ __("First Name") }}" name="first_name" value="{{ old('first_name') }}" required/>
-                </div>
-                <div class="col-xs-6">
-                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="text" id="last_name" autocomplete="off" placeholder="{{ __("Last Name") }}" name="last_name" value="{{ old('last_name') }}" required/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <input class="form-control form-control-solid placeholder-no-fix form-group" id="username" type="text" autocomplete="off" value="{{ old('username') }}" placeholder="{{ __("Username") }}" name="username" required/>
-                    @if ($errors->has('username'))
-                        <span class="help-block">
-                            <strong>{{ __($errors->first('username')) }}</strong>
-                        </span>
-                    @endif
-                </div>
-                <div class="col-xs-6">
-                    <input class="form-control form-control-solid placeholder-no-fix form-group" id="email" type="email" autocomplete="off" value="{{ old('email') }}" placeholder="{{ __("Email") }}" name="email" required/>
-                    @if ($errors->has('email'))
-                        <span class="help-block">
-                            <strong>{{ __($errors->first('email')) }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" id="password" autocomplete="off" id="password" placeholder="{{ __("Password") }}" name="password" required/>
-
-                    @if ($errors->has('password'))
-                        <span class="help-block">
-                            <strong>{{ __($errors->first('password')) }}</strong>
-                        </span>
-                    @endif
-                </div>
-                <div class="col-xs-6">
-                    <input class="form-control form-control-solid placeholder-no-fix form-group" id="password-confirm" type="password" autocomplete="off" placeholder="{{ __("Confirm Password") }}" name="password_confirmation" required/>
-
-                    @if ($errors->has('password_confirmation'))
-                        <span class="help-block">
-                            <strong>{{ __($errors->first('password_confirmation')) }}</strong>
-                        </span>
-                    @endif
-                </div>
-            </div>
-            <div class="g-recaptcha" data-sitekey="6Lf13CkUAAAAAB_RAC38RqKQXtFt8eL_vePtHvW3"></div>
-            <p id="recaptcha-error" style="display: none; color: red">Please ensure that you are a human!</p>
-            <br>
-            <div class="row">
                 <div class="col-xs-12">
-                    <button class="btn login-btn" type="submit">{{ __("Register") }}</button>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input class="form-control" type="text" id="first_name" autocomplete="off" placeholder="{{ __("First Name") }}" name="first_name" value="{{ old('first_name') }}" required/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input class="form-control" type="text" id="last_name" autocomplete="off" placeholder="{{ __("Last Name") }}" name="last_name" value="{{ old('last_name') }}" required/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-building-o"></i></span>
+                            <input class="form-control" type="text" id="company_name" autocomplete="off" placeholder="{{ __("Company Name") }}" name="company_name" value="{{ old('company_name') }}" required/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="company-name">.Wazirapp.com</span>
+                            <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+                            <input class="form-control" type="text" id="company_slug" autocomplete="off" placeholder="{{ __("Company URL") }}" name="company_slug" value="{{ old('company_slug') }}"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user-o"></i></span>
+                            <input class="form-control" id="username" type="text" autocomplete="off" value="{{ old('username') }}" placeholder="{{ __("Username") }}" name="username" required/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+                            <input class="form-control" id="email" type="email" autocomplete="off" value="{{ old('email') }}" placeholder="{{ __("Email") }}" name="email" required/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                             <input class="form-control" type="password" id="password" autocomplete="off" id="password" placeholder="{{ __("Password") }}" name="password" required/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                             <input class="form-control" id="password-confirm" type="password" autocomplete="off" placeholder="{{ __("Confirm Password") }}" name="password_confirmation" required/>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <div class="g-recaptcha" data-sitekey="6Lf13CkUAAAAAB_RAC38RqKQXtFt8eL_vePtHvW3"></div>
+            <p id="recaptcha-error" class="text-center" style="display: none; color: red">Please ensure that you are a human!</p>
+            <br>
+
+            <div class="form-group">
+                <button class="btn btn-lg login-btn" type="submit">{{ __("Register") }}</button>
+            </div>
+            <div class="login-register">
+                <a href="{{ route('login', ['domain' => app('request')->route()->parameter('company')]) }}">{{ __("Login") }}</a>
+             </div>
         </form>        
     </div>
 @endsection

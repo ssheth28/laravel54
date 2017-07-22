@@ -1,7 +1,7 @@
 @extends('layouts.admin.auth')
 
 @section('auth-content')
-    <div class="login-content">
+    <div class="login-content white-placeholder">
         <h3 class="text-white text-center">Login to your account</h3>
         
         @if (session('status'))
@@ -25,7 +25,6 @@
                             <input class="form-control" type="text" id="email_address" placeholder="{{ __("Enter Email Address") }}" name="login"/>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="col-xs-12">
@@ -35,7 +34,6 @@
                             <input class="form-control" id="password" type="password" placeholder="{{ __(" Enter Password") }}" name="password"/>
                         </div>
                     </div>
-
                 </div>
                 <div class="col-xs-6">
                     @if ($errors->has('login'))
@@ -53,7 +51,7 @@
                     </label>
                     <a id="forget-password" class="forget-password" href="{{ route('password.request', ['domain' => app('request')->route()->parameter('company')]) }}">Forgot Password?</a>
                 </div>
-                <p class="js-login-error-message" style="color:red"></p>
+                <p class="js-login-error-message text-center" style="color:red"></p>
                 <div class="col-xs-12">
                     <button class="btn btn-del btn-5 btn-5a fa fa-lock login-btn" type="submit" id="login_btn">
                         <span>{{ __("Login") }}</span>

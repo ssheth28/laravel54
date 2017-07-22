@@ -14,6 +14,8 @@ use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
 use Spatie\Permission\Traits\HasRoles;
 use Ufutx\LaravelComment\CanComment;
 use Ufutx\LaravelFavorite\Traits\Favoriteability;
+//Notification for User
+use App\Notifications\UserResetPasswordNotification;
 
 /**
  * App\Models\User.
@@ -132,6 +134,16 @@ class User extends Authenticatable implements HasBansContract, HasMedia
     public function person()
     {
         return $this->belongsTo('App\Models\Person', 'person_id');
+    }
+
+    /**
+     * Send password reset notification
+     *
+     * @return
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new UserResetPasswordNotification($token, $this->person->first_name, $this->email));
     }
 
 }

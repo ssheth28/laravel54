@@ -144,7 +144,6 @@ class RegisterController extends Controller
         $company = Companies::create([
             'name'  => $data['company_name'],
             'owner_id' => $user->id,
-            'email' => $data['email'],
         ]);
 
         $companyUser = CompanyUser::create([

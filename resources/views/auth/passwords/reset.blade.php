@@ -2,33 +2,41 @@
 
 @section('auth-content')
     <div class="login-content">
-        <h1>Set your new password.</h1>
-        <p> Lorem ipsum dolor sit amet, coectetuer adipiscing elit sed diam nonummy et nibh euismod aliquam erat volutpat. Lorem ipsum dolor sit amet, coectetuer adipiscing. </p>
-        <form class="login-form" role="form" method="POST" action="{{ route('password.request', ['domain' => app('request')->route()->parameter('company')]) }}">
-            {{ csrf_field() }}
+        <h3 class="text-white text-center">Reset Password</h3>
 
-            <div class="alert alert-danger display-hide">
-                <button class="close" data-close="alert"></button>
-                <span>{{ __("Please fill up required fields.") }}</span>
+        @if (session('status'))
+            <div class="alert alert-success">
+                {{ __(session('status')) }}
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <input class="form-control form-control-solid placeholder-no-fix form-group" id="email" type="email" autocomplete="off" value="{{ $email or old('email') }}" placeholder="{{ __("Email") }}" name="email" required/>
+        @endif
+
+        @if ($errors->has('email'))
+            <label class="error">{{ __($errors->first('email')) }}</label>
+        @endif
+
+        <form class="login-form js-reset-password-frm" role="form" method="POST" action="{{ route('password.request', ['domain' => app('request')->route()->parameter('company')]) }}">
+            {{ csrf_field() }}
+            <input type="hidden" name="token" value="{{ app('request')->route()->parameter('token') }}">
+            <input type="hidden" value="{{ $email or old('email') }}" name="email" />
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" id="reset_password" autocomplete="off" placeholder="{{ __("Enter new password") }}" name="password" />
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" id="password" autocomplete="off" placeholder="{{ __("Password") }}" name="password" required/>
-                </div>
-                <div class="col-xs-6">
-                    <input class="form-control form-control-solid placeholder-no-fix form-group" id="password-confirm" type="password" autocomplete="off" placeholder="{{ __("Confirm Password") }}" name="password_confirmation" required/>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                    <input class="form-control form-control-solid placeholder-no-fix form-group" type="password" autocomplete="off" placeholder="{{ __("Re-Enter new password") }}" name="password_confirmation" />
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <button class="btn green" type="submit">{{ __("Reset Password") }}</button>
-                </div>
+            <div class="form-actions">
+                <button type="submit" class="btn-del btn-5 btn-5a fa fa-lock"><span>{{ __("Reset") }}</span></button>
             </div>
         </form>
     </div>
+@endsection
+
+@section('page-script')
+    <script src="{{ asset('js/admin/auth.js') }}" type="text/javascript"></script>
 @endsection

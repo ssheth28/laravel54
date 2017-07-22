@@ -134,7 +134,8 @@ var ResetPassword = function() {
 		$('.js-reset-password-frm').validate({
 			rules :{
 				password: {
-                    required: true
+                    required: true,
+                    minlength: 6
                 },
                 password_confirmation: {
                     equalTo: "#reset_password"

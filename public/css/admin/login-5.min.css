@@ -77,7 +77,6 @@ input:-webkit-autofill {
 	background: #4276a4 none repeat scroll 0 0 !important;
     color: #fff !important;
     width: 100%;
-    font-weight: bold;
     text-transform: uppercase;
 }
 

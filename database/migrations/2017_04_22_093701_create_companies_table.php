@@ -18,8 +18,8 @@ class CreateCompaniesTable extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('company_domain_url')->nullable();
-            $table->integer('owner_id')->unsigned()->index();
-            $table->foreign('owner_id')->references('id')->on('users');
+            $table->integer('owner_id')->unsigned()->nullable();
+            $table->foreign('owner_id')->references('id')->on('users')->onDelete('set null')->onUpdate('cascade');
             $table->string('contact_no', 30)->nullable();
             $table->string('email', 100)->nullable();
             $table->string('country')->nullable();

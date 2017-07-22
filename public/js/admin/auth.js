@@ -92,7 +92,7 @@ var Login = function() {
     var formEvents = function() {
     	$("#email_address, #password").on('keyup', function (e) {
 		    if (e.keyCode == 13) {
-		        $('.js-login-frm').validate();
+		        $('.js-login-frm').submit();
 		    }
 		});
     };

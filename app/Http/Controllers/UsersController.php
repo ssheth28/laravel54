@@ -380,16 +380,14 @@ class UsersController extends Controller
      */
     public function destroy(Request $request, $company, $userId)
     {
-        $message = config('config-variables.flash_messages.dataDeleted');
-        $type = 'success';
-        $user = User::find($userId);
-        $user->syncRoles();
-        if (!$user->delete()) {
-            $message = config('config-variables.flash_messages.dataNotDeleted');
-            $type = 'danger';
+        $successMessage = config('config-variables.flash_messages.dataDeleted');
+        $errorMessage = config('config-variables.flash_messages.dataNotDeleted');
+        
+        if($this->deleteUser($userId)) {
+            flash()->message($successMessage, 'success');
+        } else {
+            flash()->message($errorMessage, 'danger');    
         }
-        flash()->message($message, $type);
-
         return redirect()->route('users.index', ['domain' => app('request')->route()->parameter('company')]);
     }
 
@@ -452,21 +450,6 @@ class UsersController extends Controller
 
         return view('users.profile', compact('avatar'));
     }
-
-    // public function updateAvatar(Request $request)
-    // {
-    //     $user = Auth::user();
-    //     $userAvatar = $request->file('user_avatar');
-
-    //     if ($userAvatar) {
-    //         $user->clearMediaCollection('User');
-    //         $media = $user->addMedia($userAvatar)
-    //                     ->preservingOriginal()
-    //                     ->toMediaLibrary('User');
-    //     }
-
-    //     return redirect()->route('users.profile', ['domain' => app('request')->route()->parameter('company')]);
-    // }
 
     public function saveGeneralInfo(Request $request)
     {
@@ -634,5 +617,36 @@ class UsersController extends Controller
 
         flash()->success(config('config-variables.flash_messages.dataSaved'));
         return redirect()->route('user.edit.profile', ['domain' => app('request')->route()->parameter('company')]);
+    }
+
+    /**
+     * Common delete function for user delete and company profile user delete
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return string
+     */    
+    public function deleteUser($userId)
+    {
+        $user = User::find($userId);
+        $user->syncRoles();
+        if (!$user->delete()) {            
+            return false;
+        }
+        return true;
+    }
+
+    public function removeUserFromCompanyProfile($company, $userId)
+    {
+        $successMessage = config('config-variables.flash_messages.dataDeleted');
+        $errorMessage = config('config-variables.flash_messages.dataNotDeleted');
+
+        if($this->deleteUser($userId)) {
+            flash()->message($successMessage, 'success');
+        } else {
+            flash()->message($errorMessage, 'danger');    
+        }
+
+        return redirect()->route('company.members', ['domain' => app('request')->route()->parameter('company')]);
     }
 }

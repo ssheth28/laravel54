@@ -121,6 +121,10 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
                     // Vacancy manager routes
                     Route::resource('vacancies', 'VacanciesController');
                     Route::post('/getVacanciesData', 'VacanciesController@getVacanciesData');
+
+                    // lead section routes
+                    Route::resource('leads', 'LeadsController');
+                    Route::post('/getLeadsData', 'LeadsController@getLeadsData');
                 });
             });
         }

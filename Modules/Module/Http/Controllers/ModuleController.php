@@ -217,6 +217,13 @@ class ModuleController extends Controller
 
         Permission::where('name', $companyId.'.'.(config('config-variables.menu_item_permission_identifier')).'.'.$moduleId)->delete();
 
+        $childMenuItems = MenuItem::where('parent_id', $moduleId)->get();
+
+        foreach ($childMenuItems as $menuItem) {
+            Permission::where('name', $companyId.'.'.(config('config-variables.menu_item_permission_identifier')).'.'.$menuItem->id)->delete();
+            $menuItem->delete();
+        }
+
         if (!MenuItem::where('id', $moduleId)->delete()) {
             $message = config('config-variables.flash_messages.dataNotDeleted');
             $type = 'danger';

@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
-                                    {!! Form::select('department', $departments, $companyUser->settings['department'], array('class' =>'form-control select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select Department --')) !!}
+                                    {!! Form::select('department', $departments, isset($companyUser->settings['department']) ? $companyUser->settings['department'] : '', array('class' =>'form-control select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select Department --')) !!}
                                 </div> 
                             </div>                  
                         </div>

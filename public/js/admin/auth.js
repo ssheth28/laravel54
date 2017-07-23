@@ -82,6 +82,7 @@ var Login = function() {
                 element.parent().parent().append(error);
             },
             submitHandler: function (form) {
+            	$('.js-login-error-message').html("");
                 $.ajax({
 			        url: "/en/login",
 			        data: { 'login' : $("#email_address").val(), 'password' : $("#password").val(), 'remember' : $("#remember_me").val()  },
@@ -92,9 +93,8 @@ var Login = function() {
 						$(".js-companies-modal-content").append(response);
 						$("#select-company-modal").show();
 			        },
-			        error: function(data) {
-			        	console.log(data);
-			        	$('.js-login-error-message').append(data.responseJSON.email);
+			        error: function(xhr, ajaxOptions, thrownError) {
+			        	$('.js-login-error-message').html(xhr.responseJSON.email);
 			        },
 			    })
             }

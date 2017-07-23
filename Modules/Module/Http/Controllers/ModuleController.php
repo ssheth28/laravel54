@@ -77,7 +77,7 @@ class ModuleController extends Controller
         $this->init();
         $request = $this->request->all();
         $modules = DB::table('menu_items')
-                ->join('menu_items as parent', 'menu_items.parent_id', 'parent.id')
+                ->leftjoin('menu_items as parent', 'menu_items.parent_id', 'parent.id')
                 ->where('menu_items.menu_id', $this->menuId)
                 ->select('menu_items.*', DB::raw('DATE_FORMAT(menu_items.created_at, "%d-%m-%Y %H:%i:%s") as "created_datetime"'),
                     DB::raw('parent.name as parentMenuName'));

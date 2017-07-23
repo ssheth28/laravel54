@@ -23,7 +23,8 @@ class CreateMenuItemsTable extends Migration
             $table->text('description')->nullable();
             $table->string('url');
             $table->enum('type', ['Page', 'Module']);
-            $table->integer('parent_id')->unsigned()->nullable()->index();
+            $table->integer('parent_id')->unsigned()->nullable();
+            $table->foreign('parent_id')->references('id')->on('menu_items')->onDelete('set null')->onUpdate('cascade');
             $table->integer('order')->unsigned()->default(0)->index();
             $table->string('icon')->nullable();
             $table->boolean('is_active')->default(true);

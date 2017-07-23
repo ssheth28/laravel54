@@ -102,7 +102,7 @@
                                         </a>
                                     </td>
                                     <td>@{{ module.name }}</td>
-                                    <td>@{{ module.parentMenuName }}</td>
+                                    <td>@{{ module.parentMenuName ? module.parentMenuName : '-' }}</td>
                                     <td>@{{ module.created_datetime }}</td>                                 
                                     <td>@{{ module.is_publicly_visible == 1 ? 'Yes' : 'No' }}</td>
                                     <td>

@@ -159,7 +159,7 @@ class CompaniesController extends Controller
         $roleId = $roles->first()->id;
         $request->session()->put('currentrole', $roleId);
         return response()
-            ->json(['redirecturl' => route('admin.home', ['domain' => $companySlug])]);
+            ->json(['redirecturl' => route('admin.dashboard', ['domain' => $companySlug])]);
     }
 
     public function companyProfile()

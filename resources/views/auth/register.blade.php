@@ -3,7 +3,7 @@
 @section('auth-content')
     <div class="login-content white-placeholder">
         <h3 class="text-white text-center">Registration</h3>
-        <form class="login-form js-register-frm" role="form" method="POST" action="{{ route('register', ['domain' => app('request')->route()->parameter('company')]) }}">
+        <form class="login-form registration-form js-register-frm" role="form" method="POST" action="{{ route('register', ['domain' => app('request')->route()->parameter('company')]) }}">
             {{ csrf_field() }}
 
             <div class="alert alert-danger display-hide">
@@ -89,19 +89,26 @@
             <p id="recaptcha-error" class="text-center" style="display: none; color: red">Please ensure that you are a human!</p>
             <br>
             <div class="row">
-            <div class="col-xs-12 check-field">
-                <label class="mt-checkbox mt-checkbox-outline">
-                    <input type="checkbox" name="terms_condition" id="remember_me"/> {{ __("I agree to all statements included in") }}
-                    <span></span>
-                    <a href="#" title="terms of service">TERMS OF SERVICE</a>
-                </label>
+                <div class="col-xs-12">
+                    {{-- <div class="col-xs-12 check-field">
+                        <label class="mt-checkbox mt-checkbox-outline">
+                            <input type="checkbox" name="terms_condition" id="remember_me"/> {{ __("I agree to all statements included in") }}
+                            <span></span>
+                            <a href="#" title="terms of service">TERMS OF SERVICE</a>
+                        </label>
+                    </div> --}}
+                </div>
             </div>
-            <div class="form-group">
-                <button class="btn btn-lg login-btn" type="submit">{{ __("Register") }}</button>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <button class="btn btn-lg login-btn" type="submit">{{ __("Register") }}</button>
+                    </div>
+                    <div class="login-register">
+                        <a href="{{ route('login', ['domain' => app('request')->route()->parameter('company')]) }}">{{ __("Login") }}</a>
+                    </div>
+                </div>
             </div>
-            <div class="login-register">
-                <a href="{{ route('login', ['domain' => app('request')->route()->parameter('company')]) }}">{{ __("Login") }}</a>
-             </div>
         </form>        
     </div>
 @endsection

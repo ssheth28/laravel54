@@ -88,7 +88,14 @@
             <div class="g-recaptcha" data-sitekey="6Lf13CkUAAAAAB_RAC38RqKQXtFt8eL_vePtHvW3"></div>
             <p id="recaptcha-error" class="text-center" style="display: none; color: red">Please ensure that you are a human!</p>
             <br>
-
+            <div class="row">
+            <div class="col-xs-12 check-field">
+                <label class="mt-checkbox mt-checkbox-outline">
+                    <input type="checkbox" name="terms_condition" id="remember_me"/> {{ __("I agree to all statements included in") }}
+                    <span></span>
+                    <a href="#" title="terms of service">TERMS OF SERVICE</a>
+                </label>
+            </div>
             <div class="form-group">
                 <button class="btn btn-lg login-btn" type="submit">{{ __("Register") }}</button>
             </div>

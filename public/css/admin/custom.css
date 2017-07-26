@@ -1978,3 +1978,7 @@ legend {
 .login-register a {
     color: #fff;
 }
+.registration-form .check-field a {
+    color: #184da0;
+    text-decoration: underline;
+}

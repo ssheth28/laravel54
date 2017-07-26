@@ -16,7 +16,8 @@ var Registration = function() {
 				password_confirmation: {
 					required: 'Confirmation password is required.',
 					equalTo: 'Password does not match.'
-				}
+				},
+				// terms_condition: 'You must agree with the terms and conditions.',
 			},
             rules: {
             	company_name: {
@@ -45,6 +46,9 @@ var Registration = function() {
 					required: true,
 					equalTo : "#password"
 				},
+				// terms_condition: {
+				// 	required: true,
+				// }
             },
             errorPlacement: function (error, element) { // render error placement for each input type
                 element.parent().parent().append(error);

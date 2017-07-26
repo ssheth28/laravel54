@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use View;
+use Modules\Widget\Entities\Widget;
 
 class HomeController extends Controller
 {
@@ -27,6 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.home');
+        $widgets = Widget::where('company_id', '=', 1)->pluck('status', 'slug');
+        return view('home.home', compact('widgets'));
     }
 }

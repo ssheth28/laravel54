@@ -1,4 +1,4 @@
-\@extends('layouts.admin.default')
+@extends('layouts.admin.default')
 
 @section('page-core-style')
 	<link href="{{ asset('plugins/morris/morris.css') }}" rel="stylesheet" type="text/css" />

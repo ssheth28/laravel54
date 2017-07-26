@@ -1982,3 +1982,52 @@ legend {
     color: #184da0;
     text-decoration: underline;
 }
+
+
+.btn-5a::before {
+    left: 0;
+    top: -100%;
+}
+.btn-5::before {
+    font-size: 180%;
+    height: 100%;
+    line-height: 2.5;
+    position: absolute;
+    transition: all 0.3s ease 0s;
+    width: 100%;
+}
+.btn-5 {
+    backface-visibility: hidden;
+    background: #4276a4 none repeat scroll 0 0 !important;
+    color: #fff !important;
+    font-size: 16px;
+    height: 38px;
+    line-height: 24px;
+    min-width: 180px;
+    overflow: hidden;
+}
+.btn-5a:hover::before {
+    top: 0;
+}
+.btn-5a::before {
+    left: 0;
+    top: -100%;
+}
+.btn-5::before {
+    font-size: 180%;
+    height: 100%;
+    line-height: 1.5;
+    position: absolute;
+    transition: all 0.3s ease 0s;
+    width: 100%;
+}
+.btn-5a:hover span {
+    transform: translateY(300%);
+}
+.btn-5 span {
+    backface-visibility: hidden;
+    display: inline-block;
+    height: 100%;
+    transition: all 0.3s ease 0s;
+    width: 100%;
+}

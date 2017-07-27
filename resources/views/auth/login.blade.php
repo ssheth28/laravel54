@@ -53,7 +53,7 @@
                 </div>
                 <p class="js-login-error-message text-center col-xs-12" style="color:red"></p>
                 <div class="col-xs-12">
-                    <button class="btn btn-del btn-5 btn-5a fa fa-lock login-btn" type="submit" id="login_btn">
+                    <button class="btn-del btn-5 btn-5a fa fa-lock login-btn" type="submit" id="login_btn">
                         <span>{{ __("Login") }}</span>
                     </button>
                 </div>

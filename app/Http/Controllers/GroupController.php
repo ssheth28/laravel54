@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Group;
-use Modules\Module\Entities\Menu;
-use Modules\Module\Entities\MenuItem;
-use Modules\Widget\Entities\Widget;
 use DB;
-use Illuminate\Http\Request;
-use Landlord;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 use View;
+use Landlord;
+use App\Models\Group;
+use Illuminate\Http\Request;
+use Modules\Module\Entities\Menu;
+use Spatie\Permission\Models\Role;
+use Modules\Widget\Entities\Widget;
+use Modules\Module\Entities\MenuItem;
+use Spatie\Permission\Models\Permission;
+
 
 class GroupController extends Controller
 {
     public $title;
+
+    public $menuId;
+
+    public $companyId;
 
     /**
      * Create a new controller instance.
@@ -47,6 +52,9 @@ class GroupController extends Controller
      */
     public function init()
     {
+        $this->companyId = Landlord::getTenants()['company']->id;    
+        $menu = Menu::where('company_id', $this->companyId)->where('name', 'Sidebar')->first();
+        $this->menuId = $menu->id;
     }
 
     /**
@@ -60,7 +68,7 @@ class GroupController extends Controller
         $companyId = Landlord::getTenants()['company']->id;
         $groups = DB::table('roles')->where('name', 'LIKE', $companyId.'.%')->select('*', DB::raw('DATE_FORMAT(created_at, "%d-%m-%Y %H:%i:%s") as "created_datetime"'));
 
-        $sortby = 'groups.created_datetime';
+        $sortby = 'roles.created_datetime';
         $sorttype = 'desc';
 
         if (isset($request['sortby'])) {
@@ -70,9 +78,25 @@ class GroupController extends Controller
 
         $groups->orderBy($sortby, $sorttype);
 
-        if (isset($request['name']) && trim($request['name']) !== '') {
-            $groups->where('groups.name', 'like', '%'.$request['name'].'%');
+        if (isset($request['role_name']) && trim($request['role_name']) !== '') {
+            $groups->where('roles.name', 'like', '%'.$request['role_name'].'%');
         }
+
+        // if (isset($request['parent_module']) && trim($request['parent_module']) !== '') {
+        //     $groups->where('groups.name', 'like', '%'.$request['parent_module'].'%');
+        // }
+
+        // if (isset($request['sub_module']) && trim($request['sub_module']) !== '') {
+        //     $groups->where('groups.name', 'like', '%'.$request['sub_module'].'%');
+        // }
+
+        // if (isset($request['page_name']) && trim($request['page_name']) !== '') {
+        //     $groups->where('groups.name', 'like', '%'.$request['page_name'].'%');
+        // }   
+        
+        // if (isset($request['widget']) && trim($request['widget']) !== '') {
+        //     $groups->where('groups.name', 'like', '%'.$request['widget'].'%');
+        // }                       
 
         $groupsList = [];
 
@@ -96,7 +120,13 @@ class GroupController extends Controller
      */
     public function index()
     {
-        return view('groups.index');
+        $this->init();
+        $roles = Role::where('name', 'LIKE', $this->companyId.'%')->pluck('display_name', 'name');
+        $parentModule = MenuItem::where('menu_id', $this->menuId)->where('type', 'Module')->where('parent_id', null)->get()->pluck('name', 'id');
+        $subModules = MenuItem::where('menu_id', $this->menuId)->where('type', 'Module')->where('parent_id', '!=' ,null)->get()->pluck('name', 'id');
+        $pageName = MenuItem::where('menu_id', $this->menuId)->where('type', 'Page')->get()->pluck('name', 'id');
+        $widgets = Widget::where('company_id', $this->companyId)->pluck('name', 'id');
+        return view('groups.index', compact('roles', 'parentModule', 'subModules', 'pageName', 'widgets'));
     }
 
     /**

@@ -2031,3 +2031,12 @@ legend {
     transition: all 0.3s ease 0s;
     width: 100%;
 }
+.portlet.light > .portlet-title > .actions .btn-icon-only i {
+    color: #a0a0a0;
+    margin: 0;
+}
+.portlet.light > .portlet-title > .tools {
+    margin-top: -2px;
+    margin-left: 4px;
+    padding: 0;
+}

@@ -52,6 +52,8 @@ $(document).ready(function() {
     $(".select2-hide-search-box").select2({
         minimumResultsForSearch: Infinity
     });
+
+    $('.select2').select2();
     
     $(".js-select2-multiselect").select2();
 

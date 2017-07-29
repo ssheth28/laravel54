@@ -15,7 +15,7 @@
         </div>
         <div class="portlet-body form">
        		{!! Form::open(['route' => ['modules.update', 'domain' => app('request')->route()->parameter('company'), 'moduleId' => $module->id], 'method' => 'PUT', 'class' => 'js-frm-edit-module', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
-		    	@include('modules.module.form', ['from'=>'edit'])
+		    	@include('modules.module.module_form', ['from'=>'edit'])
 			{{ Form::close() }}
         </div>
     </div>

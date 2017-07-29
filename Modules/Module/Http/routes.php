@@ -17,6 +17,10 @@ Route::group(['domain' => '{company}.'.config('config-variables.app.domain')], f
                     Route::resource('modules', 'ModuleController');
                     Route::post('/getModuleData', 'ModuleController@getModuleData');
                     Route::post('generateModuleUrl', 'ModuleController@generateModuleUrl');
+
+                    Route::resource('pages', 'PageController');
+                    Route::post('/getPageData', 'PageController@getPageData');
+                    Route::post('generatePageUrl', 'PageController@generatePageUrl');
                 });
             });
         });

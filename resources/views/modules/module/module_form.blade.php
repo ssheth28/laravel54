@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="note note-warning">
-                <p>If you are creating Parent Module itself then no need to select value from <code><b>Select Parent Module</b></code> From <b>"Basic Information"</b></p>
+                <p>If you are creating Parent Module itself then no need to select value from <code><b>Select Parent Module</b></code> from <b>"Basic Information"</b></p>
             </div>
         </div>
     </div>
@@ -89,11 +89,11 @@
                                     <span class="input-group-addon no-bg">
                                         <i class="fa fa-object-group blue-color"></i>
                                     </span>
-                                    {!! Form::select('is_publicly_visible', config('config-variables.is_publicly_visible'), $from=="edit" ? $module->is_publicly_visible : null, ['class' => 'form-control selectpicker', 'id' => 'is_publicly_visible', 'placeholder' => '-- Is Publicly Visible? --']) !!}
+                                    {!! Form::select('is_publicly_visible', config('config-variables.is_publicly_visible'), $from=="edit" ? $module->is_publicly_visible : null, ['class' => 'form-control selectpicker', 'id' => 'is_publicly_visible', 'placeholder' => '-- Select Is Publicly Visible? --']) !!}
                                 </div>
                             </div>
                         </div>                              
-                        <div class="col-md-6 col-lg-3">
+                        {{-- <div class="col-md-6 col-lg-3">
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon no-bg">
@@ -102,7 +102,8 @@
                                     {!! Form::select('type', config('config-variables.module_types'), $from=="edit" ? $module->type : null, array('class' =>'form-control selectpicker', 'tabindex' => '-98', 'placeholder' =>'Select Module Type', 'id' => 'module_type')) !!}
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
+                        <input type="hidden" name="type" id="module_type" value="Module">
                         <div class="col-md-6 col-lg-3">
                             <div class="form-group">
                                 <div class="input-group">

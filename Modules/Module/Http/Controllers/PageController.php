@@ -13,7 +13,7 @@ use Modules\Module\Services\MenuItemService;
 use View;
 use Auth;
 
-class ModuleController extends Controller
+class PageController extends Controller
 {
     public $title;
     public $uniqueUrl;
@@ -27,7 +27,7 @@ class ModuleController extends Controller
     public function __construct(Request $request, MenuItemService $menuItemService)
     {
         $this->menuId = null;
-        $this->title = 'Module';
+        $this->title = 'Page';
         $this->request = $request;
         $this->menuItemService = $menuItemService;
         View::share('title', $this->title);
@@ -66,17 +66,18 @@ class ModuleController extends Controller
     public function index()
     {
         $this->init();
-        $byParentModule = MenuItem::where('menu_id', $this->menuId)->where('type', 'Module')->where('parent_id', null)->get()->pluck('name', 'id');
-        $byModuleName = MenuItem::where('menu_id', $this->menuId)->where('type', 'Module')->where('parent_id', '!=' ,null)->get()->pluck('name', 'id');
-        return view('module::module.index', compact('byParentModule', 'byModuleName'));
+        $byPageName = MenuItem::where('menu_id', $this->menuId)->where('type', 'Page')->get()->pluck('name', 'id');
+        $allModules = MenuItem::where('menu_id', $this->menuId)->where('type', 'Module')->get()->toArray();
+        $byModuleName = Menu::buildMenuTree($allModules);
+        return view('module::page.index', compact('byPageName', 'byModuleName'));
     }
 
     /**
-     * Get module data.
+     * Get page data.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getModuleData()
+    public function getPageData()
     {
         $responseData = $this->menuItemService->getMenuItemData($this->request->all());
         return $responseData;
@@ -90,10 +91,10 @@ class ModuleController extends Controller
     public function create()
     {
         $this->init();
-        $menuItems = MenuItem::where('menu_id', $this->menuId)->where('type', 'Module')->where('parent_id', null)->get()->toArray();
+        $menuItems = MenuItem::where('menu_id', $this->menuId)->where('type', 'Module')->get()->toArray();
         $allModules = Menu::buildMenuTree($menuItems);
 
-        return view('module::module.create', compact('allModules'));
+        return view('module::page.create', compact('allModules'));
     }
 
     /**
@@ -107,7 +108,7 @@ class ModuleController extends Controller
     {
         $this->menuItemService->storeMenuItem($request);
         flash()->success(config('config-variables.flash_messages.dataSaved'));
-        return redirect()->route('modules.index', ['domain' => app('request')->route()->parameter('company')]);
+        return redirect()->route('pages.index', ['domain' => app('request')->route()->parameter('company')]);
     }
 
     /**
@@ -119,7 +120,7 @@ class ModuleController extends Controller
     {
         $this->init();
         $module = MenuItem::find($moduleId);
-        $moduleDetailHtml = view('modules.module.module_detail_show', ['module' => $module])->render();
+        $moduleDetailHtml = view('modules.module.page_detail_show', ['module' => $module])->render();
 
         return array('moduleDetailHtml' => $moduleDetailHtml);        
     }
@@ -133,10 +134,10 @@ class ModuleController extends Controller
     {
         $this->init();
         $module = MenuItem::find($moduleId);
-        $menuItems = MenuItem::where('menu_id', $this->menuId)->where('type', 'Module')->where('parent_id', null)->get()->toArray();
+        $menuItems = MenuItem::where('menu_id', $this->menuId)->where('type', 'Module')->get()->toArray();
         $allModules = Menu::buildMenuTree($menuItems);
 
-        return view('module::module.edit', compact('module', 'allModules'));
+        return view('module::page.edit', compact('module', 'allModules'));
     }
 
     /**
@@ -150,7 +151,7 @@ class ModuleController extends Controller
     {
         $this->menuItemService->updateMenuItem($request, $moduleId);
         flash()->success(config('config-variables.flash_messages.dataSaved'));
-        return redirect()->route('modules.index', ['domain' => app('request')->route()->parameter('company')]);
+        return redirect()->route('pages.index', ['domain' => app('request')->route()->parameter('company')]);
     }
 
     /**
@@ -162,7 +163,7 @@ class ModuleController extends Controller
     {
         $response = $this->menuItemService->deleteMenuItem($moduleId);
         flash()->message($response['message'], $response['type']);
-        return redirect()->route('modules.index', ['domain' => app('request')->route()->parameter('company')]);
+        return redirect()->route('pages.index', ['domain' => app('request')->route()->parameter('company')]);
     }
 
     /**
@@ -170,7 +171,7 @@ class ModuleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function generateModuleUrl(Request $request)
+    public function generatePageUrl(Request $request)
     {
         $moduleType = $request->module_type;
         $moduleName = $request->module_name;

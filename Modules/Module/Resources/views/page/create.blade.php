@@ -5,7 +5,7 @@
         <div class="portlet-title min-height">
             <div class="caption">
                 <i class="fa fa-newspaper-o" aria-hidden="true"></i>
-                <span class="caption-subject bold uppercase font-dark">Add Module</span>
+                <span class="caption-subject bold uppercase font-dark">Add Page</span>
             </div>
             <div class="tools">
                 <a href="" class="collapse" data-original-title="" title=""> </a>
@@ -15,13 +15,13 @@
             </div>
         </div>
         <div class="portlet-body form">
-       		{!! Form::open(['route' => ['modules.store', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-create-module', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
-		    	@include('modules.module.form', ['from'=>'add'])
+       		{!! Form::open(['route' => ['pages.store', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-create-module', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
+		    	@include('modules.module.page_form', ['from'=>'add'])
 			{{ Form::close() }}
         </div>
     </div>
 @endsection
 
 @section('page-script')
-    <script type="text/javascript" src="{{ Module::asset('module:js/modules.js') }}"></script>
+    <script type="text/javascript" src="{{ Module::asset('module:js/pages.js') }}"></script>
 @endsection

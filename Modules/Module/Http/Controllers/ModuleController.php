@@ -65,7 +65,10 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        return view('module::module.index');
+        $this->init();
+        $byParentModule = MenuItem::where('menu_id', $this->menuId)->where('type', 'Module')->where('parent_id', null)->get()->pluck('name', 'id');
+        $byModuleName = MenuItem::where('menu_id', $this->menuId)->where('type', 'Module')->where('parent_id', '!=' ,null)->get()->pluck('name', 'id');
+        return view('module::module.index', compact('byParentModule', 'byModuleName'));
     }
 
     /**
@@ -87,7 +90,7 @@ class ModuleController extends Controller
     public function create()
     {
         $this->init();
-        $menuItems = MenuItem::where('menu_id', $this->menuId)->where('type', 'Module')->get()->toArray();
+        $menuItems = MenuItem::where('menu_id', $this->menuId)->where('type', 'Module')->where('parent_id', null)->get()->toArray();
         $allModules = Menu::buildMenuTree($menuItems);
 
         return view('module::module.create', compact('allModules'));
@@ -130,7 +133,7 @@ class ModuleController extends Controller
     {
         $this->init();
         $module = MenuItem::find($moduleId);
-        $menuItems = MenuItem::where('menu_id', $this->menuId)->where('type', 'Module')->get()->toArray();
+        $menuItems = MenuItem::where('menu_id', $this->menuId)->where('type', 'Module')->where('parent_id', null)->get()->toArray();
         $allModules = Menu::buildMenuTree($menuItems);
 
         return view('module::module.edit', compact('module', 'allModules'));
@@ -145,7 +148,7 @@ class ModuleController extends Controller
      */
     public function update(Request $request, $company, $moduleId)
     {
-        $this->menuItemService->storeMenuItem($request, $moduleId);
+        $this->menuItemService->updateMenuItem($request, $moduleId);
         flash()->success(config('config-variables.flash_messages.dataSaved'));
         return redirect()->route('modules.index', ['domain' => app('request')->route()->parameter('company')]);
     }

@@ -19,8 +19,13 @@
                             <div class="col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <span class="input-group-addon no-bg"><i class="fa fa-file-code-o blue-color"></i></span>
-                                        <input type="text" class="form-control" placeholder="By Module Name" id="module_name">
+                                        <span class="input-group-addon no-bg"><i class="fa fa-object-ungroup blue-color"></i></span>
+                                        <select class="form-control selectpicker" id="module_name" id="module_name" placeholder="By Module Name">
+                                            <option value="">By Module Name</option>
+                                            @foreach( $byModuleName as $id=>$name)
+                                                <option value="{{ $id }}">{{ $name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -28,15 +33,43 @@
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
-                                        <select class="form-control selectpicker" id="module_status">
-                                        <option value="">By Status</option>
-                                        @foreach( config('config-variables.search_section.status') as $key=>$status)
+                                        <span class="input-group-addon no-bg"><i class="fa fa-object-group blue-color"></i></span>
+                                        <select class="form-control selectpicker" id="parent_module" id="parent_module" placeholder="By Parent Module">
+                                            <option value="">By Parent Module</option>
+                                            @foreach( $byParentModule as $id=>$name)
+                                                <option value="{{ $id }}">{{ $name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div> 
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon no-bg"><i class="fa fa-genderless blue-color"></i></span>
+                                        <select class="form-control selectpicker" id="module_publicly_visible" placeholder="By Is Publicly Visible">
+                                        <option value="">By Is Publicly Visible</option>
+                                        @foreach( config('config-variables.is_publicly_visible') as $key=>$status)
                                             <option value="{{ $key }}">{{ $status }}</option>
                                         @endforeach
                                     </select>
                                     </div> 
                                 </div>                  
+                            </div>
+
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon no-bg"><i class="fa fa-genderless blue-color"></i></span>
+                                        <select class="form-control selectpicker" id="module_status">
+                                        <option value="">By Status</option>
+                                        @foreach( config('config-variables.select_status') as $key=>$status)
+                                            <option value="{{ $key }}">{{ $status }}</option>
+                                        @endforeach
+                                    </select>
+                                    </div> 
+                                </div>
                             </div>
 
                             <div class="col-md-3 col-lg-3">
@@ -80,7 +113,7 @@
                             </div>
                             <thead>
                                 <tr>
-                                    <th class="text-center">Actions</th>
+                                    <th class="text-center">Action</th>
                                     <th data-field="name" @click="sortBy('name')" :class="[sortKey != 'name' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Module Name</th>
                                     <th data-field="parent_id" @click="sortBy('parent_id')" :class="[sortKey != 'parent_id' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Parent Module</th>
                                     <th data-field="created_datetime" @click="sortBy('created_datetime')" :class="[sortKey != 'created_datetime' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Created Date-time</th>

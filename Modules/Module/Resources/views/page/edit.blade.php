@@ -14,7 +14,7 @@
             </div>
         </div>
         <div class="portlet-body form">
-       		{!! Form::open(['route' => ['modules.update', 'domain' => app('request')->route()->parameter('company'), 'moduleId' => $module->id], 'method' => 'PUT', 'class' => 'js-frm-edit-module', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
+       		{!! Form::open(['route' => ['pages.update', 'domain' => app('request')->route()->parameter('company'), 'moduleId' => $module->id], 'method' => 'PUT', 'class' => 'js-frm-edit-module', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
 		    	@include('modules.module.page_form', ['from'=>'edit'])
 			{{ Form::close() }}
         </div>

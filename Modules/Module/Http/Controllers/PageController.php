@@ -65,7 +65,11 @@ class PageController extends Controller
      */
     public function index()
     {
-        return view('module::page.index');
+        $this->init();
+        $byPageName = MenuItem::where('menu_id', $this->menuId)->where('type', 'Page')->get()->pluck('name', 'id');
+        $allModules = MenuItem::where('menu_id', $this->menuId)->where('type', 'Module')->get()->toArray();
+        $byModuleName = Menu::buildMenuTree($allModules);
+        return view('module::page.index', compact('byPageName', 'byModuleName'));
     }
 
     /**
@@ -145,7 +149,7 @@ class PageController extends Controller
      */
     public function update(Request $request, $company, $moduleId)
     {
-        $this->menuItemService->storeMenuItem($request, $moduleId);
+        $this->menuItemService->updateMenuItem($request, $moduleId);
         flash()->success(config('config-variables.flash_messages.dataSaved'));
         return redirect()->route('pages.index', ['domain' => app('request')->route()->parameter('company')]);
     }

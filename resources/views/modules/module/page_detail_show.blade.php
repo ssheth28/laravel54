@@ -40,7 +40,7 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <div class="col-md-5 col-sm-5">
-                                        <label><b>Module Name</b></label>
+                                        <label><b>Page Name</b></label>
                                     </div>
                                     <div class="col-md-7 col-sm-7">
                                         <label>{{ $module->name }}</label>
@@ -52,7 +52,7 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <div class="col-md-5 col-sm-5">
-                                        <label><b>Module URL</b></label>
+                                        <label><b>Page URL</b></label>
                                     </div>
                                     <div class="col-md-7 col-sm-7">
                                         <label>{{ $module->url }}</label>

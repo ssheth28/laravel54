@@ -47,9 +47,12 @@ class MenuItemService
         $this->init();
         $modules = DB::table('menu_items')
                 ->leftjoin('menu_items as parent', 'menu_items.parent_id', 'parent.id')
+                ->leftjoin('menu_items as mainparent', 'parent.parent_id', 'mainparent.id')
+                ->where('menu_items.type', $request['module_type'])
                 ->where('menu_items.menu_id', $this->menuId)
                 ->select('menu_items.*', DB::raw('DATE_FORMAT(menu_items.created_at, "%d-%m-%Y %H:%i:%s") as "created_datetime"'),
-                    DB::raw('parent.name as parentMenuName'));
+                    DB::raw('parent.name as parentMenuName'),
+                    DB::raw('mainparent.name as mainParentMenuName'));
 
         $sortby = 'menu_items.id';
         $sorttype = 'desc';
@@ -62,12 +65,20 @@ class MenuItemService
         $modules->orderBy($sortby, $sorttype);
 
         if (isset($request['name']) && trim($request['name']) !== '') {
-            $modules->where('menu_items.name', 'like', '%'.$request['name'].'%');
+            $modules->where('menu_items.id', $request['name']);
+        }
+
+        if (isset($request['parent_module']) && trim($request['parent_module']) !== '') {
+            $modules->where('menu_items.parent_id', $request['parent_module']);
+        }
+
+        if (isset($request['public_visible']) && trim($request['public_visible']) !== '') {
+            $modules->where('menu_items.is_publicly_visible', '=', $request['public_visible']);
         }
 
         if (isset($request['status']) && trim($request['status']) !== '') {
             $modules->where('menu_items.is_active', '=', $request['status']);
-        }        
+        }     
 
         $modulesList = [];
 
@@ -91,7 +102,7 @@ class MenuItemService
      *
      * @return Response
      */
-    public function store($request)
+    public function storeMenuItem($request)
     {
         $this->init();
         $module = new MenuItem();

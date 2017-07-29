@@ -1,13 +1,6 @@
 <div class="form-body">
     <div class="row">
         <div class="col-md-12">
-            <div class="note note-warning">
-                <p>If you are creating Parent Module itself then no need to select value from <code><b>Select Parent Module</b></code> From <b>"Basic Information"</b></p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
             <div class="portlet light bordered no-padding-bottom mb-0">
                 <div class="portlet-title">
                     <div class="caption">
@@ -24,16 +17,16 @@
                                 <div class="input-group">
                                     <span class="input-group-addon no-bg">
                                         <i class="fa fa-object-group blue-color"></i>
-                                    </span>                                    
+                                    </span>                           
                                     <select class="form-control selectpicker" tabindex="-98" id="parent_id" name="parent_id">
-                                        <option value="">-- Select Parent Module --</option>
+                                        <option value="">-- Select Module --</option>
                                         @if (count($allModules) > 0)
                                             @foreach ($allModules as $mod)
                                                 @if(isset($mod['children']) && count($mod['children']))
-                                                    <option value="{{ $mod['id'] }}" {{ ($from=='edit' && $mod['id'] == $module->parent_id) ? 'selected=selected ' : '' }}>{{ $mod['name'] }}</option>
+                                                    <option value="{{ $mod['id'] }}" {{ ($from=='edit' && $mod['id'] == $module->parent_id) ? 'selected=selected ' : '' }} {{ $mod['parent_id'] == null ? ' disabled=disabled' : '' }}>{{ $mod['name'] }}</option>
                                                     @include('elements.admin.module_select', ['mod' => $mod['children'], 'prefix' => '&nbsp;&nbsp;&nbsp;'])
                                                 @else
-                                                    <option value="{{ $mod['id'] }}" {{ ($from=='edit' && $mod['id'] == $module->parent_id) ? 'selected=selected ' : '' }}>{{ $mod['name'] }}</option>
+                                                    <option value="{{ $mod['id'] }}" {{ ($from=='edit' && $mod['id'] == $module->parent_id) ? 'selected=selected ' : '' }} {{ $mod['parent_id'] == null ? ' disabled=disabled' : '' }}>{{ $mod['name'] }}</option>
                                                 @endif
                                             @endforeach
                                         @endif
@@ -45,7 +38,7 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon no-bg"><i class="fa fa-object-ungroup blue-color"></i></span>
-                                    {!! Form::text('name', $from=="edit" ? $module->name : null, ['class' => 'form-control', 'id' => 'module_name', 'placeholder' => 'Module Name']) !!}
+                                    {!! Form::text('name', $from=="edit" ? $module->name : null, ['class' => 'form-control', 'id' => 'module_name', 'placeholder' => 'Page Name']) !!}
                                 </div>
                             </div>
                         </div>                   
@@ -53,7 +46,7 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon no-bg"><i class="fa fa-external-link blue-color"></i></span>
-                                    {!! Form::text('url', $from=="edit" ? $module->url : null,['class' => 'form-control', 'id' => 'module_url', 'placeholder' => 'Module URL']) !!}
+                                    {!! Form::text('url', $from=="edit" ? $module->url : null,['class' => 'form-control', 'id' => 'module_url', 'placeholder' => 'Page URL']) !!}
                                 </div>
                             </div>
                         </div>
@@ -69,7 +62,7 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon no-bg"><i class="fa fa-external-link blue-color"></i></span>
-                                    {!! Form::text('order', $from=="edit" ? $module->order : null,['class' => 'form-control', 'placeholder' => 'Module Order']) !!}
+                                    {!! Form::text('order', $from=="edit" ? $module->order : null,['class' => 'form-control', 'placeholder' => 'Page Order']) !!}
                                 </div>
                             </div>
                         </div>
@@ -93,7 +86,7 @@
                                 </div>
                             </div>
                         </div>                              
-                        <div class="col-md-6 col-lg-3">
+                        {{-- <div class="col-md-6 col-lg-3">
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon no-bg">
@@ -102,7 +95,8 @@
                                     {!! Form::select('type', config('config-variables.module_types'), $from=="edit" ? $module->type : null, array('class' =>'form-control selectpicker', 'tabindex' => '-98', 'placeholder' =>'Select Module Type', 'id' => 'module_type')) !!}
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
+                        <input type="hidden" name="type" id="module_type" value="Page">
                         <div class="col-md-6 col-lg-3">
                             <div class="form-group">
                                 <div class="input-group">
@@ -131,7 +125,7 @@
     <div class="row">
         <div class="col-md-9">
             <button type="submit" class="btn blue">Submit</button>
-            <a class="btn default" href="{{ route('modules.index', ['domain' => app('request')->route()->parameter('company')]) }}">Cancel</a>
+            <a class="btn default" href="{{ route('pages.index', ['domain' => app('request')->route()->parameter('company')]) }}">Cancel</a>
         </div>
     </div>
 </div>

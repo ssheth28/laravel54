@@ -88,7 +88,7 @@ $(document).ready(function() {
                         this.sorttype = sorttype;
                     }
 
-                    var data = "sortby="+sortby + "&sorttype=" + sorttype + "&module_type=Module";
+                    var data = "sortby="+sortby + "&sorttype=" + sorttype + "&module_type=Page";
 
                     if(typeof(searchdata) != "undefined") {
                         data += searchdata;
@@ -103,11 +103,11 @@ $(document).ready(function() {
                     }
                 },
                 searchModuleData: function() {
+                    var pageName = $("#page_name").val();
                     var moduleName = $("#module_name").val();
-                    var parentModule = $("#parent_module").val();
-                    var modulePubliclyVisible = $("#module_publicly_visible").val();
-                    var moduleStatus = $('#module_status').val();
-                    var searchdata = "&name="+ moduleName + "&parent_module="+ parentModule + "&public_visible="+ modulePubliclyVisible + "&status="+ moduleStatus;
+                    var pagePubliclyVisible = $("#page_publicly_visible").val();
+                    var pageStatus = $('#page_status').val();
+                    var searchdata = "&name="+ pageName + "&parent_module="+ moduleName + "&public_visible="+ pagePubliclyVisible + "&status="+ pageStatus;
                     if($('#module_pagination').data("twbs-pagination")){
                         $('#module_pagination').twbsPagination('destroy');
                     }

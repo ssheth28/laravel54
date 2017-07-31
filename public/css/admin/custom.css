@@ -2011,7 +2011,6 @@ legend {
 }
 .btn-5a::before {
     left: 0;
-    top: -100%;
 }
 .btn-5::before {
     font-size: 180%;
@@ -2030,4 +2029,8 @@ legend {
     height: 100%;
     transition: all 0.3s ease 0s;
     width: 100%;
+}
+.fa-angle-double-right::before {
+    content: "\f023";
+    font-family: FontAwesome;
 }

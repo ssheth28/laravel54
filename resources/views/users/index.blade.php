@@ -6,41 +6,62 @@
             @if( in_array('filter', app('session')->get('widgetAccess')) )
                 <div class="portlet light box white">
                     <div class="portlet-title">
-                        <div class="caption">                            
-                            <span class="caption-subject font-dark bold uppercase"><i class="fa fa-filter"></i>
-                            SEARCH USER</span>
+                        <div class="caption">
+                            <span class="caption-subject bold uppercase font-dark"><i class="fa fa-filter" aria-hidden="true"></i> Search user</span>
                         </div>
                         <div class="tools">
-                            <a href="javascript:;" class="expand" data-original-title="" title=""> </a>
-                            <a href="javascript:;" class="reload" data-original-title="" title="" aria-describedby="tooltip73982" @click="reloadData();"> </a>
+                            <a href="" class="collapse" data-original-title="" title=""> </a>
                         </div>
-                    </div>
+                        <div class="actions">
+                            <a class="btn btn-icon-only btn-default fullscreen" href="#" data-original-title="" title=""> </a>
+                        </div>
+                    </div>                  
                     <div class="portlet-body flip-scroll" style="display: none">
                         <div class="" id="frmSearchData">
-                            <div class="row">
-                                <div class="col-md-3 col-lg-3">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <span class="input-group-addon no-bg"><i class="fa fa-envelope blue-color"></i></span>
-                                            <input type="text" name="name" class="form-control" placeholder="By User Name" id="name">
+                            <div class="form-body">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-3">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon no-bg"><i class="fa fa-envelope blue-color"></i></span>
+                                                <input type="text" name="name" class="form-control" placeholder="By User" id="name">
+                                            </div>
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-lg-2 col-md-3">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon no-bg"><i class="fa fa-envelope blue-color"></i></span>
+                                                <input type="text" name="email" class="form-control" placeholder="By User Email" id="email">
+                                            </div>
+                                        </div>        
+                                    </div>
+
+                                    <div class="col-lg-2 col-md-3">
+                                        <div class="form-group">
+                                            <div class="input-group select2-bootstrap-prepend">
+                                                <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
+                                                {!! Form::select('role', $roles,null, array('class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'id' => 'role', 'placeholder' => '-- By Role --')) !!}
+                                            </div>
+                                        </div>
+                                    </div>  
+
+                                    <div class="col-lg-2 col-md-3">
+                                        <div class="form-group">
+                                            <div class="input-group select2-bootstrap-prepend">
+                                                <span class="input-group-addon no-bg"><i class="fa fa-building blue-color"></i></span>
+                                                {!! Form::select('department', $departments,null, array('class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'id' => 'department', 'placeholder' => '-- By department --')) !!}                                      
+                                            </div>
                                         </div>
                                     </div>
-                                </div> 
 
-                                <div class="col-md-3 col-lg-3">
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <span class="input-group-addon no-bg"><i class="fa fa-envelope blue-color"></i></span>
-                                            <input type="text" name="email" class="form-control" placeholder="By User Email" id="email">
+                                    <div class="col-lg-2 col-md-3">
+                                        <div class="form-col-2">
+                                            <button type="button" class="btn blue custom-filter-submit" @click="searchUserData()">Search</button>
+                                            <button type="button" class="btn red custom-filter-cancel" @click="clearForm('frmSearchData')">Cancel</button>
                                         </div>
-                                    </div>        
-                                </div>
-
-                                <div class="col-md-3 col-lg-3">
-                                    <div class="form-col-2">
-                                        <button type="button" class="btn blue custom-filter-submit" @click="searchUserData()">Search</button>
-                                        <button type="button" class="btn red custom-filter-cancel" @click="clearForm('frmSearchData')">Clear</button>
-                                    </div>
+                                    </div>                                    
                                 </div>
                             </div>
                         </div>
@@ -51,9 +72,8 @@
                 <div class="portlet light">
                     @include('flash::message')
                     <div class="portlet-title">
-                        <div class="caption col-md-8">
-                            <i class="fa fa-user"></i>
-                            <span class="caption-subject font-dark bold uppercase">MANAGE USER</span> &nbsp;&nbsp;
+                        <div class="caption">
+                            <span class="caption-subject bold uppercase font-dark"><i class="fa fa-user" aria-hidden="true"></i> Manage user</span> &nbsp;&nbsp;
                             <span style="display:inline-block;">
                                 <label class="mt-checkbox"> Show User With Pending Invitation
                                     <input type="checkbox" value="1" name="not_accepted_invitation" id="not_accepted_invitation" @click="searchUserData()" />
@@ -61,42 +81,47 @@
                                 </label>
                             </span>
                         </div>
-                        <div class="col-md-4">
-                            <div class="btn-group pull-right">
-                                <a class="btn sbold border-btn" href="{{ route('users.create', ['domain' => app('request')->route()->parameter('company')]) }}"> Add New
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                            </div>
+                        <div class="tools">
+                            <a href="" class="collapse" data-original-title="" title=""> </a>
                         </div>
-                    </div>
+                        <div class="actions">
+                            <a href="{{ route('users.create', ['domain' => app('request')->route()->parameter('company')]) }}" class="btn btn-icon-only btn-default tooltips" data-container="body" data-placement="top" data-original-title="Add New User"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                            <a class="btn btn-icon-only btn-default dropdown-toggle tooltips" data-container="body" data-placement="top" data-original-title="Tools" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-gear" aria-hidden="true"></i></a>
+                            <ul class="dropdown-menu pull-right">
+                                <li>
+                                    <a href="javascript:;">
+                                        <i class="fa fa-print"></i> Print </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <i class="fa fa-file-pdf-o"></i> Save as PDF </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <i class="fa fa-file-excel-o"></i> Export to Excel </a>
+                                </li>
+                            </ul>
+                            <a class="btn btn-icon-only btn-default fullscreen" href="#" data-original-title="" title=""> </a>
+                        </div>
+                    </div>                    
                     <div class="portlet-body">
                         <div>
                             <table class="table table-striped table-bordered table-hover order-column" v-cloak id="userTbl">
-                                <div class="actions pull-right table-icons">
-                                    <a class="btn btn-icon-only btn-default" href="{{ route('users.create', ['domain' => app('request')->route()->parameter('company')]) }}">
-                                        <i class="fa fa-plus"></i>
-                                    </a>
-                                    <a class="btn btn-icon-only btn-default" href="#">
-                                        <i class="fa fa-gear"></i>
-                                    </a>
-                                    <a class="btn btn-icon-only btn-default fullscreen" href="#" data-original-title="" title="">
-                                        <i class= "fa fa-expand"></i>
-                                    </a> 
-                                </div>
                                 <thead>
                                     <tr>
                                         <th class="text-center">Actions</th>
                                         <th data-field="username" @click="sortBy('username')" :class="[sortKey != 'username' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Username</th>
                                         <th data-field="email" @click="sortBy('email')" :class="[sortKey != 'email' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Email Id</th>
+                                        <th data-field="email" @click="sortBy('email')" :class="[sortKey != 'email' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Role Name</th>
                                         <th data-field="person.department" @click="sortBy('person.department')" :class="[sortKey != 'person.department' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Department</th>
-                                        <th data-field="person.mobile_number" @click="sortBy('person.mobile_number')" :class="[sortKey != 'person.mobile_number' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Contact</th>
+                                        <th data-field="person.mobile_number" @click="sortBy('person.mobile_number')" :class="[sortKey != 'person.mobile_number' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Contact No.</th>
                                         <th data-field="person.date_of_joining" @click="sortBy('person.date_of_joining')" :class="[sortKey != 'person.date_of_joining' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">DOJ</th>
                                         <th data-field="person.gender" @click="sortBy('person.gender')" :class="[sortKey != 'person.gender' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Gender</th>
                                         <th data-field="person.status" @click="sortBy('person.status')" :class="[sortKey != 'person.status' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="" v-for="user in userData"> 
+                                    <tr v-for="user in userData">
                                         <td class="text-center table_icon">
                                             <a href="#" class="btn btn-icon-only outline-green js-user-detail" data-toggle="modal" data-target=".user-detail-show" data-url="{{ url('admin/users') }}/@{{ user.id }}">
                                             <i class="fa fa-eye"></i>
@@ -111,9 +136,10 @@
                                         </td>
                                         <td>@{{ user.username }}</td>
                                         <td>@{{ user.email }}</td>
-                                        <td>@{{ user.department }}</td>
+                                        <td></td>
+                                        <td>@{{ user.settings['department'] }}</td>
                                         <td>@{{ user.mobile_number }}</td>
-                                        <td>@{{ user.joined_date }}</td>
+                                        <td>@{{ user.settings['doj'] }}</td>
                                         <td>@{{ user.gender == 0 ? 'Male' : 'Female' }}</td>
                                         <td>
                                             <span class="wz-status active tooltips" data-container="body" data-placement="top"  v-if="user.status == 1"></span>

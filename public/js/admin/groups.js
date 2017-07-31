@@ -91,8 +91,12 @@ $(document).ready(function() {
                     }
                 },
                 searchGroupData: function() {
-                    var name = $("#group_name").val();
-                    var searchdata = "&name="+ name;
+                    var role_name = $("#role_name").val();
+                    var parent_module = $("#parent_module").val();
+                    var sub_module = $("#sub_module").val();
+                    var page_name = $("#page_name").val();
+                    var widget = $("#widget").val();
+                    var searchdata = "&role_name="+ role_name + "&parent_module="+ parent_module + "&sub_module="+ sub_module + "&page_name="+ page_name + "&widget="+ widget;
                     if($('#group_pagination').data("twbs-pagination")){
                         $('#group_pagination').twbsPagination('destroy');
                     }

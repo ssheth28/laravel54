@@ -243,9 +243,11 @@ $(document).ready(function() {
                 searchUserData: function() {
                     var name = $("#name").val();
                     var email = $("#email").val();
+                    var department = $("#department").val();
+                    var role = $("#role").val();
                     var not_accepted_invitation = $("#not_accepted_invitation").is(":checked") ? "1" : "0";
                     var created_at = $("#created_at").val();
-                    var searchdata = "&name="+ name + "&email=" + email + "&not_accepted_invitation=" + not_accepted_invitation;
+                    var searchdata = "&name="+ name + "&email=" + email +"&department=" + department + "&role=" + role + "&not_accepted_invitation=" + not_accepted_invitation;
                     if($('#user_pagination').data("twbs-pagination")){
                         $('#user_pagination').twbsPagination('destroy');
                     }

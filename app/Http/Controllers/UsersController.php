@@ -54,7 +54,10 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        return view('users.index');
+        $companyId = Landlord::getTenants()['company']->id;        
+        $departments = Department::all()->pluck('name', 'id');
+        $roles = Role::where('name', 'LIKE', $companyId.'%')->pluck('display_name', 'name');
+        return view('users.index', compact('departments', 'roles'));
     }
 
     public function validateEmail(Request $request)
@@ -143,6 +146,14 @@ class UsersController extends Controller
             $users->where('users.email', 'like', '%'.$request['email'].'%');
         }
 
+        if (isset($request['department']) && trim($request['department']) !== '') {
+            $users->where('company_user.settings->department', $request['department']);
+        }
+
+        if (isset($request['role']) && trim($request['role']) !== '') {
+            $users->where('company_user.settings->department', $request['role']);
+        }        
+
         if (isset($request['not_accepted_invitation']) && trim($request['not_accepted_invitation']) == '1') {
             if (!isset($request['sortby'])) {
                 $users->orderBy('company_user.settings->is_invitation_accepted', 'asc');
@@ -212,7 +223,6 @@ class UsersController extends Controller
             $person->voter_id_number = $request->voter_id_no;
             $person->blood_group = $request->blood_group;
             $person->dob = Carbon::parse($request->birth_date)->format('Y-m-d H:i:s');
-            // $person->date_of_joining = Carbon::parse($request->joining_date)->format('Y-m-d H:i:s');
             $address = [];
             $address['current_address'] = $request->current_address;
             $person->address = $address;
@@ -230,6 +240,15 @@ class UsersController extends Controller
             $user->banned_at = Carbon::parse($request->banned_at)->format('Y-m-d H:i:s');
             $user->save();
             $user->assignRole($request->get('roles'));
+
+            $userAvatar = $request->file('user_image');
+
+            if ($userAvatar) {
+                $user->clearMediaCollection('User');
+                $media = $user->addMedia($userAvatar)
+                            ->preservingOriginal()
+                            ->toMediaLibrary('User');
+            }
 
             $userId = $user->id;
             // dd($userId);

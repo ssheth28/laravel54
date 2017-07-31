@@ -119,7 +119,11 @@ class PageController extends Controller
     public function show($company, $moduleId)
     {
         $this->init();
-        $module = MenuItem::find($moduleId);
+        $module = DB::table('menu_items')
+                ->leftjoin('menu_items as parent', 'menu_items.parent_id', 'parent.id')
+                ->where('menu_items.id', $moduleId)
+                ->select('menu_items.*', DB::raw('DATE_FORMAT(menu_items.created_at, "%d-%m-%Y %H:%i:%s") as "created_datetime"'),
+                    DB::raw('parent.name as parentMenuName'))->first();
         $moduleDetailHtml = view('modules.module.page_detail_show', ['module' => $module])->render();
 
         return array('moduleDetailHtml' => $moduleDetailHtml);        

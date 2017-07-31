@@ -30,10 +30,10 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-group">
                                     <div class="col-md-5 col-sm-5">                                    
-                                        <label><b>Parent Module</b></label>
+                                        <label><b>Module Name</b></label>
                                     </div>
                                     <div class="col-md-7 col-sm-7">
-                                        <label>{{ $module->parent_id }}</label>
+                                        <label>{{ $module->parentMenuName }}</label>
                                     </div>
                                 </div>
                             </div>

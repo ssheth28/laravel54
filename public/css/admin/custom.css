@@ -2033,6 +2033,7 @@ legend {
 .fa-angle-double-right::before {
     content: "\f023";
     font-family: FontAwesome;
+}
 .portlet.light > .portlet-title > .actions .btn-icon-only i {
     color: #a0a0a0;
     margin: 0;
@@ -2041,4 +2042,8 @@ legend {
     margin-top: -2px;
     margin-left: 4px;
     padding: 0;
+}
+
+.portlet.light > .portlet-title {
+    min-height: 35px;
 }

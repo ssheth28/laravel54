@@ -16,3 +16,7 @@
     margin: 0 auto;
     text-align: center;
 }
+
+.dropdown-menu {
+    font-family: "Open Sans",sans-serif;
+}

@@ -33,7 +33,7 @@
                                         <label><b>Parent Module</b></label>
                                     </div>
                                     <div class="col-md-7 col-sm-7">
-                                        <label>{{ $module->parent_id }}</label>
+                                        <label>{{ $module->parentMenuName }}</label>
                                     </div>
                                 </div>
                             </div>

@@ -13,15 +13,15 @@
                         <a href="javascript:;" class="reload" data-original-title="" title="" aria-describedby="tooltip73982" @click="reloadData();"> </a>
                     </div>
                 </div>
-                <div class="portlet-body flip-scroll" style="display: none">
+                <div class="portlet-body flip-scroll">
                     <div id="frmSearchData">
                         <div class="row">
                             <div class="col-md-3 col-lg-3">
                                 <div class="form-group">
-                                    <div class="input-group">
+                                    <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon no-bg"><i class="fa fa-object-ungroup blue-color"></i></span>
-                                        <select class="form-control selectpicker" id="page_name" id="page_name" placeholder="By Page Name">
-                                            <option value="">By Page Name</option>
+                                        <select class="form-control select2 select2-allow-clear select2-hide-search-box" id="page_name" id="page_name" placeholder="By Page Name">
+                                            <option value="">-- By Page Name --</option>
                                             @foreach( $byPageName as $id=>$name)
                                                 <option value="{{ $id }}">{{ $name }}</option>
                                             @endforeach
@@ -32,9 +32,9 @@
 
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <div class="input-group">
+                                    <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon no-bg"><i class="fa fa-object-group blue-color"></i></span>
-                                        <select class="form-control selectpicker" tabindex="-98" id="module_name" name="module_name">
+                                        <select class="form-control select2 select2-allow-clear select2-hide-search-box" tabindex="-98" id="module_name" name="module_name">
                                             <option value="">-- By Module Name --</option>
                                             @if (count($byModuleName) > 0)
                                                 @foreach ($byModuleName as $mod)
@@ -53,9 +53,9 @@
 
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <div class="input-group">
+                                    <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon no-bg"><i class="fa fa-genderless blue-color"></i></span>
-                                        <select class="form-control selectpicker" id="page_publicly_visible" placeholder="By Is Publicly Visible">
+                                        <select class="form-control select2 select2-allow-clear select2-hide-search-box" id="page_publicly_visible" placeholder="By Is Publicly Visible">
                                         <option value="">By Is Publicly Visible</option>
                                         @foreach( config('config-variables.is_publicly_visible') as $key=>$status)
                                             <option value="{{ $key }}">{{ $status }}</option>
@@ -67,9 +67,9 @@
 
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <div class="input-group">
+                                    <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon no-bg"><i class="fa fa-genderless blue-color"></i></span>
-                                        <select class="form-control selectpicker" id="page_status">
+                                        <select class="form-control select2 select2-allow-clear select2-hide-search-box" id="page_status">
                                         <option value="">By Status</option>
                                         @foreach( config('config-variables.select_status') as $key=>$status)
                                             <option value="{{ $key }}">{{ $status }}</option>
@@ -91,7 +91,7 @@
             </div>
             <div class="portlet light">
                 @include('flash::message')
-                <div class="portlet-title">
+{{--                 <div class="portlet-title">
                     <div class="caption col-md-9">
                         <i class="fa fa-table"></i>
                         <span class="caption-subject bold uppercase font-dark">MANAGE PAGE</span>
@@ -103,21 +103,40 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </div> --}}
+
+                    <div class="portlet-title">
+                    <div class="caption">
+                        <span class="caption-subject bold uppercase font-dark"><i class="fa fa-user" aria-hidden="true"></i> Manage Page </span>
+                    </div>
+                    <div class="tools">
+                        <a href="" class="collapse" data-original-title="" title=""> </a>
+                    </div>
+                    <div class="actions">
+                        <a href="{{ route('pages.create', ['domain' => app('request')->route()->parameter('company')]) }}" class="btn btn-icon-only btn-default tooltips" data-container="body" data-placement="top" data-original-title="Add New Page"><i class="fa fa-plus" aria-hidden="true"></i>
+                        </a>
+                        <a class="btn btn-icon-only btn-default dropdown-toggle tooltips" data-container="body" data-placement="top" data-original-title="Tools" data-toggle="dropdown"><i class="fa fa-gear" aria-hidden="true"></i>
+                        </a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-print"></i> Print </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-file-pdf-o"></i> Save as PDF </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-file-excel-o"></i> Export to Excel </a>
+                            </li>
+                        </ul>
+                        <a class="btn btn-icon-only btn-default fullscreen" href="#" data-original-title="" title=""> </a>
+                    </div>
+                </div>                
                <div class="portlet-body">
                     <div>
                         <table class="table table-striped table-bordered table-hover order-column" v-cloak id="moduleTbl">
-                            <div class="actions pull-right table-icons">
-                                <a class="btn btn-icon-only btn-default" href="{{ route('pages.create', ['domain' => app('request')->route()->parameter('company')]) }}">
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                                <a class="btn btn-icon-only btn-default" href="#">
-                                    <i class="fa fa-gear"></i>
-                                </a>
-                                <a class="btn btn-icon-only btn-default fullscreen" href="#" data-original-title="" title="">
-                                    <i class= "fa fa-expand"></i>
-                                </a>
-                            </div>
                             <thead>
                                 <tr>
                                     <th class="text-center">Actions</th>

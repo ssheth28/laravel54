@@ -1871,10 +1871,17 @@ table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
 #view_user_details .modal-dialog .form-horizontal .col-md-12:last-child fieldset {
   margin-bottom: 0;
 }
-fieldset {
+/*fieldset {
     border: 1px solid #e7ecf1;
     margin: 0 0 25px;
+}*/
+
+fieldset {
+    border: 1px solid #e7ecf1;
+    margin: 0 0 20px;
+    padding: 15px 20px 0;
 }
+
 #view_user_details fieldset legend {
     font-size: 16px;
     font-weight: 600;

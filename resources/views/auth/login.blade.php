@@ -4,6 +4,8 @@
     <div class="login-content white-placeholder">
         <h3 class="text-white text-center">Login to your account</h3>
         
+        @include('flash::message')
+        
         @if (session('status'))
             <div class="alert alert-success">
                 {{ __(session('status')) }}

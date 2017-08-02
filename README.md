@@ -3,7 +3,7 @@
 <h3>Installation:-</h3>
 
 <ul>
-	<li><code>git clone https://github.com/coding-sunshine/laravel54.git projectname</code></li>
+	<li><code>clone the repository</code></li>
 	<li><code>cd projectname</code></li>
 	<li><code>composer install</code></li>
 	<li><code>php artisan key:generate</code></li>

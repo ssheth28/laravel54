@@ -13,10 +13,10 @@
                         <a href="javascript:;" class="reload" data-original-title="" title="" aria-describedby="tooltip73982" @click="reloadData();"> </a>
                     </div>
                 </div>
-                <div class="portlet-body flip-scroll">
-                    <div id="frmSearchData">
+                <div class="portlet-body">
+                    <div class="form-body">
                         <div class="row">
-                            <div class="col-md-3 col-lg-3">
+                            <div class="col-lg-2 col-md-3">
                                 <div class="form-group">
                                     <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon no-bg"><i class="fa fa-object-ungroup blue-color"></i></span>
@@ -30,7 +30,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-3 col-md-3">
+                            <div class="col-lg-2 col-md-3">
                                 <div class="form-group">
                                     <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon no-bg"><i class="fa fa-object-group blue-color"></i></span>
@@ -44,7 +44,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-3 col-md-3">
+                            <div class="col-lg-2 col-md-3">
                                 <div class="form-group">
                                     <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon no-bg"><i class="fa fa-genderless blue-color"></i></span>
@@ -58,7 +58,7 @@
                                 </div>                  
                             </div>
 
-                            <div class="col-lg-3 col-md-3">
+                            <div class="col-lg-2 col-md-3">
                                 <div class="form-group">
                                     <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon no-bg"><i class="fa fa-genderless blue-color"></i></span>
@@ -72,7 +72,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3 col-lg-3">
+                            <div class="col-lg-2 col-md-3">
                                 <div class="form-col-2">
                                     <button type="button" class="btn blue custom-filter-submit" @click="searchModuleData()">Search</button>
                                     <button type="button" class="btn red custom-filter-cancel" @click="clearForm('frmSearchData')">Clear</button>

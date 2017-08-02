@@ -3,16 +3,47 @@
 
 /* New layput*/
 
-.login_bg {
+.full-login-screen {
+    display: table;
+    height: 100vh;
+}
+
+.login-view-block {
 	background-image: url(../../img/admin/login/bg.jpg);
     background-size: cover;
     min-height: 100vh;
 }
 .leftbar-login {
-    padding-top: 20%; 
+    display: table-cell;
+    float: none;
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.leftbar-login .login-logo {
+    margin-bottom: 26px;
+}
+.leftbar-login .login-description span {
+    color: #4276a4;
+}
+.leftbar-login .login-description h2 {
+    margin: 0 0 9px;
+}
+.leftbar-login .login-description h3 {
+    margin: 0;
 }
 .rightbar-login {
-	padding-top: 8%;
+	display: table-cell;
+    float: none;
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.rightbar-login .login-form{
+    margin-bottom: 0px;
+}
+.rightbar-login .login-form .form-group {
+    margin-bottom: 20px;
 }
 .login-description {
     border-left: 4px solid #4276a4;
@@ -37,7 +68,7 @@
     box-shadow: 0 0 7px 5px rgba(0, 0, 0, 0.15);
     height: 85px;
     margin: -56px auto 32px;
-    padding: 30px 12px;
+    padding: 14px 18px;
     text-align: center;
     width: 85px;
 }
@@ -115,6 +146,7 @@ input:-webkit-autofill {
     height: 100%;
     transition: all 0.3s ease 0s;
     width: 100%;
+    font-size: 14px;
 }
 .btn-5a:hover::before {
     top: 0;
@@ -143,4 +175,8 @@ input:-webkit-autofill {
 }
 .btn.btn-5a:not(.btn-sm):not(.btn-lg) {
     line-height: 1;
+}
+.mt-checkbox > span, .mt-radio > span {
+    width: 19px;
+    height: 19px;
 }

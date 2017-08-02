@@ -105,7 +105,8 @@ class RegisterController extends Controller
         dispatch(new SendCompanyRegistrationEmail($registrationData['user'], $registrationData['company']));
         dispatch(new SendVerificationEmail($registrationData['user']));
 
-        return view('auth.verification');
+        flash()->success('You have successfully registered. An email is sent to you for verification.');
+        return redirect()->route('login', ['domain' => 'www']);
     }
 
     /**

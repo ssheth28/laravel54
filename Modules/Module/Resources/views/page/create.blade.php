@@ -5,7 +5,7 @@
         <div class="portlet-title min-height">
             <div class="caption">
                 <i class="fa fa-newspaper-o" aria-hidden="true"></i>
-                <span class="caption-subject bold uppercase font-dark">Add Page</span>
+                <span class="caption-subject bold uppercase font-dark">Create Page</span>
             </div>
             <div class="tools">
                 <a href="" class="collapse" data-original-title="" title=""> </a>

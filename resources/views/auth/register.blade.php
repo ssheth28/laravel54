@@ -102,7 +102,9 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
-                        <button class="btn btn-lg login-btn" type="submit">{{ __("Register") }}</button>
+                        <button class="btn-del btn-5 btn-5a fa fa-angle-double-right" type="submit">
+                        <span>{{ __("Register") }}</span>
+                        </button>
                     </div>
                     <div class="login-register">
                         <a href="{{ route('login', ['domain' => app('request')->route()->parameter('company')]) }}">{{ __("Login") }}</a>

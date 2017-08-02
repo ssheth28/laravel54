@@ -17,7 +17,8 @@ class CreateClientsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email');
-            $table->integer('country_id');
+            $table->integer('country_id')->unsigned()->nullable();
+            $table->foreign('country_id')->references('id')->on('countries');
             $table->timestamp('dob')->nullable();
             $table->string('contact_no');
             $table->string('skype_address')->nullable();

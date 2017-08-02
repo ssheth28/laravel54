@@ -41,7 +41,15 @@ class AssetsController extends Controller
      */
     public function index()
     {
-        return view('assets.index');
+        $companyId = Landlord::getTenants()['company']->id;
+        $users = DB::table('users')
+                    ->join('company_user', 'company_user.user_id', 'users.id')
+                    ->join('people', 'users.person_id', 'people.id')
+                    ->where('company_user.company_id', $companyId)
+                    ->select('users.*', DB::raw('CONCAT(people.first_name, " ", people.last_name) as userFullName'))
+                    ->pluck('userFullName', 'users.id');
+
+        return view('assets.index', compact('users'));
     }
 
     public function getAssetData() {
@@ -92,7 +100,15 @@ class AssetsController extends Controller
      */
     public function create()
     {
-        return view('assets.create');
+        $companyId = Landlord::getTenants()['company']->id;
+        $users = DB::table('users')
+                    ->join('company_user', 'company_user.user_id', 'users.id')
+                    ->join('people', 'users.person_id', 'people.id')
+                    ->where('company_user.company_id', $companyId)
+                    ->select('users.*', DB::raw('CONCAT(people.first_name, " ", people.last_name) as userFullName'))
+                    ->pluck('userFullName', 'users.id');
+
+        return view('assets.create', compact('users'));
     }
 
     /**

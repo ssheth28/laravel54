@@ -1,0 +1,22 @@
+/*dropzone related css*/
+
+.dropzone.dz-clickable {
+    position: relative;
+    z-index: 1;
+}
+.dropzone.dz-clickable h3 {
+    display: inline-block;
+    line-height: 0;
+    margin: 35px 0 20px;
+}
+.dropzone-file-area {
+    border: 2px dashed #028AF4;
+    background: #fff;
+    padding: 20px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.dropdown-menu {
+    font-family: "Open Sans",sans-serif;
+}

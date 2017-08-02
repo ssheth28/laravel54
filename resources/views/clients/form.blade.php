@@ -22,9 +22,9 @@
                     </div>
                     <div class="col-md-6 col-lg-6">
                         <div class="form-group">
-                            <div class="input-group">
+                            <div class="input-group select2-bootstrap-prepend">
                                 <span class="input-group-addon no-bg"><i class="fa fa-globe blue-color"></i></span>
-                                {!! Form::select('client_country', $countries,  $from == 'edit' ? $client->country_id : null, ['class' =>'selectpicker', 'placeholder' => '-- Select Client Country --']) !!}
+                                {!! Form::select('client_country', $countries,  $from == 'edit' ? $client->country_id : null, ['class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select Client Country --']) !!}
                             </div>
                         </div>
                     </div>
@@ -75,6 +75,8 @@
                             </div>
                         </div>
                     </div>   
+                </div>
+                <div class="row">
                     <div class="col-md-6 col-lg-6">
                         <div class="form-group">
                             <div class="input-group">

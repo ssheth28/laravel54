@@ -2,9 +2,10 @@
 
 @section('auth-content')
     <div class="login-content white-placeholder">
-        <h3 class="text-white text-center">Registration</h3>
         <form class="login-form registration-form js-register-frm" role="form" method="POST" action="{{ route('register', ['domain' => app('request')->route()->parameter('company')]) }}">
             {{ csrf_field() }}
+
+            <h3 class="text-white text-center">Registration</h3>
 
             <div class="alert alert-danger display-hide">
                 <button class="close" data-close="alert"></button>

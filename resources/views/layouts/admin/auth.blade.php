@@ -39,29 +39,26 @@
     </head>
     <!-- END HEAD -->
 
-    <body class=" login">
-    	<div class="user-login-5">
-            <div class="row bs-reset">
-                <div class="login_bg">
-                    <div class="container">
-                        <div class="full-login-screen row">
-                            <div class="col-md-6 leftbar-login">
-                                <div class="login-logo">
-                                    <img class="login-logo" src="{{ asset('img/logo.png') }}" />
-                                </div>
-                                <div class="login-description">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua.</p>
-                                </div>
+    <body class="login">
+    	<div class="login-view-block">
+            <div class="container">
+                <div class="full-login-screen">
+                    <div class="col-md-6 leftbar-login">
+                        <div class="login-logo">
+                            <img class="" src="{{ asset('img/logo.png') }}" />
+                        </div>
+                        <div class="login-description">
+                            <h2><span>Zwaluw</span> Comfortsanitair</h2>
+                            <h3>ver Zwaluw Comfortsanitair de specialist op het gebied van comfortsanitair.</h3>
+                        </div>
+                        <p class="leftside-para">Het aanpassen van uw badkamer naar een comfortabele omgeving is onze passie.</p>
+                    </div>
+                    <div class="col-md-6 rightbar-login">   
+                        <div class="content-log">
+                            <div class="login-logo logoicon">
+                                <img src="{{ asset('img/wazir-logo.png') }}">
                             </div>
-                            <div class="col-md-6 rightbar-login">   
-                                <div class="content-log">
-                                    <div class="login-logo logoicon">
-                                        <img src="{{ asset('img/wazir-logo.png') }}">
-                                    </div>
-                                    @yield('auth-content')
-                                </div>
-                            </div>
+                            @yield('auth-content')
                         </div>
                     </div>
                 </div>

@@ -154,6 +154,8 @@ $(document).ready(function() {
     $('.js-icon-picker').iconpicker({
         hideOnSelect: true,
     });
+
+    
 });
 
 function ajaxCall(url, data, method, dataType, successHandlerFunction, processDataFlag, contentTypeFlag) {

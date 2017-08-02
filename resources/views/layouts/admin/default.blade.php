@@ -35,11 +35,14 @@
         <!-- END THEME GLOBAL STYLES -->
         <!-- BEGIN THEME LAYOUT STYLES -->
         <link href="{{ asset('css/admin/layout.min.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('css/admin/themes/blue.min.css') }}" rel="stylesheet" type="text/css" id="style_color" />        
+        <link href="{{ asset('css/admin/themes/blue.min.css') }}" rel="stylesheet" type="text/css" id="style_color" />
+        <link href="{{ asset('css/admin/dropzone.min.css') }}" rel="stylesheet" type="text/css" id="style_color" /> 
+
 
         @yield('page-style')
 
         <link href="{{ asset('css/admin/custom.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('css/admin/common.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/admin/form.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/admin/profile.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('css/admin/owl.carousel.min.css') }}" rel="stylesheet" type="text/css" />
@@ -133,6 +136,8 @@
         <script src="{{ asset('js/admin/owl.carousel.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/admin/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/admin/bootstrap-tour.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/admin/dropzone.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('js/admin/form-dropzone.min.js') }}" type="text/javascript"></script>
         @yield("page-script")
     </body>
 </html>

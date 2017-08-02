@@ -27,29 +27,25 @@
                             </div> 
                         </div>
 
-                        <div class="col-lg-3 col-md-3">
-                            <div class="form-group">
-                                <div class="form-col-1">
-                                    <label class="label">Roles </label>
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>         
-                                    {!! Form::select('roles[]', $roles, $companyWiseRoles, array('class' =>'select2-allow-clear select2-hide-search-box form-control')) !!}
-                                </div> 
-                            </div>                  
-                        </div>
+                       <div class="col-lg-3 col-md-3">
+                            <div class="form-col-1">
+                                <label class="label">Roles </label>
+                            </div>
+                            <div class="input-group select2-bootstrap-prepend">
+                                <span class="input-group-addon no-bg"><i class="fa fa-building blue-color"></i></span>
+                                {!! Form::select('roles[]', $roles, $companyWiseRoles, array('class' =>'form-control select2 select2-allow-clear select2-hide-search-box')) !!}
+                            </div>
+                        </div>                         
 
-                        <div class="col-lg-3 col-md-3">
-                            <div class="form-group">
-                                <div class="form-col-1">
-                                    <label class="label">Department</label>
-                                </div>
-                                <div class="input-group">
-                                    <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
-                                    {!! Form::select('department', $departments, isset($companyUser->settings['department']) ? $companyUser->settings['department'] : '', array('class' =>'form-control select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select Department --')) !!}
-                                </div> 
-                            </div>                  
-                        </div>
+                       <div class="col-lg-3 col-md-3">
+                            <div class="form-col-1">
+                                <label class="label">Department</label>
+                            </div>
+                            <div class="input-group select2-bootstrap-prepend">
+                                <span class="input-group-addon no-bg"><i class="fa fa-building blue-color"></i></span>
+                                {!! Form::select('department', $departments, isset($companyUser->settings['department']) ? $companyUser->settings['department'] : '', array('class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select Department --')) !!}
+                            </div>
+                        </div>                        
 
                         <div class="col-md-3 col-lg-3">
                             <div class="form-group">
@@ -58,7 +54,7 @@
                                 </div>
                                 <div class="input-group">
                                     <span class="input-group-addon no-bg"><i class="fa fa-calendar blue-color"></i></span>
-                                    {!! Form::text('joining_date', $user->person->date_of_joining, ['class' => 'form-control form-control-inline date-picker datepicker', 'size' => '16']) !!}
+                                    {!! Form::text('joining_date', isset($companyUser->settings['doj']) ? $companyUser->settings['doj'] : '', ['class' => 'form-control form-control-inline date-picker datepicker', 'size' => '16']) !!}
                                 </div>
                             </div>
                         </div>

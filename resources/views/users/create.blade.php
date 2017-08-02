@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="portlet-body form" id="user_form_wizard">
-       		{!! Form::open(['route' => ['users.store', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-create-user form-horizontal userfrm', 'role' => 'form', 'id' => 'submit_user_form']) !!}
+       		{!! Form::open(['route' => ['users.store', 'domain' => app('request')->route()->parameter('company')], 'class' => 'js-frm-create-user form-horizontal userfrm', 'role' => 'form', 'id' => 'submit_user_form', 'enctype' => 'multipart/form-data']) !!}
                 <div class="form-wizard forms-grid cus-form-wizard">
     		    	<div class="form-body">
                         <ul class="nav nav-pills nav-justified steps">
@@ -61,7 +61,6 @@
                                 <div class="note note-info">
                                     <p style="font-size: 18px;">Provide your account details</p>
                                 </div>
-                                <!-- <h3 class="block">Provide your account details</h3> -->
                                 <div class="panel-grid-main">
                                     <div class="form-group">
                                         <div class="scroll-wrapper">
@@ -73,26 +72,22 @@
                                                             {!! Form::email('email', app('request')->get('email'), ['class' => 'form-control', 'placeholder' => 'Email ID', 'id' => 'email']) !!}
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-3 col-md-3">
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
-                                                                {!! Form::select('roles[]', $roles, null, array('class' =>'form-control select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select User Role --')) !!}
-                                                            </div> 
-                                                        </div>                  
-                                                    </div>
-                                                    <div class="col-lg-3 col-md-3">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon no-bg"><i class="fa fa-envelope blue-color"></i></span>
-                                                            {!! Form::select('department', $departments,null, array('class' =>'form-control select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select Department --')) !!}
+                                                   <div class="col-lg-3 col-md-3">
+                                                        <div class="input-group select2-bootstrap-prepend">
+                                                            <span class="input-group-addon no-bg"><i class="fa fa-building blue-color"></i></span>
+                                                            {!! Form::select('roles[]', $roles, null, array('class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select User Role --')) !!}
+                                                        </div>
+                                                    </div>   
+                                                   <div class="col-lg-3 col-md-3">
+                                                        <div class="input-group select2-bootstrap-prepend">
+                                                            <span class="input-group-addon no-bg"><i class="fa fa-building blue-color"></i></span>
+                                                            {!! Form::select('department', $departments,null, array('class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select Department --')) !!}
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 col-lg-3">
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon no-bg"><i class="fa fa-calendar blue-color"></i></span>
-                                                                <input class="form-control form-control-inline date-picker datepicker" size="16" type="text" value="" placeholder="Date Of Joining" name="joining_date">
-                                                            </div>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon no-bg"><i class="fa fa-calendar blue-color"></i></span>
+                                                            <input class="form-control form-control-inline date-picker datepicker" size="16" type="text" value="" placeholder="Date Of Joining" name="joining_date">
                                                         </div>
                                                     </div>                                                    
                                                 </div>                                            
@@ -133,11 +128,32 @@
                                                             <div class="input-group">
                                                                 <span class="input-group-addon no-bg"><i class="fa fa-user blue-color"></i></span>
                                                                 {!! Form::text('middle_name', null,['class' => 'form-control', 'placeholder' => 'Middle Name']) !!}
-                                                            </div>                                                         
-                                                        </div>                                                          
+                                                            </div>  
+                                                        </div>                               
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="scroll-wrapper">
+                                                <div class="form-row col-md-12 clearfix">
+                                                    <div class="">
+                                                        <div class="col-md-12 col-lg-6">
+                                                            <div class="fileinput fileinput-new" data-provides="fileinput">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon no-bg"><i class="fa fa-upload blue-color"></i></span>
+                                                                    <div class="form-control uneditable-input input-fixed" data-trigger="fileinput">
+                                                                        <span class="fileinput-filename">User Image</span>
+                                                                    </div>
+                                                                    <span class="input-group-addon btn light btn-file">
+                                                                        <span class="fileinput-new"> Select file </span>
+                                                                        <span class="fileinput-exists"> Change </span>
+                                                                        <input type="hidden"><input type="file" name="user_image"> </span>
+                                                                    <a href="javascript:;" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>                             
+                                                    </div>
+                                                </div>
+                                            </div>                                            
                                         </div>
                                     </div>
                                 </div>
@@ -219,25 +235,25 @@
                                                                 <span class="input-group-addon no-bg"><i class="fa fa-map-marker blue-color"></i></span>
                                                                 {!! Form::textarea('current_address', null,['class' => 'form-control', 'placeholder' => 'Current Address', 'rows' => '3' ]) !!}
                                                             </div>
-                                                        </div>
+                                                        </div>                                                      
                                                         <div class="col-md-3 col-lg-3">
                                                             <div class="input-group">
                                                                 <span class="input-group-addon no-bg"><i class="fa fa-map-marker blue-color"></i></span>
                                                                 {!! Form::textarea('permanent_address', null,['class' => 'form-control', 'placeholder' => 'Permanent Address', 'rows' => '3' ]) !!}
                                                             </div>
                                                         </div>
-                                                        <div class="col-lg-3 col-md-3">
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
-                                                                {!! Form::select('gender', config('config-variables.gender'), null, array('class' =>'form-control select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select Gender --')) !!}
+                                                       <div class="col-lg-3 col-md-3">
+                                                            <div class="input-group select2-bootstrap-prepend">
+                                                                <span class="input-group-addon no-bg"><i class="fa fa-building blue-color"></i></span>
+                                                                {!! Form::select('gender', config('config-variables.gender'), null, array('class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select Gender --')) !!}
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-3 col-md-3">
-                                                            <div class="input-group">
-                                                                <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
-                                                                {!! Form::select('status', config('config-variables.user_status'), null, array('class' =>'form-control select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select Status --')) !!}
+                                                            <div class="input-group select2-bootstrap-prepend">
+                                                                <span class="input-group-addon no-bg"><i class="fa fa-building blue-color"></i></span>
+                                                                {!! Form::select('status', config('config-variables.user_status'), null, array('class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select Status --')) !!}
                                                             </div>
-                                                        </div>                                                        
+                                                        </div>                                                       
                                                     </div>
                                                 </div>
                                             </div>

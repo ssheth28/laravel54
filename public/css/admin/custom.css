@@ -1871,10 +1871,17 @@ table .table_icon .btn:not(.btn-sm):not(.btn-lg) {
 #view_user_details .modal-dialog .form-horizontal .col-md-12:last-child fieldset {
   margin-bottom: 0;
 }
-fieldset {
+/*fieldset {
     border: 1px solid #e7ecf1;
     margin: 0 0 25px;
+}*/
+
+fieldset {
+    border: 1px solid #e7ecf1;
+    margin: 0 0 20px;
+    padding: 15px 20px 0;
 }
+
 #view_user_details fieldset legend {
     font-size: 16px;
     font-weight: 600;
@@ -2011,7 +2018,6 @@ legend {
 }
 .btn-5a::before {
     left: 0;
-    top: -100%;
 }
 .btn-5::before {
     font-size: 180%;
@@ -2030,4 +2036,21 @@ legend {
     height: 100%;
     transition: all 0.3s ease 0s;
     width: 100%;
+}
+.fa-angle-double-right::before {
+    content: "\f023";
+    font-family: FontAwesome;
+}
+.portlet.light > .portlet-title > .actions .btn-icon-only i {
+    color: #a0a0a0;
+    margin: 0;
+}
+.portlet.light > .portlet-title > .tools {
+    margin-top: -2px;
+    margin-left: 4px;
+    padding: 0;
+}
+
+.portlet.light > .portlet-title {
+    min-height: 35px;
 }

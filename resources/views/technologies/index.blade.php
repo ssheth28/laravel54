@@ -70,8 +70,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="" v-for="technology in technologyData">
-                                	<td class="text-center">@{{ technology.id }}</td>
+                                <tr class="" v-for="(index, technology) in technologyData">
+                                	<td class="text-center">@{{ index + 1}}</td>
                                     <td class="text-center table_icon">
                                         <a href="#" data-technology="@{{ technology.name }}" data-url="{{ '/' . LaravelLocalization::getCurrentLocale() . '/' . session('currentrole') . '/admin/technologies'}}/@{{ technology.id }}" class="btn green btn-outline btn-xs tooltips js-edit-techology" data-toggle="modal" data-target="#edit-technology-popup">
                                                 <i class="fa fa-edit"></i>

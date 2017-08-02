@@ -3,50 +3,79 @@
 @section('page-content')
     <div class="row">
         <div class="col-md-12" id="grouplist">
-            <div class="portlet light box white">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <span class="caption-subject bold uppercase font-dark">Search</span>
-                    </div>
-                    <div class="tools">
-                        <a href="javascript:;" class="expand" data-original-title="" title=""> </a>
-                        <a href="javascript:;" class="reload" data-original-title="" title="" aria-describedby="tooltip73982" @click="reloadData();"> </a>
-                    </div>
-                </div>
-                <div class="portlet-body flip-scroll" style="display: none">
-                    <div class="form-horizontal" id="frmSearchData">
-                        <div class="row">
-                            <div class="form-row col-lg-6 clearfix">
-                                <div class="form-col-1">
-                                    <label class="label">Name </label>
-                                </div>
-                                <div class="form-col-2">
-                                    <div class="p-r-5 input-wrapper right">
-                                        <input type="text" class="form-control" placeholder="Name" id="group_name">
+                <div class="portlet light box white">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <span class="caption-subject bold uppercase font-dark"><i class="fa fa-filter" aria-hidden="true"></i> Search role</span>
+                        </div>
+                        <div class="tools">
+                            <a href="" class="collapse" data-original-title="" title=""> </a>
+                        </div>
+                        <div class="actions">
+                            <a class="btn btn-icon-only btn-default fullscreen" href="#" data-original-title="" title=""> </a>
+                        </div>
+                    </div>                  
+                    <div class="portlet-body flip-scroll" style="display: none">
+                        <div class="" id="frmSearchData">
+                            <div class="form-body">
+                                <div class="row">
+                                   <div class="col-lg-2 col-md-3">
+                                        <div class="form-group">
+                                            <div class="input-group select2-bootstrap-prepend">
+                                                <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
+                                                <input type="text" name="role_name" class="form-control" placeholder="By Role Name" id="role_name">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="form-row col-lg-2 clearfix">
-                                <div class="form-col-1">
-                                    <label class="label"> </label>
-                                </div>
-                                <div class="form-col-2">
-                                    <button type="button" class="btn blue custom-filter-submit" @click="searchGroupData()">Search</button>
-                                    <button type="button" class="btn red custom-filter-cancel" @click="clearForm('frmSearchData')">Clear</button>
+                                    <div class="col-lg-2 col-md-3">
+                                        <div class="form-group">
+                                            <div class="input-group select2-bootstrap-prepend">
+                                                <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
+                                                {!! Form::select('parent_module', $parentModule,null, array('class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'id' => 'parent_module', 'placeholder' => '-- By Module --')) !!}
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="col-lg-2 col-md-3">
+                                        <div class="form-group">
+                                            <div class="input-group select2-bootstrap-prepend">
+                                                <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
+                                                {!! Form::select('sub_module', $subModules,null, array('class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'id' => 'sub_module', 'placeholder' => '-- By SubModule --')) !!}
+                                            </div>
+                                        </div>        
+                                    </div>
+                                    <div class="col-lg-2 col-md-3">
+                                        <div class="form-group">
+                                            <div class="input-group select2-bootstrap-prepend">
+                                                <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
+                                                {!! Form::select('page_name', $pageName,null, array('class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'id' => 'page_name', 'placeholder' => '-- By Page Name --')) !!}
+                                            </div>
+                                        </div>        
+                                    </div>
+                                    <div class="col-lg-2 col-md-3">
+                                        <div class="form-group">
+                                            <div class="input-group select2-bootstrap-prepend">
+                                                <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
+                                                {!! Form::select('widget', $widgets,null, array('class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'id' => 'widget', 'placeholder' => '-- By Widget Name --')) !!}
+                                            </div>
+                                        </div>        
+                                    </div> 
+                                    <div class="col-lg-2 col-md-3">
+                                        <div class="form-col-2">
+                                            <button type="button" class="btn blue custom-filter-submit" @click="searchGroupData()">Search</button>
+                                            <button type="button" class="btn red custom-filter-cancel" @click="clearForm('frmSearchData')">Cancel</button>
+                                        </div>
+                                    </div>                                    
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
-            </div>
             <div class="portlet light">
                 @include('flash::message')
                 <div class="portlet-title">
                     <div class="caption col-md-9">
                         <i class="fa fa-table"></i>
-                        <span class="caption-subject bold uppercase font-dark">Group List</span>
+                        <span class="caption-subject bold uppercase font-dark">Manage role</span>
                     </div>
                     <div class="col-md-3">
                         <div class="btn-group pull-right">

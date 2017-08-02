@@ -5,62 +5,65 @@
         <div class="col-md-12 col-sm-12" id="clientlist" v-cloak>
             <div class="portlet light box white">
                 <div class="portlet-title">
-                    <div class="caption">                            
-                        <span class="caption-subject font-dark bold uppercase"><i class="fa fa-filter"></i>
-                        SEARCH CLIENT</span>
+                    <div class="caption">
+                        <span class="caption-subject bold uppercase font-dark"><i class="fa fa-filter" aria-hidden="true"></i> Search Client</span>
                     </div>
                     <div class="tools">
-                        <a href="javascript:;" class="expand" data-original-title="" title=""> </a>
-                        <a href="javascript:;" class="reload" data-original-title="" title="" aria-describedby="tooltip73982" @click="reloadData();"> </a>
+                        <a href="" class="collapse" data-original-title="" title=""> </a>
+                    </div>
+                    <div class="actions">
+                        <a class="btn btn-icon-only btn-default fullscreen" href="#" data-original-title="" title=""> </a>
                     </div>
                 </div>
-                <div class="portlet-body flip-scroll" style="display: none">
-                    <div class="" id="frmSearchData">
+                <div class="portlet-body flip-scroll">
+                    <div id="frmSearchData">
                         <div class="row">
-                            <div class="col-md-3 col-lg-2">
+                            <div class="col-lg-2 col-md-3">
                                 <div class="form-group">
-                                    <div class="input-group">
+                                    <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon no-bg"><i class="fa fa-user blue-color"></i></span>
                                         <input type="text" name="name" class="form-control" placeholder="By Client Name" id="name">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3 col-lg-2">
+
+                            <div class="col-lg-2 col-md-3">
                                 <div class="form-group">
-                                    <div class="input-group">
+                                    <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon no-bg"><i class="fa fa-envelope blue-color"></i></span>
                                         <input type="text" name="email" class="form-control" placeholder="By Email Id" id="email">
                                     </div>
                                 </div>        
                             </div>
-                            <div class="col-md-3 col-lg-2">
+                             <div class="col-lg-2 col-md-3">
                                 <div class="form-group">
-                                    <div class="input-group">
+                                    <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon no-bg"><i class="fa fa-skype blue-color"></i></span>
                                         <input type="text" name="skype" class="form-control" placeholder="By Skype Id" id="skype">
                                     </div>
                                 </div>        
                             </div>
-                            <div class="col-md-3 col-lg-2">
+                            <div class="col-lg-2 col-md-3">
                                 <div class="form-group">
-                                    <div class="input-group">
+                                    <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon no-bg"><i class="fa fa-globe blue-color"></i></span>
-                                        {!! Form::select('country', $countries, null, ['class' =>'selectpicker', 'placeholder' => '-- By Country --', 'id' => 'country']) !!}
+                                        {!! Form::select('country', $countries, null, ['class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'placeholder' => '-- By Country --', 'id' => 'country']) !!}
                                     </div>
                                 </div>        
                             </div>
-                            <div class="col-md-3 col-lg-2">
+
+                            <div class="col-lg-2 col-md-3">
                                 <div class="form-group">
-                                    <div class="input-group">
+                                    <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon no-bg"><i class="fa fa-industry blue-color"></i></span>
                                         <input type="text" name="industry" class="form-control" placeholder="By Industry" id="industry">
                                     </div>
                                 </div>        
                             </div>
-                            <div class="col-md-3 col-lg-2">
+                            <div class="col-lg-2 col-md-3">
                                 <div class="form-col-2">
-                                    <button type="button" class="btn blue custom-filter-submit" @click="searchClientData()">Search</button>
-                                    <button type="button" class="btn red custom-filter-cancel" @click="clearForm('frmSearchData')">Clear</button>
+                                    <button type="button" class="btn blue custom-filter-submit" @click="searchClientData()">Submit</button>
+                                    <button type="button" class="btn red custom-filter-cancel" @click="clearForm('frmSearchData')">Cancel</button>
                                 </div>
                             </div>
                         </div>
@@ -70,22 +73,35 @@
             <div class="portlet light">                    
             @include('flash::message')
                 <div class="portlet-title">
-                    <div class="caption col-md-12">
-                        <i class="fa fa-user"></i>
-                        <span class="caption-subject font-dark bold uppercase">MANAGE CLIENT</span> &nbsp;&nbsp;
+                    <div class="caption">
+                        <span class="caption-subject bold uppercase font-dark"><i class="fa fa-user" aria-hidden="true"></i> Manage Client</span>
                     </div>
-                </div>
+                    <div class="tools">
+                        <a href="" class="collapse" data-original-title="" title=""> </a>
+                    </div>
+                    <div class="actions">
+                        <a href="{{ route('clients.create', ['domain' => app('request')->route()->parameter('company')]) }}" class="btn btn-icon-only btn-default tooltips" data-container="body" data-placement="top" data-original-title="Add New Client"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                        <a class="btn btn-icon-only btn-default dropdown-toggle tooltips" data-container="body" data-placement="top" data-original-title="Tools" data-toggle="dropdown"><i class="fa fa-gear" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-print"></i> Print </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-file-pdf-o"></i> Save as PDF </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-file-excel-o"></i> Export to Excel </a>
+                            </li>
+                        </ul>
+                        <a class="btn btn-icon-only btn-default fullscreen" href="#" data-original-title="" title=""> </a>
+                    </div>
+                </div>                
                 <div class="portlet-body">
                     <div>
                         <table class="table table-striped table-bordered table-hover order-column" v-cloak id="clientTbl"> 
-                            <div class="actions pull-right table-icons">
-                                <a class="btn btn-icon-only btn-default" href="#">
-                                    <i class="fa fa-gear"></i>
-                                </a>
-                                <a class="btn btn-icon-only btn-default fullscreen" href="#" data-original-title="" title="">
-                                    <i class= "fa fa-expand"></i>
-                                </a> 
-                            </div>
                             <thead>
                                 <tr>
                                     <th class="text-center">No.</th>
@@ -138,79 +154,6 @@
                 </div>
             </div>  
         </div>    
-    </div>
-    <div class="modal fade" id="caret-down-popup" role="dialog">
-       <div class="modal-dialog">
-          <div class="modal-content popup-action">
-             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">×</button>
-                <h4 class="modal-title">Actions</h4>
-             </div>
-             <div class="modal-body">
-                 <div class="action-box element-sec clearfix">
-                    <div class="select-record-status hide">
-                        <p></p>
-                        <div class="radio-btn">
-                            <input type="radio" id="radio" name="selectRecordAction" value="1">
-                            <label for="radio" class="redio-btn-string"><span><span></span></span>All Records matched the filter Criteria</label>
-                            <div class="searched-criteria-text-popup searched-criteria-text-show"></div>
-                        </div>
-                        <div class="clearfix"></div>
-                        <div class="radio-btn">
-                            <input type="radio" id="radio1" name="selectRecordAction" value="2" disabled="disabled">
-                            <label for="radio1"><span><span></span></span> Selected Records on the Page </label>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div>
-                        <h3 class="action-title">action.command.label</h3>
-                        <div class="clearfix"></div>
-                        <div class="owl-carousel owl-theme owl-responsive-1000 owl-loaded">
-                            <div class="owl-stage-outer">
-                                <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: 0s; width: 1008px;">
-                                    <div class="owl-item active" style="width: 116px; margin-right: 10px;">
-                                        <div class="item"><a href="javascript:void(0);" class="assignrole-action action-popup-close"><span class="action-image"></span><span class="action-title">assign.role.link.label</span></a></div>
-                                    </div>
-                                    <div class="owl-item active" style="width: 116px; margin-right: 10px;">
-                                        <div class="item"><a href="javascript:void(0);" class="assignorganization-action action-popup-close"><span class="action-image"></span><span class="action-title">assign.organization.link.label</span></a></div>
-                                    </div>
-                                    <div class="owl-item active" style="width: 116px; margin-right: 10px;">
-                                        <div class="item"><a href="javascript:void(0);" class="assignusergroup-action action-popup-close"><span class="action-image"></span><span class="action-title">assign.usergroup.link.label</span></a></div>
-                                    </div>
-                                    <div class="owl-item active" style="width: 116px; margin-right: 10px;">
-                                        <div class="item"><a href="javascript:void(0);" class="suspenduser-action action-popup-close"><span class="action-image"></span><span class="action-title">suspend.user.link.label</span></a></div>
-                                    </div>
-                                    <div class="owl-item active" style="width: 116px; margin-right: 10px;">
-                                        <div class="item"><a href="javascript:void(0);" class="unsuspenduser-action action-popup-close"><span class="action-image"></span><span class="action-title">active.user.link.label</span></a></div>
-                                    </div>
-                                    <div class="owl-item" style="width: 116px; margin-right: 10px;">
-                                        <div class="item"><a href="javascript:void(0);" class="forcelogout-action action-popup-close"><span class="action-image"></span><span class="action-title">forcelogout.link.label</span></a></div>
-                                    </div>
-                                    <div class="owl-item" style="width: 116px; margin-right: 10px;">
-                                        <div class="item"><a href="javascript:void(0);" class="regpswd-action action-popup-close"><span class="action-image"></span><span class="action-title">regenrate.pswrd.link.label</span></a></div>
-                                    </div>
-                                    <div class="owl-item" style="width: 116px; margin-right: 10px;">
-                                        <div class="item"><a href="javascript:void(0);" class="forcechangepswd-action action-popup-close"><span class="action-image"></span><span class="action-title">force.change.pswrd.link.label</span></a></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="owl-controls">
-                                <div class="owl-nav">
-                                    <div class="owl-prev" style="">prev</div>
-                                    <div class="owl-next" style="">next</div>
-                                </div>
-                                <div class="owl-dots" style="">
-                                    <div class="owl-dot active"><span></span></div>
-                                    <div class="owl-dot"><span></span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-             </div>
-          </div>
-       </div>      
     </div>
 
     <div class="modal fade in client-detail-show" id="view_client_details" role="dialog" style="display: none; padding-left: 17px;">

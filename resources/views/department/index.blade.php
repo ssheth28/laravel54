@@ -66,12 +66,12 @@
                                 	<th data-field="id" @click="sortBy('id')" :class="[sortKey != 'id' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']" class="text-center" class="text-center">No</th>
                                     <th class="text-center">Actions</th>                      
                                     <th data-field="name" @click="sortBy('name')" :class="[sortKey != 'name' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Department Name</th>
-                                    <th ata-field="created_at" @click="sortBy('created_at')" :class="[sortKey != 'created_at' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Created At</th>
+                                    <th ata-field="created_at" @click="sortBy('created_at')" :class="[sortKey != 'created_at' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Created Date</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="department in departmentData">
-                                	<td class="text-center">@{{ department.id }}</td>
+                                <tr v-for="(index, department) in departmentData">
+                                	<td class="text-center">@{{ index + 1 }}</td>
                                     <td class="text-center table_icon">
                                         <a href="#" data-department="@{{ department.name }}" data-url="{{ '/' . LaravelLocalization::getCurrentLocale() . '/' . session('currentrole') . '/admin/departments'}}/@{{ department.id }}" class="btn green btn-outline btn-xs tooltips js-edit-department" data-toggle="modal" data-target="#edit-department-popup">
                                             <i class="fa fa-edit"></i>

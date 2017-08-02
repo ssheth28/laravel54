@@ -112,7 +112,13 @@ $(document).ready(function() {
                 },
                 searchProjectData: function() {
                     var name= $("#name").val();
-                    var searchdata = "&name="+ name;
+                    var project_technology= $("#project_technology").val();
+                    var project_member= $("#project_member").val();
+                    var client= $("#client").val();
+                    var priority= $("#priority").val();
+                    var status= $("#status").val();
+
+                    var searchdata = "&name="+ name + "&project_technology="+ project_technology + "&project_member="+ project_member + "&client="+ client + "&priority="+ priority + "&status="+ status;
                     if($('#project_pagination').data("twbs-pagination")){
                         $('#project_pagination').twbsPagination('destroy');
                     }

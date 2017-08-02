@@ -31,7 +31,8 @@ class VacanciesController extends Controller
      */
     public function index()
     {
-        return view('hr_department.vacancy_manager.index');
+        $departments = Department::all()->pluck('name', 'id');
+        return view('hr_department.vacancy_manager.index', compact('departments'));
     }
 
     public function getVacanciesData()
@@ -55,6 +56,10 @@ class VacanciesController extends Controller
         if (isset($request['position_name']) && trim($request['position_name']) !== '') {
             $vacancyDetails->where('vacancies.position_name', 'like', '%'.$request['position_name'].'%');
         }
+
+        if (isset($request['department']) && trim($request['department']) !== '') {
+            $vacancyDetails->where('vacancies.department_id', '=', $request['department']);
+        }        
 
         $vacancyDetailsList = [];
 

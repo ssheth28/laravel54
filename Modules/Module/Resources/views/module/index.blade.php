@@ -13,14 +13,14 @@
                         <a href="javascript:;" class="reload" data-original-title="" title="" aria-describedby="tooltip73982" @click="reloadData();"> </a>
                     </div>
                 </div>
-                <div class="portlet-body flip-scroll" style="display: none">
+                <div class="portlet-body flip-scroll">
                     <div id="frmSearchData">
                         <div class="row">
                             <div class="col-md-3 col-lg-3">
                                 <div class="form-group">
-                                    <div class="input-group">
+                                    <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon no-bg"><i class="fa fa-object-ungroup blue-color"></i></span>
-                                        <select class="form-control selectpicker" id="module_name" id="module_name" placeholder="By Module Name">
+                                        <select class="form-control select2 select2-allow-clear select2-hide-search-box" id="module_name" id="module_name" placeholder="By Module Name">
                                             <option value="">By Module Name</option>
                                             @foreach( $byModuleName as $id=>$name)
                                                 <option value="{{ $id }}">{{ $name }}</option>
@@ -32,9 +32,9 @@
 
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <div class="input-group">
+                                    <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon no-bg"><i class="fa fa-object-group blue-color"></i></span>
-                                        <select class="form-control selectpicker" id="parent_module" id="parent_module" placeholder="By Parent Module">
+                                        <select class="form-control select2 select2-allow-clear select2-hide-search-box" id="parent_module" id="parent_module" placeholder="By Parent Module">
                                             <option value="">By Parent Module</option>
                                             @foreach( $byParentModule as $id=>$name)
                                                 <option value="{{ $id }}">{{ $name }}</option>
@@ -46,9 +46,9 @@
 
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <div class="input-group">
+                                    <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon no-bg"><i class="fa fa-genderless blue-color"></i></span>
-                                        <select class="form-control selectpicker" id="module_publicly_visible" placeholder="By Is Publicly Visible">
+                                        <select class="form-control select2 select2-allow-clear select2-hide-search-box" id="module_publicly_visible" placeholder="By Is Publicly Visible">
                                         <option value="">By Is Publicly Visible</option>
                                         @foreach( config('config-variables.is_publicly_visible') as $key=>$status)
                                             <option value="{{ $key }}">{{ $status }}</option>
@@ -60,9 +60,9 @@
 
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <div class="input-group">
+                                    <div class="input-group select2-bootstrap-prepend">
                                         <span class="input-group-addon no-bg"><i class="fa fa-genderless blue-color"></i></span>
-                                        <select class="form-control selectpicker" id="module_status">
+                                        <select class="form-control select2 select2-allow-clear select2-hide-search-box" id="module_status">
                                         <option value="">By Status</option>
                                         @foreach( config('config-variables.select_status') as $key=>$status)
                                             <option value="{{ $key }}">{{ $status }}</option>
@@ -85,34 +85,38 @@
             <div class="portlet light">
                 @include('flash::message')
                 <div class="portlet-title">
-                    <div class="caption col-md-9">
-                        <i class="fa fa-table"></i>
-                        <span class="caption-subject bold uppercase font-dark">MANAGE MODULE</span>
+                    <div class="caption">
+                        <span class="caption-subject bold uppercase font-dark"><i class="fa fa-user" aria-hidden="true"></i> Manage Module </span>
                     </div>
-                    <div class="col-md-3">
-                        <div class="btn-group pull-right">
-                            <a class="btn sbold border-btn" href="{{ route('modules.create', ['domain' => app('request')->route()->parameter('company')]) }}"> Add New
-                                <i class="fa fa-plus"></i>
-                            </a>
-                        </div>
+                    <div class="tools">
+                        <a href="" class="collapse" data-original-title="" title=""> </a>
                     </div>
-                </div>
+                    <div class="actions">
+                        <a href="{{ route('modules.create', ['domain' => app('request')->route()->parameter('company')]) }}" class="btn btn-icon-only btn-default tooltips" data-container="body" data-placement="top" data-original-title="Add New Module"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                        <a class="btn btn-icon-only btn-default dropdown-toggle tooltips" data-container="body" data-placement="top" data-original-title="Tools" data-toggle="dropdown"><i class="fa fa-gear" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-print"></i> Print </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-file-pdf-o"></i> Save as PDF </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-file-excel-o"></i> Export to Excel </a>
+                            </li>
+                        </ul>
+                        <a class="btn btn-icon-only btn-default fullscreen" href="#" data-original-title="" title=""> </a>
+                    </div>
+                </div>                
                <div class="portlet-body">
                     <div>
                         <table class="table table-striped table-bordered table-hover order-column" v-cloak id="moduleTbl">
-                            <div class="actions pull-right table-icons">
-                                <a class="btn btn-icon-only btn-default" href="{{ route('modules.create', ['domain' => app('request')->route()->parameter('company')]) }}">
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                                <a class="btn btn-icon-only btn-default" href="#">
-                                    <i class="fa fa-gear"></i>
-                                </a>
-                                <a class="btn btn-icon-only btn-default fullscreen" href="#" data-original-title="" title="">
-                                    <i class= "fa fa-expand"></i>
-                                </a>
-                            </div>
                             <thead>
                                 <tr>
+                                    <th class="text-center">No</th>
                                     <th class="text-center">Action</th>
                                     <th data-field="name" @click="sortBy('name')" :class="[sortKey != 'name' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Module Name</th>
                                     <th data-field="parent_id" @click="sortBy('parent_id')" :class="[sortKey != 'parent_id' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Parent Module</th>
@@ -122,7 +126,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="" v-for="module in moduleData">  
+                                <tr class="" v-for="(index, module) in moduleData">
+                                    <td class="text-center">@{{ index + 1 }}</td>
                                     <td class="text-center table_icon">
                                         <a href="#" class="btn btn-icon-only outline-green js-module-detail" data-toggle="modal" data-target=".module-detail-show" data-url="{{ url('admin/modules') }}/@{{ module.id }}">
                                             <i class="fa fa-eye"></i>

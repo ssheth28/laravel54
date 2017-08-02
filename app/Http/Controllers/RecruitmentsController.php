@@ -39,14 +39,27 @@ class RecruitmentsController extends Controller
      */
     public function index()
     {
-        return view('hr_department.recruitments.index');
+        $companyId = Landlord::getTenants()['company']->id;
+        $users = DB::table('users')
+                    ->join('company_user', 'company_user.user_id', 'users.id')
+                    ->join('people', 'users.person_id', 'people.id')
+                    ->where('company_user.company_id', $companyId)
+                    ->select('users.*', DB::raw('CONCAT(people.first_name, " ", people.last_name) as userFullName'))
+                    ->pluck('userFullName', 'users.id');
+
+        return view('hr_department.recruitments.index', compact('users'));
     }
 
     public function getRecruitmentData() 
     {
         $request = $this->request->all();
         $recruitmentDetails = DB::table('recruitment_details')
-                    ->select('*', DB::raw('DATE_FORMAT(recruitment_details.date_of_interview, "%d-%m-%Y") as "date_of_interview"'),DB::raw('DATE_FORMAT(recruitment_details.time_of_interview, "%H:%i %p") as "time_of_interview"'));
+                    ->join('users', 'users.id', 'recruitment_details.assignee_id')
+                    ->join('people', 'users.person_id', 'people.id')
+                    ->select('recruitment_details.*', 
+                        DB::raw('DATE_FORMAT(recruitment_details.date_of_interview, "%d-%m-%Y") as "date_of_interview"'),
+                        DB::raw('DATE_FORMAT(recruitment_details.time_of_interview, "%H:%i %p") as "time_of_interview"'),
+                        DB::raw('CONCAT(people.first_name, " ", people.last_name) as userFullName'));
 
         $sortby = 'recruitment_details.id';
         $sorttype = 'desc';
@@ -68,6 +81,10 @@ class RecruitmentsController extends Controller
 
         if (isset($request['last_status']) && trim($request['last_status']) !== '') {
             $recruitmentDetails->where('recruitment_details.last_status', '=', $request['last_status']);
+        }
+
+        if (isset($request['assignee']) && trim($request['assignee']) !== '') {
+            $recruitmentDetails->where('recruitment_details.assignee_id', '=', $request['assignee']);
         }  
 
         $recruitmentDetailsList = [];
@@ -113,7 +130,7 @@ class RecruitmentsController extends Controller
         $recruitment->position = $request->position;
         $recruitment->date_of_interview = Carbon::parse($request->date_of_interview)->format('Y-m-d H:i:s');
         $recruitment->time_of_interview = Carbon::parse($request->time_of_interview)->format('Y-m-d H:i:s');
-        $recruitment->assign_to = $request->assigned_to;
+        $recruitment->assignee_id = $request->assigned_to;
         $recruitment->last_status = $request->last_status;
         $recruitment->area_of_interest = $request->area_of_interest;
         $recruitment->source_of_info_about_company = $request->source_of_info_about_company;
@@ -175,7 +192,7 @@ class RecruitmentsController extends Controller
         $recruitment->position = $request->position;
         $recruitment->date_of_interview = Carbon::parse($request->date_of_interview)->format('Y-m-d H:i:s');
         $recruitment->time_of_interview = Carbon::parse($request->time_of_interview)->format('Y-m-d H:i:s');
-        $recruitment->assign_to = $request->assigned_to;
+        $recruitment->assignee_id = $request->assigned_to;
         $recruitment->last_status = $request->last_status;
         $recruitment->area_of_interest = $request->area_of_interest;
         $recruitment->source_of_info_about_company = $request->source_of_info_about_company;

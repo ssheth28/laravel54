@@ -18,7 +18,8 @@ class CreateRecruitmentDetailsTable extends Migration
             $table->string('person_name');
             $table->string('position');
             $table->timestamp('date_of_interview')->nullable();
-            $table->string('assign_to');
+            $table->integer('assignee_id')->unsigned()->index();
+            $table->foreign('assignee_id')->references('id')->on('users');
             $table->string('last_status');
             $table->string('area_of_interest');
             $table->string('source_of_info_about_company');

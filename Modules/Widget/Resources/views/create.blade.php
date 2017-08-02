@@ -9,7 +9,7 @@
         <div class="portlet-title min-height">
             <div class="caption">
                 <i class="fa fa-newspaper-o"></i>
-                <span class="caption-subject bold uppercase font-dark">Add Widget</span>
+                <span class="caption-subject bold uppercase font-dark">Create Widget</span>
             </div>
             <div class="tools">
                 <a href="" class="collapse" data-original-title="" title=""> </a>

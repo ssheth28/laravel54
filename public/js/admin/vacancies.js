@@ -81,7 +81,8 @@ $(document).ready(function() {
                 },
                 searchVacancyData: function() {
                     var position_name = $("#position_name").val();
-                    var searchdata = "&position_name="+ position_name;
+                    var department = $('#department').val();
+                    var searchdata = "&position_name="+ position_name + "&department="+ department;
                     if($('#vacancy_pagination').data("twbs-pagination")){
                         $('#vacancy_pagination').twbsPagination('destroy');
                     }

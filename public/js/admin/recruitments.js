@@ -128,7 +128,8 @@ $(document).ready(function() {
                     var person_name = $("#person_name").val();
                     var position = $("#position").val();
                     var last_status = $("#last_status").val();
-                    var searchdata = "&person_name="+ person_name + "&position=" + position + "&last_status=" + last_status;
+                    var assignee = $('#assignee').val();
+                    var searchdata = "&person_name="+ person_name + "&position=" + position + "&last_status=" + last_status + "&assignee=" + assignee;
                     if($('#recruitment_pagination').data("twbs-pagination")){
                         $('#recruitment_pagination').twbsPagination('destroy');
                     }

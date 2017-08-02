@@ -14,9 +14,9 @@
                     </div>
                     <div class="col-md-6 col-lg-6">
                         <div class="form-group">
-                            <div class="input-group">
+                            <div class="input-group select2-bootstrap-prepend">
                                 <span class="input-group-addon no-bg"><i class="fa fa-file-code-o blue-color"></i></span>
-                                {!! Form::select('position', config('config-variables.positions'), $from == 'edit' ? $recruitment->position : null, ['class' =>'form-control selectpicker', 'placeholder' => '-- Applied For Position --']) !!}
+                                {!! Form::select('position', config('config-variables.positions'), $from == 'edit' ? $recruitment->position : null, ['class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Applied For Position --']) !!}
                             </div>
                         </div>
                     </div>
@@ -38,17 +38,17 @@
                     </div>
                     <div class="col-md-6 col-lg-6">
                         <div class="form-group">
-                            <div class="input-group">
+                            <div class="input-group select2-bootstrap-prepend">
                                 <span class="input-group-addon no-bg"><i class="fa fa-user blue-color"></i></span>
-                                {!! Form::select('assigned_to', $users, $from == 'edit' ? $recruitment->assign_to : null, ['class' =>'form-control selectpicker', 'placeholder' => '-- Assigned To --']) !!}
+                                {!! Form::select('assigned_to', $users, $from == 'edit' ? $recruitment->assignee_id : null, ['class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Assigned To --']) !!}
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6">
                         <div class="form-group">
-                            <div class="input-group">
+                            <div class="input-group select2-bootstrap-prepend">
                                 <span class="input-group-addon no-bg"><i class="fa fa-random blue-color"></i></span>
-                                {!! Form::select('last_status', config('config-variables.last_status'), $from == 'edit' ? $recruitment->last_status : null, ['class' =>'form-control selectpicker', 'placeholder' => '-- Last Status --']) !!}
+                                {!! Form::select('last_status', config('config-variables.last_status'), $from == 'edit' ? $recruitment->last_status : null, ['class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Last Status --']) !!}
                             </div>
                         </div>
                     </div>

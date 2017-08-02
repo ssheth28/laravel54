@@ -1,23 +1,8 @@
 <div class="form-body">
     <div class="row">
         <div class="col-md-12">
-            <div class="note note-warning">
-                <p>If you are creating Parent Module itself then no need to select value from <code><b>Select Parent Module</b></code> From <b>"Basic Information"</b></p>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="portlet light bordered no-padding-bottom mb-0">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <span class="caption-subject font-dark">Basic Information </span>
-                    </div>
-                    <div class="tools">
-                        &nbsp;<a href="" class="collapse no-border" data-original-title="" title=""> </a>
-                    </div>
-                </div>
-                <div class="portlet-body clearfix">
+            <fieldset>
+                <legend class="blue-color">Basic Information</legend>
                     <div class="row">
                         <div class="col-md-6 col-lg-3">
                             <div class="form-group">
@@ -33,7 +18,7 @@
                                     <span class="input-group-addon no-bg">
                                         <i class="fa fa-object-group blue-color"></i>
                                     </span>
-                                    <select class="form-control selectpicker" tabindex="-98" id="parent_id" name="widget_controller">
+                                    <select class="form-control select2 select2-allow-clear select2-hide-search-box" tabindex="-98" id="parent_id" name="widget_controller">
                                         <option value="">Select Parent Module</option>
                                         @if (count($allWidgetControllers) > 0)
                                             @foreach ($allWidgetControllers as $controller)
@@ -55,7 +40,7 @@
                                     <span class="input-group-addon no-bg">
                                         <i class="fa fa-object-group blue-color"></i>
                                     </span>
-                                    <select class="form-control selectpicker" tabindex="-98" id="parent_id" name="widget_parent">
+                                    <select class="form-control select2 select2-allow-clear select2-hide-search-box" tabindex="-98" id="parent_id" name="widget_parent">
                                         <option value="">Select Module</option>
                                             @if (count($WidgetTree) > 0)
                                                 @foreach ($WidgetTree as $wt)
@@ -77,7 +62,7 @@
                                     <span class="input-group-addon no-bg">
                                         <i class="fa fa-object-group blue-color"></i>
                                     </span>
-                                   {!! Form::select('widget_width', config('config-variables.widget_widths'), $from=="edit" ? $widget->width : null, array('class' =>'form-control select2-allow-clear select2-hide-search-box', 'placeholder' =>'Select Widget Width (%)')) !!}
+                                   {!! Form::select('widget_width', config('config-variables.widget_widths'), $from=="edit" ? $widget->width : null, array('class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'placeholder' =>'Select Widget Width (%)')) !!}
                                 </div>
                             </div>
                         </div>
@@ -89,7 +74,7 @@
                                     <span class="input-group-addon no-bg">
                                         <i class="fa fa-object-group blue-color"></i>
                                     </span>
-                                    <select class="form-control selectpicker" tabindex="-98" id="parent_id" name="widget_type">
+                                    <select class="form-control select2 select2-allow-clear select2-hide-search-box" tabindex="-98" id="parent_id" name="widget_type">
                                         <option value="">Select Widget Type</option>
                                         @if (count($WidgetTypes) > 0)
                                             @foreach ($WidgetTypes as $type)
@@ -111,7 +96,7 @@
                                     <span class="input-group-addon no-bg">
                                         <i class="fa fa-object-group blue-color"></i>
                                     </span>
-                                   {!! Form::select('status', config('config-variables.select_status'), $from=="edit" ? $widget->status : null, ['class' => 'form-control select2-allow-clear select2-hide-search-box', 'placeholder' => 'Select Status']) !!}
+                                   {!! Form::select('status', config('config-variables.select_status'), $from=="edit" ? $widget->status : null, ['class' => 'form-control select2 select2-allow-clear select2-hide-search-box', 'placeholder' => 'Select Status']) !!}
                                 </div>
                             </div>
                         </div>
@@ -121,7 +106,7 @@
                                     <span class="input-group-addon no-bg">
                                         <i class="fa fa-object-group blue-color"></i>
                                     </span>
-                                   {!! Form::select('is_publicly_visible', config('config-variables.is_publicly_visible'), $from=="edit" ? $widget->is_publicly_visible : null, ['class' => 'form-control select2-allow-clear select2-hide-search-box', 'placeholder' => 'Select Is Publicly Visible']) !!}
+                                   {!! Form::select('is_publicly_visible', config('config-variables.is_publicly_visible'), $from=="edit" ? $widget->is_publicly_visible : null, ['class' => 'form-control select2 select2-allow-clear select2-hide-search-box', 'placeholder' => 'Select Is Publicly Visible']) !!}
                                 </div>
                             </div>
                         </div>
@@ -143,9 +128,8 @@
                                 </div>
                             </div>
                         </div>   
-                    </div>
-                </div>
-            </div>
+                    </div>                
+            </fieldset>
         </div>
     </div>
 </div>

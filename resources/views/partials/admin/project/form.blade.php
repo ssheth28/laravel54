@@ -14,25 +14,25 @@
                     </div>
                     <div class="col-md-6 col-lg-6">
                         <div class="form-group">
-                            <div class="input-group">
+                            <div class="input-group select2-bootstrap-prepend">
                                 <span class="input-group-addon no-bg"><i class="fa fa-envelope blue-color"></i></span>
-                                {!! Form::select('project_tech', $technologies,  $from == 'edit' ? $project->technology_id : null, ['class' =>'selectpicker', 'placeholder' => '-- Select Project Technology --']) !!}
+                                {!! Form::select('project_tech', $technologies,  $from == 'edit' ? $project->technology_id : null, ['class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select Project Technology --']) !!}
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6">
                         <div class="form-group">
-                            <div class="input-group">
+                            <div class="input-group select2-bootstrap-prepend">
                                 <span class="input-group-addon no-bg"><i class="fa fa-globe blue-color"></i></span>
-                                {!! Form::select('project_type', config('config-variables.project_types'),  $from == 'edit' ? $project->project_type : null, ['class' =>'selectpicker', 'placeholder' => '-- Select Project Type --']) !!}
+                                {!! Form::select('project_type', config('config-variables.project_types'),  $from == 'edit' ? $project->project_type : null, ['class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select Project Type --']) !!}
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6">
                         <div class="form-group">
-                            <div class="input-group">
+                            <div class="input-group select2-bootstrap-prepend">
                                 <span class="input-group-addon no-bg"><i class="fa fa-calendar blue-color"></i></span>
-                                {!! Form::select('client_name', $clients,  $from == 'edit' ? $project->client_id : null, ['class' =>'selectpicker', 'placeholder' => '-- Select Client --']) !!}
+                                {!! Form::select('client_name', $clients,  $from == 'edit' ? $project->client_id : null, ['class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select Client --']) !!}
                             </div>
                         </div>
                     </div>
@@ -46,48 +46,7 @@
                     </div>                    
                 </div>
             </fieldset>
-        </div>
-        <div class="col-md-6">
-            <fieldset>
-                <legend class="blue-color">Project Manage Details</legend>
-                <div class="row">
-                    <div class="col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon no-bg"><i class="fa fa-building blue-color"></i></span>
-                                {!! Form::select('project_member[]', $users,  $from == 'edit' ? $project->user_id : null, ['class' =>'form-control selectpicker', 'placeholder' => '-- Select Project Members --', 'multiple' => true]) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon no-bg"><i class="fa fa-external-link blue-color"></i></span>
-                                {!! Form::select('project_priority', config('config-variables.project_priorities'),  $from == 'edit' ? $project->priority : null, ['class' =>'selectpicker', 'placeholder' => '-- Select Project Priority --']) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon no-bg"><i class="fa fa-industry blue-color"></i></span>
-                                {!! Form::select('project_status', config('config-variables.project_status'),  $from == 'edit' ? $project->status : null, ['class' =>'selectpicker', 'placeholder' => '-- Select Project Status --']) !!}
-                            </div>
-                        </div>
-                    </div>                                            
-                    <div class="col-md-6 col-lg-6">
-                        <div class="form-group">
-                            <div class="input-group">
-                                <span class="input-group-addon no-bg"><i class="fa fa-info blue-color"></i></span>
-                                {!! Form::textarea('other_info', $from == 'edit' ? $project->other_info : null, ['class' => 'form-control', 'id' => 'other_info', 'placeholder' => 'Other Information', 'rows' => '1']) !!}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-        <div class="row">
-        <div class="col-md-6 col-lg-6">
+
             <fieldset>
                 <legend class="blue-color">Project Timeline</legend>
                 <div class="row">
@@ -108,8 +67,46 @@
                         </div>
                     </div>
                 </div>
-            </fieldset>
+            </fieldset>            
         </div>
+        <div class="col-md-6">
+            <fieldset>
+                <legend class="blue-color">Project Manage Details</legend>
+                <div class="row">
+                    <div class="col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon no-bg"><i class="fa fa-building blue-color"></i></span>
+                                {!! Form::select('project_member[]', $users,  $from == 'edit' ? $project->user_id : null, ['class' =>'form-control selectpicker ', 'data-placeholder' => '-- Select Project Members --', 'multiple' => 'true']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <div class="input-group select2-bootstrap-prepend">
+                                <span class="input-group-addon no-bg"><i class="fa fa-external-link blue-color"></i></span>
+                                {!! Form::select('project_priority', config('config-variables.project_priorities'),  $from == 'edit' ? $project->priority : null, ['class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select Project Priority --']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <div class="input-group select2-bootstrap-prepend">
+                                <span class="input-group-addon no-bg"><i class="fa fa-industry blue-color"></i></span>
+                                {!! Form::select('project_status', config('config-variables.project_status'),  $from == 'edit' ? $project->status : null, ['class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'placeholder' => '-- Select Project Status --']) !!}
+                            </div>
+                        </div>
+                    </div>                                            
+                    <div class="col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon no-bg"><i class="fa fa-info blue-color"></i></span>
+                                {!! Form::textarea('other_info', $from == 'edit' ? $project->other_info : null, ['class' => 'form-control', 'id' => 'other_info', 'placeholder' => 'Other Information', 'rows' => '1']) !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
         </div>
     </div>
 </div>

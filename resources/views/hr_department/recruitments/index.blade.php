@@ -15,7 +15,7 @@
                         <a href="javascript:;" class="reload" data-original-title="" title="" aria-describedby="tooltip73982" @click="reloadData();"> </a>
                     </div>
                 </div>
-                <div class="portlet-body flip-scroll" style="display: none">
+                <div class="portlet-body flip-scroll">
                     <div class="" id="frmSearchData">
                         <div class="row">
                             <div class="col-md-3 col-lg-3">
@@ -28,9 +28,9 @@
                             </div>
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
-                                        <select class="form-control selectpicker" id="position">
+                                    <div class="input-group select2-bootstrap-prepend">
+                                        <span class="input-group-addon no-bg"><i class="fa fa-file-code-o blue-color"></i></span>
+                                        <select class="form-control select2 select2-allow-clear select2-hide-search-box" id="position">
                                         <option value="">By Position</option>
                                         @foreach( config('config-variables.positions') as $key=>$status)
                                             <option value="{{ $key }}">{{ $status }}</option>
@@ -39,12 +39,22 @@
                                     </div> 
                                 </div>                  
                             </div>
+
                             <div class="col-lg-3 col-md-3">
                                 <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon no-bg"><i class="fa fa-user-secret blue-color"></i></span>
-                                        <select class="form-control selectpicker" id="last_status">
-                                        <option value="">By Position</option>
+                                    <div class="input-group select2-bootstrap-prepend">
+                                        <span class="input-group-addon no-bg"><i class="fa fa-user blue-color"></i></span>
+                                        {!! Form::select('assignee', $users, null, ['class' =>'form-control select2 select2-allow-clear select2-hide-search-box', 'placeholder' => '-- By Assigned To --', 'id' => 'assignee']) !!}
+                                    </div> 
+                                </div>                  
+                            </div>
+
+                            <div class="col-lg-3 col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group select2-bootstrap-prepend">
+                                        <span class="input-group-addon no-bg"><i class="fa fa-random blue-color"></i></span>
+                                        <select class="form-control select2 select2-allow-clear select2-hide-search-box" id="last_status">
+                                        <option value="">By Last Status</option>
                                         @foreach( config('config-variables.last_status') as $key=>$status)
                                             <option value="{{ $key }}">{{ $status }}</option>
                                         @endforeach
@@ -54,8 +64,8 @@
                             </div>
                             <div class="col-md-3 col-lg-3">
                                 <div class="form-col-2">
-                                    <button type="button" class="btn blue custom-filter-submit" @click="searchRecruitmentData()">Search</button>
-                                    <button type="button" class="btn red custom-filter-cancel" @click="clearForm('frmSearchData')">Clear</button>
+                                    <button type="button" class="btn blue custom-filter-submit" @click="searchRecruitmentData()">Submit</button>
+                                    <button type="button" class="btn red custom-filter-cancel" @click="clearForm('frmSearchData')">Cancel</button>
                                 </div>
                             </div>
                         </div>
@@ -67,34 +77,38 @@
             <div class="portlet light">
                 @include('flash::message')
                 <div class="portlet-title">
-                    <div class="caption col-md-8">
-                        <i class="fa fa-user"></i>
-                        <span class="caption-subject font-dark bold uppercase">MANAGE RECRUITMENT</span> &nbsp;&nbsp;
+                    <div class="caption">
+                        <span class="caption-subject bold uppercase font-dark"><i class="fa fa-user" aria-hidden="true"></i> Manage Recruitment</span>
                     </div>
-                    <div class="col-md-4">
-                        <div class="btn-group pull-right">
-                            <a class="btn sbold border-btn" href="{{ route('recruitments.create', ['domain' => app('request')->route()->parameter('company')]) }}"> Add New
-                                <i class="fa fa-plus"></i>
-                            </a>
-                        </div>
+                    <div class="tools">
+                        <a href="" class="collapse" data-original-title="" title=""> </a>
+                    </div>
+                    <div class="actions">
+                        <a href="{{ route('recruitments.create', ['domain' => app('request')->route()->parameter('company')]) }}" class="btn btn-icon-only btn-default tooltips" data-container="body" data-placement="top" data-original-title="Add New Recruitment"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                        <a class="btn btn-icon-only btn-default dropdown-toggle tooltips" data-container="body" data-placement="top" data-original-title="Tools" data-toggle="dropdown"><i class="fa fa-gear" aria-hidden="true"></i></a>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-print"></i> Print </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-file-pdf-o"></i> Save as PDF </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">
+                                    <i class="fa fa-file-excel-o"></i> Export to Excel </a>
+                            </li>
+                        </ul>
+                        <a class="btn btn-icon-only btn-default fullscreen" href="#" data-original-title="" title=""> </a>
                     </div>
                 </div>
                 <div class="portlet-body">
                     <div>
-                        <table class="table table-striped table-bordered table-hover order-column">
-                            <div class="actions pull-right table-icons">
-                                <a class="btn btn-icon-only btn-default" href="{{ route('recruitments.create', ['domain' => app('request')->route()->parameter('company')]) }}">
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                                <a class="btn btn-icon-only btn-default" href="#">
-                                    <i class="fa fa-gear"></i>
-                                </a>
-                                <a class="btn btn-icon-only btn-default fullscreen" href="#" data-original-title="" title="">
-                                    <i class= "fa fa-expand"></i>
-                                </a> 
-                            </div>
+                        <table class="table table-striped table-bordered table-hover order-column" v-cloak>
                             <thead>
                                 <tr>
+                                    <th class="text-center">No</th>
                                     <th class="text-center">Actions</th>
                                     <th data-field="person_name" @click="sortBy('person_name')" :class="[sortKey != 'person_name' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Person Name</th>
                                     <th data-field="position" @click="sortBy('position')" :class="[sortKey != 'position' ? 'sorting' : sortOrder == 1 ? 'sorting_asc' : 'sorting_desc']">Applied for position</th>
@@ -105,7 +119,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="" v-for="recruitment in recruitmentData"> 
+                                <tr class="" v-for="(index, recruitment) in recruitmentData"> 
+                                    <td class="text-center">@{{ index + 1 }}</td>
                                     <td class="text-center table_icon">
                                         <a href="#" class="btn btn-icon-only outline-green js-recruitment-detail" data-toggle="modal" data-target=".recruitment-detail-show" data-url="{{ url('admin/recruitments') }}/@{{ recruitment.id }}">
                                         <i class="fa fa-eye"></i>
@@ -119,7 +134,7 @@
                                     <td>@{{ recruitment.position }}</td>
                                     <td>@{{ recruitment.date_of_interview }} @{{ recruitment.time_of_interview }}</td>
                                     <td>@{{ recruitment.contact_no }}</td>
-                                    <td>@{{ recruitment.assign_to }}</td>
+                                    <td>@{{ recruitment.userFullName }}</td>
                                     <td>@{{ recruitment.last_status }}</td>
                                 </tr>
                             </tbody>

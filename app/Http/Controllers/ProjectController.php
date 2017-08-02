@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use View;
+use Landlord;
 use App\Models\User;
 use App\Models\Project;
 use App\Models\ProjectUser;
@@ -35,7 +36,16 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        return view('projects.index');
+        $companyId = Landlord::getTenants()['company']->id;
+        $projectTechnologies = Technology::all()->pluck('name', 'id');
+        $clients = DB::table('clients')->pluck('name', 'id');
+        $projectMembers =  DB::table('users')
+                            ->join('company_user', 'company_user.user_id', 'users.id')
+                            ->join('people', 'users.person_id', 'people.id')
+                            ->where('company_user.company_id', $companyId)
+                            ->select('users.*', DB::raw('CONCAT(people.first_name, " ", people.last_name) as userFullName'))
+                            ->pluck('userFullName', 'users.id');
+        return view('projects.index', compact('projectTechnologies', 'clients', 'projectMembers'));
     }
 
     public function getProjectData()
@@ -65,6 +75,26 @@ class ProjectController extends Controller
             $projects->where('projects.name', 'like', '%'.$request['name'].'%');
         }
 
+        if (isset($request['project_technology']) && trim($request['project_technology']) !== '') {
+            $projects->where('projects.technology_id', '=', $request['project_technology']);
+        }
+
+        if (isset($request['project_member']) && trim($request['project_member']) !== '') {
+            $projects->where('project_user.user_id', '=', $request['project_member']);
+        }
+
+        if (isset($request['client']) && trim($request['client']) !== '') {
+            $projects->where('projects.client_id', '=', $request['client']);
+        }
+
+        if (isset($request['priority']) && trim($request['priority']) !== '') {
+            $projects->where('projects.priority', '=', $request['priority']);
+        } 
+
+        if (isset($request['status']) && trim($request['status']) !== '') {
+            $projects->where('projects.status', '=', $request['status']);
+        }                                        
+
         $projectsList = [];
 
         if (!array_key_exists('pagination', $request)) {
@@ -87,13 +117,16 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        $companyId = Landlord::getTenants()['company']->id;
         $technologies = Technology::all()->pluck('name', 'id');
         $clients = DB::table('clients')->pluck('name', 'id');
 
         $users = DB::table('users')
+                    ->join('company_user', 'company_user.user_id', 'users.id')
                     ->join('people', 'users.person_id', 'people.id')
-                    ->pluck('people.first_name', 'users.id')
-                    ->toArray();
+                    ->where('company_user.company_id', $companyId)
+                    ->select('users.*', DB::raw('CONCAT(people.first_name, " ", people.last_name) as userFullName'))
+                    ->pluck('userFullName', 'users.id');
 
         return view('projects.create', compact('technologies', 'users', 'clients'));
     }

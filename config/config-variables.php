@@ -96,5 +96,10 @@ return [
         'Round-2' => 'Round-2',
         'Round-3' => 'Round-3',
         'Round-4' => 'Round-4'
-    ]
+    ],
+    'leads_last_update_status' => [
+        'Prospects' => 'Prospects',
+        'Leads' => 'Leads',
+        'Customers' => 'Customers'
+    ],
 ];

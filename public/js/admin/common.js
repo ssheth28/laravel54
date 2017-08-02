@@ -102,7 +102,7 @@ $(document).ready(function() {
         backdrop: true,
         storage: window.localeStorage,
         onEnd: function (tour) {
-            tour.end();
+            $('.tour-backdrop').remove();
         }
     });
 

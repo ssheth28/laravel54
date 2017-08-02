@@ -53,7 +53,7 @@
     </head>
     <!-- END HEAD -->
 
-    <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
+    <body class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed page-container-bg-solid">
         <!-- BEGIN HEADER -->
         @include('elements.admin.header')
         <!-- END HEADER -->

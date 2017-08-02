@@ -1948,7 +1948,7 @@ legend {
     width: 800px;
 }
 .login-logo img {
-    margin-top: -15px;
+    /*margin-top: -15px;*/
 }
 .login-logo.logoicon img {
     width: 50px;
@@ -2053,4 +2053,10 @@ legend {
 
 .portlet.light > .portlet-title {
     min-height: 35px;
+}
+
+.form-title {
+    color: #fff;
+    padding-bottom: 10px;
+    text-align: center;
 }

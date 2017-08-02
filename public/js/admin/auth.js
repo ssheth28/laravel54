@@ -87,6 +87,7 @@ var Login = function() {
             },
             submitHandler: function (form) {
             	$('.js-login-error-message').html("");
+            	$(".js-login-error-message").hide();
                 $.ajax({
 			        url: "/en/login",
 			        data: { 'login' : $("#email_address").val(), 'password' : $("#password").val(), 'remember' : $("#remember_me").val()  },
@@ -98,6 +99,7 @@ var Login = function() {
 						$("#select-company-modal").show();
 			        },
 			        error: function(xhr, ajaxOptions, thrownError) {
+			        	$(".js-login-error-message").show();
 			        	$('.js-login-error-message').html(xhr.responseJSON.email);
 			        },
 			    })
